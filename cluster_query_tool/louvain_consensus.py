@@ -113,11 +113,11 @@ def mu_ivector_n(graph, partitions, query_nodes):
     key = dict([(k, i) for i, k in enumerate(sorted(graph.nodes()))])
 
     for partition in partitions:
-        best = [(len(query_set.intersection(set(cluster))), cluster) for cluster in partition]
-
-        for s, cluster in best:
-            for i in cluster:
-                muscore[key[i]] += s
+        for cluster in partitions:
+            s = len(query_set.intersection(cluster))
+            if s > 0:
+                for i in cluster:
+                    muscore[key[i]] += 1/s
 
     # Normalise result
     return muscore * 1 / len(partitions), key

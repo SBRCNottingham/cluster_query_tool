@@ -12,7 +12,7 @@
 \usepackage{lineno}
 \linenumbers
 \doublespacing
-
+\DeclareMathOperator*{\argmax}{argmax}
 %opening
 
 % \author{
@@ -159,10 +159,6 @@ The Louvain algorithm is selected as it is fast, running in $O(n \log n)$ time c
 
 The Louvain algorithm is conceptually very simple; starting from a random partition, clusters are agglomerated if the merge results in a positive change in modularity $\Delta Q$.
 When no possible moves result in an increase in modularity the algorithm has found a local optima and stops.
-Whilst, in principle, the found local optima should have a high modularity score this is not guaranteed.
-Consequently, the process here rejects any solutions if the value of modularity is not significantly higher than the distribution of starting partitions.
-This is achieved by means of a standard $z$-test, formally the probability of generating a random partition with a modularity score $Q$ as high as observed as a result of the Louvain optimisation must be $p < 0.01$.
-Furthermore, only unique solutions are accepted.
 
 The index \textit{coverage} is directly proportional to the number of starting random partitions.
 A full coverage index could be considered as every locally optimal partition.
@@ -173,13 +169,22 @@ Consequently, in the approach taken here is to use a large but not exhaustive su
 \subsection{Measuring the quality of relationships} \label{sec:expansion}
 Given a query of vertices, the relatedness to other vertexes in a network is quantifiable by the fraction of times they are clustered with the query set, given the set of high quality partitions.
 Formally, this can be expressed in terms of the \textit{expansion score} of a given vertex,
+% \begin{equation} \label{eq:mu_score}
+% \mu_i(S) = \frac{1}{|\mathcal{P}| |S - i|} \sum_{P \in \mathcal{P}} \sum_{j \in S - i} \delta(c^{P}_{i}, c^{P}_{j}),
+% \end{equation}
 \begin{equation} \label{eq:mu_score}
-\mu_i(S) = \frac{1}{|\mathcal{P}| |S - i|} \sum_{P \in \mathcal{P}} \sum_{j \in S - i} \delta(c^{P}_{i}, c^{P}_{j}),
+\mu_i(S) = \frac{1}{|\mathcal{P}|} \sum_{P \in \mathcal{P}} \delta(c^{P}_i, c^{P}_S),
 \end{equation}
-where $S$ denotes a query set, $P$ is a given partition in the space of all high quality partitions $\mathcal{P}$, $c^{P}_{i}$ indicates the partition vertex $i$ is contained in within partition $P$ and $\delta(u, v)$ is the Dirac delta function that equals 1 if vertex $i$ and $j$ are in the same partition and $0$ otherwise.
+where $S$ denotes a query set, $P$ is a given partition in the space of all high quality partitions $\mathcal{P}$, $c^{P}_{i}$ indicates the partition vertex $i$ is contained in within partition $P$ and
+$\delta(u, v)$ is the Dirac delta function that equals 1 if are the same cluster and $0$ otherwise, where $c^{P}_S$ is given by,
+\begin{equation}
+ c^{P}_S = \argmax_{C \in P} |C \cap S|,
+\end{equation}
+or the largest intersecting cluster with the query set, in partition $P$.
+Using the largest intersecting community with $S$ is both computationally favourable for computing $mu_i$ for all $i$ in $V$ and allows the query set to contain potentially suprious query nodes.
 Borrowing the terminology of fuzzy logic \cite{zimmermann2001fuzzy}, \textit{$\mu_i(S)$} can be considered a membership function and we can interpret this as a measure of the \textit{possibility} for which a given vertex belongs to the query set, given a set of partitions.
 Where $\mu_i(S) = 1$ the partition space indicates that a given vertex is always partitioned in the same group as the query set.
-In the case $\mu_i(S) = 0$ the vertex $i$ never appears in the same cluster as any vertex in the query set.
+In the case $\mu_i(S) = 0$ the vertex $i$ never appears in the same cluster as the largest query set.
 
 The subtraction of the vertex from the query set ($S - i$) allows an unbiased score for vertices within the query set.
 This allows us to define a vector, $\mu(S)$ for all vertices in the network, including those in $S$.
