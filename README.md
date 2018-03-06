@@ -1,2 +1,2 @@
-# cluster_query_tool
+# cluster query tool
 Cluster query tool

@@ -1,0 +1,2741 @@
+{
+    "Cul3p-RING ubiquitin ligase complex": [
+        "YGR003W", 
+        "YNL230C", 
+        "YPL046C", 
+        "YBR114W", 
+        "YJR052W"
+    ], 
+    "Nfs1p/Isd11p complex": [
+        "YER048W-A", 
+        "YCL017C"
+    ], 
+    "box C/D snoRNP complex": [
+        "YOR310C", 
+        "YDL014W", 
+        "YEL026W", 
+        "YLR197W"
+    ], 
+    "Rvs161p/Rvs167p complex": [
+        "YCR009C", 
+        "YDR388W"
+    ], 
+    "Tup1p/Ssn6p complex": [
+        "YBR112C", 
+        "YCR084C"
+    ], 
+    "tRNA Methyltransferase Complex": [
+        "YDL201W", 
+        "YDR165W"
+    ], 
+    "cytoplasmic ribosomal small subunit": [
+        "YMR116C", 
+        "YGR214W", 
+        "YLR048W", 
+        "YOR293W", 
+        "YMR230W", 
+        "YDR025W", 
+        "YBR048W", 
+        "YOR369C", 
+        "YDR064W", 
+        "YCR031C", 
+        "YJL191W", 
+        "YOL040C", 
+        "YMR143W", 
+        "YDL083C", 
+        "YML024W", 
+        "YDR447C", 
+        "YDR450W", 
+        "YML026C", 
+        "YOL121C", 
+        "YNL302C", 
+        "YLR441C", 
+        "YML063W", 
+        "YGL123W", 
+        "YHL015W", 
+        "YKR057W", 
+        "YJL136C", 
+        "YJL190C", 
+        "YLR367W", 
+        "YGR118W", 
+        "YPR132W", 
+        "YER074W", 
+        "YIL069C", 
+        "YGR027C", 
+        "YLR333C", 
+        "YGL189C", 
+        "YER131W", 
+        "YKL156W", 
+        "YHR021C", 
+        "YOR167C", 
+        "YLR264W", 
+        "YLR388W", 
+        "YDL061C", 
+        "YNL178W", 
+        "YLR287C-A", 
+        "YOR182C", 
+        "YLR167W", 
+        "YJR145C", 
+        "YHR203C", 
+        "YJR123W", 
+        "YPL090C", 
+        "YBR181C", 
+        "YOR096W", 
+        "YNL096C", 
+        "YBL072C", 
+        "YER102W", 
+        "YPL081W", 
+        "YBR189W"
+    ], 
+    "Ribosome-associated complex (RAC)": [
+        "YHR064C", 
+        "YGR285C"
+    ], 
+    "transcription factor TFIIIC complex": [
+        "YBR123C", 
+        "YAL001C", 
+        "YGR047C", 
+        "YDR362C", 
+        "YOR110W", 
+        "YPL007C"
+    ], 
+    "Cdc28p/Clb1p complex": [
+        "YBR160W", 
+        "YGR108W"
+    ], 
+    "Rix1p complex": [
+        "YHR085W", 
+        "YNL182C", 
+        "YHR197W"
+    ], 
+    "Phenylalaninine-tRNA-ligase": [
+        "YLR060W", 
+        "YFL022C"
+    ], 
+    "Signal recognition particle (SRP)": [
+        "YML105C", 
+        "YDL092W", 
+        "YKL122C", 
+        "YPR088C", 
+        "YPL243W", 
+        "YPL210C"
+    ], 
+    "\"1,3-beta-glucan synthase complex (Gsc2p/Smk1p)\"": [
+        "YGR032W", 
+        "YPR054W"
+    ], 
+    "CCR4-NOT core complex": [
+        "YGR134W", 
+        "YNL288W", 
+        "YAL021C", 
+        "YDL165W", 
+        "YCR093W", 
+        "YER068W", 
+        "YIL038C", 
+        "YPR072W", 
+        "YNR052C"
+    ], 
+    "phosphatidylinositol (PtdIns) 3-kinase complex (functions in CPY sorting)": [
+        "YBR097W", 
+        "YPL120W", 
+        "YLR240W", 
+        "YLR360W"
+    ], 
+    "Decapping Enzyme Complex": [
+        "YOL149W", 
+        "YNL118C"
+    ], 
+    "\"actin cytoskeleton-regulatory complex, Pan1p/Sla1p/End3p complex\"": [
+        "YNL084C", 
+        "YIR006C", 
+        "YBL007C"
+    ], 
+    "Bi4p/Nam2p complex": [
+        "Q0120", 
+        "YLR382C"
+    ], 
+    "Cytochrome c oxidase (complex IV)": [
+        "Q0045", 
+        "YLR038C", 
+        "YGL191W", 
+        "Q0250", 
+        "Q0275", 
+        "YGL187C", 
+        "YNL052W", 
+        "YHR051W", 
+        "YMR256C", 
+        "YLR395C", 
+        "YDL067C"
+    ], 
+    "CCAAT-binding factor complex": [
+        "YGL237C", 
+        "YBL021C", 
+        "YKL109W", 
+        "YOR358W"
+    ], 
+    "protein kinase CK2 complex": [
+        "YIL035C", 
+        "YOR061W", 
+        "YGL019W", 
+        "YOR039W"
+    ], 
+    "Pho85p/Pcl1p complex": [
+        "YNL289W", 
+        "YPL031C"
+    ], 
+    "ribonucleoside-diphosphate reductase complex": [
+        "YER070W", 
+        "YJL026W", 
+        "YGR180C"
+    ], 
+    "Cdc7p/Dbf4p complex": [
+        "YDL017W", 
+        "YDR052C"
+    ], 
+    "Lge1p/Bre1p complex": [
+        "YPL055C", 
+        "YDL074C"
+    ], 
+    "Bi3 ribonucleoprotein complex": [
+        "Q0115", 
+        "YIR021W"
+    ], 
+    "mitochondrial ribosomal large subunit": [
+        "YCR046C", 
+        "YCR071C", 
+        "YGL068W", 
+        "YDR405W", 
+        "YKL167C", 
+        "YNL005C", 
+        "YDR116C", 
+        "YNL284C", 
+        "YDL202W", 
+        "YKR006C", 
+        "YLR312W-A", 
+        "YBL038W", 
+        "YNL252C", 
+        "YNL185C", 
+        "YKR085C", 
+        "YNL177C", 
+        "YOR150W", 
+        "YMR193W", 
+        "YGR076C", 
+        "YBR282W", 
+        "YDR462W", 
+        "YMR024W", 
+        "YKL138C", 
+        "YCR003W", 
+        "YMR286W", 
+        "YDR322W", 
+        "YBR122C", 
+        "YBR268W", 
+        "YKL170W", 
+        "YML009C", 
+        "YLR439W", 
+        "YPL173W", 
+        "YMR225C", 
+        "YJL096W", 
+        "YNR022C", 
+        "YPR100W", 
+        "YHR147C", 
+        "YDR237W", 
+        "YJL063C", 
+        "YGR220C", 
+        "YEL050C", 
+        "YDR115W", 
+        "YML025C", 
+        "YPL183W-A"
+    ], 
+    "Sro1p/Sec4p/Sec9p complex": [
+        "YFL005W", 
+        "YGR009C", 
+        "YPR032W"
+    ], 
+    "eEF1": [
+        "YPL048W", 
+        "YAL003W", 
+        "YPR080W", 
+        "YBR118W", 
+        "YKL081W"
+    ], 
+    "\"1,3-beta-glucan synthase complex (Fks1p/Rho1p)\"": [
+        "YLR342W", 
+        "YPR165W"
+    ], 
+    "Tof1p/Mrc1p/Csm3p complex": [
+        "YMR048W", 
+        "YCL061C", 
+        "YNL273W"
+    ], 
+    "CAAX-protein geranylgeranyltransferase complex": [
+        "YGL155W", 
+        "YKL019W"
+    ], 
+    "DNA-directed RNA polymerase III complex": [
+        "YOR207C", 
+        "YOR210W", 
+        "YBR154C", 
+        "YOR224C", 
+        "YHR143W-A", 
+        "YDR045C", 
+        "YJL011C", 
+        "YNL113W", 
+        "YKL144C", 
+        "YNL151C", 
+        "YNR003C", 
+        "YKR025W", 
+        "YPR110C", 
+        "YDL150W", 
+        "YPR190C", 
+        "YPR187W", 
+        "YOR116C"
+    ], 
+    "TORC 2 complex": [
+        "YOL078W", 
+        "YMR068W", 
+        "YJL058C", 
+        "YNL006W", 
+        "YIL105C", 
+        "YNL047C", 
+        "YKL203C", 
+        "YER093C"
+    ], 
+    "polarisome complex": [
+        "YLR319C", 
+        "YER149C", 
+        "YLL021W"
+    ], 
+    "mRNA cleavage and polyadenylation specificity factor complex": [
+        "YDR301W", 
+        "YLR115W", 
+        "YJR093C", 
+        "YER133W", 
+        "YKL059C", 
+        "YKR002W", 
+        "YNL317W", 
+        "YAL043C", 
+        "YGR156W", 
+        "YDR195W", 
+        "YNL222W", 
+        "YKL018W", 
+        "YOR179C", 
+        "YLR277C", 
+        "YPR107C"
+    ], 
+    "calcineurin complex": [
+        "YML057W", 
+        "YLR433C", 
+        "YKL190W"
+    ], 
+    "karyopherin docking subcomplex of the Nuclear Pore Complex (NPC)": [
+        "YDL088C", 
+        "YBL079W", 
+        "YMR153W"
+    ], 
+    "ubiquitin conjugating enzyme complex": [
+        "YGL087C", 
+        "YDR092W"
+    ], 
+    "Mps2p/Bbp1p complex": [
+        "YPL255W", 
+        "YGL075C", 
+        "YLR457C"
+    ], 
+    "Cdc28p/Clb6p complex": [
+        "YBR160W", 
+        "YGR109C"
+    ], 
+    "RNA Degradation Complex": [
+        "YGL246C", 
+        "YOR048C", 
+        "YDR289C"
+    ], 
+    "nucleotide-excision repair factor 3 complex": [
+        "YGR258C", 
+        "YER171W", 
+        "YLR005W", 
+        "YIL143C", 
+        "YDR311W", 
+        "YPL122C", 
+        "YPR056W"
+    ], 
+    "HMC Complex": [
+        "YMR186W", 
+        "YCL037C", 
+        "YBL075C", 
+        "YNL064C"
+    ], 
+    "nascent polypeptide-associated complex": [
+        "YDR252W", 
+        "YPL037C", 
+        "YHR193C"
+    ], 
+    "Ume6p/Ime1p complex": [
+        "YJR094C", 
+        "YDR207C"
+    ], 
+    "Gip1p/Glc7p complex": [
+        "YBR045C", 
+        "YER133W"
+    ], 
+    "MBF complex": [
+        "YDL056W", 
+        "YLR182W"
+    ], 
+    "\"alpha-1,6-mannosyltransferase complex(Anp1p/Mnn9p)\"": [
+        "YEL036C", 
+        "YJR075W", 
+        "YDR245W", 
+        "YJL183W", 
+        "YPL050C"
+    ], 
+    "protein farnesyltransferase complex": [
+        "YDL090C", 
+        "YKL019W"
+    ], 
+    "FACT complex": [
+        "YML069W", 
+        "YGL207W"
+    ], 
+    "Ubp3p/Bre5p complex": [
+        "YNR051C", 
+        "YER151C"
+    ], 
+    "Mto1p/Mss1p complex": [
+        "YMR023C", 
+        "YGL236C"
+    ], 
+    "nucleotide-excision repair factor 2 complex": [
+        "YEL037C", 
+        "YER162C"
+    ], 
+    "DNA polymerase epsilon complex": [
+        "YPR175W", 
+        "YBR278W", 
+        "YDR121W", 
+        "YNL262W"
+    ], 
+    "Erv41p/Erv46p complex": [
+        "YML067C", 
+        "YAL042W"
+    ], 
+    "Rtt109p/Vps75p complex": [
+        "YLL002W", 
+        "YNL246W"
+    ], 
+    "CBF3 complex": [
+        "YGR140W", 
+        "YMR168C", 
+        "YMR094W", 
+        "YDR328C"
+    ], 
+    "Mlh1p/Mlh3p complex": [
+        "YMR167W", 
+        "YPL164C"
+    ], 
+    "carbamoyl-phosphate synthase complex": [
+        "YOR303W", 
+        "YJR109C"
+    ], 
+    "\"H+-transporting ATPase, vacuolar\"": [
+        "YEL027W", 
+        "YHR026W", 
+        "YDL185W", 
+        "YPL234C", 
+        "YHR039C-A", 
+        "YPR036W", 
+        "YBR127C", 
+        "YOR332W", 
+        "YKL080W", 
+        "YLR447C", 
+        "YGR020C", 
+        "YEL051W", 
+        "YOR270C"
+    ], 
+    "Ula1p/Uba3p complex": [
+        "YPR066W", 
+        "YPL003W"
+    ], 
+    "COMPASS complex": [
+        "YLR015W", 
+        "YDR469W", 
+        "YHR119W", 
+        "YBR258C", 
+        "YPL138C", 
+        "YAR003W", 
+        "YKL018W", 
+        "YBR175W"
+    ], 
+    "Sfb3p/Sec23p complex": [
+        "YHR098C", 
+        "YPR181C"
+    ], 
+    "other DNA repair complexes": [
+        "YDR076W", 
+        "YDR004W"
+    ], 
+    "nuclear ubiquitin ligase complex": [
+        "YDL132W", 
+        "YJR090C", 
+        "YOL133W", 
+        "YDR328C"
+    ], 
+    "CURI complex": [
+        "YOR039W", 
+        "YLR223C", 
+        "YCL031C", 
+        "YGR090W"
+    ], 
+    "acetolactate synthase complex": [
+        "YMR108W", 
+        "YCL009C"
+    ], 
+    "Ino2p/Ino4p basic helix-loop-helix heteromeric complex": [
+        "YDR123C", 
+        "YOL108C"
+    ], 
+    "ESCRT II complex": [
+        "YPL002C", 
+        "YJR102C", 
+        "YLR417W"
+    ], 
+    "GSE Complex": [
+        "YML121W", 
+        "YGR163W", 
+        "YKL143W", 
+        "YKR007W", 
+        "YBR077C"
+    ], 
+    "Ntr1p/Ntr2p/Prp43p complex": [
+        "YLR424W", 
+        "YKR022C", 
+        "YGL120C"
+    ], 
+    "Cdc28p/Cln3p complex": [
+        "YBR160W", 
+        "YAL040C"
+    ], 
+    "mitochondrial intermembrane space protein transporter complex": [
+        "YHR005C-A", 
+        "YEL020W-A"
+    ], 
+    "Fig4p/Vac14p complex": [
+        "YNL325C", 
+        "YLR386W"
+    ], 
+    "GINS complex": [
+        "YDR013W", 
+        "YJL072C", 
+        "YOL146W", 
+        "YDR489W"
+    ], 
+    "smc5p-Smc6p complex": [
+        "YER038C", 
+        "YEL019C", 
+        "YLR007W", 
+        "YDR288W", 
+        "YDL105W", 
+        "YML023C", 
+        "YOL034W", 
+        "YLR383W"
+    ], 
+    "Def1p/Rad26p complex": [
+        "YKL054C", 
+        "YJR035W"
+    ], 
+    "F0/F1 ATP synthase (complex V)": [
+        "YBL099W", 
+        "YLR295C", 
+        "YPL271W", 
+        "YDL004W", 
+        "YDR377W", 
+        "YML081C-A", 
+        "YOL077W-A", 
+        "YJR121W", 
+        "YPR020W", 
+        "YBR039W", 
+        "YPL078C", 
+        "YDR298C", 
+        "Q0085", 
+        "YKL016C", 
+        "Q0080", 
+        "YDL181W", 
+        "Q0130", 
+        "YDR322C-A"
+    ], 
+    "mitochondrial sorting and assembly machinery complex": [
+        "YAL010C", 
+        "YHR083W", 
+        "YMR060C", 
+        "YNL026W"
+    ], 
+    "\"Cytochrome bc1 complex (Ubiquinol-cytochrome c reductase complex, complex III)\"": [
+        "Q0105", 
+        "YBL045C", 
+        "YOR065W", 
+        "YHR001W-A", 
+        "YPR191W", 
+        "YFR033C", 
+        "YDR529C", 
+        "YJL166W", 
+        "YGR183C", 
+        "YEL024W"
+    ], 
+    "Swr1p complex": [
+        "YFL039C", 
+        "YJL081C", 
+        "YLR085C", 
+        "YDR190C", 
+        "YPL235W", 
+        "YAL011W", 
+        "YGR002C", 
+        "YBR231C", 
+        "YLR385C", 
+        "YDR334W", 
+        "YML041C", 
+        "YDR485C", 
+        "YNL107W"
+    ], 
+    "retromer complex": [
+        "YJL053W", 
+        "YOR132W", 
+        "YHR012W", 
+        "YJL154C", 
+        "YOR069W"
+    ], 
+    "Hse1p/Vps27p complex": [
+        "YHL002W", 
+        "YNR006W"
+    ], 
+    "6-phosphofructokinase complex": [
+        "YGR240C", 
+        "YMR205C"
+    ], 
+    "RSC complex": [
+        "YPR034W", 
+        "YMR033W", 
+        "YCR020W-B", 
+        "YBL006C", 
+        "YMR091C", 
+        "YGR056W", 
+        "YLR357W", 
+        "YDR303C", 
+        "YHR056C", 
+        "YKR008W", 
+        "YLR033W", 
+        "YCR052W", 
+        "YFR037C", 
+        "YML127W", 
+        "YGR275W", 
+        "YLR321C", 
+        "YIL126W"
+    ], 
+    "SLIK (SAGA-like) complex": [
+        "YDR448W", 
+        "YER164W", 
+        "YGR252W", 
+        "YPL254W", 
+        "YDR176W", 
+        "YGL252C", 
+        "YGL066W", 
+        "YOL148C", 
+        "YDR392W", 
+        "YBR081C", 
+        "YDR167W", 
+        "YDR145W", 
+        "YBR198C", 
+        "YGL112C", 
+        "YMR236W", 
+        "YHR099W", 
+        "YMR223W"
+    ], 
+    "Npa2p-containing subcomplex": [
+        "YNR038W", 
+        "YOL144W", 
+        "YLR221C", 
+        "YKL014C", 
+        "YJR041C"
+    ], 
+    "Sds22p/Glc7p complex": [
+        "YKL193C", 
+        "YER133W"
+    ], 
+    "Gcn1p/Gcn20p complex": [
+        "YGL195W", 
+        "YFR009W"
+    ], 
+    "luminal surveillance complex": [
+        "YLR207W", 
+        "YJL034W", 
+        "YDR057W"
+    ], 
+    "EKC/KEOPS protein complex": [
+        "YGR262C", 
+        "YML036W", 
+        "YJL184W", 
+        "YKR038C", 
+        "YKR095W-A"
+    ], 
+    "Nup82 nuclear pore subcomplex": [
+        "YDL207W", 
+        "YIL115C", 
+        "YJL061W"
+    ], 
+    "SF3b complex": [
+        "YNL138W-A", 
+        "YMR240C", 
+        "YMR288W", 
+        "YOR319W", 
+        "YPR094W", 
+        "YML049C"
+    ], 
+    "signal peptidase complex": [
+        "YIR022W", 
+        "YJR010C-A", 
+        "YML055W", 
+        "YLR066W"
+    ], 
+    "Grh1p/Bug1p complex": [
+        "YDR517W", 
+        "YDL099W"
+    ], 
+    "methionyl glutamyl tRNA synthetase complex": [
+        "YGL105W", 
+        "YGL245W", 
+        "YGR264C"
+    ], 
+    "Cytoplasmic exosome complex": [
+        "YNL232W", 
+        "YOL021C", 
+        "YGR158C", 
+        "YHR069C", 
+        "YOL142W", 
+        "YDL111C", 
+        "YCR035C", 
+        "YDR280W", 
+        "YGR095C", 
+        "YGR195W"
+    ], 
+    "Mei5p/Sae3p complex": [
+        "YPL121C", 
+        "YHR079C-A"
+    ], 
+    "Kel1p/Kel2p/Lte1p complex": [
+        "YGR238C", 
+        "YHR158C", 
+        "YAL024C"
+    ], 
+    "DNA replication factor A complex": [
+        "YAR007C", 
+        "YNL312W", 
+        "YJL173C"
+    ], 
+    "Mgm1p/Ugo1p/Fzo1p complex": [
+        "YBR179C", 
+        "YOR211C", 
+        "YDR470C"
+    ], 
+    "Cdc42p/Ste20p complex": [
+        "YLR229C", 
+        "YHL007C"
+    ], 
+    "Snf1p/Snf4p/Sip1p complex": [
+        "YDR422C", 
+        "YDR477W", 
+        "YGL115W"
+    ], 
+    "Mcm2-7 complex": [
+        "YLR274W", 
+        "YBR202W", 
+        "YPR019W", 
+        "YBL023C", 
+        "YEL032W", 
+        "YGL201C"
+    ], 
+    "mitochondrial inner membrane peptidase complex": [
+        "YMR150C", 
+        "YMR035W", 
+        "YEL059C-A"
+    ], 
+    "Permease-Oxidase Complex": [
+        "YMR058W", 
+        "YER145C"
+    ], 
+    "TRAMP complex (Air1p)": [
+        "YIL079C", 
+        "YJL050W", 
+        "YOL115W"
+    ], 
+    "Psr1p/Whi2p complex": [
+        "YLL010C", 
+        "YOR043W"
+    ], 
+    "Hop2p/Mnd1p complex": [
+        "YGL033W", 
+        "YGL183C"
+    ], 
+    "Prp9p/Prp11p/Prp21p complex(SF3a complex)": [
+        "YDL043C", 
+        "YJL203W", 
+        "YDL030W"
+    ], 
+    "Succinate dehydrogenase complex (complex II)": [
+        "YKL148C", 
+        "YLL041C", 
+        "YKL141W", 
+        "YDR178W"
+    ], 
+    "transcription factor TFIIH complex": [
+        "YPR025C", 
+        "YDL108W", 
+        "YDR460W", 
+        "YER171W", 
+        "YLR005W", 
+        "YIL143C", 
+        "YDR311W", 
+        "YPL122C", 
+        "YPR056W", 
+        "YDR079C-A"
+    ], 
+    "Cdc28p/Cln2p complex": [
+        "YBR160W", 
+        "YPL256C"
+    ], 
+    "MRX complex": [
+        "YMR224C", 
+        "YNL250W", 
+        "YDR369C"
+    ], 
+    "anthranilate synthase complex": [
+        "YER090W", 
+        "YKL211C"
+    ], 
+    "Bud14p/Glc7p complex": [
+        "YAR014C", 
+        "YER133W"
+    ], 
+    "GAL4p/GAL80p complex": [
+        "YPL248C", 
+        "YML051W"
+    ], 
+    "NC2 complex": [
+        "YER159C", 
+        "YDR397C"
+    ], 
+    "Aurora B-INCENP protein kinase complex": [
+        "YPL209C", 
+        "YBR156C"
+    ], 
+    "Ssh1p translocon complex": [
+        "YER019C-A", 
+        "YBR283C", 
+        "YDR086C"
+    ], 
+    "ribonuclease MRP complex": [
+        "YNL221C", 
+        "YNL282W", 
+        "YBR257W", 
+        "YAL033W", 
+        "YGR030C", 
+        "YBR167C", 
+        "YBL018C", 
+        "YLR145W", 
+        "YHR062C", 
+        "YDR478W"
+    ], 
+    "SAGA complex": [
+        "YDR448W", 
+        "YER164W", 
+        "YGR252W", 
+        "YPL254W", 
+        "YDR176W", 
+        "YPL047W", 
+        "YCL010C", 
+        "YGL066W", 
+        "YOL148C", 
+        "YDR392W", 
+        "YBR081C", 
+        "YLR055C", 
+        "YBR111W-A", 
+        "YDR167W", 
+        "YDR145W", 
+        "YBR198C", 
+        "YGL112C", 
+        "YMR236W", 
+        "YHR099W", 
+        "YMR223W"
+    ], 
+    "PAM complex": [
+        "YOR232W", 
+        "YJL104W", 
+        "YKR065C", 
+        "YLR008C", 
+        "YJR045C", 
+        "YIL022W"
+    ], 
+    "Gcd10p/Gcd14p complex": [
+        "YNL062C", 
+        "YJL125C"
+    ], 
+    "chromatin silencing complex": [
+        "YDL042C", 
+        "YLR442C", 
+        "YDR227W"
+    ], 
+    "mitochondrial ribosomal small subunit": [
+        "YDR347W", 
+        "YDL045W-A", 
+        "YGR084C", 
+        "YKL003C", 
+        "YPR166C", 
+        "YBL090W", 
+        "YHL004W", 
+        "YPL118W", 
+        "YPL013C", 
+        "YMR188C", 
+        "YNL306W", 
+        "YDR337W", 
+        "YGR165W", 
+        "YBR251W", 
+        "YMR158W", 
+        "YBR146W", 
+        "YNL137C", 
+        "YOR158W", 
+        "YHR075C", 
+        "YDR041W", 
+        "YER050C", 
+        "YNR037C", 
+        "YKL155C", 
+        "YGL129C", 
+        "YDR175C", 
+        "YIL093C", 
+        "YJR101W", 
+        "YGR215W", 
+        "YJR113C", 
+        "Q0140", 
+        "YFR049W", 
+        "YNL081C"
+    ], 
+    "cytoplasmic dynein complex": [
+        "YKR054C", 
+        "YDR424C", 
+        "YMR299C", 
+        "YDR488C"
+    ], 
+    "NatA complex": [
+        "YHR013C", 
+        "YDL040C", 
+        "YOR253W"
+    ], 
+    "RING finger peroxin complex": [
+        "YDR265W", 
+        "YMR026C", 
+        "YJL210W"
+    ], 
+    "ESCRT I complex": [
+        "YGR206W", 
+        "YLR119W", 
+        "YCL008C", 
+        "YPL065W"
+    ], 
+    "nucleotide-excision repair factor 1 complex": [
+        "YPL022W", 
+        "YML095C", 
+        "YMR201C"
+    ], 
+    "VTC heterotetrameric complex": [
+        "YER072W", 
+        "YFL004W", 
+        "YPL019C", 
+        "YJL012C"
+    ], 
+    "Complex": [
+        "ORF"
+    ], 
+    "Nonsense-mediated mRNA decay pathway complex": [
+        "YMR080C", 
+        "YHR077C", 
+        "YGR072W"
+    ], 
+    "Mon1p/Ccz1p complex": [
+        "YBR131W", 
+        "YGL124C"
+    ], 
+    "ubiquitin ligase ERAD-M complex": [
+        "YOL013C", 
+        "YLR207W"
+    ], 
+    "TRAMP complex (Air2p)": [
+        "YDL175C", 
+        "YJL050W", 
+        "YOL115W"
+    ], 
+    "Sec62p/Sec63p complex": [
+        "YPL094C", 
+        "YOR254C", 
+        "YBR171W", 
+        "YLR292C"
+    ], 
+    "DNA ligase IV": [
+        "YOR005C", 
+        "YGL090W"
+    ], 
+    "DSIF complex": [
+        "YGR063C", 
+        "YML010W"
+    ], 
+    "Cdc28p/Clb3p complex": [
+        "YBR160W", 
+        "YDL155W"
+    ], 
+    "Pho85p/Pho80p complex": [
+        "YOL001W", 
+        "YPL031C"
+    ], 
+    "Tim8p/Tim13p complex": [
+        "YGR181W", 
+        "YJR135W-A"
+    ], 
+    "Pho85p/Pcl2p complex": [
+        "YDL127W", 
+        "YPL031C"
+    ], 
+    "chromatin assembly complex": [
+        "YML102W", 
+        "YBR195C", 
+        "YPR018W"
+    ], 
+    "UTP A complex": [
+        "YEL055C", 
+        "YPL126W", 
+        "YDR324C", 
+        "YGR128C", 
+        "YHR196W", 
+        "YJL109C", 
+        "YMR093W"
+    ], 
+    "transcription factor TFIIE complex": [
+        "YKL028W", 
+        "YKR062W"
+    ], 
+    "Sec61p translocon complex": [
+        "YER087C-B", 
+        "YLR378C", 
+        "YDR086C"
+    ], 
+    "U4/U6 x U5 tri-snRNP complex": [
+        "YER172C", 
+        "YPR082C", 
+        "YBL026W", 
+        "YLR438C-A", 
+        "YER112W", 
+        "YER146W", 
+        "YDR378C", 
+        "YNL147W", 
+        "YJR022W", 
+        "YGR006W", 
+        "YDR473C", 
+        "YGR091W", 
+        "YGR075C", 
+        "YPR178W", 
+        "YBR055C", 
+        "YHR165C", 
+        "YER029C", 
+        "YGR074W", 
+        "YLR275W", 
+        "YLR147C", 
+        "YOR159C", 
+        "YFL017W-A", 
+        "YPR182W", 
+        "YKL173W", 
+        "YEL026W", 
+        "YDL098C", 
+        "YOR308C", 
+        "YBR152W"
+    ], 
+    "GAL3p/GAL80p complex": [
+        "YDR009W", 
+        "YML051W"
+    ], 
+    "Noc2p/Noc3p complex": [
+        "YOR206W", 
+        "YLR002C"
+    ], 
+    "Bub2p/Bfa1p complex": [
+        "YMR055C", 
+        "YJR053W"
+    ], 
+    "Reg1p/Glc7p complex": [
+        "YDR028C", 
+        "YER133W"
+    ], 
+    "mRNA cleavage factor complex (CFI)": [
+        "YOR250C", 
+        "YOL123W", 
+        "YDR228C", 
+        "YMR061W", 
+        "YGL044C"
+    ], 
+    "SAS Complex": [
+        "YMR127C", 
+        "YDR181C", 
+        "YOR213C"
+    ], 
+    "Ctf3p protein complex": [
+        "YLR381W", 
+        "YPR046W", 
+        "YJR135C"
+    ], 
+    "Mtr2p/Mex67p complex": [
+        "YPL169C", 
+        "YKL186C"
+    ], 
+    "Ela1p/Elc1p complex": [
+        "YNL230C", 
+        "YPL046C"
+    ], 
+    "Golgi transport complex": [
+        "YGL223C", 
+        "YGR120C", 
+        "YER157W", 
+        "YPR105C", 
+        "YNL051W", 
+        "YNL041C", 
+        "YGL005C", 
+        "YML071C"
+    ], 
+    "prohibitin complex": [
+        "YGR132C", 
+        "YGR231C"
+    ], 
+    "\"alpha,alpha-trehalose-phosphate synthase complex (UDP-forming)\"": [
+        "YBR126C", 
+        "YDR074W", 
+        "YMR261C", 
+        "YML100W"
+    ], 
+    "mitotic checkpoint complex": [
+        "YOR026W", 
+        "YGL116W", 
+        "YJL030W", 
+        "YJL013C"
+    ], 
+    "Cbp1p/Pet309p complex": [
+        "YJL209W", 
+        "YLR067C"
+    ], 
+    "heterotrimeric G-protein complex": [
+        "YHR005C", 
+        "YJR086W", 
+        "YOR212W"
+    ], 
+    "RES complex": [
+        "YGL174W", 
+        "YLR016C", 
+        "YIR005W"
+    ], 
+    "Cdc24p/Far1p/Gbetagamma protein complex": [
+        "YAL041W", 
+        "YJL157C", 
+        "YJR086W", 
+        "YOR212W"
+    ], 
+    "multi-eIF complex": [
+        "YER025W", 
+        "YMR309C", 
+        "YOR361C", 
+        "YNL244C", 
+        "YJR007W", 
+        "YPL237W", 
+        "YMR146C", 
+        "YPR041W"
+    ], 
+    "Set3p complex": [
+        "YGL194C", 
+        "YIL112W", 
+        "YDR155C", 
+        "YOL068C", 
+        "YKR029C", 
+        "YBR103W", 
+        "YCR033W"
+    ], 
+    "commitment complex": [
+        "YPL178W", 
+        "YLR116W", 
+        "YKL074C", 
+        "YMR125W", 
+        "YER029C", 
+        "YGR074W", 
+        "YLR275W", 
+        "YLR147C", 
+        "YOR159C", 
+        "YFL017W-A", 
+        "YPR182W", 
+        "YDL087C", 
+        "YBR119W", 
+        "YHR086W", 
+        "YML046W", 
+        "YKL012W", 
+        "YDR235W", 
+        "YIL061C", 
+        "YDR240C", 
+        "YGR013W", 
+        "YLR298C"
+    ], 
+    "RENT complex": [
+        "YFR028C", 
+        "YJL076W", 
+        "YDL042C"
+    ], 
+    "MIND complex": [
+        "YIR010W", 
+        "YAL034W-A", 
+        "YJR112W", 
+        "YPL233W"
+    ], 
+    "Sod1p/Ccs1p complex": [
+        "YMR038C", 
+        "YJR104C"
+    ], 
+    "Prp19-associated complex": [
+        "YLL036C", 
+        "YMR213W", 
+        "YJR050W", 
+        "YLR117C", 
+        "YDR416W", 
+        "YGR129W", 
+        "YBR188C", 
+        "YPR101W"
+    ], 
+    "Nucleosomal protein complex": [
+        "YBR009C", 
+        "YNL030W", 
+        "YBR010W", 
+        "YNL031C", 
+        "YDR225W", 
+        "YBL003C", 
+        "YDR224C", 
+        "YBL002W"
+    ], 
+    "Rad6p/Rad18p complex": [
+        "YCR066W", 
+        "YGL058W"
+    ], 
+    "U2 snRNP complex": [
+        "YPL213W", 
+        "YIR009W", 
+        "YML049C", 
+        "YMR288W", 
+        "YIR005W", 
+        "YOR319W", 
+        "YDL030W", 
+        "YDL043C", 
+        "YJL203W", 
+        "YMR240C", 
+        "YNL286W", 
+        "YER029C", 
+        "YGR074W", 
+        "YLR275W", 
+        "YLR147C", 
+        "YOR159C", 
+        "YFL017W-A", 
+        "YPR182W"
+    ], 
+    "Apg12p/Apg5p/Apg16 multimeric complex": [
+        "YBR217W", 
+        "YMR159C", 
+        "YPL149W"
+    ], 
+    "gamma-tubulin complex": [
+        "YHR172W", 
+        "YNL126W", 
+        "YLR212C"
+    ], 
+    "Exocyst complex": [
+        "YJL085W", 
+        "YBR102C", 
+        "YLR166C", 
+        "YGL233W", 
+        "YER008C", 
+        "YDR166C", 
+        "YIL068C", 
+        "YPR055W"
+    ], 
+    "Car1p/Arg3p complex": [
+        "YJL088W", 
+        "YPL111W"
+    ], 
+    "Sgv1p/Bur2p complex": [
+        "YLR226W", 
+        "YPR161C"
+    ], 
+    "Pho85p/Pcl8p complex": [
+        "YPL219W", 
+        "YPL031C"
+    ], 
+    "SBF complex": [
+        "YER111C", 
+        "YLR182W"
+    ], 
+    "i-AAA complex": [
+        "YCL044C", 
+        "YPR024W"
+    ], 
+    "DNA-directed RNA polymerase II complex": [
+        "YOR210W", 
+        "YOL005C", 
+        "YOR151C", 
+        "YIL021W", 
+        "YJL140W", 
+        "YBR154C", 
+        "YDR404C", 
+        "YOR224C", 
+        "YGL070C", 
+        "YHR143W-A", 
+        "YDL140C", 
+        "YPR187W"
+    ], 
+    "DNA polymerase delta complex": [
+        "YDL102W", 
+        "YJR006W", 
+        "YJR043C"
+    ], 
+    "Protein O-mannosyltransferase(Pmt1p/Pmt2p)": [
+        "YDL095W", 
+        "YAL023C"
+    ], 
+    "COPI": [
+        "YDL145C", 
+        "YER122C", 
+        "YFR051C", 
+        "YPL010W", 
+        "YNL287W", 
+        "YDR238C", 
+        "YGL137W", 
+        "YIL076W"
+    ], 
+    "ISW1b complex": [
+        "YLR095C", 
+        "YMR044W", 
+        "YBR245C"
+    ], 
+    "transcription factor TFIIA complex": [
+        "YOR194C", 
+        "YKL058W"
+    ], 
+    "Cdc28p/Clb4p complex": [
+        "YBR160W", 
+        "YLR210W"
+    ], 
+    "Vam3p/Vam7 vacuolar tSNARE complex": [
+        "YOR106W", 
+        "YGL212W"
+    ], 
+    "sulfite reductase complex (NADPH)": [
+        "YFR030W", 
+        "YJR137C"
+    ], 
+    "Bni4p/Glc7p complex": [
+        "YNL233W", 
+        "YER133W"
+    ], 
+    "Mlh1p/Pms1p complex": [
+        "YMR167W", 
+        "YNL082W"
+    ], 
+    "Pxa1p/Pxa2p complex": [
+        "YPL147W", 
+        "YKL188C"
+    ], 
+    "Mot1p complex": [
+        "YPL082C", 
+        "YER148W"
+    ], 
+    "Fth1p/Fet5p complex": [
+        "YFL041W", 
+        "YBR207W"
+    ], 
+    "nucleotide-excision repair factor 4 complex": [
+        "YKL112W", 
+        "YPL046C", 
+        "YBR114W", 
+        "YJR052W"
+    ], 
+    "SWI/SNF complex": [
+        "YPR034W", 
+        "YMR033W", 
+        "YGR275W", 
+        "YDR073W", 
+        "YNR023W", 
+        "YOR290C", 
+        "YBR289W", 
+        "YHL025W", 
+        "YPL016W", 
+        "YJL176C", 
+        "YPL129W", 
+        "YFL049W"
+    ], 
+    "signal recognition particle receptor complex": [
+        "YDR292C", 
+        "YKL154W"
+    ], 
+    "SPB components": [
+        "YBR109C", 
+        "YNL225C", 
+        "YOR373W", 
+        "YDR356W", 
+        "YPL124W", 
+        "YKL042W", 
+        "YAL047C"
+    ], 
+    "Elongator complex": [
+        "YGR200C", 
+        "YPL086C", 
+        "YPL101W", 
+        "YMR312W", 
+        "YHR187W", 
+        "YLR384C"
+    ], 
+    "Gac1p/Glc7p complex": [
+        "YOR178C", 
+        "YER133W"
+    ], 
+    "Nsp1p complex": [
+        "YJL041W", 
+        "YFR002W", 
+        "YGL172W", 
+        "YGR119C"
+    ], 
+    "eIF1/eIF1A/40S complex": [
+        "YNL244C", 
+        "YMR260C"
+    ], 
+    "Dsl1p complex": [
+        "YNL258C", 
+        "YGL145W", 
+        "YDR498C", 
+        "YLR440C", 
+        "YGL098W", 
+        "YOR075W"
+    ], 
+    "Sko1p/Cyc8p/Tup1 repressor complex": [
+        "YBR112C", 
+        "YNL167C", 
+        "YCR084C"
+    ], 
+    "chaperonin-containing T-complex": [
+        "YIL142W", 
+        "YJL014W", 
+        "YDL143W", 
+        "YJR064W", 
+        "YDR188W", 
+        "YJL111W", 
+        "YJL008C", 
+        "YDR212W"
+    ], 
+    "Met4p/Met28p/Met31p complex": [
+        "YIR017C", 
+        "YPL038W", 
+        "YNL103W"
+    ], 
+    "palmitoyltransferase complex": [
+        "YLR246W", 
+        "YOL110W"
+    ], 
+    "signalosome complex": [
+        "YMR025W", 
+        "YJR084W", 
+        "YDR179C", 
+        "YIL071C", 
+        "YDL216C", 
+        "YOL117W"
+    ], 
+    "\"H+-transporting ATPase, Golgi\"": [
+        "YEL027W", 
+        "YHR026W", 
+        "YMR054W", 
+        "YDL185W", 
+        "YPL234C", 
+        "YHR039C-A", 
+        "YPR036W", 
+        "YBR127C", 
+        "YOR332W", 
+        "YKL080W", 
+        "YLR447C", 
+        "YGR020C", 
+        "YEL051W"
+    ], 
+    "OCA complex": [
+        "YNL099C", 
+        "YNL056W", 
+        "YNL032W", 
+        "YCR095C", 
+        "YHL029C", 
+        "YDR067C"
+    ], 
+    "Synaptonemal complex (SC)": [
+        "YIL072W", 
+        "YLR263W", 
+        "YDR285W", 
+        "YGL249W"
+    ], 
+    "zeta DNA polymerase complex": [
+        "YPL167C", 
+        "YIL139C"
+    ], 
+    "Tap42p/Pph21p/Rrd2p complex": [
+        "YMR028W", 
+        "YDL134C", 
+        "YPL152W"
+    ], 
+    "Ku complex": [
+        "YMR284W", 
+        "YMR106C"
+    ], 
+    "HAT-B complex": [
+        "YPL001W", 
+        "YEL056W", 
+        "YLL022C"
+    ], 
+    "mitochondrial processing peptidase complex": [
+        "YLR163C", 
+        "YHR024C"
+    ], 
+    "mitochondrial ATPase inhibitor complex": [
+        "YDL181W", 
+        "YDL130W-A", 
+        "YGR008C"
+    ], 
+    "Ski Complex": [
+        "YLR398C", 
+        "YPR189W", 
+        "YGL213C"
+    ], 
+    "Geranylgeranyltransferase II (GGTase II)": [
+        "YPR176C", 
+        "YJL031C"
+    ], 
+    "eIF2": [
+        "YER025W", 
+        "YJR007W", 
+        "YPL237W"
+    ], 
+    "eIF3": [
+        "YMR012W", 
+        "YLR192C", 
+        "YMR309C", 
+        "YOR361C", 
+        "YBR079C", 
+        "YMR146C", 
+        "YDR429C"
+    ], 
+    "Kornberg's mediator (SRB) complex": [
+        "YPL042C", 
+        "YNL025C", 
+        "YCR081W", 
+        "YDR443C", 
+        "YNR010W", 
+        "YOL051W", 
+        "YPR070W", 
+        "YMR112C", 
+        "YDL005C", 
+        "YOR174W", 
+        "YHR058C", 
+        "YOL135C", 
+        "YBR193C", 
+        "YGL151W", 
+        "YPR168W", 
+        "YGL025C", 
+        "YLR071C", 
+        "YBL093C", 
+        "YNL236W", 
+        "YHR041C", 
+        "YER022W", 
+        "YGR104C", 
+        "YBR253W", 
+        "YDR308C", 
+        "YGL127C"
+    ], 
+    "nuclear cohesin complex": [
+        "YIL026C", 
+        "YDL003W", 
+        "YPR007C", 
+        "YFL008W", 
+        "YJL074C"
+    ], 
+    "Rad53p/Asf1p complex": [
+        "YJL115W", 
+        "YPL153C"
+    ], 
+    "histone H2A phosphatase complex": [
+        "YDR075W", 
+        "YNL201C", 
+        "YBL046W"
+    ], 
+    "U5 snRNP complex": [
+        "YER029C", 
+        "YGR074W", 
+        "YLR275W", 
+        "YLR147C", 
+        "YOR159C", 
+        "YFL017W-A", 
+        "YPR182W", 
+        "YKL173W", 
+        "YBL074C", 
+        "YER172C", 
+        "YHR165C", 
+        "YDR243C", 
+        "YHR156C", 
+        "YPR082C"
+    ], 
+    "ER V-ATPase assembly complex": [
+        "YHR060W", 
+        "YKL119C"
+    ], 
+    "guanyl-nucleotide exchange factor complex": [
+        "YDR137W", 
+        "YLR039C"
+    ], 
+    "Rad17p/Ddc1p/Mec3p complex": [
+        "YPL194W", 
+        "YLR288C", 
+        "YOR368W"
+    ], 
+    "Sap190p/Sit4p complex": [
+        "YKR028W", 
+        "YDL047W"
+    ], 
+    "AP-2 adaptor complex": [
+        "YJR005W", 
+        "YBL037W", 
+        "YOL062C", 
+        "YJR058C"
+    ], 
+    "UTP C complex": [
+        "YCL031C", 
+        "YGR090W", 
+        "YIL035C", 
+        "YOR061W", 
+        "YGL019W", 
+        "YOR039W"
+    ], 
+    "NatC complex": [
+        "YEL053C", 
+        "YPR051W", 
+        "YCR020C-A"
+    ], 
+    "\"Arg2p/Arg5,6p complex\"": [
+        "YJL071W", 
+        "YER069W"
+    ], 
+    "TRAPP complex": [
+        "YKR068C", 
+        "YML077W", 
+        "YDR108W", 
+        "YGR166W", 
+        "YDR407C", 
+        "YMR218C", 
+        "YBR254C", 
+        "YDR246W", 
+        "YDR472W", 
+        "YOR115C"
+    ], 
+    "dynactin complex": [
+        "YHR129C", 
+        "YDR106W", 
+        "YMR294W", 
+        "YPL174C"
+    ], 
+    "fatty acid synthase complex": [
+        "YKL182W", 
+        "YPL231W"
+    ], 
+    "Csh1p/Csg2p complex": [
+        "YBR036C", 
+        "YBR161W"
+    ], 
+    "FBP degradation complex": [
+        "YDR255C", 
+        "YCL039W", 
+        "YMR135C", 
+        "YBR105C", 
+        "YIL017C", 
+        "YGL227W", 
+        "YIL097W", 
+        "YDL176W"
+    ], 
+    "Sap185p/Sit4p complex": [
+        "YJL098W", 
+        "YDL047W"
+    ], 
+    "Telomerase": [
+        "YLR233C", 
+        "YLR318W", 
+        "YIL009C-A"
+    ], 
+    "mitochondrial inner membrane protein insertion complex": [
+        "YBR091C", 
+        "YOR297C", 
+        "YDL217C", 
+        "YJL054W"
+    ], 
+    "Mtk1p/Pbp1p complex": [
+        "YNL085W", 
+        "YGR178C"
+    ], 
+    "Sum1p/Rfm1p/Hst1p complex": [
+        "YOL068C", 
+        "YOR279C", 
+        "YDR310C"
+    ], 
+    "CORVET complex": [
+        "YLR148W", 
+        "YMR231W", 
+        "YDR495C", 
+        "YPL045W", 
+        "YLR396C", 
+        "YAL002W"
+    ], 
+    "Eisosome": [
+        "YPL004C", 
+        "YGR086C"
+    ], 
+    "Cdc73p/Paf1p complex": [
+        "YLR418C", 
+        "YOL145C", 
+        "YDR138W", 
+        "YOR123C", 
+        "YBR279W", 
+        "YGL244W", 
+        "YAL021C"
+    ], 
+    "transcription factor TFIIIB complex": [
+        "YNL039W", 
+        "YGR246C", 
+        "YER148W"
+    ], 
+    "mitochondrial pyruvate dehydrogenase complex": [
+        "YNL071W", 
+        "YFL018C", 
+        "YER178W", 
+        "YBR221C", 
+        "YGR193C", 
+        "YIL042C", 
+        "YOR090C"
+    ], 
+    "cohesin loading factor complex": [
+        "YDR180W", 
+        "YER147C"
+    ], 
+    "OAF complex": [
+        "YAL051W", 
+        "YOR363C"
+    ], 
+    "Rtg1p/Rtg3p complex": [
+        "YOL067C", 
+        "YBL103C"
+    ], 
+    "DNA replication factor C complex (Rcf1p)": [
+        "YOR217W", 
+        "YJR068W", 
+        "YNL290W", 
+        "YOL094C", 
+        "YBR087W"
+    ], 
+    "ARGR complex": [
+        "YMR042W", 
+        "YML099C", 
+        "YDR173C", 
+        "YMR043W"
+    ], 
+    "Reg2p/Glc7p complex": [
+        "YBR050C", 
+        "YER133W"
+    ], 
+    "Dop1p/Mon2p complex": [
+        "YDR141C", 
+        "YNL297C"
+    ], 
+    "Nsp1p/Nup82p complex": [
+        "YJL041W", 
+        "YJL061W"
+    ], 
+    "Uba2p/Aos1p complex": [
+        "YPR180W", 
+        "YDR390C"
+    ], 
+    "Esp1p/Pds1p complex": [
+        "YGR098C", 
+        "YDR113C"
+    ], 
+    "mRNA guanylyl transferase (capping complex)": [
+        "YGL130W", 
+        "YPL228W"
+    ], 
+    "RNA polymerase I upstream activating factor complex": [
+        "YBL025W", 
+        "YLR141W", 
+        "YMR270C", 
+        "YOR295W", 
+        "YBR010W", 
+        "YBR009C"
+    ], 
+    "Isocitrate dehydrogenase": [
+        "YNL037C", 
+        "YOR136W"
+    ], 
+    "Kel1p/Kel2p complex": [
+        "YHR158C", 
+        "YGR238C"
+    ], 
+    "heterodimeric G-protein complex": [
+        "YJR086W", 
+        "YOR212W"
+    ], 
+    "DNA-directed RNA polymerase I complex": [
+        "YJR063W", 
+        "YPR010C", 
+        "YDR156W", 
+        "YOR341W", 
+        "YJL148W", 
+        "YOR340C", 
+        "YNL248C", 
+        "YOR210W", 
+        "YBR154C", 
+        "YOR224C", 
+        "YHR143W-A", 
+        "YNL113W", 
+        "YPR110C", 
+        "YPR187W"
+    ], 
+    "transcription factor TFIID complex": [
+        "YER148W", 
+        "YGR274C", 
+        "YDR167W", 
+        "YML015C", 
+        "YDR145W", 
+        "YML098W", 
+        "YPL129W", 
+        "YCR042C", 
+        "YPL011C", 
+        "YMR005W", 
+        "YBR198C", 
+        "YGL112C", 
+        "YMR227C", 
+        "YML114C", 
+        "YMR236W"
+    ], 
+    "Holliday junction resolvase complex": [
+        "YBR098W", 
+        "YDR386W"
+    ], 
+    "COPII": [
+        "YGL200C", 
+        "YAR002C-A", 
+        "YAL007C", 
+        "YML012W", 
+        "YAL042W", 
+        "YPL218W", 
+        "YLR208W", 
+        "YPL085W", 
+        "YPR181C", 
+        "YIL109C", 
+        "YDL195W"
+    ], 
+    "mitochondrial inner membrane presequence translocase complex": [
+        "YNR017W", 
+        "YJL104W", 
+        "YLR008C", 
+        "YJL143W", 
+        "YGR033C", 
+        "YPL063W"
+    ], 
+    "STE5-MAPK complex": [
+        "YBL016W", 
+        "YLR362W", 
+        "YDR103W", 
+        "YDL159W"
+    ], 
+    "COMA complex": [
+        "YBR211C", 
+        "YPL018W", 
+        "YDR318W", 
+        "YGR179C"
+    ], 
+    "Mst27p/Mst28p complex": [
+        "YGL051W", 
+        "YAR033W"
+    ], 
+    "mitochondrial oxoglutarate dehydrogenase complex": [
+        "YIL125W", 
+        "YDR148C", 
+        "YFL018C"
+    ], 
+    "Ada2p/Gcn5p/Ada3 transcription activator complex": [
+        "YDR448W", 
+        "YOR023C", 
+        "YGR252W", 
+        "YPL254W", 
+        "YDR176W"
+    ], 
+    "Hym1p/Kic1p/Sog2p complex": [
+        "YKL189W", 
+        "YHR102W", 
+        "YOR353C"
+    ], 
+    "Swh1p/Nvj1p complex": [
+        "YHR195W", 
+        "YAR042W"
+    ], 
+    "DASH complex": [
+        "YKL052C", 
+        "YDR016C", 
+        "YKR083C", 
+        "YBR233W-A", 
+        "YDR320C-A", 
+        "YGR113W", 
+        "YGL061C", 
+        "YKL138C-A", 
+        "YDR201W", 
+        "YKR037C"
+    ], 
+    "Rsp5p/Bul1 ubiquitin ligase complex": [
+        "YMR275C", 
+        "YER125W"
+    ], 
+    "NuA3 histone acetyltransferase complex": [
+        "YJR082C", 
+        "YBL052C", 
+        "YPL129W", 
+        "YOR064C", 
+        "YPR031W"
+    ], 
+    "Clathrin": [
+        "YGL206C", 
+        "YGR167W"
+    ], 
+    "cAMP-dependent protein kinase": [
+        "YIL033C", 
+        "YJL164C", 
+        "YPL203W", 
+        "YKL166C"
+    ], 
+    "Nem1p/Spo7p complex": [
+        "YHR004C", 
+        "YAL009W"
+    ], 
+    "Cbf1p/Met4p/Met28p complex": [
+        "YJR060W", 
+        "YIR017C", 
+        "YNL103W"
+    ], 
+    "Ndc80p complex": [
+        "YOL069W", 
+        "YMR117C", 
+        "YER018C", 
+        "YIL144W"
+    ], 
+    "MSH2p/MSH3p complex": [
+        "YOL090W", 
+        "YCR092C"
+    ], 
+    "UDP-N-acetylglucosamine transferase complex": [
+        "YGL047W", 
+        "YBR070C"
+    ], 
+    "eIF2B": [
+        "YOR260W", 
+        "YGR083C", 
+        "YDR211W", 
+        "YLR291C", 
+        "YKR026C"
+    ], 
+    "Succinyl-CoA ligase": [
+        "YOR142W", 
+        "YGR244C"
+    ], 
+    "Chs5p/Arf-1binding proteins (ChAPs)": [
+        "YDL192W", 
+        "YMR237W", 
+        "YKR027W", 
+        "YOR299W", 
+        "YLR330W", 
+        "YJL099W"
+    ], 
+    "anaphase-promoting complex": [
+        "YNL172W", 
+        "YDL008W", 
+        "YLR127C", 
+        "YDR118W", 
+        "YOR249C", 
+        "YLR102C", 
+        "YKL022C", 
+        "YGL116W", 
+        "YHR166C", 
+        "YFR036W", 
+        "YBL084C", 
+        "YGL003C", 
+        "YGL240W", 
+        "YIR025W", 
+        "YDR260C"
+    ], 
+    "meiotic recombination initiation complex": [
+        "YLR329W", 
+        "YHR157W", 
+        "YHL022C"
+    ], 
+    "Protein O-mannosyltransferase(Pmt3p/Pmt5p)": [
+        "YOR321W", 
+        "YDL093W"
+    ], 
+    "Rpd3L complex": [
+        "YKL185W", 
+        "YPL181W", 
+        "YAL013W", 
+        "YNL097C", 
+        "YNL330C", 
+        "YBR095C", 
+        "YDL076C", 
+        "YMR263W", 
+        "YIL084C", 
+        "YOL004W", 
+        "YPL139C", 
+        "YDR207C"
+    ], 
+    "Pho85p/Pcl10p complex": [
+        "YGL134W", 
+        "YPL031C"
+    ], 
+    "DNA replication factor C complex (Elg1p)": [
+        "YOR144C", 
+        "YJR068W", 
+        "YNL290W", 
+        "YOL094C", 
+        "YBR087W"
+    ], 
+    "UTP B complex": [
+        "YLR129W", 
+        "YCR057C", 
+        "YDR449C", 
+        "YLR222C", 
+        "YJL069C", 
+        "YLR409C"
+    ], 
+    "cytoplasmic ribosomal large subunit": [
+        "YLR075W", 
+        "YPR102C", 
+        "YGR085C", 
+        "YEL054C", 
+        "YDR418W", 
+        "YDL082W", 
+        "YMR142C", 
+        "YKL006W", 
+        "YHL001W", 
+        "YLR029C", 
+        "YMR121C", 
+        "YIL133C", 
+        "YNL069C", 
+        "YKL180W", 
+        "YJL177W", 
+        "YOL120C", 
+        "YNL301C", 
+        "YBR084C-A", 
+        "YBL027W", 
+        "YPL220W", 
+        "YGL135W", 
+        "YMR242C", 
+        "YOR312C", 
+        "YBR191W", 
+        "YPL079W", 
+        "YLR061W", 
+        "YFL034C-A", 
+        "YBL087C", 
+        "YER117W", 
+        "YGL031C", 
+        "YGR148C", 
+        "YOL127W", 
+        "YLR344W", 
+        "YGR034W", 
+        "YHR010W", 
+        "YDR471W", 
+        "YGL103W", 
+        "YFR032C-A", 
+        "YFR031C-A", 
+        "YIL018W", 
+        "YOR063W", 
+        "YGL030W", 
+        "YDL075W", 
+        "YLR406C", 
+        "YBL092W", 
+        "YPL143W", 
+        "YOR234C", 
+        "YER056C-A", 
+        "YIL052C", 
+        "YDL191W", 
+        "YDL136W", 
+        "YMR194W", 
+        "YPL249C-A", 
+        "YLR185W", 
+        "YDR500C", 
+        "YLR325C", 
+        "YJL189W", 
+        "YIL148W", 
+        "YKR094C", 
+        "YDL184C", 
+        "YDL133C-A", 
+        "YNL162W", 
+        "YHR141C", 
+        "YPR043W", 
+        "YJR094W-A", 
+        "YBR031W", 
+        "YDR012W", 
+        "YPL131W", 
+        "YML073C", 
+        "YLR448W", 
+        "YGL076C", 
+        "YPL198W", 
+        "YHL033C", 
+        "YLL045C", 
+        "YGL147C", 
+        "YNL067W", 
+        "YLR340W", 
+        "YDL081C", 
+        "YDL130W", 
+        "YOL039W", 
+        "YDR382W"
+    ], 
+    "transcription export complex": [
+        "YDL084W", 
+        "YNL253W", 
+        "YDR381W"
+    ], 
+    "U6 snRNP complex": [
+        "YBL026W", 
+        "YLR438C-A", 
+        "YER112W", 
+        "YER146W", 
+        "YDR378C", 
+        "YNL147W", 
+        "YJR022W", 
+        "YMR268C"
+    ], 
+    "DNA replication factor C complex (Ctf18p/Ctf8p/dcc1p)": [
+        "YMR078C", 
+        "YHR191C", 
+        "YCL016C", 
+        "YJR068W", 
+        "YNL290W", 
+        "YOL094C", 
+        "YBR087W"
+    ], 
+    "RAVE complex": [
+        "YJR033C", 
+        "YDR202C", 
+        "YDR328C"
+    ], 
+    "Tap42p/Sit4p/Rrd1p complex": [
+        "YIL153W", 
+        "YDL047W", 
+        "YMR028W"
+    ], 
+    "RecQ helicase-Topo III complex": [
+        "YPL024W", 
+        "YMR190C", 
+        "YLR234W"
+    ], 
+    "DNA replication factor C complex (Rad24p)": [
+        "YER173W", 
+        "YJR068W", 
+        "YNL290W", 
+        "YOL094C", 
+        "YBR087W"
+    ], 
+    "Ino80p complex": [
+        "YFL039C", 
+        "YJL081C", 
+        "YNL059C", 
+        "YOR141C", 
+        "YFL013C", 
+        "YLR052W", 
+        "YOR189W", 
+        "YGL150C", 
+        "YDL002C", 
+        "YDR190C", 
+        "YPL235W", 
+        "YPL129W"
+    ], 
+    "alpha DNA polymerase:primase complex": [
+        "YNL102W", 
+        "YBL035C", 
+        "YIR008C", 
+        "YKL045W"
+    ], 
+    "Noc1p/Noc2p complex": [
+        "YDR060W", 
+        "YOR206W"
+    ], 
+    "Polzeta-Rev1p complex": [
+        "YOR346W", 
+        "YPL167C", 
+        "YIL139C"
+    ], 
+    "ESCRT III complex": [
+        "YKL002W", 
+        "YLR025W", 
+        "YMR077C", 
+        "YKL041W"
+    ], 
+    "GCR complex": [
+        "YPL075W", 
+        "YNL199C"
+    ], 
+    "\"alpha-1,6-mannosyltransferase complex(Van1p/Mnn9p)\"": [
+        "YPL050C", 
+        "YML115C"
+    ], 
+    "Rpd3S complex": [
+        "YPR023C", 
+        "YMR075W", 
+        "YNL330C", 
+        "YOL004W", 
+        "YPL139C"
+    ], 
+    "histone deacetylase complex": [
+        "YNL021W", 
+        "YDR295C", 
+        "YPR179C"
+    ], 
+    "phosphatidylinositol (PtdIns) 3-kinase complex (functions in autophagy)": [
+        "YBR128C", 
+        "YBR097W", 
+        "YPL120W", 
+        "YLR240W"
+    ], 
+    "mitochondrial outer membrane translocase complex": [
+        "YGR082W", 
+        "YNL131W", 
+        "YMR203W", 
+        "YPR133W-A", 
+        "YOR045W", 
+        "YNL070W", 
+        "YNL121C"
+    ], 
+    "Mdm12p/Mmm1p/Mdm10p complex": [
+        "YAL010C", 
+        "YOL009C", 
+        "YLL006W"
+    ], 
+    "Mad1p/Mad2p complex": [
+        "YGL086W", 
+        "YJL030W"
+    ], 
+    "Nup84p complex": [
+        "YDL116W", 
+        "YJR042W", 
+        "YKL057C", 
+        "YGL092W", 
+        "YLR208W", 
+        "YGL100W"
+    ], 
+    "chromatin accessibility complex": [
+        "YJL065C", 
+        "YDR121W", 
+        "YOR304W", 
+        "YGL133W"
+    ], 
+    "GARP complex": [
+        "YKR020W", 
+        "YDR484W", 
+        "YJL029C", 
+        "YDR027C"
+    ], 
+    "Mob2p/Cbk1p complex": [
+        "YFL034C-B", 
+        "YNL161W"
+    ], 
+    "TORC 1 complex": [
+        "YHR186C", 
+        "YNL006W", 
+        "YPL180W", 
+        "YJR066W"
+    ], 
+    "MSH2p/MSH6p complex": [
+        "YOL090W", 
+        "YDR097C"
+    ], 
+    "Png1p/Rad23p complex": [
+        "YPL096W", 
+        "YEL037C"
+    ], 
+    "glycosylphosphatidylinositol-N-acetylglucosaminyltransferase (GPI-GnT) complex": [
+        "YPL096C-A", 
+        "YGR216C", 
+        "YNL038W", 
+        "YDR437W", 
+        "YPL076W", 
+        "YPL175W"
+    ], 
+    "Rot2p/Gtb1p complex": [
+        "YDR221W", 
+        "YBR229C"
+    ], 
+    "Rsp5p/Bul2 ubiquitin ligase complex": [
+        "YML111W", 
+        "YER125W"
+    ], 
+    "GSH degradosomal complex": [
+        "YFR044C", 
+        "YBR281C", 
+        "YNL191W"
+    ], 
+    "protein phosphatase type 2A complex (Rts1p)": [
+        "YDL134C", 
+        "YOR014W", 
+        "YAL016W"
+    ], 
+    "Nuclear exosome complex": [
+        "YNL232W", 
+        "YOL021C", 
+        "YHR081W", 
+        "YGR158C", 
+        "YHR069C", 
+        "YOL142W", 
+        "YDL111C", 
+        "YCR035C", 
+        "YDR280W", 
+        "YGR095C", 
+        "YOR001W", 
+        "YGR195W"
+    ], 
+    "ribonuclease H2 complex": [
+        "YNL072W", 
+        "YDR279W", 
+        "YLR154C"
+    ], 
+    "Snf1p/Snf4p/Sip2p complex": [
+        "YGL208W", 
+        "YDR477W", 
+        "YGL115W"
+    ], 
+    "Dpb11p/Sld2p complex": [
+        "YJL090C", 
+        "YKL108W"
+    ], 
+    "HOPS complex": [
+        "YLR148W", 
+        "YMR231W", 
+        "YDL077C", 
+        "YPL045W", 
+        "YLR396C", 
+        "YDR080W"
+    ], 
+    "Dcs1p/Dcs2 heterodimer": [
+        "YLR270W", 
+        "YOR173W"
+    ], 
+    "LMA1 complex": [
+        "YNL015W", 
+        "YLR043C"
+    ], 
+    "Atg20p/Snx4p/Snx41p complex": [
+        "YDL113C", 
+        "YJL036W", 
+        "YDR425W"
+    ], 
+    "Fatty Acid Import Complex": [
+        "YOR317W", 
+        "YMR246W", 
+        "YBR041W"
+    ], 
+    "m-AAA complex": [
+        "YER017C", 
+        "YMR089C"
+    ], 
+    "degradosome": [
+        "YMR287C", 
+        "YPL029W"
+    ], 
+    "Sac3p/Thp1p complex": [
+        "YDR159W", 
+        "YOL072W"
+    ], 
+    "Cdc28p/Cln1p complex": [
+        "YBR160W", 
+        "YMR199W"
+    ], 
+    "translation release factor complex": [
+        "YDR172W", 
+        "YBR143C"
+    ], 
+    "Cdc28p/Clb2p complex": [
+        "YBR160W", 
+        "YPR119W"
+    ], 
+    "Far3p/Far7p/Far8p/Far9p/Far10p/Far11p complex": [
+        "YLR238W", 
+        "YNL127W", 
+        "YMR052W", 
+        "YFR008W", 
+        "YMR029C", 
+        "YDR200C"
+    ], 
+    "GPI-anchor transamidase complex": [
+        "YLR088W", 
+        "YLR459W", 
+        "YHR188C", 
+        "YDR434W", 
+        "YDR331W"
+    ], 
+    "Noc4p/Nop14p complex": [
+        "YPR144C", 
+        "YDL148C"
+    ], 
+    "Cdc48p complex": [
+        "YDL126C", 
+        "YGR048W", 
+        "YBR170C"
+    ], 
+    "monopolin complex": [
+        "YDR439W", 
+        "YER106W", 
+        "YCR086W", 
+        "YPL204W"
+    ], 
+    "oligosaccharyl transferase complex": [
+        "YJL002C", 
+        "YOR103C", 
+        "YOR085W", 
+        "YDL232W", 
+        "YGL226C-A", 
+        "YML019W", 
+        "YGL022W", 
+        "YMR149W", 
+        "YEL002C"
+    ], 
+    "Origin recognition complex": [
+        "YML065W", 
+        "YBR060C", 
+        "YLL004W", 
+        "YPR162C", 
+        "YNL261W", 
+        "YHR118C"
+    ], 
+    "19/22S regulator": [
+        "YDR363W-A", 
+        "YHL030W", 
+        "YFR010W", 
+        "YGR232W", 
+        "YHR027C", 
+        "YHR200W", 
+        "YFR004W", 
+        "YFR052W", 
+        "YLR421C", 
+        "YIL075C", 
+        "YER021W", 
+        "YDL147W", 
+        "YDL097C", 
+        "YPR108W", 
+        "YOR261C", 
+        "YDR427W", 
+        "YKL145W", 
+        "YDL007W", 
+        "YDR394W", 
+        "YOR259C", 
+        "YOR117W", 
+        "YGL048C"
+    ], 
+    "Chz1p/Htz1p/Htb1p complex": [
+        "YER030W", 
+        "YDR224C", 
+        "YOL012C"
+    ], 
+    "THO complex": [
+        "YDR138W", 
+        "YML062C", 
+        "YNL139C", 
+        "YHR167W"
+    ], 
+    "GET complex": [
+        "YGL020C", 
+        "YER083C", 
+        "YDL100C"
+    ], 
+    "Mlh1p/Mlh2p complex": [
+        "YMR167W", 
+        "YLR035C"
+    ], 
+    "Sli15p/Bir1p complex": [
+        "YJR089W", 
+        "YBR156C"
+    ], 
+    "Cdc28p/Clb5p complex": [
+        "YBR160W", 
+        "YPR120C"
+    ], 
+    "peroxin docking complex": [
+        "YLR191W", 
+        "YGL153W", 
+        "YNL214W"
+    ], 
+    "RNA polymerase I transcription factor complex": [
+        "YML043C", 
+        "YBL014C", 
+        "YJL025W"
+    ], 
+    "AP-1 adaptor complex": [
+        "YKL135C", 
+        "YPR029C", 
+        "YPL259C", 
+        "YHL019C", 
+        "YLR170C"
+    ], 
+    "Slx1p/Slx4p complex": [
+        "YBR228W", 
+        "YLR135W"
+    ], 
+    "PAN complex": [
+        "YGL094C", 
+        "YKL025C"
+    ], 
+    "ISW1a complex": [
+        "YFR013W", 
+        "YBR245C"
+    ], 
+    "HIR complex": [
+        "YBL008W", 
+        "YOR038C", 
+        "YJR140C", 
+        "YBR215W"
+    ], 
+    "EGO complex": [
+        "YGR163W", 
+        "YKR007W", 
+        "YBR077C"
+    ], 
+    "Gyl1p/Gyp5p complex": [
+        "YMR192W", 
+        "YPL249C"
+    ], 
+    "Arp2/3 protein complex": [
+        "YIL062C", 
+        "YLR370C", 
+        "YKL013C", 
+        "YNR035C", 
+        "YBR234C", 
+        "YDL029W", 
+        "YJR065C"
+    ], 
+    "transcription factor TFIIF complex": [
+        "YPL129W", 
+        "YGR186W", 
+        "YGR005C"
+    ], 
+    "20S proteasome": [
+        "YER012W", 
+        "YOR362C", 
+        "YPR103W", 
+        "YJL001W", 
+        "YFR050C", 
+        "YMR314W", 
+        "YOL038W", 
+        "YBL041W", 
+        "YML092C", 
+        "YGR135W", 
+        "YOR157C", 
+        "YGR253C", 
+        "YER094C", 
+        "YGL011C"
+    ], 
+    "tRNA-intron endonuclease complex": [
+        "YMR059W", 
+        "YLR105C", 
+        "YAR008W", 
+        "YPL083C"
+    ], 
+    "NatB complex": [
+        "YOL076W", 
+        "YPR131C"
+    ], 
+    "ubiquitin ligase ERAD-L complex": [
+        "YML029W", 
+        "YBR201W", 
+        "YDR057W", 
+        "YOL013C", 
+        "YLR207W"
+    ], 
+    "SCF-CDC4 complex": [
+        "YDR054C", 
+        "YFL009W", 
+        "YDL132W", 
+        "YOR057W", 
+        "YDR328C"
+    ], 
+    "nucleolar ribonuclease P complex": [
+        "YNL221C", 
+        "YNL282W", 
+        "YBR257W", 
+        "YAL033W", 
+        "YGR030C", 
+        "YBR167C", 
+        "YBL018C", 
+        "YIR015W", 
+        "YHR062C"
+    ], 
+    "nuclear condensin complex": [
+        "YBL097W", 
+        "YFR031C", 
+        "YLR086W", 
+        "YDR325W", 
+        "YLR272C"
+    ], 
+    "AP-3 adaptor complex": [
+        "YPL195W", 
+        "YGR261C", 
+        "YBR288C", 
+        "YJL024C"
+    ], 
+    "Slx5p/Slx8p complex": [
+        "YDL013W", 
+        "YER116C"
+    ], 
+    "Shq1p/Naf1p complex": [
+        "YNL124W", 
+        "YIL104C"
+    ], 
+    "Bub1p/Bub3p complex": [
+        "YGR188C", 
+        "YOR026W"
+    ], 
+    "SNARE complex": [
+        "YGR009C", 
+        "YPL232W", 
+        "YAL030W"
+    ], 
+    "Met4p/Met28p/Met32p complex": [
+        "YIR017C", 
+        "YDR253C", 
+        "YNL103W"
+    ], 
+    "Dig1p/Ste12p/Dig2p complex": [
+        "YPL049C", 
+        "YDR480W", 
+        "YHR084W"
+    ], 
+    "protein phosphatase type 2A complex (Cdc55p)": [
+        "YGL190C", 
+        "YDL134C", 
+        "YAL016W"
+    ], 
+    "U1 snRNP complex": [
+        "YER029C", 
+        "YGR074W", 
+        "YLR275W", 
+        "YLR147C", 
+        "YOR159C", 
+        "YFL017W-A", 
+        "YPR182W", 
+        "YDL087C", 
+        "YBR119W", 
+        "YHR086W", 
+        "YML046W", 
+        "YKL012W", 
+        "YDR235W", 
+        "YIL061C", 
+        "YDR240C", 
+        "YGR013W", 
+        "YLR298C"
+    ], 
+    "eIF4F": [
+        "YOL139C", 
+        "YKR059W", 
+        "YGR162W"
+    ], 
+    "carboxy-terminal domain protein kinase complex": [
+        "YKL139W", 
+        "YJL006C", 
+        "YML112W"
+    ], 
+    "NuA4 histone acetyltransferase complex": [
+        "YFL039C", 
+        "YJL081C", 
+        "YPR023C", 
+        "YEL018W", 
+        "YJR082C", 
+        "YNL136W", 
+        "YFL024C", 
+        "YOR244W", 
+        "YGR002C", 
+        "YHR099W", 
+        "YDR359C", 
+        "YNL107W", 
+        "YHR090C"
+    ], 
+    "Cox14p/Cox1p/Mss51p complex": [
+        "Q0045", 
+        "YML129C", 
+        "YLR203C"
+    ], 
+    "glycine cleavage complex": [
+        "YDR019C", 
+        "YMR189W", 
+        "YAL044C", 
+        "YFL018C"
+    ], 
+    "adoMet-dependent tRNA methyltransferase (Mtase) Complex": [
+        "YOL124C", 
+        "YNR046W"
+    ], 
+    "Sno1p/Snz1p complex": [
+        "YMR095C", 
+        "YMR096W"
+    ], 
+    "Tubulins": [
+        "YML085C", 
+        "YFL037W"
+    ], 
+    "serine C-palmitoyltransferase complex": [
+        "YMR296C", 
+        "YDR062W"
+    ], 
+    "Q-biosynthetic Coq polypeptide complex": [
+        "YOL096C", 
+        "YDR204W"
+    ], 
+    "Mks1p/Rtg2p complex": [
+        "YNL076W", 
+        "YGL252C"
+    ], 
+    "Snf1p/Snf4p/Gal83p complex": [
+        "YER027C", 
+        "YDR477W", 
+        "YGL115W"
+    ], 
+    "Mob1p/Dbf2p complex": [
+        "YGR092W", 
+        "YIL106W"
+    ], 
+    "Sap155p/Sit4p complex": [
+        "YFR040W", 
+        "YDL047W"
+    ], 
+    "prefoldin complex": [
+        "YNL153C", 
+        "YEL003W", 
+        "YML094W", 
+        "YGR078C", 
+        "YJL179W", 
+        "YLR200W"
+    ], 
+    "Sur1p/Csg2p complex": [
+        "YBR036C", 
+        "YPL057C"
+    ], 
+    "adenylyl cyclase complex": [
+        "YJL005W", 
+        "YNL138W"
+    ], 
+    "Csm1p/Lrs4p complex": [
+        "YCR086W", 
+        "YDR439W"
+    ]
+}
