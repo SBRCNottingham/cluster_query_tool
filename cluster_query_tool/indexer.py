@@ -8,6 +8,7 @@ import json
 import os
 from joblib import Parallel, delayed
 import networkx as nx
+import lzma
 
 
 def _try_int(num):
@@ -22,6 +23,18 @@ def _try_int(num):
         return False
 
     return True
+
+
+def dump(obj, filepath):
+    json_str = json.dumps(obj).encode("utf-8")
+    with lzma.LZMAFile(filepath, "w") as lzfile:
+        lzfile.write(json_str)
+
+
+def load(filepath):
+    with lzma.LZMAFile(filepath, "r") as infile:
+        json_bytes = infile.read()
+    return json.loads(json_bytes.decode("utf-8"))
 
 
 def get_index(graph, space_sample_size="medium", seed=1, num_procs=cpu_count(), use_cache=True):
@@ -50,14 +63,13 @@ def get_index(graph, space_sample_size="medium", seed=1, num_procs=cpu_count(), 
 
     space_sample_size = int(space_sample_size)
     # cache_result
-    cache_location = os.path.join(".ctq_cache", "get_index_{0}_{1}_{2}.json".format(seed,
+    cache_location = os.path.join(".ctq_cache", "get_index_{0}_{1}_{2}.json.xz".format(seed,
                                                                                     space_sample_size, graph.name))
 
     if use_cache and os.path.exists(cache_location):
 
         try:
-            with open(cache_location) as cache:
-                result = json.load(cache)
+            result = load(cache_location)
             return result
         except json.JSONDecodeError:
             pass
@@ -65,8 +77,7 @@ def get_index(graph, space_sample_size="medium", seed=1, num_procs=cpu_count(), 
     result = gen_sample_sets(graph, num_samples=space_sample_size, num_procs=num_procs, seed=seed)
 
     if use_cache:
-        with open(cache_location, "w+") as cache:
-            json.dump(result, cache)
+        dump(result, cache_location)
         
     return result
 
