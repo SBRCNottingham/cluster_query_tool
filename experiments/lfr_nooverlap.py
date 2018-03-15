@@ -23,7 +23,7 @@ _seed_sizes = [1, 3, 7, 15]
 @click.argument("mu")
 @click.argument("seed")
 @click.argument("results_file")
-def auc_compute(seed, n, results_file, mu):
+def auc_compute(seed, n, mu, results_file):
     click.echo("Starting")
     pset = _base_params.copy()
     pset['n'] = int(n)
@@ -59,8 +59,8 @@ def get_bm(n, mu, seed):
 @click.argument("n")
 @click.option("--mu_steps", default=10)
 @click.option("--network_samples", default=10)
-@click.option("--exec/--no_exec", default=False)
-def print_commands(n, mu_steps, network_samples, exec):
+@click.option("--execucte/--no_exec", default=False)
+def print_commands(n, mu_steps, network_samples, execucte):
 
     opt = dict(
         options="-l walltime=0:30:00 -l select=1:ncpus=16:mem=16gb",
@@ -76,7 +76,7 @@ def print_commands(n, mu_steps, network_samples, exec):
         command = template.format(**params)
         click.echo(command)
 
-        if exec:
+        if execucte:
             call(command.split())
 
     for mu in np.linspace(0, 1, mu_steps):
@@ -84,7 +84,7 @@ def print_commands(n, mu_steps, network_samples, exec):
         params['mu'] = mu
         command = template2.format(**params)
         click.echo(command)
-        if exec:
+        if execucte:
             call(command.split())
 
 

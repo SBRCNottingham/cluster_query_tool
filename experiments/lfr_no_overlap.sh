@@ -2,7 +2,7 @@
 #PBS -k oe
 #PBS -l select=1:ncpus=16:mem=16gb
 #PBS -l walltime=00:30:00
-#PBS -P HPCA-00-IFR
+#PBS -P HPCA-02856-EFR
 
 # setting MU parameter
 MU=$0
