@@ -3,11 +3,40 @@ HPC script for running evaluation of performance on benchmark graphs
 
 This script is supposed to be run by the jobscript
 """
-import experiments as exps
+from experiments import get_benchmark, get_auc_scores_community
 import numpy as np
 import click
 from subprocess import call
+import fasteners
+import json
 import os
+
+
+@fasteners.interprocess_locked('.ctq_lfr_bm_results_db.lock')
+def save_results(value, results_path, *keys):
+    """
+    Handle the locking of shared results dicts
+    """
+    if not os.path.exists(results_path):
+        with open(results_path, "w+") as rfile:
+            json.dump({}, rfile)
+
+    with open(results_path) as rfile:
+        db = json.load(rfile)
+        xv = db
+        for key in keys[:-1]:
+            print(key)
+            try:
+                xv = xv[str(key)]
+            except KeyError:
+                xv[str(key)] = {}
+                xv = xv[str(key)]
+
+        xv[str(keys[-1])] = value
+
+    with open(results_path, "w+") as rfile:
+        json.dump(db, rfile, indent=4)
+
 
 _base_params = dict(
     average_degree=20,
@@ -25,29 +54,28 @@ _seed_sizes = [1, 3, 7, 15]
 @click.argument("seed")
 @click.argument("results_file")
 def auc_compute(seed, n, mu, results_file):
-    click.echo("Starting")
     pset = _base_params.copy()
     pset['n'] = int(n)
     pset['mu'] = float(mu)
     pset['seed'] = int(seed)
 
-    graph, communities, index = exps.get_benchmark(pset)
+    graph, communities, index = get_benchmark(pset)
     results = {}
     for c, comm in communities.items():
         results[str(c)] = {}
         for seed_size in _seed_sizes:
             if len(comm) > seed_size:
                 # Seed of AUC scores for node this size
-                results[str(c)][str(seed_size)] = exps.get_auc_scores_community(seed_size, comm, graph, index)
+                results[str(c)][str(seed_size)] = get_auc_scores_community(seed_size, comm, graph, index)
 
-    exps.save_results(results, results_file, mu, seed)
+    save_results(results, results_file, mu, seed)
 
 
 @click.command()
 @click.argument("n")
 @click.option("--mu_steps", default=10)
 @click.option("--network_samples", default=10)
-@click.option("--walltime", default="00:30:00")
+@click.option("--walltime", default="01:30:00")
 @click.option("--execucte/--no_exec", default=False)
 def run_jobs(n, mu_steps, network_samples, walltime, execucte):
     script_template = """#!/bin/bash
@@ -102,6 +130,27 @@ python experiments/lfr_nooverlap.py auc_compute {n} {mu:.2f} $JOB $RESULTS_DIR/{
         click.echo(command)
         if execucte:
             call(command.split())
+
+
+@click.command()
+@click.argument('results_file', type=click.File('rb'))
+@click.option("--network_samples", default=10)
+@click.option("--mu_steps", default=10)
+def get_results_df(results_file, network_samples, mu_steps):
+    results = json.load(results_file)
+    mu_vals = np.linspace(0, 1, mu_steps)
+
+    table = []
+
+    for mu in ["{:.2f}".format(mu) in mu_vals]:
+        for seed in range(1, network_samples+1):
+            for seed_size in _seed_sizes:
+                auc_scores = results[mu][str(seed)][str(seed_size)]
+
+                row = [mu, seed, seed_size, np.mean(auc_scores), np.std(auc_scores)]
+                table.append(row)
+
+    return table
 
 
 @click.group()

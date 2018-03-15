@@ -13,10 +13,6 @@ import logging
 from scipy.special import binom
 import itertools
 
-import fasteners
-import json
-import os
-
 logger = logging.getLogger("cigram.generators")
 logger.setLevel(logging.WARNING)
 
@@ -51,23 +47,6 @@ def get_benchmark(params):
     return graph, communities, get_index(graph)
 
 
-def roc_score_node(n, graph, index, node_comms):
-    vec, key = mu_ivector(graph, index, [n])
-    inc = lambda x: 1 if x in node_comms[n] else 0
-    y_true = [inc(x) for x in graph.nodes()]
-    y_score = [vec[key[x]] for x in graph.nodes()]
-
-    return roc_auc_score(y_true, y_score)
-
-
-def roc_score_seed(seed_set, graph, index, comm):
-    vec, key = mu_ivector(graph, index, seed_set)
-    inc = lambda x: 1 if x in comm else 0
-    y_true = [inc(x) for x in graph.nodes()]
-    y_score = [vec[key[x]] for x in graph.nodes()]
-    return roc_auc_score(y_true, y_score)
-
-
 def unique_sampler(node_set, sample_size, max_samples=96):
     sample_sets = set()
 
@@ -94,35 +73,27 @@ def unique_sampler(node_set, sample_size, max_samples=96):
     return sample_sets
 
 
+def roc_score_node(n, graph, index, node_comms):
+    vec, key = mu_ivector(graph, index, [n])
+    inc = lambda x: 1 if x in node_comms[n] else 0
+    y_true = [inc(x) for x in graph.nodes()]
+    y_score = [vec[key[x]] for x in graph.nodes()]
+
+    return roc_auc_score(y_true, y_score)
+
+
+def roc_score_seed(seed_set, graph, index, comm):
+    vec, key = mu_ivector(graph, index, seed_set)
+    inc = lambda x: 1 if x in comm else 0
+    y_true = [inc(x) for x in graph.nodes()]
+    y_score = [vec[key[x]] for x in graph.nodes()]
+    return roc_auc_score(y_true, y_score)
+
+
 def get_auc_scores_community(seed_size, community, graph, index, sample_seed=1337):
     np.random.seed(sample_seed)
     samples = unique_sampler(community, seed_size)
-    auc_scores = Parallel(n_jobs=24)(delayed(roc_score_seed)(sample, graph, index, community) for sample in samples)
+    auc_scores = Parallel(n_jobs=cpu_count())(delayed(roc_score_seed)(sample, graph, index, community)
+                                              for sample in samples)
     return auc_scores
 
-
-@fasteners.interprocess_locked('~/.ctq_results_db.lock')
-def save_results(value, results_path, *keys):
-    """
-    Handle the locking of shared results dicts
-    """
-    if not os.path.exists(results_path):
-        with open(results_path, "w+") as rfile:
-            json.dump({}, rfile)
-
-    with open(results_path) as rfile:
-        db = json.load(rfile)
-        xv = db
-        for key in keys[:-1]:
-            print(key)
-            try:
-                xv = xv[str(key)]
-            except KeyError:
-                xv[str(key)] = {}
-                xv = xv[str(key)]
-
-        xv[str(keys[-1])] = value
-
-    with open(results_path, "w+") as rfile:
-        json.dump(db, rfile, indent=4)
-    print(db.keys())
