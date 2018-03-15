@@ -113,7 +113,7 @@ def mu_ivector_n(graph, partitions, query_nodes):
     key = dict([(k, i) for i, k in enumerate(sorted(graph.nodes()))])
 
     for partition in partitions:
-        for cluster in partitions:
+        for cluster in partition:
             s = len(query_set.intersection(cluster))
             if s > 0:
                 for i in cluster:
