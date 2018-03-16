@@ -78,7 +78,7 @@ def auc_compute(seed, n, mu, results_file):
 @click.option("--walltime", default="01:30:00")
 @click.option("--execute/--no_exec", default=False)
 @click.option("--queue", default="HPCA-01839-EFR")
-def run_jobs(n, mu_steps, network_samples, walltime, execucte, queue):
+def run_jobs(n, mu_steps, network_samples, walltime, execute, queue):
     script_template = """#!/bin/bash
 #PBS -k oe
 #PBS -l {request}
@@ -133,7 +133,7 @@ python experiments/lfr_nooverlap.py auc_compute {n} {mu:.2f} $JOB $RESULTS_DIR/{
         params['command_file'] = command_file_path
         command = cmd_template.format(**params)
         click.echo(command)
-        if execucte:
+        if execute:
             call(command.split())
 
 
