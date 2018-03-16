@@ -60,13 +60,15 @@ def auc_compute(seed, n, mu, results_file):
     pset['seed'] = int(seed)
 
     graph, communities, index = get_benchmark(pset)
-    results = {}
+    results = []
     for c, comm in communities.items():
         results[str(c)] = {}
         for seed_size in _seed_sizes:
+            results[str(c)][str(seed_size)] = []
             if len(comm) > seed_size:
                 # Seed of AUC scores for node this size
-                results[str(c)][str(seed_size)] = get_auc_scores_community(seed_size, comm, graph, index)
+                auc_s = get_auc_scores_community(seed_size, comm, graph, index)
+                results[str(c)][str(seed_size)].append([len(comm), np.mean(auc_s), np.std(auc_s)])
 
     save_results(results, results_file, mu, seed)
 
@@ -93,7 +95,6 @@ cd $WORK_DIR
 python experiments/lfr_nooverlap.py auc_compute {n} {mu:.2f} $JOB $RESULTS_DIR/{results_file}
 
 """
-
     results_file = "lfr_bm_{}.json".format(n)
 
     script_settings = dict(
@@ -130,27 +131,6 @@ python experiments/lfr_nooverlap.py auc_compute {n} {mu:.2f} $JOB $RESULTS_DIR/{
         click.echo(command)
         if execucte:
             call(command.split())
-
-
-@click.command()
-@click.argument('results_file', type=click.File('rb'))
-@click.option("--network_samples", default=10)
-@click.option("--mu_steps", default=10)
-def get_results_df(results_file, network_samples, mu_steps):
-    results = json.load(results_file)
-    mu_vals = np.linspace(0, 1, mu_steps)
-
-    table = []
-
-    for mu in ["{:.2f}".format(mu) in mu_vals]:
-        for seed in range(1, network_samples+1):
-            for seed_size in _seed_sizes:
-                auc_scores = results[mu][str(seed)][str(seed_size)]
-
-                row = [mu, seed, seed_size, np.mean(auc_scores), np.std(auc_scores)]
-                table.append(row)
-
-    return table
 
 
 @click.group()
