@@ -66,7 +66,7 @@ def auc_compute(seed, n, mu, results_file):
             if len(comm) > seed_size:
                 # Seed of AUC scores for node this size
                 auc_s = get_auc_scores_community(seed_size, comm, graph, index)
-                results.append([str(c), str(seed_size), len(comm), np.mean(auc_s), np.std(auc_s)])
+                results.append([seed, c, seed_size, len(comm), np.mean(auc_s), np.std(auc_s)])
 
     save_results(results, results_file, mu)
 
