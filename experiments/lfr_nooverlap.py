@@ -62,15 +62,13 @@ def auc_compute(seed, n, mu, results_file):
     graph, communities, index = get_benchmark(pset)
     results = []
     for c, comm in communities.items():
-        results[str(c)] = {}
         for seed_size in _seed_sizes:
-            results[str(c)][str(seed_size)] = []
             if len(comm) > seed_size:
                 # Seed of AUC scores for node this size
                 auc_s = get_auc_scores_community(seed_size, comm, graph, index)
-                results[str(c)][str(seed_size)].append([len(comm), np.mean(auc_s), np.std(auc_s)])
+                results.append([str(c), str(seed_size), len(comm), np.mean(auc_s), np.std(auc_s)])
 
-    save_results(results, results_file, mu, seed)
+    save_results(results, results_file, mu)
 
 
 @click.command()
@@ -78,8 +76,9 @@ def auc_compute(seed, n, mu, results_file):
 @click.option("--mu_steps", default=10)
 @click.option("--network_samples", default=10)
 @click.option("--walltime", default="01:30:00")
-@click.option("--execucte/--no_exec", default=False)
-def run_jobs(n, mu_steps, network_samples, walltime, execucte):
+@click.option("--execute/--no_exec", default=False)
+@click.option("--queue", default="HPCA-01839-EFR")
+def run_jobs(n, mu_steps, network_samples, walltime, execucte, queue):
     script_template = """#!/bin/bash
 #PBS -k oe
 #PBS -l {request}
@@ -100,7 +99,7 @@ python experiments/lfr_nooverlap.py auc_compute {n} {mu:.2f} $JOB $RESULTS_DIR/{
     script_settings = dict(
         walltime="walltime={}".format(walltime),
         request="select=1:ncpus=16:mem=16gb",
-        queue="HPCA-01839-EFR",
+        queue=queue,
         workdir="$HOME/repos/cluster_query_tool",
         results_file=results_file,
         n=n
