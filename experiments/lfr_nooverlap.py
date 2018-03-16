@@ -84,11 +84,9 @@ def run_jobs(n, mu_steps, network_samples, walltime, execute, queue):
 #PBS -l {request}
 #PBS -l {walltime}
 #PBS -P {queue}
-#PBS -e $HOME/ctq_run/error/error_{n}_{mu}.txt
-#PBS -o $HOME/ctq_run/ouput/output_{n}_{mu}.txt
 
 WORK_DIR={workdir}
-RESULTS_DIR=
+RESULTS_DIR=$WORK_DIR/hpc_results
 JOB=$PBS_ARRAY_INDEX
 
 mkdir -p $RESULTS_DIR
@@ -110,7 +108,9 @@ python experiments/lfr_nooverlap.py auc_compute {n} {mu:.2f} $JOB $RESULTS_DIR/{
     cmd_opt = dict(
         options="",
         jcount=network_samples,
-        n=n
+        n=n,
+        e="$HOME/ctq_run/error/error_{n}.txt".format(n),
+        o="$HOME/ctq_run/output/output_{n}.txt".format(n),
     )
     cmd_template = "qsub {options} -J 1-{jcount} {command_file}"
 
