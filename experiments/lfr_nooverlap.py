@@ -84,6 +84,11 @@ def run_jobs(n, mu_steps, network_samples, walltime, execucte, queue):
 #PBS -l {request}
 #PBS -l {walltime}
 #PBS -P {queue}
+#PBS -e $HOME/ctq_run/error/error_{n}_{mu}.txt
+#PBS -o $HOME/ctq_run/ouput/output_{n}_{mu}.txt
+
+mkdir -p $HOME/ctq_run/output/
+mkdir -p $HOME/ctq_run/error/
 
 WORK_DIR={workdir}
 RESULTS_DIR=
