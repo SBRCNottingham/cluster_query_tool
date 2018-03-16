@@ -100,7 +100,7 @@ python experiments/lfr_nooverlap.py auc_compute {n} {mu:.2f} $JOB $RESULTS_DIR/{
     script_settings = dict(
         walltime="walltime={}".format(walltime),
         request="select=1:ncpus=16:mem=16gb",
-        queue="HPCA-02856-EFR",
+        queue="HPCA-01839-EFR",
         workdir="$HOME/repos/cluster_query_tool",
         results_file=results_file,
         n=n

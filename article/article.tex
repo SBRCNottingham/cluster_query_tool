@@ -56,13 +56,14 @@ Many algorithms exist to solve this problem, yet initial starting conditions or 
 In this paper, we develop an intuitive method to use the uncertainty amongst a high number of near optimal solutions to measure the overall quality of a given labelling scheme that can come from classes known \textit{a-priori} or clusters detected through other methods.
 This approach also allows the expansion of labels to find potentially related vertices to an initial starting subset.
 
-The number and size of communities is, generally, not known \textit{a priori}, and the problem has been shown to be NP-hard.
+The number and size of communities is, generally, not known \textit{a priori}, and the problem has been shown to be NP-hard \cite{npHardModularity}.
 The work of Good \textit{et al.} \cite{good2010performance} recently highlighted that the popular modularity maximisation algorithm has a highly ``glassy'' search space.
 In this situation there are many locally optimal partitions that bear little to no resemblance to each other by measure of mutual information.
 This allows greedy optimisation algorithms \cite{blondel2008fast} to trivially find solutions that score extremely high values of modularity.
 In order to solve this issue, certain approaches use a consensus based approach to clustering, combining many high value partitions into a given median partition.
 
-Though the methods presented here can be applied to any complex network, the focus of this work is biological in nature; characterising the function of all genes within an organism is a problem critical to systems biology \cite{}.
+One example of community detection that has gained significant interest is in systems biology \cite{}.
+A core goal here is to characterise the function and functional relationships between genes, proteins or metabolites within a larger network.
 In many situations, only the role of a small number of genes is known, with much of the annotation for a given organism being computed through naive homology information that ignores the role of a gene within a wider context.
 The advent of high throughput experimental datasets has allowed the construction of genome scale networks, leading to the observation of non-trivial topological properties such as densely connected clusters \cite{ArabidopsisConsortium2011}.
 These densely connected clusters are widely believed to be associated with specific function, such as protein complexes or biochemical pathways \cite{}.
