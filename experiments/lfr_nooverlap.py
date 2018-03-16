@@ -109,8 +109,8 @@ python experiments/lfr_nooverlap.py auc_compute {n} {mu:.2f} $JOB $RESULTS_DIR/{
         options="",
         jcount=network_samples,
         n=n,
-        e="$HOME/ctq_run/error/error_{n}.txt".format(n),
-        o="$HOME/ctq_run/output/output_{n}.txt".format(n),
+        e="$HOME/ctq_run/error/error_{}.txt".format(n),
+        o="$HOME/ctq_run/output/output_{}.txt".format(n),
     )
     cmd_template = "qsub {options} -J 1-{jcount} {command_file}"
 
