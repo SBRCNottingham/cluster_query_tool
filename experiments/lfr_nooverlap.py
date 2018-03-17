@@ -76,9 +76,10 @@ def auc_compute(seed, n, mu, results_file):
 @click.option("--mu_steps", default=10)
 @click.option("--network_samples", default=10)
 @click.option("--walltime", default="01:30:00")
+@click.option("--request", default="select=1:ncpus=16:mem=31gb")
 @click.option("--execute/--no_exec", default=False)
 @click.option("--queue", default="HPCA-01839-EFR")
-def run_jobs(n, mu_steps, network_samples, walltime, execute, queue):
+def run_jobs(n, mu_steps, network_samples, walltime, request, execute, queue):
     script_template = """#!/bin/bash
 #PBS -k oe
 #PBS -l {request}
@@ -98,7 +99,7 @@ python experiments/lfr_nooverlap.py auc_compute {n} {mu:.2f} $JOB $RESULTS_DIR/{
 
     script_settings = dict(
         walltime="walltime={}".format(walltime),
-        request="select=1:ncpus=16:mem=16gb",
+        request=request,
         queue=queue,
         workdir="$HOME/repos/cluster_query_tool",
         results_file=results_file,
