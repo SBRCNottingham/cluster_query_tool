@@ -206,6 +206,30 @@ To evaluate how our method performs we demonstrate results against two benchmark
 Both these benchmarks allow for a configurable level of overlapping and mixing between communities.
 
 \subsubsection{LFR benchmarks}
+In this section we test the area under the ROC curve (AUC) scores for networks synthetically generated with the LFR benchmark.
+The community distribution is defined with a powerlaw coefficient of $-1.0$ and the degree distribution is defined with a powerlaw coefficient of $-2.0$.
+\textbf{Non-overlapping modules.} Figure \ref{fig:auc_no_overlap} represents tests on 100 networks with different randomly selected seed nodes.
+As one would expect, the prediction of the method drops off steeply where communities are less defined above a mixing coefficient of 0.6.
+Using larger seed sets also improves accuracy with some prediction of true communities being possible at extremely high levels of mixing.
+
+\begin{figure*}[ht]
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/lfr_binary_mo_overlap_auc.eps}
+        \caption{1000 nodes}
+    \end{subfigure}
+    
+    \centering
+    \begin{subfigure}[b]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/lfr_binary_mo_overlap_auc.eps}
+        \caption{5000 nodes}
+    \end{subfigure}
+    \caption{Non-overlapping community varying seed nodes on LFR networks with 1000 and 5000 nodes.
+     Data points represent mean auc scores for all communities on 100 sampled networks at varying mixing coefficients.
+     Error bars represent standard deviations.}
+\end{figure*}
 
 \subsubsection{CiGRAM benchmarks}
 

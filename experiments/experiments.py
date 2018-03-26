@@ -76,8 +76,8 @@ def unique_sampler(node_set, sample_size, max_samples=96):
 def roc_score_node(n, graph, index, node_comms):
     vec, key = mu_ivector(graph, index, [n])
     inc = lambda x: 1 if x in node_comms[n] else 0
-    y_true = [inc(x) for x in graph.nodes()]
-    y_score = [vec[key[x]] for x in graph.nodes()]
+    y_true = [inc(x) for x in graph.nodes() if x != n]
+    y_score = [vec[key[x]] for x in graph.nodes() if x != n]
 
     return roc_auc_score(y_true, y_score)
 
@@ -85,8 +85,8 @@ def roc_score_node(n, graph, index, node_comms):
 def roc_score_seed(seed_set, graph, index, comm):
     vec, key = mu_ivector(graph, index, seed_set)
     inc = lambda x: 1 if x in comm else 0
-    y_true = [inc(x) for x in graph.nodes()]
-    y_score = [vec[key[x]] for x in graph.nodes()]
+    y_true = [inc(x) for x in graph.nodes() if x not in seed_set]
+    y_score = [vec[key[x]] for x in graph.nodes() if x not in seed_set]
     return roc_auc_score(y_true, y_score)
 
 
