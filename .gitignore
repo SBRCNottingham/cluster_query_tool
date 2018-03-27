@@ -107,3 +107,5 @@ ENV/
 .idea/
 
 experiments/*.sh
+experiments/job_scripts/*.sh
+*.context_lock

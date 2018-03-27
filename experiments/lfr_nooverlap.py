@@ -7,36 +7,8 @@ from experiments import get_benchmark, get_auc_scores_community
 import numpy as np
 import click
 from subprocess import call
-import fasteners
-import json
+from json_db import ResultsJsonDB
 import os
-
-
-@fasteners.interprocess_locked('.ctq_lfr_bm_results_db.lock')
-def save_results(value, results_path, *keys):
-    """
-    Handle the locking of shared results dicts
-    """
-    if not os.path.exists(results_path):
-        with open(results_path, "w+") as rfile:
-            json.dump({}, rfile)
-
-    with open(results_path) as rfile:
-        db = json.load(rfile)
-        xv = db
-        for key in keys[:-1]:
-            print(key)
-            try:
-                xv = xv[str(key)]
-            except KeyError:
-                xv[str(key)] = {}
-                xv = xv[str(key)]
-
-        xv[str(keys[-1])] = value
-
-    with open(results_path, "w+") as rfile:
-        json.dump(db, rfile, indent=4)
-
 
 _base_params = dict(
     average_degree=20,
@@ -54,6 +26,7 @@ _seed_sizes = [1, 3, 7, 15]
 @click.argument("seed")
 @click.argument("results_file")
 def auc_compute(seed, n, mu, results_file):
+    db = ResultsJsonDB(results_file)
     pset = _base_params.copy()
     pset['n'] = int(n)
     pset['mu'] = float(mu)
@@ -68,7 +41,7 @@ def auc_compute(seed, n, mu, results_file):
                 auc_s = get_auc_scores_community(seed_size, comm, graph, index)
                 results.append([c, seed_size, len(comm), np.mean(auc_s), np.std(auc_s)])
 
-    save_results(results, results_file, mu, seed)
+        db.save(results, mu, seed)
 
 
 @click.command()
@@ -96,7 +69,7 @@ python experiments/lfr_nooverlap.py auc_compute {n} {mu:.2f} $JOB $RESULTS_DIR/{
 
 """
     results_file = "lfr_bm_{}.json".format(n)
-
+    db = ResultsJsonDB(results_file)
     script_settings = dict(
         walltime="walltime={}".format(walltime),
         request=request,
@@ -115,7 +88,9 @@ python experiments/lfr_nooverlap.py auc_compute {n} {mu:.2f} $JOB $RESULTS_DIR/{
     )
     cmd_template = "qsub {options} -J 1-{jcount} {command_file}"
 
-    commands_path = os.path.abspath(os.path.dirname(__file__))
+    commands_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'job_scripts'))
+    if not os.path.exists(commands_path):
+        os.mkdir(commands_path)
 
     for mu in np.linspace(0, 1, mu_steps):
         command_file_path = os.path.join(commands_path, "lfr_bm_{}_{:.2f}.sh".format(n, mu))
