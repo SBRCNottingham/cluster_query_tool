@@ -43,7 +43,7 @@ def auc_compute(seed, n, mu, results_folder):
             if len(comm) > seed_size:
                 # Seed of AUC scores for node this size
                 auc_s = get_auc_scores_community(seed_size, comm, graph, index)
-                results.append([c, seed_size, len(comm), np.mean(auc_s), np.std(auc_s)])
+                results.append([int(n), int(mu), int(seed), c, seed_size, len(comm), np.mean(auc_s), np.std(auc_s)])
 
         with open(results_file, "w+") as rf:
             json.dump(results, rf)
