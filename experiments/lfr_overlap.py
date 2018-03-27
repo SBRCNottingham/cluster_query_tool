@@ -7,8 +7,8 @@ from experiments import get_benchmark, get_auc_scores_community
 import numpy as np
 import click
 from subprocess import call
-from json_db import ResultsJsonDB
 import os
+import json
 
 
 _base_params = dict(
@@ -26,13 +26,15 @@ _seed_sizes = [1, 3, 7, 15]
 @click.argument("n")
 @click.argument("ol")
 @click.argument("seed")
-@click.argument("results_file")
-def auc_compute(seed, n, ol, results_file):
-    db = ResultsJsonDB(results_file)
+@click.argument("results_folder")
+def auc_compute(seed, n, ol, results_folder):
     pset = _base_params.copy()
     pset['n'] = int(n)
     pset['overlapping_nodes'] = ol
     pset['seed'] = int(seed)
+
+    rp = "{}_{}_{}.json".format(n, ol, seed)
+    results_file = os.path.abspath(os.path.join(results_folder, rp))
 
     graph, communities, index = get_benchmark(pset)
     results = []
@@ -41,9 +43,10 @@ def auc_compute(seed, n, ol, results_file):
             if len(comm) > seed_size:
                 # Seed of AUC scores for node this size
                 auc_s = get_auc_scores_community(seed_size, comm, graph, index)
-                results.append([c, seed_size, len(comm), np.mean(auc_s), np.std(auc_s)])
+                results.append([int(n), int(ol), int(seed), c, seed_size, len(comm), np.mean(auc_s), np.std(auc_s)])
 
-        db.save(results, ol, seed)
+    with open(results_file, "w+") as rf:
+        json.dump(results, rf)
 
 
 @click.command()
@@ -64,17 +67,21 @@ WORK_DIR={workdir}
 JOB=$PBS_ARRAY_INDEX
 
 cd $WORK_DIR
-python {file} auc_compute {n} {ol} $JOB $RESULTS_DIR/{results_file}
+python {file} auc_compute {n} {ol} $JOB {results_folder}
 
 """
-    results_file = "lfr_bm_overlap_{}.json".format(n)
-    db = ResultsJsonDB(results_file)
+    workdir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+    results_folder = os.path.join(workdir, 'hpc_results', "lfr_overlap_{}".format(n))
+
+    if not os.path.exists(results_folder):
+        os.makedirs(results_folder)
+
     script_settings = dict(
         walltime="walltime={}".format(walltime),
         request=request,
         queue=queue,
-        workdir="$HOME/repos/cluster_query_tool",
-        results_file=results_file,
+        workdir=workdir,
+        results_file=results_folder,
         n=n,
         file=os.path.abspath(__file__),
     )

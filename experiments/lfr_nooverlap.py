@@ -20,8 +20,6 @@ _base_params = dict(
 _seed_sizes = [1, 3, 7, 15]
 
 
-
-
 @click.command()
 @click.argument("n")
 @click.argument("mu")
@@ -45,8 +43,8 @@ def auc_compute(seed, n, mu, results_folder):
                 auc_s = get_auc_scores_community(seed_size, comm, graph, index)
                 results.append([int(n), int(mu), int(seed), c, seed_size, len(comm), np.mean(auc_s), np.std(auc_s)])
 
-        with open(results_file, "w+") as rf:
-            json.dump(results, rf)
+    with open(results_file, "w+") as rf:
+        json.dump(results, rf)
 
 
 @click.command()
@@ -74,7 +72,6 @@ python {_file} auc_compute {n} {mu:.2f} $JOB {results_folder}
 
     workdir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
     results_folder = os.path.join(workdir, 'hpc_results', "lfr_no_overlap_{}".format(n))
-    print(results_folder)
 
     if not os.path.exists(results_folder):
         os.makedirs(results_folder)
