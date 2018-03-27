@@ -28,6 +28,7 @@ class ResultsJsonDB(object):
         with self.context_lock:
             with open(self._file_path) as fp:
                 db = json.load(fp)
+                xv = db
                 for key in keys[:-1]:
                     try:
                         xv = xv[str(key)]
