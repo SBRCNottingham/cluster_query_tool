@@ -7,7 +7,7 @@ from experiments import get_benchmark, get_auc_scores_community
 import numpy as np
 import click
 from subprocess import call
-from json_db import ResultsJsonDB
+import json
 import os
 
 _base_params = dict(
@@ -20,17 +20,21 @@ _base_params = dict(
 _seed_sizes = [1, 3, 7, 15]
 
 
+
+
 @click.command()
 @click.argument("n")
 @click.argument("mu")
 @click.argument("seed")
-@click.argument("results_file")
-def auc_compute(seed, n, mu, results_file):
-    db = ResultsJsonDB(results_file)
+@click.argument("results_folder")
+def auc_compute(seed, n, mu, results_folder):
     pset = _base_params.copy()
     pset['n'] = int(n)
     pset['mu'] = float(mu)
     pset['seed'] = int(seed)
+
+    rp = "{}_{}_{}.json".format(n, mu, seed)
+    results_file = os.path.abspath(os.path.join(results_folder, rp))
 
     graph, communities, index = get_benchmark(pset)
     results = []
@@ -41,7 +45,8 @@ def auc_compute(seed, n, mu, results_file):
                 auc_s = get_auc_scores_community(seed_size, comm, graph, index)
                 results.append([c, seed_size, len(comm), np.mean(auc_s), np.std(auc_s)])
 
-        db.save(results, mu, seed)
+        with open(results_file, "w+") as rf:
+            json.dump(results, rf)
 
 
 @click.command()
@@ -60,23 +65,28 @@ def run_jobs(n, mu_steps, network_samples, walltime, request, execute, queue):
 #PBS -P {queue}
 
 WORK_DIR={workdir}
-RESULTS_DIR=$WORK_DIR/hpc_results
 JOB=$PBS_ARRAY_INDEX
 
-mkdir -p $RESULTS_DIR
 cd $WORK_DIR
-python experiments/lfr_nooverlap.py auc_compute {n} {mu:.2f} $JOB $RESULTS_DIR/{results_file}
+python {_file} auc_compute {n} {mu:.2f} $JOB {results_folder}
 
 """
-    results_file = "lfr_bm_{}.json".format(n)
-    db = ResultsJsonDB(results_file)
+
+    workdir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+    results_folder = os.path.join(workdir, 'hpc_results', "lfr_no_overlap_{}".format(n))
+    print(results_folder)
+
+    if not os.path.exists(results_folder):
+        os.makedirs(results_folder)
+
     script_settings = dict(
         walltime="walltime={}".format(walltime),
         request=request,
         queue=queue,
-        workdir="$HOME/repos/cluster_query_tool",
-        results_file=results_file,
-        n=n
+        workdir=workdir,
+        results_folder=results_folder,
+        n=n,
+        _file=__file__,
     )
 
     cmd_opt = dict(

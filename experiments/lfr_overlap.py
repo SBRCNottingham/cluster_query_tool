@@ -48,13 +48,12 @@ def auc_compute(seed, n, ol, results_file):
 
 @click.command()
 @click.argument("n")
-@click.option("--mu_steps", default=10)
 @click.option("--network_samples", default=10)
 @click.option("--walltime", default="01:30:00")
 @click.option("--request", default="select=1:ncpus=16:mem=31gb")
 @click.option("--execute/--no_exec", default=False)
 @click.option("--queue", default="HPCA-01839-EFR")
-def run_jobs(n, mu_steps, network_samples, walltime, request, execute, queue):
+def run_jobs(n, network_samples, walltime, request, execute, queue):
     script_template = """#!/bin/bash
 #PBS -k oe
 #PBS -l {request}
@@ -62,15 +61,13 @@ def run_jobs(n, mu_steps, network_samples, walltime, request, execute, queue):
 #PBS -P {queue}
 
 WORK_DIR={workdir}
-RESULTS_DIR=$WORK_DIR/hpc_results
 JOB=$PBS_ARRAY_INDEX
 
-mkdir -p $RESULTS_DIR
 cd $WORK_DIR
 python {file} auc_compute {n} {ol} $JOB $RESULTS_DIR/{results_file}
 
 """
-    results_file = "lfr_bm__overlap_{}.json".format(n)
+    results_file = "lfr_bm_overlap_{}.json".format(n)
     db = ResultsJsonDB(results_file)
     script_settings = dict(
         walltime="walltime={}".format(walltime),
