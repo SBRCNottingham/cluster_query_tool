@@ -81,7 +81,7 @@ python {file} auc_compute {n} {ol} $JOB {results_folder}
         request=request,
         queue=queue,
         workdir=workdir,
-        results_file=results_folder,
+        results_folder=results_folder,
         n=n,
         file=os.path.abspath(__file__),
     )
