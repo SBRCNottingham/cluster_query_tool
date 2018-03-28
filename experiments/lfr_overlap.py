@@ -86,14 +86,19 @@ python {file} auc_compute {n} {ol} $JOB {results_folder}
         file=os.path.abspath(__file__),
     )
 
+    opt_path = os.path.join(workdir, 'hpc_out', 'output_{}'.format(n))
+    err_path = os.path.join(workdir, 'hpc_out', 'error_{}'.format(n))
+
+    os.makedirs(os.path.join(workdir, 'hpc_out'), exist_ok=True)
+
     cmd_opt = dict(
         options="",
         jcount=network_samples,
         n=n,
-        e="$HOME/ctq_run/error/error_{}.txt".format(n),
-        o="$HOME/ctq_run/output/output_{}.txt".format(n),
+        e=err_path,
+        o=opt_path,
     )
-    cmd_template = "qsub {options} -J 1-{jcount} {command_file}"
+    cmd_template = "qsub {options} -J 1-{jcount} -e {e} -o {o} {command_file}"
 
     commands_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'job_scripts'))
     if not os.path.exists(commands_path):
