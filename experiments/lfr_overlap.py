@@ -9,6 +9,7 @@ import click
 from subprocess import call
 import os
 import json
+from joblib import load, dump
 
 
 _base_params = dict(
@@ -37,16 +38,28 @@ def auc_compute(seed, n, ol, results_folder):
     results_file = os.path.abspath(os.path.join(results_folder, rp))
 
     graph, communities, index = get_benchmark(pset)
+
+    graph_path = '/dev/shm/{}.graph'.format(graph.name)
+    dump(graph, graph_path)
+    graph = load(graph_path, mmap_mode='r')
+
+    index_path = '/dev/shm/{}.index'.format(graph.name)
+    dump(index, index_path)
+    index = load(index_path, mmap_mode='r')
+
     results = []
     for c, comm in communities.items():
         for seed_size in _seed_sizes:
             if len(comm) > seed_size:
                 # Seed of AUC scores for node this size
-                auc_s = get_auc_scores_community(seed_size, comm, graph, index)
-                results.append([int(n), int(ol), int(seed), c, seed_size, len(comm), np.mean(auc_s), np.std(auc_s)])
+                m_auc, std_auc = get_auc_scores_community(seed_size, comm, graph, index)
+                results.append([int(n), int(ol), int(seed), c, seed_size, len(comm), m_auc, std_auc])
 
     with open(results_file, "w+") as rf:
         json.dump(results, rf)
+
+    os.unlink(graph_path)
+    os.unlink(index_path)
 
 
 @click.command()

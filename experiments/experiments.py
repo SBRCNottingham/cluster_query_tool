@@ -3,7 +3,7 @@ from cluster_query_tool.louvain_consensus import mu_ivector
 from sklearn.metrics import roc_auc_score
 
 from cigram import lfr_benchmark_graph
-from joblib import Parallel, delayed
+from joblib import Parallel, delayed, dump, load
 from multiprocessing import cpu_count
 import random
 import numpy as np
@@ -12,6 +12,7 @@ import logging
 
 from scipy.special import binom
 import itertools
+import os
 
 logger = logging.getLogger("cigram.generators")
 logger.setLevel(logging.WARNING)
@@ -75,7 +76,12 @@ def unique_sampler(node_set, sample_size, max_samples=96):
 
 def roc_score_node(n, graph, index, node_comms):
     vec, key = mu_ivector(graph, index, [n])
-    inc = lambda x: 1 if x in node_comms[n] else 0
+
+    def inc(x):
+        if x in node_comms[n]:
+            return 1
+        return 0
+
     y_true = [inc(x) for x in graph.nodes() if x != n]
     y_score = [vec[key[x]] for x in graph.nodes() if x != n]
 
@@ -84,7 +90,12 @@ def roc_score_node(n, graph, index, node_comms):
 
 def roc_score_seed(seed_set, graph, index, comm):
     vec, key = mu_ivector(graph, index, seed_set)
-    inc = lambda x: 1 if x in comm else 0
+
+    def inc(x):
+        if x in comm:
+            return 1
+        return 0
+
     y_true = [inc(x) for x in graph.nodes() if x not in seed_set]
     y_score = [vec[key[x]] for x in graph.nodes() if x not in seed_set]
     return roc_auc_score(y_true, y_score)
@@ -93,7 +104,9 @@ def roc_score_seed(seed_set, graph, index, comm):
 def get_auc_scores_community(seed_size, community, graph, index, sample_seed=1337):
     np.random.seed(sample_seed)
     samples = unique_sampler(community, seed_size)
+
     auc_scores = Parallel(n_jobs=cpu_count())(delayed(roc_score_seed)(sample, graph, index, community)
                                               for sample in samples)
-    return auc_scores
+
+    return np.mean(auc_scores), np.std(auc_scores)
 
