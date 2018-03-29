@@ -8,3 +8,4 @@ joblib
 pandas
 scipy
 fasteners
+click
