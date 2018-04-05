@@ -12,7 +12,7 @@ import logging
 
 from scipy.special import binom
 import itertools
-import os
+from numba import jit
 
 logger = logging.getLogger("cigram.generators")
 logger.setLevel(logging.WARNING)
@@ -88,25 +88,51 @@ def roc_score_node(n, graph, index, node_comms):
     return roc_auc_score(y_true, y_score)
 
 
-def roc_score_seed(seed_set, graph, index, comm):
-    vec, key = mu_ivector(graph, index, seed_set)
+@jit
+def mu_ivectord(nodes, partitions, query_set):
+    """
+    For all nodes in V, return a vector $\mu$ such that $\mu$ is the fraction of times that a node is in
+    the largest cluster that intersects with the query set over all clusters.
 
-    def inc(x):
-        if x in comm:
-            return 1
-        return 0
+    returns muscore (numpy array of floats) and  mappings for keys to vector index.
+    """
+    muscore = np.zeros(len(nodes))
 
-    y_true = [inc(x) for x in graph.nodes() if x not in seed_set]
-    y_score = [vec[key[x]] for x in graph.nodes() if x not in seed_set]
+    for partition in partitions:
+        best = max(partition * query_set, key=np.sum)
+        muscore += 1 * best
+
+    # Normalise result
+    retval = np.array(muscore * 1/len(partitions))
+    return retval
+
+
+def roc_score_seed(seed_set, nodes, index, comm):
+    vec = mu_ivectord(nodes, index, np.array([n in seed_set for n in nodes]))
+
+    key = dict(((j, i) for i, j in enumerate(nodes)))
+    y_true = [x in comm for x in nodes if x not in seed_set]
+    y_score = [vec[key[x]] for x in nodes if x not in seed_set]
     return roc_auc_score(y_true, y_score)
 
 
-def get_auc_scores_community(seed_size, community, graph, index, sample_seed=1337):
+def get_auc_scores_community(seed_size, community, nodes, index, sample_seed=1337):
     np.random.seed(sample_seed)
     samples = unique_sampler(community, seed_size)
 
-    auc_scores = Parallel(n_jobs=cpu_count())(delayed(roc_score_seed)(sample, graph, index, community)
+    auc_scores = Parallel(n_jobs=cpu_count())(delayed(roc_score_seed)(sample, nodes, index, community)
                                               for sample in samples)
 
     return np.mean(auc_scores), np.std(auc_scores)
 
+
+def index_to_one_hot_encoding(nodes, index):
+    enc = []
+    for partition in index:
+        h_encoding = []
+        for cluster in partition:
+            h_encoding.append(np.array([n in cluster for n in nodes], dtype=np.bool))
+
+        enc.append(np.array(h_encoding))
+
+    return np.array(enc)

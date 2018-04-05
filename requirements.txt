@@ -9,3 +9,6 @@ pandas
 scipy
 fasteners
 click
+dask
+cigram
+numba
