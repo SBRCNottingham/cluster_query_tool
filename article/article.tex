@@ -1,40 +1,53 @@
-\documentclass[a4paper,10pt]{article}
+\listfiles
+\documentclass[manuscript, review, sigconf]{acmart}
 \usepackage[utf8]{inputenc}
-\usepackage{fullpage}
 \usepackage{color}
-\usepackage{authblk}
+
 \usepackage{listings}
 \usepackage{graphicx}
 \usepackage{subcaption}
 \usepackage{amsmath}
-%PREPRINT/MANUSCRIPT OPTIONS
-\usepackage{setspace}
-\usepackage{lineno}
-\linenumbers
-\doublespacing
-\DeclareMathOperator*{\argmax}{argmax}
-%opening
 
-% \author{
-%     \IEEEauthorblockN{James Gilbert\IEEEauthorrefmark{1}, Nicole Pearcy\IEEEauthorrefmark{1}, Jamie Twycross\IEEEauthorrefmark{2}}
-%     \IEEEauthorblockA{\IEEEauthorrefmark{1}Synthetic Biology Research Centre, School of Life Sciences, University of Nottingham}
-%     \IEEEauthorblockA{\IEEEauthorrefmark{2}Intelligent Modelling and Analysis Group, School of Computer Science, University of Nottingham}
-% }
+
+\usepackage{booktabs} 
+\DeclareMathOperator*{\argmax}{argmax}
+
+\date{Received: date / Accepted: date}
 
 \begin{document}
 
-\title{From clusters to queries: exploiting uncertainty in the modular landscape of complex networks}
+\title{From clusters to queries: exploiting uncertainty in the modularity landscape of complex networks}
 
-%\titlerunning{Short form of title}        % if too long for running head
+\author{James P Gilbert}
+\affiliation{%
+  \institution{Synthetic biology research centre}
+  \streetaddress{University of Nottingham}
+  \city{Nottingham}
+  \country{United Kingdom}
+  \postcode{NG7 2RD}
+}
+\email{james.gilbert@nottingham.ac.uk}
 
-\author{James P Gilbert         \and
-	Jamie Twycross 		\and
-	John King
-	}
-\date{Received: date / Accepted: date}
+\author{Jamie Twycross}
+\affiliation{%
+  \institution{School of Computer Science}
+  \streetaddress{University of Nottingham}
+  \city{Nottingham}
+  \country{United Kingdom}
+  \postcode{NG7 2RD}
+}
+\email{jamie.twycross@nottingham.ac.uk}
 
+\author{John King}
+\affiliation{%
+  \institution{School of Mathematical Sciences}
+  \streetaddress{University of Nottingham}
+  \city{Nottingham}
+  \country{United Kingdom}
+  \postcode{NG7 2RD}
+}
+\email{john.king@nottingham.ac.uk}
 
-\maketitle
 
 \begin{abstract}
 Uncovering latent community structure in complex networks is a field that has received an enormous amount of attention.
@@ -47,6 +60,8 @@ The methods developed in this paper are applied to biological and social dataset
 When tested on both real and synthetic datasets our method achieves extremely high levels of classification.
 Furthermore, the approach can be applied in distributed environments potentially allowing it to scale to very large networks.
 \end{abstract}
+
+\maketitle
 
 \section{Introduction}
 
@@ -125,7 +140,7 @@ The similarity between the partitions is compared with variation of information 
 
 \begin{figure}
 \centering
- \includegraphics[width=0.7\textwidth]{images/search_space_3.png}
+ \includegraphics[width=0.48\textwidth]{images/search_space_3.png}
  \caption{
  Modularity search space of the \textit{E. coli} metabolic network.
  Distance between partitions is calculated using variation of information \cite{meilua2003comparing} and dimensionality reduction is performed using curvilinear component analysis \cite{demartines1997curvilinear}.
@@ -214,14 +229,12 @@ Using larger seed sets also improves accuracy with some prediction of true commu
 
 \begin{figure*}[ht]
     \centering
-    \begin{subfigure}[b]{0.45\textwidth}
+    \begin{subfigure}[b]{0.48\textwidth}
         \centering
         \includegraphics[width=\textwidth]{images/lfr_binary_mo_overlap_auc_1000.eps}
         \caption{1000 nodes}
     \end{subfigure}
-    
-    \centering
-    \begin{subfigure}[b]{0.45\textwidth}
+    \begin{subfigure}[b]{0.48\textwidth}
         \centering
         \includegraphics[width=\textwidth]{images/lfr_binary_mo_overlap_auc_5000.eps}
         \caption{5000 nodes}
@@ -254,50 +267,44 @@ The real networks used are listed as follows:
  
 \end{itemize}
 
-\begin{figure}[ht]
+\begin{figure*}
      \centering
-    \begin{subfigure}[b]{\textwidth}
+    \begin{subfigure}[b]{0.48\textwidth}
         \centering
         \includegraphics[width=\textwidth]{images/eu_roc_scores.eps}
         \caption{EU email departments}
     \end{subfigure}
-    
-    \centering
-    \begin{subfigure}[b]{\textwidth}
+    \begin{subfigure}[b]{0.48\textwidth}
         \centering
         \includegraphics[width=\textwidth]{images/yeast_ppi_roc_scores.eps}
         \caption{Yeast PPI protein complexes}
     \end{subfigure}
-    
     \caption{Mean area under RO curve (AUC) scores from cross-validation performed on Metadata communities for networks described in Section \ref{sec:real_network_descs}.
     Dashed line indicates an AUC score of 0.5 (random chance).
     Communities are ordered by size.
     Error bars indicate standard deviation.
     }
     \label{fig:real_network_results}
-\end{figure}
+\end{figure*}
 
-\begin{figure}[ht]
-     \centering
-    \begin{subfigure}[b]{0.8\textwidth}
+\begin{figure*}
+    \centering
+    \begin{subfigure}[b]{0.48\textwidth}
         \centering
         \includegraphics[width=\textwidth]{images/eu_email_nodewise_roc.eps}
         \caption{EU email departments (986 nodes)}
     \end{subfigure}
-    
-    \centering
-    \begin{subfigure}[b]{0.8\textwidth}
+    \begin{subfigure}[b]{0.48\textwidth}
         \centering
         \includegraphics[width=\textwidth]{images/yeast_ppi_nodewise_roc.eps}
         \caption{Yeast PPI protein complexes (1628 nodes)}
     \end{subfigure}
-    
     \caption{Receiver Operator Characteristic curves for node communities.
     Dashed line indicates an AUC score of 0.5 (random chance).
     Represents mean, shaded area indicates standard deviation.
     }
     \label{fig:real_network_nodwise_classifiers}
-\end{figure}
+\end{figure*}
 
 
 We tested the method on each real network described in section \ref{sec:real_network_descs}.
