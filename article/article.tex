@@ -217,7 +217,7 @@ For a query set to be relevant it should be significantly more related than one 
 Formally, given the partition space $\mathcal{P}$ and a query set $S$ we consider the distribution of quality scores as $\mu_i(S - i)$, for all $i$ in $S$.
 In order for $S$ to be a high quality query set, its value of internal vertices should be significantly higher than for external vertices.
 Formally, we assert that the distribution $\mu_i(S - i)$ should reject the null hypothesis that the mean is not significantly greater than $\mu_j(S)$ where $j \in S - V$, the set of vertices excluding those in the query set.
-For the purposes of this work we use the non-parametric Mann–Whitney $U$ test and reject the null hypothesis where $p < 0.01$.
+For the purposes of this work we use the non-parametric Mann–Whitney $U$ test and reject the null hypothesis where $p < 0.001$.
 In section \ref{sec:go_labels} this is used to exclude less relevant GO terms.
 
 \section{Results}
