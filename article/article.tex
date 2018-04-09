@@ -1,5 +1,5 @@
 \listfiles
-\documentclass[manuscript, review, sigconf]{acmart}
+\documentclass[manuscript, proceedings]{acmart}
 \usepackage[utf8]{inputenc}
 \usepackage{color}
 
@@ -142,7 +142,7 @@ The similarity between the partitions is compared with variation of information 
 \centering
  \includegraphics[width=0.48\textwidth]{images/search_space_3.png}
  \caption{
- Modularity search space of the \textit{E. coli} metabolic network.
+ Modularity search space of an \textit{E. coli} metabolic network.
  Distance between partitions is calculated using variation of information \cite{meilua2003comparing} and dimensionality reduction is performed using curvilinear component analysis \cite{demartines1997curvilinear}.
   The inset (top) demonstrates the landscape of the high modularity region. 
   Figure generated with the software of Good \textit{et al.}\cite{good2010performance}.
@@ -197,13 +197,28 @@ $\delta(u, v)$ is the Dirac delta function that equals 1 if are the same cluster
  c^{P}_S = \argmax_{C \in P} |C \cap S|,
 \end{equation}
 or the largest intersecting cluster with the query set, in partition $P$.
-Using the largest intersecting community with $S$ is both computationally favourable for computing $mu_i$ for all $i$ in $V$ and allows the query set to contain potentially suprious query nodes.
-Borrowing the terminology of fuzzy logic \cite{zimmermann2001fuzzy}, \textit{$\mu_i(S)$} can be considered a membership function and we can interpret this as a measure of the \textit{possibility} for which a given vertex belongs to the query set, given a set of partitions.
+Using the largest intersecting community with $S$ is both computationally favourable for computing $mu_i$ for all $i$ in $V$ and allows the query set to contain potentially spurious query nodes.
 Where $\mu_i(S) = 1$ the partition space indicates that a given vertex is always partitioned in the same group as the query set.
 In the case $\mu_i(S) = 0$ the vertex $i$ never appears in the same cluster as the largest query set.
+We define $\mu_i(S)$ for all vertices in the network, including those in $S$.
+In many cases, a query set will not be fully represented by the partitions found within the network, this is further elaborated in the following section.
 
-The subtraction of the vertex from the query set ($S - i$) allows an unbiased score for vertices within the query set.
-This allows us to define a vector, $\mu(S)$ for all vertices in the network, including those in $S$.
+\subsection{Statistically significant query sets}
+Naturally, not every label set will be of high quality or represented within the community structure of a network.
+This is established further in section \ref{sec:go_labels} which tests gene ontology terms (GO) on protein interaction networks.
+In this case, all the labels relate to the real function of the vertices, however, GO is a hierarchical system and many terms are extremely general.
+Furthermore, even for specific terms the network datasets will often not be well represented.
+A common approach with community detection and clustering (used for example in \cite{dekkers2013}) is to detect communities and find clusters containing significant GO terms.
+
+In this work, we would wish to use the community partition space, described above, to find highly related sets of vertices.
+For this we take the distribution, from Equation \ref{eq:mu_score} for a given query set.
+For a query set to be relevant it should be significantly more related than one would expect from a set of nodes selected at random within a network.
+
+Formally, given the partition space $\mathcal{P}$ and a query set $S$ we consider the distribution of quality scores as $\mu_i(S - i)$, for all $i$ in $S$.
+In order for $S$ to be a high quality query set, its value of internal vertices should be significantly higher than for external vertices.
+Formally, we assert that the distribution $\mu_i(S - i)$ should reject the null hypothesis that the mean is not significantly greater than $\mu_j(S)$ where $j \in S - V$, the set of vertices excluding those in the query set.
+For the purposes of this work we use the non-parametric Mann–Whitney $U$ test and reject the null hypothesis where $p < 0.01$.
+In section \ref{sec:go_labels} this is used to exclude less relevant GO terms.
 
 \section{Results}
 \subsection{Cross-validation method}
@@ -217,11 +232,8 @@ It should therefore be noted that presented receiver operator characteristic (RO
 
 \subsection{Synthetic networks}
 In this section we test the method on a number benchmark networks constructed with a known, ground-truth community structure.
-To evaluate how our method performs we demonstrate results against two benchmark networks the conventionally used LFR benchmark \cite{lfr} and a newer form of benchmark for community detection algorithms developed in previous studies \cite{cigram}.
-Both these benchmarks allow for a configurable level of overlapping and mixing between communities.
-
-\subsubsection{LFR benchmarks}
-In this section we test the area under the ROC curve (AUC) scores for networks synthetically generated with the LFR benchmark.
+To evaluate how our method performs we demonstrate results against two benchmark networks the conventionally used LFR benchmark \cite{lfr} for community detection algorithms.
+We test the area under the ROC curve (AUC) scores for networks synthetically generated with the LFR benchmark.
 The community distribution is defined with a powerlaw coefficient of $-1.0$ and the degree distribution is defined with a powerlaw coefficient of $-2.0$.
 \textbf{Non-overlapping modules.} Figure \ref{fig:auc_no_overlap} represents tests on 100 networks with different randomly selected seed nodes.
 As one would expect, the prediction of the method drops off steeply where communities are less defined above a mixing coefficient of 0.6.
@@ -244,7 +256,6 @@ Using larger seed sets also improves accuracy with some prediction of true commu
      Error bars represent standard deviations.}
 \end{figure*}
 
-\subsubsection{CiGRAM benchmarks}
 
 \subsection{Real networks}
 In order to test the performance of the semi-supervised classification on real-world data we present our findings on example networks with known metadata communities.
@@ -263,7 +274,7 @@ The real networks used are listed as follows:
  The metadata used are known, experimentally validated protein complexes from \cite{yeast_ppi_complexes}.
  The network contains 6222 nodes in the largest connected component, with 22,3868 edges.
  There are 409 experimentally validated protein complexes, 236 of which contain 3 or more nodes.
- The protein complexes are typically very small in terms of number of proteins with only 90\% of the complexes containing less than 10 proteins and only 2 complexes containing 50 or more proteins.
+ The protein complexes are typically very small in terms of number of proteins with  90\% of the complexes containing less than 10 proteins and only 2 complexes containing 50 or more proteins.
  
 \end{itemize}
 
@@ -317,6 +328,9 @@ Here, binary classification is performed on each node for which community data i
 The $mu_i({i})$ score is used as a binary classifier.
 For the EU email and Yeast PPI the average ROC AUC score to classify node membership inside communities is 0.9 and 0.93, respectively.
 
+\subsection{Gene ontology data}
+\label{sec:go_labels}
+
 \section{Discussion}
 The semi-supervised method for vertex classification presented in this work has shown to have good results on both synthetic benchmarks and real-world datasets.
 Interestingly, this method is capable of correctly classifying communities with only a small number of seed query vertexes.
@@ -335,7 +349,6 @@ This allows the use of a single node to find related vertices, in real networks 
 In a practical context, however, this should not be interpreted as uncovering the community structure as this includes many overlapping communities for which the node is a member.
 
 
-
 \section{Related work}
 \label{sec:related_work}
 
@@ -350,7 +363,6 @@ The higher the probability of the walker ending up at a given vertex, the more l
 Conceptually, RWR is very similar to the method presented in this paper given that the user has a given query.
 One can thing of the RWR probability as analogous to the value of $\mu_i(S)$ presented above.
 However, the RWR value is based only on a single vertex as a query set where the approach presented in this work requires many vertices associated with a given label for it to be readily applicable.
-
 
 Many existing method are based on the idea of a locally dense subgraph containing \textit{all query nodes} \cite{}.
 In contrast, the query approach presented here does not require the queries to be a self contained sub-graph.

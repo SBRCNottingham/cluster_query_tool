@@ -3,7 +3,7 @@ from . import louvain
 import networkx as nx
 import random
 import numpy as np
-
+from scipy.stats import mannwhitneyu
 
 def modularity(graph, part):
     """
@@ -58,21 +58,21 @@ def gen_local_optima_community(graph):
 
 def mu_iscore(nodes, partitions, query_nodes):
     """
-    
+
     """
     query_set = set(query_nodes)
     qs = 0
     muscore = dict([(n, 0) for n in nodes])
-    
+
     for partition in partitions:
         best = max([(len(query_set.intersection(set(cluster))), cluster) for cluster in partition], key=lambda x: x[0])
 
         qs += 1.0/(len(query_set) - 1) * (best[0] - 1)
-        
+
         for n in best[1]:
             if n in muscore and best[0] > 0:
                 muscore[n] += 1.0/len(partitions)
-    
+
     qs *= 1.0/len(partitions)
 
     return muscore
@@ -121,3 +121,21 @@ def mu_ivector_n(graph, partitions, query_nodes):
 
     # Normalise result
     return muscore * 1 / len(partitions), key
+
+
+def q_significance(graph, index, testset):
+    """
+    For a given query set, return the p value from a mann-whitney u test that the null hypothesis that the query nodes
+    could have been selected randomly from within the network.
+    :param graph:
+    :param index:
+    :param testset:
+    :return:
+    """
+    testset = set(testset)
+    vec, keys = mu_ivector(graph, index, testset)
+
+    network_dist = [vec[keys[x]] for x in keys if x not in testset]
+    seed_dist = [vec[keys[x]] for x in keys if x in testset]
+    u_score, pvalue = mannwhitneyu(network_dist, seed_dist)
+    return pvalue
