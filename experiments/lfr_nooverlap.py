@@ -3,13 +3,12 @@ HPC script for running evaluation of performance on benchmark graphs
 
 This script is supposed to be run by the jobscript
 """
-from experiments import get_benchmark, get_auc_scores_community, index_to_one_hot_encoding
+from experiments import get_benchmark, get_auc_scores_community
 import numpy as np
 import click
 from subprocess import call
 import json
 import os
-from joblib import load, dump
 
 _base_params = dict(
     average_degree=20,
@@ -26,7 +25,7 @@ _seed_sizes = [1, 3, 7, 15]
 @click.argument("mu")
 @click.argument("seed")
 @click.argument("results_folder")
-def auc_compute(n, mu, seed, results_folder):
+def auc_compute(seed, n, mu, results_folder):
     pset = _base_params.copy()
     pset['n'] = int(n)
     pset['mu'] = float(mu)
@@ -36,17 +35,13 @@ def auc_compute(n, mu, seed, results_folder):
     results_file = os.path.abspath(os.path.join(results_folder, rp))
 
     graph, communities, index = get_benchmark(pset)
-
-    nodes = np.array(sorted(graph.nodes()))
-    index = index_to_one_hot_encoding(nodes, index)
-
     results = []
     for c, comm in communities.items():
         for seed_size in _seed_sizes:
             if len(comm) > seed_size:
                 # Seed of AUC scores for node this size
-                m_auc, std_auc = get_auc_scores_community(seed_size, comm, nodes, index)
-                results.append([int(n), float(mu), int(seed), c, seed_size, len(comm), m_auc, std_auc])
+                auc_s = get_auc_scores_community(seed_size, comm, graph, index)
+                results.append([int(n), float(mu), int(seed), c, seed_size, len(comm), np.mean(auc_s), np.std(auc_s)])
 
     with open(results_file, "w+") as rf:
         json.dump(results, rf)
