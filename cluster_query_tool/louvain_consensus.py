@@ -81,17 +81,23 @@ def mu_iscore(nodes, partitions, query_nodes):
     return muscore
 
 
-def mu_ivector(graph, partitions, query_nodes):
+def mu_ivector(graph_or_nodes, partitions, query_nodes):
     """
     For all nodes in V, return a vector $\mu$ such that $\mu$ is the fraction of times that a node is in
     the largest cluster that intersects with the query set over all clusters.
 
     returns muscore (numpy array of floats) and  mappings for keys to vector index.
     """
-    query_set = set(query_nodes)
-    muscore = np.zeros(graph.number_of_nodes())
+    nodes = {}
+    if isinstance(graph_or_nodes, nx.Graph):
+        nodes = set(graph_or_nodes.nodes())
+    else:
+        nodes = set(graph_or_nodes)
 
-    key = dict([(k, i) for i, k in enumerate(sorted(graph.nodes()))])
+    query_set = set(query_nodes)
+    muscore = np.zeros(nodes)
+
+    key = dict([(k, i) for i, k in enumerate(sorted(nodes))])
 
     for partition in partitions:
         best = max([(len(query_set.intersection(set(cluster))), cluster) for cluster in partition])
