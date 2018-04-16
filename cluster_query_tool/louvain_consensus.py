@@ -150,29 +150,30 @@ def q_significance(graph, index, testset):
     return pvalue
 
 
-def s_quaility(query_nodes, nmap, M):
+def membership_matrix(nodes, partitions):
+    nmap = dict(((n, m) for m, n in enumerate(sorted(nodes))))
+    M = np.zeros((len(nodes), len(partitions)), dtype=np.int16)
+
+    for pi, partition in enumerate(partitions):
+        for ci, cluster in enumerate(partition, 1):
+            for v in cluster:
+                M[nmap[v]][pi] = ci
+    return M, nmap
+
+
+def s_quality(query_nodes, nmap, M):
     Mx = []
     for i, j in combinations(set([nmap[i] for i in query_nodes]), 2):
         Mx.append((M[i] == M[j]).sum(axis=0) * 1 / M.shape[1])
     return np.mean(Mx), np.std(Mx)
 
 
-def query_vector(query_nodes, nmap, M):
-    qm = np.zeros(M.shape[0])
-    norm_const = 1 / (M.shape[1] * len(query_nodes))
-    for v in nmap.values():
-        for q in query_nodes:
-            qm[v] += (M[v] == M[nmap[q]]).sum()
-
-    return qm * norm_const
-
-
 @jit(nopython=True, nogil=True)
-def query_vector_jit(query_indexes, M):
-    qm = np.zeros(M.shape[0])
-    norm_const = 1 / (M.shape[1] * query_indexes.shape[0])
-    for v in range(M.shape[0]):
+def query_vector_jit(query_indexes, membership_mat):
+    qm = np.zeros(membership_mat.shape[0])
+    norm_const = 1 / (membership_mat.shape[1] * query_indexes.shape[0])
+    for v in range(membership_mat.shape[0]):
         for q in query_indexes:
-            qm[v] += (M[v] == M[q]).sum()
+            qm[v] += (membership_mat[v] == membership_mat[q]).sum()
 
     return qm * norm_const
