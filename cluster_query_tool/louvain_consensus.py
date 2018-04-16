@@ -4,6 +4,9 @@ import networkx as nx
 import random
 import numpy as np
 from scipy.stats import mannwhitneyu
+from itertools import combinations, product
+from numba import jit
+
 
 def modularity(graph, part):
     """
@@ -139,3 +142,31 @@ def q_significance(graph, index, testset):
     seed_dist = [vec[keys[x]] for x in keys if x in testset]
     u_score, pvalue = mannwhitneyu(network_dist, seed_dist)
     return pvalue
+
+
+def s_quaility(query_nodes, nmap, M):
+    Mx = []
+    for i, j in combinations(set([nmap[i] for i in query_nodes]), 2):
+        Mx.append((M[i] == M[j]).sum(axis=0) * 1 / M.shape[1])
+    return np.mean(Mx), np.std(Mx)
+
+
+def query_vector(query_nodes, nmap, M):
+    qm = np.zeros(M.shape[0])
+    norm_const = 1 / (M.shape[1] * len(query_nodes))
+    for v in nmap.values():
+        for q in query_nodes:
+            qm[v] += (M[v] == M[nmap[q]]).sum()
+
+    return qm * norm_const
+
+
+@jit(nopython=True, nogil=True)
+def query_vector_jit(query_indexes, M):
+    qm = np.zeros(M.shape[0])
+    norm_const = 1 / (M.shape[1] * query_indexes.shape[0])
+    for v in range(M.shape[0]):
+        for q in query_indexes:
+            qm[v] += (M[v] == M[q]).sum()
+
+    return qm * norm_const
