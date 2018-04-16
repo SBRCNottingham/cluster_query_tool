@@ -95,7 +95,7 @@ def mu_ivector(graph_or_nodes, partitions, query_nodes):
         nodes = set(graph_or_nodes)
 
     query_set = set(query_nodes)
-    muscore = np.zeros(nodes)
+    muscore = np.zeros(len(nodes))
 
     key = dict([(k, i) for i, k in enumerate(sorted(nodes))])
 
