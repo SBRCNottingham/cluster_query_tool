@@ -194,4 +194,4 @@ def mui_vec_membership(query_indexes, membership_mat):
             isize = (col == it).sum()  # size of intersection for each community
             mu_vec[np.where((mtrans[col_id] == it))] += isize
 
-    return mu_vec * 1/(qmat.shape[0] * membership_mat.size[1])
+    return mu_vec * 1/(qmat.shape[0] * membership_mat.shape[1])
