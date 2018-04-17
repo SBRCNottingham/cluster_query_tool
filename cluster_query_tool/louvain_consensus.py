@@ -177,3 +177,21 @@ def query_vector_jit(query_indexes, membership_mat):
             qm[v] += (membership_mat[v] == membership_mat[q]).sum()
 
     return qm * norm_const
+
+
+def mui_vec_membership(query_indexes, membership_mat):
+
+    # Get the sub matrix slice based on query node indexes
+    qmat = membership_mat[np.array(query_indexes)]
+
+    qtrans = qmat.transpose()
+    mu_vec = np.zeros(membership_mat.shape[0])
+
+    mtrans = membership_mat.transpose()
+
+    for col_id, col in enumerate(qtrans):
+        for it in np.unique(col):
+            isize = (col == it).sum()  # size of intersection for each community
+            mu_vec[np.where((mtrans[col_id] == it))] += isize
+
+    return mu_vec * 1/(qmat.shape[0] * membership_mat.size[1])
