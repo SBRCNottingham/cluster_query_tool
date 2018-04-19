@@ -49,11 +49,18 @@ def partition_to_cut_set(graph, partition):
     return tuple(sorted(set([edge for edge in graph.edges() if partition[edge[0]] != partition[edge[1]]])))
 
 
-def gen_local_optima_community(graph):
+def gen_local_optima_community(graph, cut_set=None):
+    """
+    Generate a partition with louvain. If cut_set is None the starting partition will be randomly chosen.
+    :param graph: nx.Graph
+    :param cut_set: iterble, tuple of edges
+    :return:
+    """
     # The possible space of communities is huge!
-    sample = random.sample(graph.edges(), random.randint(1, graph.number_of_edges()))
+    if cut_set is None:
+       cut_set = random.sample(graph.edges(), random.randint(1, graph.number_of_edges()))
     # convert to partition
-    start_partition = create_partition_from_edge_set(graph, sample)
+    start_partition = create_partition_from_edge_set(graph, cut_set)
     local_optima = louvain.best_partition(graph, partition=start_partition)
 
     return start_partition, local_optima
@@ -169,29 +176,67 @@ def s_quality(query_nodes, nmap, M):
 
 
 @jit(nopython=True, nogil=True)
-def query_vector_jit(query_indexes, membership_mat):
-    qm = np.zeros(membership_mat.shape[0])
-    norm_const = 1 / (membership_mat.shape[1] * query_indexes.shape[0])
-    for v in range(membership_mat.shape[0]):
+def query_vector(query_indexes, M):
+    qm = np.zeros(M.shape[0])
+    norm_const = 1 / (M.shape[1] * query_indexes.shape[0])
+    for v in np.ndindex(M.shape[0]):
         for q in query_indexes:
-            qm[v] += (membership_mat[v] == membership_mat[q]).sum()
+            # Number of times node is in the same cluster as a query node
+            qm[v] += (M[v] == M[q]).sum()
 
     return qm * norm_const
 
 
+@jit(nopython=True, nogil=True)
 def mui_vec_membership(query_indexes, membership_mat):
-
     # Get the sub matrix slice based on query node indexes
-    qmat = membership_mat[np.array(query_indexes)]
+    # qmat = membership_mat[np.array(query_indexes, dtype=np.int16)]
+    '''
+    qmat = np.zeros((query_indexes.shape[0], membership_mat.shape[1]))
+    for i in range(query_indexes.shape[0]):
+        qmat[i] = membership_mat[query_indexes[i]]
+    '''
+    qmat = membership_mat[query_indexes]
 
     qtrans = qmat.transpose()
     mu_vec = np.zeros(membership_mat.shape[0])
 
     mtrans = membership_mat.transpose()
 
-    for col_id, col in enumerate(qtrans):
-        for it in np.unique(col):
-            isize = (col == it).sum()  # size of intersection for each community
+    for col_id in range(qtrans.shape[0]):
+        for it in range(1, np.max(qtrans[col_id]) + 1):
+            # size of intersection for each community
+            isize = (qtrans[col_id] == it).sum()
             mu_vec[np.where((mtrans[col_id] == it))] += isize
+    mu_vec *= 1 / (qmat.shape[0] * membership_mat.shape[1])
+    return mu_vec
 
-    return mu_vec * 1/(qmat.shape[0] * membership_mat.shape[1])
+
+@jit(nopython=True, nogil=True)
+def mui_vec_largest_intersec(query_indexes, membership_mat):
+    # Get the sub matrix slice based on query node indexes
+    qmat = membership_mat[query_indexes]
+
+    qtrans = qmat.transpose()
+    mu_vec = np.zeros(membership_mat.shape[0])
+
+    mtrans = membership_mat.transpose()
+
+    for col_id in np.ndindex(qtrans.shape[0]):
+
+        maxi = 0
+        max_it = [0]
+        for it in range(1, np.max(qtrans[col_id]) + 1):
+            # size of intersection for each community
+            isize = (qtrans[col_id] == it).sum()
+            if isize > maxi:
+                maxi = isize
+                max_it = [int(it)]
+            # In case of a tie for largest intersection
+            elif isize == maxi:
+                max_it += [int(it)]
+
+        for it in max_it:
+            mu_vec[np.where((mtrans[col_id] == it))] += 1
+    mu_vec *= 1 / membership_mat.shape[1]
+    return mu_vec
