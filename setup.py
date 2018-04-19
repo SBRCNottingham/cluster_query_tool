@@ -9,7 +9,7 @@ long_description = '''
 '''
 
 setup(
-    name="cqt",
+    name="cluster_query_tool",
     version="0.0.1",
     description="Cluster query tool for complex networks",
     long_description=long_description,
@@ -18,7 +18,11 @@ setup(
     install_requires=requirements,
     author_email="jamie.gilbert@azimov.co.uk",
     license="GPL",
-    entry_points={},
+    entry_points={
+        'console_scripts': [
+            "modindexer=cluster_query_tool.distributed_indexer:cli"
+        ]
+    },
     url="https://github.com/azimov/cluster_query_tool",
     include_package_data=True,
     packages=find_packages(),

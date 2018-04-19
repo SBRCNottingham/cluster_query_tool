@@ -37,7 +37,7 @@ def load(filepath):
     return json.loads(json_bytes.decode("utf-8"))
 
 
-def get_index(graph, space_sample_size="medium", seed=1, num_procs=cpu_count(), use_cache=True):
+def get_index(graph, space_sample_size="medium", seed=1, num_procs=cpu_count(), use_cache=True, cache_location=None):
     """
     Generate a partition space index for a given network
     :param graph: networkx graph object (make sure name is set for caching)
@@ -63,7 +63,8 @@ def get_index(graph, space_sample_size="medium", seed=1, num_procs=cpu_count(), 
 
     space_sample_size = int(space_sample_size)
     # cache_result
-    cache_location = os.path.join(".ctq_cache", "get_index_{0}_{1}_{2}.json.xz".format(seed,
+    if cache_location is None:
+        cache_location = os.path.join(".ctq_cache", "get_index_{0}_{1}_{2}.json.xz".format(seed,
                                                                                     space_sample_size, graph.name))
 
     if use_cache and os.path.exists(cache_location):
@@ -72,7 +73,7 @@ def get_index(graph, space_sample_size="medium", seed=1, num_procs=cpu_count(), 
             result = load(cache_location)
             return result
         except json.JSONDecodeError:
-            pass
+            pass # Regenerate the cache
 
     result = gen_sample_sets(graph, num_samples=space_sample_size, num_procs=num_procs, seed=seed)
 
@@ -96,7 +97,6 @@ def partition_from_cut(graph, edge_set):
 
 def _sample_local_optima(graph, seed):
     """
-
     :param graph:
     :param seed:
     :return:
