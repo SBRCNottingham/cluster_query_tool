@@ -5,7 +5,7 @@ import random
 import numpy as np
 from scipy.stats import mannwhitneyu
 from itertools import combinations, product
-from numba import jit
+import numba
 
 
 def modularity(graph, part):
@@ -168,8 +168,8 @@ def s_quality(query_nodes, nmap, M):
     return np.mean(Mx), np.std(Mx)
 
 
-@jit(nopython=True, nogil=True)
-def query_vector_jit(query_indexes, membership_mat):
+@numba.jit(nopython=True, nogil=True)
+def query_vector(query_indexes, membership_mat):
     qm = np.zeros(membership_mat.shape[0])
     norm_const = 1 / (membership_mat.shape[1] * query_indexes.shape[0])
     for v in range(membership_mat.shape[0]):
@@ -179,8 +179,13 @@ def query_vector_jit(query_indexes, membership_mat):
     return qm * norm_const
 
 
+@numba.jit(nopython=True, nogil=True)
 def mui_vec_membership(query_indexes, membership_mat):
-
+    """
+    :param query_indexes:  numpy.array (1D) of node indexes to query
+    :param membership_mat: n * P matrix of node memberships
+    :return:
+    """
     # Get the sub matrix slice based on query node indexes
     qmat = membership_mat[np.array(query_indexes)]
 
@@ -189,7 +194,7 @@ def mui_vec_membership(query_indexes, membership_mat):
 
     mtrans = membership_mat.transpose()
 
-    for col_id, col in enumerate(qtrans):
+    for col_id, col in np.ndenumerate(qtrans):
         for it in np.unique(col):
             isize = (col == it).sum()  # size of intersection for each community
             mu_vec[np.where((mtrans[col_id] == it))] += isize
