@@ -4,8 +4,8 @@ import networkx as nx
 import random
 import numpy as np
 from scipy.stats import mannwhitneyu
-from itertools import combinations, product
-import numba
+from itertools import combinations
+from numba import jit
 
 
 def modularity(graph, part):
@@ -175,19 +175,11 @@ def s_quality(query_nodes, nmap, M):
     return np.mean(Mx), np.std(Mx)
 
 
-<<<<<<< HEAD
-@numba.jit(nopython=True, nogil=True)
-def query_vector(query_indexes, membership_mat):
-    qm = np.zeros(membership_mat.shape[0])
-    norm_const = 1 / (membership_mat.shape[1] * query_indexes.shape[0])
-    for v in range(membership_mat.shape[0]):
-=======
 @jit(nopython=True, nogil=True)
 def query_vector(query_indexes, M):
     qm = np.zeros(M.shape[0])
     norm_const = 1 / (M.shape[1] * query_indexes.shape[0])
     for v in np.ndindex(M.shape[0]):
->>>>>>> 7425665db98e644be9a70462e465d9b5d9fa2aeb
         for q in query_indexes:
             # Number of times node is in the same cluster as a query node
             qm[v] += (M[v] == M[q]).sum()
@@ -195,18 +187,8 @@ def query_vector(query_indexes, M):
     return qm * norm_const
 
 
-<<<<<<< HEAD
-@numba.jit(nopython=True, nogil=True)
-def mui_vec_membership(query_indexes, membership_mat):
-    """
-    :param query_indexes:  numpy.array (1D) of node indexes to query
-    :param membership_mat: n * P matrix of node memberships
-    :return:
-    """
-=======
 @jit(nopython=True, nogil=True)
 def mui_vec_membership(query_indexes, membership_mat):
->>>>>>> 7425665db98e644be9a70462e465d9b5d9fa2aeb
     # Get the sub matrix slice based on query node indexes
     # qmat = membership_mat[np.array(query_indexes, dtype=np.int16)]
     '''
@@ -221,16 +203,10 @@ def mui_vec_membership(query_indexes, membership_mat):
 
     mtrans = membership_mat.transpose()
 
-<<<<<<< HEAD
-    for col_id, col in np.ndenumerate(qtrans):
-        for it in np.unique(col):
-            isize = (col == it).sum()  # size of intersection for each community
-=======
     for col_id in range(qtrans.shape[0]):
         for it in range(1, np.max(qtrans[col_id]) + 1):
             # size of intersection for each community
             isize = (qtrans[col_id] == it).sum()
->>>>>>> 7425665db98e644be9a70462e465d9b5d9fa2aeb
             mu_vec[np.where((mtrans[col_id] == it))] += isize
     mu_vec *= 1 / (qmat.shape[0] * membership_mat.shape[1])
     return mu_vec
@@ -264,3 +240,4 @@ def mui_vec_largest_intersec(query_indexes, membership_mat):
             mu_vec[np.where((mtrans[col_id] == it))] += 1
     mu_vec *= 1 / membership_mat.shape[1]
     return mu_vec
+
