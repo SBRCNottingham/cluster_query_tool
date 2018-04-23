@@ -1,5 +1,5 @@
 
-\documentclass[manuscript, proceedings]{acmart}
+\documentclass[sigconf]{acmart}
 \usepackage[utf8]{inputenc}
 \usepackage{color}
 
@@ -7,9 +7,8 @@
 \usepackage{graphicx}
 \usepackage{subcaption}
 \usepackage{amsmath}
-
-
 \usepackage{booktabs} 
+
 \DeclareMathOperator*{\argmax}{argmax}
 
 \date{Received: date / Accepted: date}
@@ -138,17 +137,27 @@ Each of these solution partitions are extremely close to the global maxima, maki
 This fact is visually demonstrated with the software from \cite{good2010performance} in Figure \ref{fig:modular_search_space}, which shows the modularity search space of an \textit{E coli} metabolic network reconstruction \cite{GuimeraNature2005}.
 The similarity between the partitions is compared with variation of information measure \cite{meilua2003comparing} and dimensionality of the space is reduced with curvilinear component analysis \cite{demartines1997curvilinear}.
 
-\begin{figure}
+\begin{figure*}
 \centering
- \includegraphics[width=0.48\textwidth]{images/search_space_3.png}
+
+  \begin{subfigure}[ht]{0.4\textwidth}
+    \includegraphics[width=\textwidth]{images/search_space_3.png}
+    \caption{Modularity optimisation space of an \textit{E. coli} metabolic network.}
+    \label{fig:modular_search_space}
+  \end{subfigure}
+  \begin{subfigure}[ht]{0.58\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{images/meth_fig/fig1_desc.eps}
+    \caption{Outline of the proposed approach to querying networks by using multiple, high quality representations of modular networks.}
+    \label{fig:algorithm_outline}
+  \end{subfigure}
  \caption{
  Modularity search space of an \textit{E. coli} metabolic network.
  Distance between partitions is calculated using variation of information \cite{meilua2003comparing} and dimensionality reduction is performed using curvilinear component analysis \cite{demartines1997curvilinear}.
   The inset (top) demonstrates the landscape of the high modularity region. 
   Figure generated with the software of Good \textit{et al.}\cite{good2010performance}.
  }
- \label{fig:modular_search_space}
-\end{figure}
+\end{figure*}
 
 In our work, instead of seeing this modular search space as a flaw we consider each high value partition to be information about latent relationships between vertices inferred through the topology of the network.
 In the parlance of the computational and information sciences, we consider the mapping of this search space to be an \textit{index} analogous to search algorithms.
@@ -157,14 +166,6 @@ Whilst methods based on simulated annealing can be used to guarantee full covera
 \subsection{Algorithm outline}
 A broad outline of the proposed method is presented in Figure \ref{fig:algorithm_outline}.
 In essence, the objective is to use multiple modular representation of a given dataset to generate a relatedness score for a given set of query vertices.
-
-\begin{figure*}
- \centering
- \includegraphics[width=0.6\textwidth]{images/meth_fig/fig1_desc.eps}
- \caption{Outline of the proposed approach to querying networks by using multiple, high quality representations of modular networks.}
- \label{fig:algorithm_outline}
-\end{figure*}
-
 
 \subsection{Generating the search index}
 In order to cover the space of high modularity partitions, randomly generated starting partitions are computed with a random cut set.
@@ -258,6 +259,18 @@ Using larger seed sets also improves accuracy with some prediction of true commu
 
 
 \subsection{Real networks}
+
+\begin{figure*}[ht]
+\includegraphics[width=\textwidth]{images/ppi_example_combined.eps}
+\caption{An example of the GO term \textit{``SNAP receptor activity''} (16 nodes) on the \textit{Arabidopsis thaliana} protein-protein interaction network.
+(A) Shows the full network with 3 randomly chosen query nodes from the full query set.
+(B) Shows a reduced view of the network where a threshold is selected, reducing the network to 404 nodes.
+(C) Shows an example ROC curve, sampled from combinations of using 3 randomly selected query nodes including this term.
+Blue nodes indicate those in the randomly selected 3 query nodes, yellow the remaining nodes in the term and the shade of red relates to the strength of the relationship each node has to the query set.
+}
+\label{fig:query_example}
+\end{figure*}
+
 In order to test the performance of the semi-supervised classification on real-world data we present our findings on example networks with known metadata communities.
 All datasets taken use the largest single connected component sub-graph.
 
@@ -278,57 +291,45 @@ The real networks used are listed as follows:
  
 \end{itemize}
 
-\begin{figure*}
-     \centering
-    \begin{subfigure}[b]{0.48\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{images/eu_roc_scores.eps}
-        \caption{EU email departments}
-    \end{subfigure}
-    \begin{subfigure}[b]{0.48\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{images/yeast_ppi_roc_scores.eps}
-        \caption{Yeast PPI protein complexes}
-    \end{subfigure}
-    \caption{Mean area under RO curve (AUC) scores from cross-validation performed on Metadata communities for networks described in Section \ref{sec:real_network_descs}.
-    Dashed line indicates an AUC score of 0.5 (random chance).
-    Communities are ordered by size.
-    Error bars indicate standard deviation.
-    }
-    \label{fig:real_network_results}
-\end{figure*}
-
-
-\begin{figure*}
-    \centering
-    \begin{subfigure}[b]{0.48\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{images/eu_email_nodewise_roc.eps}
-        \caption{EU email departments (986 nodes)}
-    \end{subfigure}
-    \begin{subfigure}[b]{0.48\textwidth}
-        \centering
-        \includegraphics[width=\textwidth]{images/yeast_ppi_nodewise_roc.eps}
-        \caption{Yeast PPI protein complexes (1628 nodes)}
-    \end{subfigure}
-    \caption{Receiver Operator Characteristic curves for node communities.
-    Dashed line indicates an AUC score of 0.5 (random chance).
-    Represents mean, shaded area indicates standard deviation.
-    }
-    \label{fig:real_network_nodwise_classifiers}
-\end{figure*}
-
-
-\begin{figure*}[ht]
-\includegraphics[width=\textwidth]{images/ppi_example_combined.eps}
-\caption{An example of the query term \textit{``SNAP receptor activity''} on the arabidopsis protein-protein interaction network.
-(A) Shows the full network with 3 randomly chosen query nodes from the full query set.
-(B) Shows a reduced view of the network where a threshold is selected.
-(C) Shows an example ROC curve, sampled from combinations of using 3 randomly selected query nodes including this term.
-Blue nodes indicate those in the query set, the shade of red relates to the strength of the relationship each node has to the query set.
-}
-\label{fig:query_example}
-\end{figure*}
+% \begin{figure*}
+%      \centering
+%     \begin{subfigure}[b]{0.48\textwidth}
+%         \centering
+%         \includegraphics[width=\textwidth]{images/eu_roc_scores.eps}
+%         \caption{EU email departments}
+%     \end{subfigure}
+%     \begin{subfigure}[b]{0.48\textwidth}
+%         \centering
+%         \includegraphics[width=\textwidth]{images/yeast_ppi_roc_scores.eps}
+%         \caption{Yeast PPI protein complexes}
+%     \end{subfigure}
+%     \caption{Mean area under RO curve (AUC) scores from cross-validation performed on Metadata communities for networks described in Section \ref{sec:real_network_descs}.
+%     Dashed line indicates an AUC score of 0.5 (random chance).
+%     Communities are ordered by size.
+%     Error bars indicate standard deviation.
+%     }
+%     \label{fig:real_network_results}
+% \end{figure*}
+% 
+% 
+% \begin{figure*}
+%     \centering
+%     \begin{subfigure}[b]{0.48\textwidth}
+%         \centering
+%         \includegraphics[width=\textwidth]{images/eu_email_nodewise_roc.eps}
+%         \caption{EU email departments (986 nodes)}
+%     \end{subfigure}
+%     \begin{subfigure}[b]{0.48\textwidth}
+%         \centering
+%         \includegraphics[width=\textwidth]{images/yeast_ppi_nodewise_roc.eps}
+%         \caption{Yeast PPI protein complexes (1628 nodes)}
+%     \end{subfigure}
+%     \caption{Receiver Operator Characteristic curves for node communities.
+%     Dashed line indicates an AUC score of 0.5 (random chance).
+%     Represents mean, shaded area indicates standard deviation.
+%     }
+%     \label{fig:real_network_nodwise_classifiers}
+% \end{figure*}
 
 
 We tested the method on each real network described in section \ref{sec:real_network_descs}.
@@ -361,41 +362,39 @@ From the perspective of exploratory study, this implies that a small number of q
 This allows the use of a single node to find related vertices, in real networks the results appeared to have a very good level of accuracy with average AUC of ROC curves above $0.9$.
 In a practical context, however, this should not be interpreted as uncovering the community structure as this includes many overlapping communities for which the node is a member.
 
-
-\section{Related work}
-\label{sec:related_work}
-
-This work relates very strongly to the idea of local community detection, more specifically the idea of \textit{seed set expansion}.
-Here, a given seed set is created a random walks are analysed to find clearly related communities of vertices.
-One of the most common approaches to finding related vertices in a network is the random walk with restart (RWR) \cite{can2005analysis, kohler2008walking}.
-This approach has been applied in fields as diverse as recommender systems and the detection of potential drug targets \cite{chen2012drug}.
-In RWR the relatedness of any pair of vertices can be seen as the probability of a particle traversing the graph starting at a given vertex and ending at another.
-The restart aspect of the random walk can be thought of as the probability of the walker teleporting back to the start vertex with some none zero probability. 
-The higher the probability of the walker ending up at a given vertex, the more likely it is that the two vertices are related.
-
-Conceptually, RWR is very similar to the method presented in this paper given that the user has a given query.
-One can thing of the RWR probability as analogous to the value of $\mu_i(S)$ presented above.
-However, the RWR value is based only on a single vertex as a query set where the approach presented in this work requires many vertices associated with a given label for it to be readily applicable.
-
-Many existing method are based on the idea of a locally dense subgraph containing \textit{all query nodes} \cite{}.
-In contrast, the query approach presented here does not require the queries to be a self contained sub-graph.
-Indeed, queries can contain spurious nodes that are topologically distinct from one another - the result is that the either $q(S)$ score for the query will be very low and insignificant, or the spurious nodes will be ignored in the final query set.
-In user facing domains it is highly likely that very large query sets do not form isolated topologies.
-With Conventional methods some ``cleaning up'' of the underlying queries is often required to gather any meaningful expansion.
-
-Whilst modularity maximisation is used for the set of global partitions, this approach is distinct from local modularity based approaches \cite{}.
-A limitation of this approach compared with localised methods is that the entire dataset is required.
-However, the objective is somewhat different as the approach presented here relies on high quality meta-data labels for queries.
-In this sense, the approach should be considered closer to semi-supervised \textit{classification} than unsupervised \textit{clustering}.
-
-In the field of community detection, a number of very recent articles have focused on using metadata to improve the results of community detection approaches.
-
-%TODO: Discuss citations of metadata based community detection - Newman-Clauset, Jure Lesovec, other citations in newman paper.
-
-These algorithms, however, are distinct from the approach taken here as the metadata is not used in the module discovery process.
-Furthermore, the results in this work attempt to explicitly label unlabelled data and only require a relatively small number of labels to operate in such a fashion.
-In contrast,  the recent approach by Newman and Clauset \cite{}, for example, uses examples in which practically the entire network contains labels which is less useful from the perspective of label discovery.
-However, these methods are vastly superior to the work presented here when considering the research question of whether a labelling scheme (such as demography in a social network) accurately describes the structure of the network. 
+% \section{Related work}
+% \label{sec:related_work}
+% This work relates very strongly to the idea of local community detection, more specifically the idea of \textit{seed set expansion}.
+% Here, a given seed set is created a random walks are analysed to find clearly related communities of vertices.
+% One of the most common approaches to finding related vertices in a network is the random walk with restart (RWR) \cite{can2005analysis, kohler2008walking}.
+% This approach has been applied in fields as diverse as recommender systems and the detection of potential drug targets \cite{chen2012drug}.
+% In RWR the relatedness of any pair of vertices can be seen as the probability of a particle traversing the graph starting at a given vertex and ending at another.
+% The restart aspect of the random walk can be thought of as the probability of the walker teleporting back to the start vertex with some none zero probability. 
+% The higher the probability of the walker ending up at a given vertex, the more likely it is that the two vertices are related.
+% 
+% Conceptually, RWR is very similar to the method presented in this paper given that the user has a given query.
+% One can thing of the RWR probability as analogous to the value of $\mu_i(S)$ presented above.
+% However, the RWR value is based only on a single vertex as a query set where the approach presented in this work requires many vertices associated with a given label for it to be readily applicable.
+% 
+% Many existing method are based on the idea of a locally dense subgraph containing \textit{all query nodes} \cite{}.
+% In contrast, the query approach presented here does not require the queries to be a self contained sub-graph.
+% Indeed, queries can contain spurious nodes that are topologically distinct from one another - the result is that the either $q(S)$ score for the query will be very low and insignificant, or the spurious nodes will be ignored in the final query set.
+% In user facing domains it is highly likely that very large query sets do not form isolated topologies.
+% With Conventional methods some ``cleaning up'' of the underlying queries is often required to gather any meaningful expansion.
+% 
+% Whilst modularity maximisation is used for the set of global partitions, this approach is distinct from local modularity based approaches \cite{}.
+% A limitation of this approach compared with localised methods is that the entire dataset is required.
+% However, the objective is somewhat different as the approach presented here relies on high quality meta-data labels for queries.
+% In this sense, the approach should be considered closer to semi-supervised \textit{classification} than unsupervised \textit{clustering}.
+% 
+% In the field of community detection, a number of very recent articles have focused on using metadata to improve the results of community detection approaches.
+% 
+% %TODO: Discuss citations of metadata based community detection - Newman-Clauset, Jure Lesovec, other citations in newman paper.
+% 
+% These algorithms, however, are distinct from the approach taken here as the metadata is not used in the module discovery process.
+% Furthermore, the results in this work attempt to explicitly label unlabelled data and only require a relatively small number of labels to operate in such a fashion.
+% In contrast,  the recent approach by Newman and Clauset \cite{}, for example, uses examples in which practically the entire network contains labels which is less useful from the perspective of label discovery.
+% However, these methods are vastly superior to the work presented here when considering the research question of whether a labelling scheme (such as demography in a social network) accurately describes the structure of the network. 
 
 \section{Conclusions}
 This paper has presented a novel approach to semi-supervised community detection utilising a consensus of high scoring partitions computed with the popular modularity maximisation approach.
