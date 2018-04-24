@@ -1,4 +1,4 @@
-from cluster_query_tool.louvain_consensus import mu_ivector
+from cluster_query_tool.louvain_consensus import query_vector
 
 from sklearn.metrics import roc_auc_score
 
@@ -12,6 +12,8 @@ import logging
 
 from scipy.special import binom
 import itertools
+
+from numba import jit
 
 logger = logging.getLogger("cigram.generators")
 logger.setLevel(logging.WARNING)
@@ -73,27 +75,44 @@ def unique_sampler(node_set, sample_size, max_samples=96):
     return sample_sets
 
 
-def roc_score_node(n, graph, index, node_comms):
-    vec, key = mu_ivector(graph, index, [n])
-    inc = lambda x: 1 if x in node_comms[n] else 0
-    y_true = [inc(x) for x in graph.nodes() if x != n]
-    y_score = [vec[key[x]] for x in graph.nodes() if x != n]
+@jit(nopython=True, nogil=True)
+def fast_auc(y_true, y_prob):
+    """
+    Numba implementation of auc score calculation for multi threaded purposes
+    :param y_true:
+    :param y_prob:
+    :return:
+    """
+    y_true = y_true[np.argsort(y_prob)]
+    nfalse = 0
+    auc = 0
+    n = len(y_true)
+    for i in range(n):
+        y_i = y_true[i]
+        nfalse += (1 - y_i)
+        auc += y_i * nfalse
+    auc /= (nfalse * (n - nfalse))
+    return auc
 
-    return roc_auc_score(y_true, y_score)
+
+def roc_score_seed(seed_set, nodes, membership_ma, comm):
+    vec = query_vector(seed_set, membership_ma)
+
+    def inc(x):
+        if x in comm:
+            return 1
+        return 0
+
+    y_true = np.array([inc(x) for x in nodes if x not in seed_set])
+    y_score = np.array([vec[x] for x in nodes if x not in seed_set])
+    return fast_auc(y_true, y_score)
 
 
-def roc_score_seed(seed_set, graph, index, comm):
-    vec, key = mu_ivector(graph, index, seed_set)
-    inc = lambda x: 1 if x in comm else 0
-    y_true = [inc(x) for x in graph.nodes() if x not in seed_set]
-    y_score = [vec[key[x]] for x in graph.nodes() if x not in seed_set]
-    return roc_auc_score(y_true, y_score)
-
-
-def get_auc_scores_community(seed_size, community, graph, index, sample_seed=1337):
+def get_auc_scores_community(seed_size, community, nodes, membership_ma, sample_seed=1337):
     np.random.seed(sample_seed)
     samples = unique_sampler(community, seed_size)
-    auc_scores = Parallel(n_jobs=cpu_count())(delayed(roc_score_seed)(sample, graph, index, community)
-                                              for sample in samples)
+
+    funcs = (delayed(roc_score_seed)(np.array(sample), nodes, membership_ma, community) for sample in samples)
+    auc_scores = Parallel(n_jobs=cpu_count(), backend='threading')(funcs)
     return auc_scores
 
