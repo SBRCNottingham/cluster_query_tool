@@ -1,7 +1,5 @@
 from cluster_query_tool.louvain_consensus import query_vector
 
-from sklearn.metrics import roc_auc_score
-
 from cigram import lfr_benchmark_graph
 from joblib import Parallel, delayed
 from multiprocessing import cpu_count
@@ -95,6 +93,7 @@ def fast_auc(y_true, y_prob):
     return auc
 
 
+@jit(nopython=True, nogil=True)
 def roc_score_seed(seed_set, nodes, membership_ma, comm):
     vec = query_vector(seed_set, membership_ma)
 
@@ -115,4 +114,3 @@ def get_auc_scores_community(seed_size, community, nodes, membership_ma, sample_
     funcs = (delayed(roc_score_seed)(np.array(sample), nodes, membership_ma, community) for sample in samples)
     auc_scores = Parallel(n_jobs=cpu_count(), backend='threading')(funcs)
     return auc_scores
-
