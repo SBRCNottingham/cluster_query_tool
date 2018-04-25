@@ -9,15 +9,16 @@ import click
 from subprocess import call
 import os
 import json
-from joblib import load, dump
+from cluster_query_tool.louvain_consensus import membership_matrix
 
 
 _base_params = dict(
     average_degree=20,
-    max_degree=50,
-    minc_size=10,
+    max_degree=300,
+    minc_size=1,
     maxc_size=50,
-    mu=0.1,
+    mu=0.3,
+    overlapping_memberships=4,
 )
 
 _seed_sizes = [1, 3, 7, 15]
@@ -39,27 +40,20 @@ def auc_compute(seed, n, ol, results_folder):
 
     graph, communities, index = get_benchmark(pset)
 
-    graph_path = '/dev/shm/{}.graph'.format(graph.name)
-    dump(graph, graph_path)
-    graph = load(graph_path, mmap_mode='r')
+    membership_ma, nmap = membership_matrix(graph.nodes(), index)
 
-    index_path = '/dev/shm/{}.index'.format(graph.name)
-    dump(index, index_path)
-    index = load(index_path, mmap_mode='r')
-
+    nodes = np.array(list(nmap.values()))
     results = []
     for c, comm in communities.items():
         for seed_size in _seed_sizes:
             if len(comm) > seed_size:
                 # Seed of AUC scores for node this size
-                m_auc, std_auc = get_auc_scores_community(seed_size, comm, graph, index)
-                results.append([int(n), int(ol), int(seed), c, seed_size, len(comm), m_auc, std_auc])
+                scom = np.array([nmap[i] for i in comm])
+                auc_s = get_auc_scores_community(seed_size, scom, nodes, membership_ma)
+                results.append([int(n), int(ol), int(seed), c, seed_size, len(comm), np.mean(auc_s), np.std(auc_s)])
 
     with open(results_file, "w+") as rf:
         json.dump(results, rf)
-
-    os.unlink(graph_path)
-    os.unlink(index_path)
 
 
 @click.command()
@@ -117,7 +111,7 @@ python {file} auc_compute {n} {ol} $JOB {results_folder}
     if not os.path.exists(commands_path):
         os.mkdir(commands_path)
 
-    overlap_vals = np.linspace(0.0, 0.5, 10)
+    overlap_vals = np.linspace(0.0, 1.0, 10)
     overlap_vals *= int(n)
     for ol in overlap_vals.astype(int):
         command_file_path = os.path.join(commands_path, "lfr_bm_overlap_{}_{:.2f}.sh".format(n, ol))
