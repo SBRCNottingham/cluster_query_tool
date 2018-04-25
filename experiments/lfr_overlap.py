@@ -131,6 +131,50 @@ python {file} auc_compute {n} {ol} $JOB {results_folder}
             call(command.split())
 
 
+@click.command()
+@click.argument("n")
+def gen_figure(n):
+    import json
+    from matplotlib import pyplot as plt
+    import glob
+    import pandas as pd
+    rows = []
+
+    for f in glob.glob("hpc_results/lfr_overlap_{}/*.json".format(n)):
+        with open(f) as jf:
+            rts = json.load(jf)
+            for row in rts:
+                rows.append(row)
+
+    df = pd.DataFrame(rows, columns=['n', 'ol', 'seed', 'c', 'seed_size', 'comm', 'auc', 'auc_std'])
+
+    fig, ax = plt.subplots()
+    fig.set_dpi(90)
+    ax.set_ylabel("Mean AUC")
+    ax.set_xlabel("Overlapping nodes (fraction) ")
+    ax.set_ylim(0.4, 1.01)
+    ax.set_xlim(0.0, 1.01)
+    x_vals = df['ol'].unique()
+    x_vals.sort()
+
+    for s in _seed_sizes:
+        y_vals = []
+        y_err = []
+        sdf = df.loc[df['seed_size'] == s]
+        for x in x_vals:
+            m = sdf.loc[sdf['ol'] == x]["auc"].mean()
+            y_vals.append(m)
+            std = sdf.loc[sdf['ol'] == x]["auc_std"].std()
+            y_err.append(std)
+        ax.scatter(x_vals / int(n), y_vals, label="{} seed nodes".format(s))
+        ax.errorbar(x_vals/ int(n), y_vals, yerr=y_err)
+
+    ax.legend(loc=3)
+    fig.savefig("article/images/lfr_binary_overlap_auc_{}.eps".format(n))
+    fig.savefig("article/images/lfr_binary_overlap_auc_{}.svg".format(n))
+    fig.savefig("article/images/lfr_binary_overlap_auc_{}.png".format(n))
+
+
 @click.group()
 def cli():
     pass
@@ -139,4 +183,5 @@ def cli():
 if __name__ == "__main__":
     cli.add_command(run_jobs)
     cli.add_command(auc_compute)
+    cli.add_command(gen_figure)
     cli()
