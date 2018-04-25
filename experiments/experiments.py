@@ -93,7 +93,6 @@ def fast_auc(y_true, y_prob):
     return auc
 
 
-@jit(nopython=True, nogil=True)
 def roc_score_seed(seed_set, nodes, membership_ma, comm):
     vec = query_vector(seed_set, membership_ma)
 
