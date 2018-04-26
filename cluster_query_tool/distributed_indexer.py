@@ -7,11 +7,16 @@ from .indexer import partition_to_cut_set, partition_from_cut, dump
 from .louvain_consensus import gen_local_optima_community
 import random
 import networkx as nx
+from subprocess import check_output
 
 
-def load_graph(path):
+def load_graph(path, graph_name=None):
     graph = nx.read_edgelist(path)
-    graph.name = os.path.basename(path)
+
+    if graph_name is not None:
+        graph.name = graph_name
+    else:
+        graph.name = os.path.basename(path)
     return graph
 
 
@@ -24,7 +29,11 @@ def load_graph(path):
 @click.option("--space_sample_size", default=2000)
 @click.option("--request", default="select=1:ncpus=1:mem=8gb")
 @click.option("--queue", default="HPCA-01839-EFR")
-def pbs_indexer(graph_path, seed, n_jobs, results_folder, walltime, request, space_sample_size, queue):
+@click.option('--graph_name', default=None)
+@click.option('--cache_path', default='.ctq_cache')
+@click.option('--cache_name', default=None)
+def pbs_indexer(graph_path, seed, n_jobs, results_folder, walltime, request, space_sample_size, queue,
+                graph_name, cache_path, cache_name):
     """
     Generates space_sample_size starting cut sets and divides them in to n jobs to be scheduled
 
@@ -38,8 +47,10 @@ def pbs_indexer(graph_path, seed, n_jobs, results_folder, walltime, request, spa
     :param queue:
     :return:
     """
-    random.seed(seed)
-    graph = load_graph(graph_path)
+    graph = load_graph(graph_path, graph_name)
+
+    if cache_name is None:
+        cache_name = '{}-dist_res.json.xz'.format(graph.name)
 
     job_options = dict(
         walltime=walltime,
@@ -48,7 +59,10 @@ def pbs_indexer(graph_path, seed, n_jobs, results_folder, walltime, request, spa
         queue=queue,
         graph_path=os.path.abspath(graph_path),
         n_jobs=n_jobs,
-        n_samps=int(round(int(space_sample_size) / int(n_jobs)))
+        n_samps=int(round(int(space_sample_size) / int(n_jobs))),
+        graph_name=graph.name,
+        cache_path=os.path.abspath(cache_path),
+        cache_name=cache_name,
     )
 
     job_template = """#!/bin/bash
@@ -59,7 +73,6 @@ def pbs_indexer(graph_path, seed, n_jobs, results_folder, walltime, request, spa
 
     JOB=$PBS_ARRAY_INDEX
 
-    cd $WORK_DIR
     modindexer dist_partitions {graph_path} $JOB {n_jobs} {n_samps} {results_folder}
 
     """.format(**job_options)
@@ -72,6 +85,20 @@ def pbs_indexer(graph_path, seed, n_jobs, results_folder, walltime, request, spa
     with open(command_file, "w+") as cf:
         cf.write(job_template)
 
+    merge_template = """#!/bin/bash
+    #PBS -k oe
+    #PBS -l {request}
+    #PBS -l {walltime}
+    #PBS -P {queue}
+
+    modindexer merge {graph_path} {results_folder} --graph_name {graph_name} --cache_path {cache_path} --cache_name {cache_name}
+
+    """.format(**job_options)
+
+    merge_file = "merge_index_{}-{}-{}.sh".format(graph.name, seed, space_sample_size)
+    with open(merge_file, "w+") as cf:
+        cf.write(merge_template)
+
     cmd_options = dict(
         command_file=command_file,
         n_jobs=n_jobs,
@@ -79,9 +106,18 @@ def pbs_indexer(graph_path, seed, n_jobs, results_folder, walltime, request, spa
     )
     # Write script to disk
     # print/run command for exec script
-    cmd = "qsub {options} -J 1-{n_jobs} {command_file}".format(**cmd_options)
-    click.echo("Run the following command:")
-    click.echo(cmd)
+    jcmd = "qsub {options} -J 1-{n_jobs} {command_file}".format(**cmd_options)
+
+    click.echo("Running submission:")
+
+    job_out = check_output(jcmd.split())
+    click.echo(job_out)
+
+    cmd_options["dist_proc"] = job_out.split()[0]
+    mcmd = "qsub {options} -J 1-{n_jobs} {merge_file} -W depend=afterany:{dist_proc}".format(**cmd_options)
+    j2 = check_output(mcmd.split())
+
+    click.echo(j2)
 
 
 @click.command()
@@ -89,12 +125,13 @@ def pbs_indexer(graph_path, seed, n_jobs, results_folder, walltime, request, spa
 @click.argument('job_id', type=int)
 @click.argument('n_samps', type=int)
 @click.argument('results_folder')
-def dist_partitions(graph_path, job_id, n_samps, results_folder):
+@click.option('--graph_name', default=None)
+def dist_partitions(graph_path, job_id, n_samps, results_folder, graph_name):
     """
     Distributed partition job task
     :return:
     """
-    graph = load_graph(graph_path)
+    graph = load_graph(graph_path, graph_name)
 
     results_file = os.path.join(os.path.abspath(results_folder), '{}-{}-cs.res'.format(graph.name, job_id))
 
@@ -114,10 +151,21 @@ def dist_partitions(graph_path, job_id, n_samps, results_folder):
 @click.argument('graph_path')
 @click.argument('results_folder')
 @click.option('--cache_path', default='.ctq_cache')
-def merge(graph_path, results_folder, cache_path):
-    graph = load_graph(graph_path)
-    results = []
+@click.option('--cache_name', default=None)
+@click.option('--graph_name', default=None)
+def merge(graph_path, results_folder, cache_path, cache_name, graph_name):
+    """
+    Merge results
+    :param graph_path:
+    :param results_folder:
+    :param cache_path:
+    :param cache_name:
+    :param graph_name:
+    :return:
+    """
+    graph = load_graph(graph_path, graph_name)
 
+    results = []
     hashes = []
 
     for fp in glob.glob('{}/{}-*-cs.res'.format(results_folder, graph.name)):
@@ -134,7 +182,10 @@ def merge(graph_path, results_folder, cache_path):
     if not os.path.exists(cache_path):
         os.mkdir(cache_path)
 
-    file_path = os.path.join(cache_path, '{}-dist_res.json.xz'.format(graph.name))
+    if cache_name is None:
+        cache_name = '{}-dist_res.json.xz'.format(graph.name)
+
+    file_path = os.path.join(cache_path, cache_name)
     # Dump as compressed json file
     dump(results, file_path)
 
