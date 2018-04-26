@@ -42,9 +42,9 @@ def get_benchmarks(base_params, modified_params, param_vals, seed, samples):
             yield graph, communities, get_index(graph)
 
 
-def get_benchmark(params):
+def get_benchmark(params, num_procs=4):
     graph, communities = lfr_benchmark_graph(**params)
-    return graph, communities, get_index(graph)
+    return graph, communities, get_index(graph, num_procs=num_procs)
 
 
 def unique_sampler(node_set, sample_size, max_samples=96):
