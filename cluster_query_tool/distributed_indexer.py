@@ -67,7 +67,7 @@ def pbs_indexer(graph_path, seed, n_jobs, results_folder, walltime, request, spa
 
     job_template = """#!/bin/bash
 #PBS -l {request}
-#PBS -l {walltime}
+#PBS -l walltime={walltime}
 #PBS -P {queue}
 
 JOB=$PBS_ARRAY_INDEX
@@ -86,7 +86,7 @@ modindexer dist_partitions {graph_path} $JOB {n_jobs} {n_samps} {results_folder}
 
     merge_template = """#!/bin/bash
 #PBS -l {request}
-#PBS -l {walltime}
+#PBS -l walltime={walltime}
 #PBS -P {queue}
 
 modindexer merge {graph_path} {results_folder} --graph_name {graph_name} --cache_path {cache_path} --cache_name {cache_name}
