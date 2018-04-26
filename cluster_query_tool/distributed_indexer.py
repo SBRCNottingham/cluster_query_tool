@@ -59,6 +59,7 @@ def pbs_indexer(graph_path, seed, n_jobs, results_folder, walltime, request, spa
         queue=queue,
         graph_path=os.path.abspath(graph_path),
         n_jobs=n_jobs,
+        seed=seed,
         n_samps=int(round(int(space_sample_size) / int(n_jobs))),
         graph_name=graph.name,
         cache_path=os.path.abspath(cache_path),
@@ -72,7 +73,7 @@ def pbs_indexer(graph_path, seed, n_jobs, results_folder, walltime, request, spa
 
 JOB=$PBS_ARRAY_INDEX
 
-modindexer dist_partitions {graph_path} $JOB {n_jobs} {n_samps} {results_folder}
+modindexer dist_partitions {graph_path} $JOB {n_samps} {seed} {results_folder}
 
     """.format(**job_options)
 
@@ -100,6 +101,7 @@ modindexer merge {graph_path} {results_folder} --graph_name {graph_name} --cache
     cmd_options = dict(
         command_file=command_file,
         n_jobs=n_jobs,
+        merge_file=merge_file,
         options="",
     )
     # Write script to disk
@@ -112,7 +114,7 @@ modindexer merge {graph_path} {results_folder} --graph_name {graph_name} --cache
     click.echo(job_out)
 
     cmd_options["dist_proc"] = job_out.split()[0]
-    mcmd = "qsub {options} -J 1-{n_jobs} {merge_file} -W depend=afterany:{dist_proc}".format(**cmd_options)
+    mcmd = "qsub {options} {merge_file} -W depend=afterany:{dist_proc}".format(**cmd_options)
     j2 = check_output(mcmd.split())
 
     click.echo(j2)
@@ -122,9 +124,10 @@ modindexer merge {graph_path} {results_folder} --graph_name {graph_name} --cache
 @click.argument('graph_path')
 @click.argument('job_id', type=int)
 @click.argument('n_samps', type=int)
+@click.argument('seed', type=int)
 @click.argument('results_folder')
 @click.option('--graph_name', default=None)
-def dist_partitions(graph_path, job_id, n_samps, results_folder, graph_name):
+def dist_partitions(graph_path, job_id, n_samps, seed, results_folder, graph_name):
     """
     Distributed partition job task
     :return:
@@ -134,7 +137,7 @@ def dist_partitions(graph_path, job_id, n_samps, results_folder, graph_name):
     results_file = os.path.join(os.path.abspath(results_folder), '{}-{}-cs.res'.format(graph.name, job_id))
 
     # We want unique starting cut sets for this job_id
-    random.seed(job_id)
+    random.seed(job_id + seed)
     for cs in range(n_samps):
         _, local_optima = gen_local_optima_community(graph)
         cut_set = partition_to_cut_set(graph, local_optima)
