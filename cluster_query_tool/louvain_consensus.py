@@ -58,7 +58,7 @@ def gen_local_optima_community(graph, cut_set=None):
     """
     # The possible space of communities is huge!
     if cut_set is None:
-       cut_set = random.sample(graph.edges(), random.randint(1, graph.number_of_edges()))
+        cut_set = random.sample(graph.edges(), random.randint(1, graph.number_of_edges()))
     # convert to partition
     start_partition = create_partition_from_edge_set(graph, cut_set)
     local_optima = louvain.best_partition(graph, partition=start_partition)

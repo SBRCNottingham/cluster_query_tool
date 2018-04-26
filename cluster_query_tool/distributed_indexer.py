@@ -41,16 +41,6 @@ def pbs_indexer(graph_path, seed, n_jobs, results_folder, walltime, request, spa
     random.seed(seed)
     graph = load_graph(graph_path)
 
-    def random_cut_set():
-        cs = random.sample(graph.edges(), random.randint(1, graph.number_of_edges()))
-        return tuple(sorted(cs))
-
-    # Generate and dump starting cut sets to disk
-    starting_cut_sets = [random_cut_set() for _ in range(space_sample_size)]
-    cs_path = os.path.abspath(graph_path) + 'cs-{}-{}.json'.format(seed, space_sample_size)
-    with open(cs_path, 'w+') as csfile:
-        json.dump(starting_cut_sets, csfile)
-
     job_options = dict(
         walltime=walltime,
         results_folder=os.path.abspath(results_folder),
@@ -58,7 +48,7 @@ def pbs_indexer(graph_path, seed, n_jobs, results_folder, walltime, request, spa
         queue=queue,
         graph_path=os.path.abspath(graph_path),
         n_jobs=n_jobs,
-        cs_path=cs_path,
+        n_samps=int(round(int(space_sample_size) / int(n_jobs)))
     )
 
     job_template = """#!/bin/bash
@@ -70,7 +60,7 @@ def pbs_indexer(graph_path, seed, n_jobs, results_folder, walltime, request, spa
     JOB=$PBS_ARRAY_INDEX
 
     cd $WORK_DIR
-    modindexer dist_partitions {graph_path} $JOB {n_jobs} {cs_path} {results_folder}
+    modindexer dist_partitions {graph_path} $JOB {n_jobs} {n_samps} {results_folder}
 
     """.format(**job_options)
 
@@ -97,30 +87,21 @@ def pbs_indexer(graph_path, seed, n_jobs, results_folder, walltime, request, spa
 @click.command()
 @click.argument('graph_path')
 @click.argument('job_id', type=int)
-@click.argument('n_jobs', type=int)
-@click.argument('cs_path')
+@click.argument('n_samps', type=int)
 @click.argument('results_folder')
-def dist_partitions(graph_path, job_id, n_jobs, cs_path, results_folder):
+def dist_partitions(graph_path, job_id, n_samps, results_folder):
     """
     Distributed partition job task
     :return:
     """
     graph = load_graph(graph_path)
 
-    with open(cs_path) as csf:
-        starting_cut_sets = json.load(csf)
-
-    n_samps = int(len(starting_cut_sets) / n_jobs)
-
-    start_samp = (job_id - 1) * n_samps
-    end_samp = start_samp + n_samps
-
-    starting_cut_sets = starting_cut_sets[start_samp: end_samp]
-
     results_file = os.path.join(os.path.abspath(results_folder), '{}-{}-cs.res'.format(graph.name, job_id))
 
-    for cs in starting_cut_sets:
-        _, local_optima = gen_local_optima_community(graph, cut_set=cs)
+    # We want unique starting cut sets for this job_id
+    random.seed(job_id)
+    for cs in range(n_samps):
+        _, local_optima = gen_local_optima_community(graph)
         cut_set = partition_to_cut_set(graph, local_optima)
 
         # Append new cut sets to file individually. Slower IO but saves memory

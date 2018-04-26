@@ -25,6 +25,11 @@ _seed_sizes = [1, 3, 7, 15]
 
 
 @click.command()
+def gen_partition_spaces():
+    pass
+
+
+@click.command()
 @click.argument("n")
 @click.argument("ol")
 @click.argument("seed")
