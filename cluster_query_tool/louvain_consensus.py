@@ -4,7 +4,6 @@ import networkx as nx
 import random
 import numpy as np
 from scipy.stats import mannwhitneyu
-from itertools import combinations
 from numba import jit
 
 
@@ -168,11 +167,17 @@ def membership_matrix(nodes, partitions):
     return M, nmap
 
 
-def s_quality(query_nodes, nmap, M):
-    Mx = []
-    for i, j in combinations(set([nmap[i] for i in query_nodes]), 2):
-        Mx.append((M[i] == M[j]).sum(axis=0) * 1 / M.shape[1])
-    return np.mean(Mx), np.std(Mx)
+def quality_score(query_indexes, M):
+    """
+
+    :param query_indexes:
+    :param M:
+    :return:
+    """
+    vec = query_vector(query_indexes, M)
+    nset = np.array([x for x in range(vec.shape[0]) if x not in query_indexes])
+    u_score, pvalue = mannwhitneyu(vec[nset], vec[query_indexes])
+    return pvalue
 
 
 @jit(nopython=True, nogil=True)
