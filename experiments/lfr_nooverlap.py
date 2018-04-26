@@ -63,7 +63,6 @@ def auc_compute(seed, n, mu, results_folder):
 @click.option("--queue", default="HPCA-01839-EFR")
 def run_jobs(n, mu_steps, network_samples, walltime, request, execute, queue):
     script_template = """#!/bin/bash
-#PBS -k oe
 #PBS -l {request}
 #PBS -l {walltime}
 #PBS -P {queue}

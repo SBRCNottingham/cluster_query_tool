@@ -66,14 +66,13 @@ def pbs_indexer(graph_path, seed, n_jobs, results_folder, walltime, request, spa
     )
 
     job_template = """#!/bin/bash
-    #PBS -k oe
-    #PBS -l {request}
-    #PBS -l {walltime}
-    #PBS -P {queue}
+#PBS -l {request}
+#PBS -l {walltime}
+#PBS -P {queue}
 
-    JOB=$PBS_ARRAY_INDEX
+JOB=$PBS_ARRAY_INDEX
 
-    modindexer dist_partitions {graph_path} $JOB {n_jobs} {n_samps} {results_folder}
+modindexer dist_partitions {graph_path} $JOB {n_jobs} {n_samps} {results_folder}
 
     """.format(**job_options)
 
@@ -86,12 +85,11 @@ def pbs_indexer(graph_path, seed, n_jobs, results_folder, walltime, request, spa
         cf.write(job_template)
 
     merge_template = """#!/bin/bash
-    #PBS -k oe
-    #PBS -l {request}
-    #PBS -l {walltime}
-    #PBS -P {queue}
+#PBS -l {request}
+#PBS -l {walltime}
+#PBS -P {queue}
 
-    modindexer merge {graph_path} {results_folder} --graph_name {graph_name} --cache_path {cache_path} --cache_name {cache_name}
+modindexer merge {graph_path} {results_folder} --graph_name {graph_name} --cache_path {cache_path} --cache_name {cache_name}
 
     """.format(**job_options)
 
