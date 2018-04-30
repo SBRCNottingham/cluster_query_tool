@@ -137,6 +137,15 @@ In practice, this is likely not the case for most subsets of $V$.
 Consequently we also use our approach to ask another question; \textit{How well related is $S$?}
 In order to answer these questions we focus on the set of high valued partitions of a given network detectable with the well known modularity maximisation algorithm.
 
+\begin{figure}[ht]
+    \includegraphics[width=0.45\textwidth]{images/search_space_3.png}
+    \caption{Modularity search space of an \textit{E. coli} metabolic network.
+ Distance between partitions is calculated using variation of information \cite{meilua2003comparing} and dimensionality reduction is performed using curvilinear component analysis \cite{demartines1997curvilinear}.
+  The inset (top) demonstrates the landscape of the high modularity region. 
+  Figure generated with the software of Good \textit{et al.}\cite{good2010performance}.}
+    \label{fig:modular_search_space}
+\end{figure}
+
 \section{Exploiting the modularity query space}
 To characterise latent community structure, one of the most popular approaches is to use modularity maximisation.
 The modularity quality function of a partition on a graph is given by the following equation \cite{newman2004}
@@ -151,15 +160,6 @@ In this study, the authors discovered that the modularity search space for many 
 Each of these solution partitions are extremely close to the global maxima, making it both difficult to find the optimal value of $Q$ and difficult to argue that the highest scoring partition is the ``true'' community structure.
 This fact is visually demonstrated with the software from \cite{good2010performance} in Figure \ref{fig:modular_search_space}, which shows the modularity search space of an \textit{E coli} metabolic network reconstruction \cite{GuimeraNature2005}.
 The similarity between the partitions is compared with variation of information measure \cite{meilua2003comparing} and dimensionality of the space is reduced with curvilinear component analysis \cite{demartines1997curvilinear}.
-
-\begin{figure}[ht]
-    \includegraphics[width=0.45\textwidth]{images/search_space_3.png}
-    \caption{Modularity search space of an \textit{E. coli} metabolic network.
- Distance between partitions is calculated using variation of information \cite{meilua2003comparing} and dimensionality reduction is performed using curvilinear component analysis \cite{demartines1997curvilinear}.
-  The inset (top) demonstrates the landscape of the high modularity region. 
-  Figure generated with the software of Good \textit{et al.}\cite{good2010performance}.}
-    \label{fig:modular_search_space}
-\end{figure}
 
 \begin{figure}[ht]
     \centering
@@ -240,17 +240,10 @@ To evaluate how our method performs we use the undirected, unweighted LFR benchm
 We test the area under the ROC curve (AUC) scores for networks synthetically generated with the LFR benchmark.
 In these tests, the community distribution is defined with a powerlaw coefficient of $-1.0$, the degree distribution is defined with a powerlaw coefficient of $-2.0$ and the number of nodes is stated.
 
-\textbf{Non-overlapping modules.} Figure \ref{fig:auc_no_overlap} represents tests on 100 networks with 1000 and 5000 nodes varying the mixing coefficient (number of edges between communities).
+\subsubsection{Non-overlapping modules.}
+Figure \ref{fig:auc_no_overlap} represents tests on 100 networks with 1000 and 5000 nodes varying the mixing coefficient (number of edges between communities).
 As one would expect, the prediction of the method drops off steeply where communities are less defined above a mixing coefficient of 0.6.
 Using larger seed sets also improves accuracy with some prediction of true communities being possible at extremely high levels of mixing.
-
-\textbf{Overlapping modules.} 
-In figure \ref{fig:auc_overlap} we show the results of network performance when tested against an increasing level of overlapping communities.
-For these tests we fix the mixing coefficient at $0.3$.
-Here, each vertex can belong to up to 4 communities.
-In order to test performance we varied the fraction of nodes that are in more than one community.
-Interestingly, the method still has an AUC score above 0.5 when all nodes are placed in multiple communities.
-This indicates that the method is capable of uncovering latent overlapping memberships even when given a relatively small number of seed nodes.
 
 \begin{figure*}[ht]
     \centering
@@ -270,6 +263,14 @@ This indicates that the method is capable of uncovering latent overlapping membe
      \label{fig:auc_no_overlap}
 \end{figure*}
 
+\subsubsection{Overlapping modules.} 
+In figure \ref{fig:auc_overlap} we show the results of network performance when tested against an increasing level of overlapping communities.
+For these tests we fix the mixing coefficient at $0.3$.
+Here, each vertex can belong to up to 4 communities.
+In order to test performance we varied the fraction of nodes that are in more than one community.
+Interestingly, the method still has an AUC score above 0.5 when all nodes are placed in multiple communities.
+This indicates that the method is capable of uncovering latent overlapping memberships even when given a relatively small number of seed nodes.
+
 \begin{figure*}[ht]
     \centering
     \begin{subfigure}[b]{0.48\textwidth}
@@ -288,6 +289,9 @@ This indicates that the method is capable of uncovering latent overlapping membe
      \label{fig:auc_overlap}
 \end{figure*}
 
+\subsubsection{Cluster significance}
+In this section we evaluate the method for testing labels to discover significant communities by comparing the scores to randomly selected communities.
+In order to do this, we 
 
 \subsection{Real networks}
 

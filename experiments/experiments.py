@@ -47,7 +47,7 @@ def get_benchmark(params, num_procs=4):
     return graph, communities, get_index(graph, num_procs=num_procs)
 
 
-def unique_sampler(node_set, sample_size, max_samples=96):
+def unique_sampler(node_set, sample_size, max_samples=120):
     sample_sets = set()
 
     # maximum number of samples
