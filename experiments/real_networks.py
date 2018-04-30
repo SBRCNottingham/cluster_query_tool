@@ -11,7 +11,7 @@ import os
 real_networks = {
     "arabidopsis_ppi": {
         "path": "data/arabidopsis_ppi/arabadopsis_ppi.edgelist",
-        "clusters": "data/arabidopsis_ppi/complexes.json",
+        "clusters": "data/arabidopsis_ppi/int_act_complexes.json",
         "index": "data/arabidopsis_ppi/index.json.xz",
         "node_type": "str",
     },
@@ -19,7 +19,7 @@ real_networks = {
         "path": "data/yeast_ppi/yeast.edgelist",
         "clusters": "data/yeast_ppi/yeast_ppi.json",
         "index": "data/yeast_ppi/index.json.xz",
-        "node_type":"str",
+        "node_type": "str",
     },
     "eu_email": {
         "path": "data/eu_email/network.txt",
@@ -134,23 +134,26 @@ def plot_roc_curve(roc_df, save_path):
     pass
 
 
-def generate_results(network):
+def generate_results(network, overwrite=False):
     dt = real_networks[network]
     graph, comms, mmatrix, nmap = load_network(dt["path"], network, dt["clusters"], dt["index"], dt["node_type"])
 
-    roc_results = get_rocs(mmatrix, nmap, comms)
-
     roc_df_path = os.path.join("results", graph.name) + "roc_res.json"
 
-    with open(roc_df_path, "w+") as roc_df:
-        json.dump(roc_results, roc_df)
+    if overwrite or not os.path.exists(roc_df_path):
+        roc_results = get_rocs(mmatrix, nmap, comms)
+        with open(roc_df_path, "w+") as roc_df:
+            json.dump(roc_results, roc_df)
 
     sign_df_path = os.path.join("results", graph.name) + "sign_res.json"
-    sigscores = get_community_significance_scores(mmatrix, nmap, comms)
 
-    with open(sign_df_path, "w+") as sig_df:
-        json.dump(sigscores, sig_df)
+    if overwrite or not os.path.exists(sign_df_path):
+        sigscores = get_community_significance_scores(mmatrix, nmap, comms)
+
+        with open(sign_df_path, "w+") as sig_df:
+            json.dump(sigscores, sig_df)
 
 
-for n in ["yeast_ppi", "eu_email"]:
-    generate_results(n)
+if __name__ == "__main__":
+    for n in real_networks:
+        generate_results(n)
