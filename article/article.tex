@@ -84,13 +84,11 @@ Perhaps the most popular of these methods is that of modularity maximisation \ci
 One limitation of partition based methods is that each vertex can only belong to a community.
 Overlapping methods have recently been applied to this problem in both \textit{crisp} \cite{ahn2010link, lancichinetti2011finding} and \textit{fuzzy} \cite{gregory2011fuzzy} based algorithms.
 
-
 In this paper, we do not seek to find a single ``best'' partition, either overlapping or not.
 Instead, we use the large number of highly modular solutions to form the index for a search query system.
 In essence, this is a method of semi-supervised learning that attempts to find items related given labelled sets of vertices using topology alone.
 Each high value partition, if statistically more modular than random, can be treated as information about the relationships between vertices.
 As the objective of community detection approaches is to relate information, it is assumed that some labelled meta-data can be used to find unlabelled, potentially related vertices.
-
 
 We propose an algorithm that pre-computes an index of clusterings for a given complex network, based on the fast greedy Louvain algorithm \cite{blondel2008fast}, used in a distributed manner.
 The detected clusters then form the basis of a searching algorithm that allows one to compute the relatedness of subsets of nodes.
@@ -128,27 +126,21 @@ Each of these solution partitions are extremely close to the global maxima, maki
 This fact is visually demonstrated with the software from \cite{good2010performance} in Figure \ref{fig:modular_search_space}, which shows the modularity search space of an \textit{E coli} metabolic network reconstruction \cite{GuimeraNature2005}.
 The similarity between the partitions is compared with variation of information measure \cite{meilua2003comparing} and dimensionality of the space is reduced with curvilinear component analysis \cite{demartines1997curvilinear}.
 
-\begin{figure*}
-\centering
-
-  \begin{subfigure}[ht]{0.4\textwidth}
-    \includegraphics[width=\textwidth]{images/search_space_3.png}
-    \caption{Modularity optimisation space of an \textit{E. coli} metabolic network.}
-    \label{fig:modular_search_space}
-  \end{subfigure}
-  \begin{subfigure}[ht]{0.58\textwidth}
-    \centering
-    \includegraphics[width=\textwidth]{images/meth_fig/fig1_desc.eps}
-    \caption{Outline of the proposed approach to querying networks by using multiple, high quality representations of modular networks.}
-    \label{fig:algorithm_outline}
-  \end{subfigure}
- \caption{
- Modularity search space of an \textit{E. coli} metabolic network.
+\begin{figure}[ht]
+    \includegraphics[width=0.45\textwidth]{images/search_space_3.png}
+    \caption{Modularity search space of an \textit{E. coli} metabolic network.
  Distance between partitions is calculated using variation of information \cite{meilua2003comparing} and dimensionality reduction is performed using curvilinear component analysis \cite{demartines1997curvilinear}.
   The inset (top) demonstrates the landscape of the high modularity region. 
-  Figure generated with the software of Good \textit{et al.}\cite{good2010performance}.
- }
-\end{figure*}
+  Figure generated with the software of Good \textit{et al.}\cite{good2010performance}.}
+    \label{fig:modular_search_space}
+\end{figure}
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.45\textwidth]{images/meth_fig/fig1_desc.eps}
+    \caption{Outline of the proposed approach to querying networks by using multiple, high quality representations of modular networks.}
+    \label{fig:algorithm_outline}
+\end{figure}
 
 In this work, we consider each high value partition to be information about latent relationships between vertices inferred through the topology of the network.
 This approach, in and of itself is not unique, as there have been previous approaches that use the consensus of an ensemble of clusters to create high quality overlapping clustering of networks \cite{lancichinetti2012consensus}.
@@ -217,13 +209,22 @@ Consequently, cross validation is either conducted on an exhaustive set of all p
 It should therefore be noted that presented receiver operator characteristic (ROC) scores are, therefore, dependent on community sizes.
 
 \subsection{Synthetic networks}
-In this section we test the method on a number benchmark networks constructed with a known, ground-truth community structure.
-To evaluate how our method performs we demonstrate results against two benchmark networks the conventionally used LFR benchmark \cite{lfr} for community detection algorithms.
+In this section we test the method on benchmark networks constructed with a known, ground-truth community structure.
+To evaluate how our method performs we use the undirected, unweighted LFR benchmark \cite{lancichinetti2008benchmark} in overlapping and non-overlapping forms.
 We test the area under the ROC curve (AUC) scores for networks synthetically generated with the LFR benchmark.
-The community distribution is defined with a powerlaw coefficient of $-1.0$ and the degree distribution is defined with a powerlaw coefficient of $-2.0$.
-\textbf{Non-overlapping modules.} Figure \ref{fig:auc_no_overlap} represents tests on 100 networks with different randomly selected seed nodes.
+In these tests, the community distribution is defined with a powerlaw coefficient of $-1.0$, the degree distribution is defined with a powerlaw coefficient of $-2.0$ and the number of nodes is stated.
+
+\textbf{Non-overlapping modules.} Figure \ref{fig:auc_no_overlap} represents tests on 100 networks with 1000 and 5000 nodes varying the mixing coefficient (number of edges between communities).
 As one would expect, the prediction of the method drops off steeply where communities are less defined above a mixing coefficient of 0.6.
 Using larger seed sets also improves accuracy with some prediction of true communities being possible at extremely high levels of mixing.
+
+\textbf{Overlapping modules.} 
+In figure \ref{fig:auc_overlap} we show the results of network performance when tested against an increasing level of overlapping communities.
+For these tests we fix the mixing coefficient at $0.3$.
+Here, each vertex can belong to up to 4 communities.
+In order to test performance we varied the fraction of nodes that are in more than one community.
+Interestingly, the method still has an AUC score above 0.5 when all nodes are placed in multiple communities.
+This indicates that the method is capable of uncovering latent overlapping memberships even when given a relatively small number of seed nodes.
 
 \begin{figure*}[ht]
     \centering
@@ -240,6 +241,7 @@ Using larger seed sets also improves accuracy with some prediction of true commu
     \caption{Non-overlapping community varying seed nodes on LFR networks with 1000 and 5000 nodes.
      Data points represent mean auc scores for all communities on 100 sampled networks at varying mixing coefficients.
      Error bars represent standard deviations.}
+     \label{fig:auc_no_overlap}
 \end{figure*}
 
 \begin{figure*}[ht]
@@ -251,12 +253,13 @@ Using larger seed sets also improves accuracy with some prediction of true commu
     \end{subfigure}
     \begin{subfigure}[b]{0.48\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{images/lfr_binary_overlap_auc_1000.eps}
+        \includegraphics[width=\textwidth]{images/lfr_binary_overlap_auc_5000.eps}
         \caption{5000 nodes}
     \end{subfigure}
     \caption{Overlapping community varying seed nodes on LFR networks with 1000 and 5000 nodes.
      Data points represent mean auc scores for all communities on 100 sampled networks at varying overlapping fraction of nodes.
      Error bars represent standard deviations.}
+     \label{fig:auc_overlap}
 \end{figure*}
 
 
@@ -266,7 +269,7 @@ Using larger seed sets also improves accuracy with some prediction of true commu
 \includegraphics[width=\textwidth]{images/ppi_example_combined.eps}
 \caption{An example of the GO term \textit{``SNAP receptor activity''} (16 nodes) on the \textit{Arabidopsis thaliana} protein-protein interaction network.
 (A) Shows the full network with 3 randomly chosen query nodes from the full query set.
-(B) Shows a reduced view of the network where a threshold is selected, reducing the network to 404 nodes.
+(B) Shows a reduced view of the network where a threshold of $\mu_i(S) > 0.8$ is selected, reducing the network to 404 nodes.
 Blue nodes indicate those in the randomly selected 3 query nodes, yellow the remaining nodes in the term and the shade of red relates to the strength of the relationship each node has to the query set.
 (C) Shows an example ROC curve from the cross validation described in the main text. 
 Based on 3 randomly selected query nodes containing this GO term.

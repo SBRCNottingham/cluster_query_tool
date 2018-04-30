@@ -169,6 +169,7 @@ def gen_figure(n):
         ax.errorbar(x_vals/ int(n), y_vals, yerr=y_err)
 
     ax.legend(loc=3)
+    fig.tight_layout()
     fig.savefig("article/images/lfr_binary_overlap_auc_{}.eps".format(n))
     fig.savefig("article/images/lfr_binary_overlap_auc_{}.svg".format(n))
     fig.savefig("article/images/lfr_binary_overlap_auc_{}.png".format(n))
