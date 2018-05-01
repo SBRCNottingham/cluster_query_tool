@@ -27,7 +27,7 @@ real_networks = {
     "ecoli_ppi": {
         "path": "data/ecoli_ppi/ecoli_ppi.edgelist",
         "clusters": "data/ecoli_ppi/ecoli_ppi.json",
-        "index": "data/eu_email/index.json.xz",
+        "index": "data/ecoli_ppi/index.json.xz",
         "node_type": "str",
     },
 
