@@ -10,7 +10,7 @@ import os
 
 real_networks = {
     "arabidopsis_ppi": {
-        "path": "data/arabidopsis_ppi/arabadopsis_ppi.edgelist",
+        "path": "data/arabidopsis_ppi/arabidopsis_ppi.edgelist",
         "clusters": "data/arabidopsis_ppi/int_act_complexes.json",
         "index": "data/arabidopsis_ppi/index.json.xz",
         "node_type": "str",
