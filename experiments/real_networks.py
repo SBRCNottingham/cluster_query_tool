@@ -181,4 +181,5 @@ def handle_results(network):
 if __name__ == "__main__":
     for n in real_networks:
         print(n)
-        generate_results(n)
+        #generate_results(n)
+        handle_results(n)
