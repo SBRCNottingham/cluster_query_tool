@@ -4,6 +4,7 @@ from cluster_query_tool.indexer import get_index
 from experiments import fast_auc, unique_sampler
 from joblib import Parallel, delayed, cpu_count
 import json
+import pickle
 from sklearn.metrics import roc_curve
 import numpy as np
 import os
@@ -148,21 +149,21 @@ def generate_results(network, overwrite=False):
     dt = real_networks[network]
     graph, comms, mmatrix, nmap = load_network(dt["path"], network, dt["clusters"], dt["index"], dt["node_type"])
 
-    roc_df_path = os.path.join("results", graph.name) + "_roc_res.json"
+    roc_df_path = os.path.join("results", graph.name) + "_roc_res.p"
 
     if overwrite or not os.path.exists(roc_df_path):
         print(network, "gen_roc_curves")
         roc_results = get_rocs(mmatrix, nmap, comms)
         with open(roc_df_path, "w+") as roc_df:
-            json.dump(roc_results, roc_df)
+            pickle.dump(roc_results, roc_df)
 
-    sign_df_path = os.path.join("results", graph.name) + "_sign_res.json"
+    sign_df_path = os.path.join("results", graph.name) + "_sign_res.p"
 
     if overwrite or not os.path.exists(sign_df_path):
         sigscores = get_community_significance_scores(mmatrix, nmap, comms)
         print(network, "gen_sig_scores")
         with open(sign_df_path, "w+") as sig_df:
-            json.dump(sigscores, sig_df)
+            pickle.dump(sigscores, sig_df)
 
 
 if __name__ == "__main__":
