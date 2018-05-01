@@ -10,12 +10,20 @@ import numpy as np
 import os
 import progressbar
 import pandas as pd
+import matplotlib.pyplot as plt
+from scipy import interp
 
 
 real_networks = {
     "arabidopsis_ppi": {
         "path": "data/arabidopsis_ppi/arabidopsis_ppi.edgelist",
         "clusters": "data/arabidopsis_ppi/int_act_complexes.json",
+        "index": "data/arabidopsis_ppi/index.json.xz",
+        "node_type": "str",
+    },
+    "arabidopsis_ppi_go_complexes": {
+        "path": "data/arabidopsis_ppi/arabidopsis_ppi.edgelist",
+        "clusters": "data/arabidopsis_ppi/go_complexes.json",
         "index": "data/arabidopsis_ppi/index.json.xz",
         "node_type": "str",
     },
@@ -129,7 +137,7 @@ def get_rocs(mmatrix, nmap, comms, seed_sizes=(1, 3, 7, 15)):
     return res
 
 
-def plot_roc_curve(roc_df, save_path):
+def plot_roc_curve(df, save_path):
     """
     Takes a dataframe of roc curves at different seeds and plots the mean roc curves
 
@@ -143,7 +151,51 @@ def plot_roc_curve(roc_df, save_path):
     :param save_path:
     :return:
     """
-    pass
+    colours = {
+        1: "b",
+        3: "g",
+        7: "y",
+        15: "m"
+    }
+
+    fig, ax = plt.subplots()
+    fig.set_dpi(90)
+
+    ax.set_xlabel("False positive rate")
+    ax.set_ylabel("True positive rate")
+
+    ax.set_xlim([0.0, 1.0])
+    ax.set_ylim([0.0, 1.01])
+    ax.plot(np.linspace(0, 1, 100), np.linspace(0, 1, 100), '--', color="#cccccc")
+
+    for s in df["seed"].unique():
+
+        sdf = df.loc[df["seed"] == s]
+
+        tprs = []
+        base_fpr = np.linspace(0, 1, 101)
+
+        for rid, row in sdf.iterrows():
+            tpr = interp(base_fpr, row["tpr"], row["fnr"])
+            tpr[0] = 0.0
+            tprs.append(tpr)
+
+        tprs = np.array(tprs)
+        mean_tprs = tprs.mean(axis=0)
+        std = tprs.std(axis=0)
+
+        tprs_upper = np.minimum(mean_tprs + std, 1)
+        tprs_lower = mean_tprs - std
+
+        label = "{} seed node(s) mean AUC: {:.2f} (std: {:.2f})".format(s, sdf.mean()["auc"], sdf.std()["auc"])
+
+        ax.plot(base_fpr, mean_tprs, color=colours[s], label=label)
+        ax.fill_between(base_fpr, tprs_lower, tprs_upper, color=colours[s], alpha=0.1)
+
+        ax.legend()
+
+    fig.tight_layout()
+    fig.save_fig(save_path)
 
 
 def generate_results(network, overwrite=False):

@@ -134,7 +134,7 @@ In practice, this is likely not the case for most subsets of $V$.
 Consequently we also use our approach to ask another question; \textit{How well related is $S$?}
 In order to answer these questions we focus on the set of high valued partitions of a given network detectable with the well known modularity maximisation algorithm.
 
-\begin{figure}[ht]
+\begin{figure}[t]
     \includegraphics[width=0.45\textwidth]{images/search_space_3.png}
     \caption{Modularity search space of an \textit{E. coli} metabolic network.
  Distance between partitions is calculated using variation of information \cite{meilua2003comparing} and dimensionality reduction is performed using curvilinear component analysis \cite{demartines1997curvilinear}.
@@ -158,7 +158,7 @@ Each of these solution partitions are extremely close to the global maxima, maki
 This fact is visually demonstrated with the software from \cite{good2010performance} in Figure \ref{fig:modular_search_space}, which shows the modularity search space of an \textit{E coli} metabolic network reconstruction \cite{GuimeraNature2005}.
 The similarity between the partitions is compared with variation of information measure \cite{meilua2003comparing} and dimensionality of the space is reduced with curvilinear component analysis \cite{demartines1997curvilinear}.
 
-\begin{figure}[ht]
+\begin{figure}[t]
     \centering
     \includegraphics[width=0.45\textwidth]{images/meth_fig/fig1_desc.eps}
     \caption{Outline of the proposed approach to querying networks by using multiple, high quality representations of modular networks.}
@@ -243,14 +243,14 @@ Figure \ref{fig:auc_no_overlap} represents tests on 100 networks with 1000 and 5
 As one would expect, the prediction of the method drops off steeply where communities are less defined above a mixing coefficient of 0.6.
 Using larger seed sets also improves accuracy with some prediction of true communities being possible at extremely high levels of mixing.
 
-\begin{figure*}[ht]
+\begin{figure}[t]
     \centering
-    \begin{subfigure}[b]{0.48\textwidth}
+    \begin{subfigure}[b]{0.23\textwidth}
         \centering
         \includegraphics[width=\textwidth]{images/lfr_binary_mo_overlap_auc_1000.eps}
         \caption{1000 nodes}
     \end{subfigure}
-    \begin{subfigure}[b]{0.48\textwidth}
+    \begin{subfigure}[b]{0.23\textwidth}
         \centering
         \includegraphics[width=\textwidth]{images/lfr_binary_mo_overlap_auc_5000.eps}
         \caption{5000 nodes}
@@ -259,7 +259,7 @@ Using larger seed sets also improves accuracy with some prediction of true commu
      Data points represent mean auc scores for all communities on 100 sampled networks at varying mixing coefficients.
      Error bars represent standard deviations.}
      \label{fig:auc_no_overlap}
-\end{figure*}
+\end{figure}
 
 \subsubsection{Overlapping modules.} 
 In figure \ref{fig:auc_overlap} we show the results of network performance when tested against an increasing level of overlapping communities.
@@ -269,14 +269,14 @@ In order to test performance we varied the fraction of nodes that are in more th
 Interestingly, the method still has an AUC score above 0.5 when all nodes are placed in multiple communities.
 This indicates that the method is capable of uncovering latent overlapping memberships even when given a relatively small number of seed nodes.
 
-\begin{figure*}[ht]
+\begin{figure}[t]
     \centering
-    \begin{subfigure}[b]{0.48\textwidth}
+    \begin{subfigure}[b]{0.23\textwidth}
         \centering
         \includegraphics[width=\textwidth]{images/lfr_binary_overlap_auc_1000.eps}
         \caption{1000 nodes}
     \end{subfigure}
-    \begin{subfigure}[b]{0.48\textwidth}
+    \begin{subfigure}[b]{0.23\textwidth}
         \centering
         \includegraphics[width=\textwidth]{images/lfr_binary_overlap_auc_5000.eps}
         \caption{5000 nodes}
@@ -285,12 +285,12 @@ This indicates that the method is capable of uncovering latent overlapping membe
      Data points represent mean auc scores for all communities on 100 sampled networks at varying overlapping fraction of nodes.
      Error bars represent standard deviations.}
      \label{fig:auc_overlap}
-\end{figure*}
+\end{figure}
 
 
 \subsection{Real networks}
 
-\begin{figure*}[ht]
+\begin{figure*}[t]
 \includegraphics[width=\textwidth]{images/ppi_example_combined.eps}
 \caption{An example of the GO term \textit{``SNAP receptor activity''} (16 nodes) on the \textit{Arabidopsis thaliana} protein-protein interaction network.
 (A) Shows the full network with 3 randomly chosen query nodes from the full query set.
@@ -313,12 +313,14 @@ The real networks used are listed as follows:
  The metadata community labels represent different departments within the organisation.
  In total there are 42 communities, 39 of which contain at least 3 nodes.
  
- \item \textbf{Yeast protein-protein interaction network (Yeast PPI)} \cite{yeast_ppi}
+ \item \textbf{Yeast protein-protein interaction network (Yeast PPI)} \cite{yu2008high}
  This dataset is a collection of recorded binary interactions between proteins collected with high-throughput yeast-2-hybrid assays.
- The metadata used are known, experimentally validated protein complexes from \cite{yeast_ppi_complexes}.
+ The metadata used are known, experimentally validated protein complexes from \cite{pu2008up}.
  The network contains 6222 nodes in the largest connected component, with 22,3868 edges.
  There are 409 experimentally validated protein complexes, 236 of which contain 3 or more nodes.
  The protein complexes are typically very small in terms of number of proteins with  90\% of the complexes containing less than 10 proteins and only 2 complexes containing 50 or more proteins.
+ 
+ \item \textbf{Arabidopsis protein-protein interaction network (Arabidopsis PPI)} \cite{ArabidopsisConsortium2011}
  
 \end{itemize}
 
