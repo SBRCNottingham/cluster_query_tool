@@ -320,60 +320,54 @@ The real networks used are listed as follows:
  There are 409 experimentally validated protein complexes, 236 of which contain 3 or more nodes.
  The protein complexes are typically very small in terms of number of proteins with  90\% of the complexes containing less than 10 proteins and only 2 complexes containing 50 or more proteins.
  
- \item \textbf{Arabidopsis protein-protein interaction network (Arabidopsis PPI)} \cite{ArabidopsisConsortium2011}
+ \item \textbf{\textit{Arabidopsis thaliana} protein-protein interaction network (Arabidopsis PPI)} \cite{ArabidopsisConsortium2011}
+ 
+ \item \textbf{\textit{Escherichia coli} protein-protein interaction network (E.coli PPI)}
  
 \end{itemize}
 
-% \begin{figure*}
-%      \centering
-%     \begin{subfigure}[b]{0.48\textwidth}
-%         \centering
-%         \includegraphics[width=\textwidth]{images/eu_roc_scores.eps}
-%         \caption{EU email departments}
-%     \end{subfigure}
-%     \begin{subfigure}[b]{0.48\textwidth}
-%         \centering
-%         \includegraphics[width=\textwidth]{images/yeast_ppi_roc_scores.eps}
-%         \caption{Yeast PPI protein complexes}
-%     \end{subfigure}
-%     \caption{Mean area under RO curve (AUC) scores from cross-validation performed on Metadata communities for networks described in Section \ref{sec:real_network_descs}.
-%     Dashed line indicates an AUC score of 0.5 (random chance).
-%     Communities are ordered by size.
-%     Error bars indicate standard deviation.
-%     }
-%     \label{fig:real_network_results}
-% \end{figure*}
+\begin{figure*}
+     \centering
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/rocs/eu_email.png}
+        \caption{EU email departments}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/rocs/yeast_ppi.png}
+        \caption{Yeast PPI protein complexes}
+    \end{subfigure}
+    
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/rocs/arabidopsis_ppi.png}
+        \caption{Arabidopsis PPI protein complexes}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/rocs/arabidopsis_ppi_go_complexes.png}
+        \caption{E coli PPI protein complexes}
+    \end{subfigure}
+    \caption{ROC scores for the high quality labels for real networks described in Section \ref{sec:real_network_descs}. 
+    Results represent the averages over all label sets.
+    Shaded areas indicate standard deviations.}
+    \label{fig:quality_label_rocs}
+\end{figure*}
 % 
 % 
-% \begin{figure*}
-%     \centering
-%     \begin{subfigure}[b]{0.48\textwidth}
-%         \centering
-%         \includegraphics[width=\textwidth]{images/eu_email_nodewise_roc.eps}
-%         \caption{EU email departments (986 nodes)}
-%     \end{subfigure}
-%     \begin{subfigure}[b]{0.48\textwidth}
-%         \centering
-%         \includegraphics[width=\textwidth]{images/yeast_ppi_nodewise_roc.eps}
-%         \caption{Yeast PPI protein complexes (1628 nodes)}
-%     \end{subfigure}
-%     \caption{Receiver Operator Characteristic curves for node communities.
-%     Dashed line indicates an AUC score of 0.5 (random chance).
-%     Represents mean, shaded area indicates standard deviation.
-%     }
-%     \label{fig:real_network_nodwise_classifiers}
-% \end{figure*}
-
 \subsubsection{High quality labels}
-We tested the method on each real network described in section \ref{sec:real_network_descs}.
-Figure \ref{fig:real_network_results} shows the mean ROC scores for each community in the relevant networks, organised by size of community at increasing numbers levels of query seed nodes.
-On the EU emails and Yeast PPI dataasets, for all communities tested with 3 or more nodes, mean AUC scores calculated with the cross validation method described in section \ref{sec:cross_validation} were above 0.6.
-There appeared to be no statistically significant improvements to using more than 3 seed nodes.
+In this section we observe the performance of our method on the real networks described in Section \ref{sec:real_network_descs} with high quality, gold standard, curated labels.
+For the EU Emails dataset, the communities relate to real departments of individuals.
+For the protein interaction datasets we used manually curated interaction sets.
+In the case of the Yeast this was taken from experimentally validated complexes  \cite{pu2008up}.
+For the \textit{E coli} dataset we used manually curated interacting proteins from \cite{}.
+For the Arabidopsis dataset, the complex sources were more limited.
+Consequently, the IntAct database was used with all protein complexes listed containing less than 10 proteins in total \cite{}.
 
-The classification for individual nodes is presented in Figure \ref{fig:real_network_nodwise_classifiers}.
-Here, binary classification is performed on each node for which community data is available.
-The $mu_i({i})$ score is used as a binary classifier.
-For the EU email and Yeast PPI the average ROC AUC score to classify node membership inside communities is 0.9 and 0.93, respectively.
+The results with varying number of seed nodes, for the cross validation procedure described in Section \ref{sec:cross_validation} are shown in Figure \ref{fig:quality_label_rocs}.
+These results represent ROC and AUC statistics 
+
 
 \subsubsection{Gene ontology data}
 \label{sec:go_labels}

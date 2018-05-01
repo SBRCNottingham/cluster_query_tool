@@ -23,6 +23,14 @@ real_networks = {
         "index": "data/arabidopsis_ppi/index.json.xz",
         "node_type": "str",
     },
+
+    "ecoli_ppi": {
+        "path": "data/ecoli_ppi/ecoli_ppi.edgelist",
+        "clusters": "data/ecoli_ppi/ecoli_ppi.json",
+        "index": "data/eu_email/index.json.xz",
+        "node_type": "str",
+    }
+
     "arabidopsis_ppi_go_complexes": {
         "path": "data/arabidopsis_ppi/arabidopsis_ppi.edgelist",
         "clusters": "data/arabidopsis_ppi/go_complexes.json",

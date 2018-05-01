@@ -1,0 +1,880 @@
+{
+    "24": [
+        "fusA", 
+        "murG", 
+        "nadE", 
+        "murF", 
+        "aroB", 
+        "murI"
+    ], 
+    "25": [
+        "yacL", 
+        "kefA", 
+        "fur", 
+        "hisL", 
+        "crp", 
+        "nusG"
+    ], 
+    "26": [
+        "rpmB", 
+        "yaiA", 
+        "yciA", 
+        "ubiG", 
+        "yfhM", 
+        "ytfL"
+    ], 
+    "27": [
+        "cyoD", 
+        "dmsA", 
+        "ynfF", 
+        "dmsB", 
+        "ynfG", 
+        "ynfI"
+    ], 
+    "20": [
+        "prsA", 
+        "lpxB", 
+        "yccR", 
+        "cobB", 
+        "recE", 
+        "ydgJ", 
+        "ligA"
+    ], 
+    "21": [
+        "yjgD", 
+        "fabI", 
+        "glnB", 
+        "yrbH", 
+        "yibA", 
+        "glpC", 
+        "trmH"
+    ], 
+    "22": [
+        "ybdF", 
+        "uvrA", 
+        "kdgR", 
+        "fis", 
+        "yiiL", 
+        "yebR", 
+        "yebV"
+    ], 
+    "23": [
+        "ybeX", 
+        "glxK", 
+        "tolR", 
+        "yniA", 
+        "rfaE", 
+        "mcrB", 
+        "ygfK"
+    ], 
+    "28": [
+        "narG", 
+        "narZ", 
+        "narY", 
+        "narH", 
+        "narJ", 
+        "narW"
+    ], 
+    "29": [
+        "hsdM", 
+        "uvrB", 
+        "hsdS", 
+        "hsdR", 
+        "gloB", 
+        "ubiD"
+    ], 
+    "4": [
+        "rpsU", 
+        "rplX", 
+        "rpsC", 
+        "rplA", 
+        "rpsF", 
+        "rplC", 
+        "rpsG", 
+        "rplU", 
+        "rplM", 
+        "rpsD", 
+        "rplO", 
+        "rplP", 
+        "rplB", 
+        "rplT", 
+        "rplS", 
+        "rpsI", 
+        "rpsK", 
+        "rpsM", 
+        "rplE", 
+        "rplD", 
+        "rplI", 
+        "rpmC", 
+        "rplF", 
+        "ydcM", 
+        "srlR", 
+        "ygcP", 
+        "yhbC", 
+        "nikE"
+    ], 
+    "8": [
+        "dnaN", 
+        "msyB", 
+        "ycfF", 
+        "trxA", 
+        "zwf", 
+        "hda", 
+        "murA", 
+        "yghA", 
+        "yhbH", 
+        "yieF", 
+        "yifE", 
+        "cyaY", 
+        "yjdC", 
+        "yjjX"
+    ], 
+    "59": [
+        "mltD", 
+        "ycjF", 
+        "ydiO"
+    ], 
+    "58": [
+        "accA", 
+        "accD", 
+        "ppiC"
+    ], 
+    "55": [
+        "atpD", 
+        "macA", 
+        "cirA"
+    ], 
+    "54": [
+        "rpsJ", 
+        "yciU", 
+        "lepA"
+    ], 
+    "57": [
+        "panC", 
+        "ushA", 
+        "aphA"
+    ], 
+    "56": [
+        "rho", 
+        "yiiM", 
+        "yjiM"
+    ], 
+    "51": [
+        "pepB", 
+        "fabH", 
+        "pepE", 
+        "pepA"
+    ], 
+    "50": [
+        "yibO", 
+        "ygiT", 
+        "frvX", 
+        "pyrI"
+    ], 
+    "53": [
+        "secA", 
+        "minD", 
+        "yjjK"
+    ], 
+    "52": [
+        "hemY", 
+        "phnJ", 
+        "phnI", 
+        "phnK"
+    ], 
+    "88": [
+        "napD", 
+        "pta", 
+        "yjgH"
+    ], 
+    "89": [
+        "hyfG", 
+        "hycE", 
+        "hypC"
+    ], 
+    "82": [
+        "yneI", 
+        "potE", 
+        "yeaW"
+    ], 
+    "83": [
+        "gloA", 
+        "speA", 
+        "nikA"
+    ], 
+    "80": [
+        "ydaM", 
+        "yncH", 
+        "yddW"
+    ], 
+    "81": [
+        "ynaF", 
+        "yohF", 
+        "sms"
+    ], 
+    "86": [
+        "yebG", 
+        "iscS", 
+        "yedD"
+    ], 
+    "87": [
+        "yegU", 
+        "yegV", 
+        "yffS"
+    ], 
+    "84": [
+        "ydiA", 
+        "rluD", 
+        "pepQ"
+    ], 
+    "85": [
+        "manX", 
+        "rpoS", 
+        "rpoN"
+    ], 
+    "3": [
+        "mogA", 
+        "dnaK", 
+        "entB", 
+        "grpE", 
+        "rpmG", 
+        "ompC", 
+        "cbpA", 
+        "ybaX", 
+        "gadB", 
+        "ybiB", 
+        "serC", 
+        "helD", 
+        "yccD", 
+        "hscA", 
+        "yceA", 
+        "eno", 
+        "ydjL", 
+        "gadA", 
+        "ydhR", 
+        "katE", 
+        "ruvB", 
+        "yfeU", 
+        "iscU", 
+        "trxC", 
+        "ygaG", 
+        "xni", 
+        "fbaA", 
+        "yqhD", 
+        "yhbW", 
+        "rpe", 
+        "rpoH", 
+        "qor", 
+        "rph", 
+        "aspA"
+    ], 
+    "7": [
+        "rpsB", 
+        "rpsP", 
+        "rplR", 
+        "rpsA", 
+        "ybaK", 
+        "ybeA", 
+        "infA", 
+        "glmM", 
+        "pncB", 
+        "ffh", 
+        "yejL", 
+        "cca", 
+        "rrmJ", 
+        "trpS", 
+        "hslR", 
+        "uvrD"
+    ], 
+    "39": [
+        "yfcX", 
+        "yfcY", 
+        "yfgK", 
+        "ypdD", 
+        "yffL"
+    ], 
+    "38": [
+        "cheY", 
+        "parE", 
+        "cheW", 
+        "yfcD", 
+        "fimB"
+    ], 
+    "33": [
+        "tig", 
+        "yfcB", 
+        "pykA", 
+        "purC", 
+        "kdtA"
+    ], 
+    "32": [
+        "galF", 
+        "galU", 
+        "gatD", 
+        "yfaY", 
+        "yfbR", 
+        "ypdB"
+    ], 
+    "31": [
+        "pflB", 
+        "ycbJ", 
+        "tpiA", 
+        "rimJ", 
+        "yfiD", 
+        "yieM"
+    ], 
+    "30": [
+        "cspE", 
+        "serS", 
+        "cspI", 
+        "cspG", 
+        "cspB", 
+        "cspA"
+    ], 
+    "37": [
+        "yqjD", 
+        "ygaM", 
+        "ndh", 
+        "elaB", 
+        "sspB"
+    ], 
+    "36": [
+        "yciR", 
+        "tldD", 
+        "pmbA", 
+        "yedP", 
+        "argR"
+    ], 
+    "35": [
+        "pgk", 
+        "rimI", 
+        "pstS", 
+        "udp", 
+        "glpK"
+    ], 
+    "34": [
+        "hupB", 
+        "rdgC", 
+        "seqA", 
+        "himA", 
+        "malQ"
+    ], 
+    "60": [
+        "yafA", 
+        "yaeB", 
+        "crr"
+    ], 
+    "61": [
+        "proA", 
+        "pepT", 
+        "yihI"
+    ], 
+    "62": [
+        "smpB", 
+        "ycbB", 
+        "prfC"
+    ], 
+    "63": [
+        "lon", 
+        "nfo", 
+        "secB"
+    ], 
+    "64": [
+        "hns", 
+        "ydgT", 
+        "stpA"
+    ], 
+    "65": [
+        "citB", 
+        "cysB", 
+        "fadA"
+    ], 
+    "66": [
+        "ybeD", 
+        "tyrS", 
+        "yejK"
+    ], 
+    "67": [
+        "leuS", 
+        "prfB", 
+        "prfA"
+    ], 
+    "68": [
+        "ompA", 
+        "wbbK", 
+        "rfaB"
+    ], 
+    "69": [
+        "nei", 
+        "nfi", 
+        "hflB"
+    ], 
+    "2": [
+        "aceE", 
+        "lpxC", 
+        "yafM", 
+        "-", 
+        "ybbK", 
+        "ybbF", 
+        "renD", 
+        "fepB", 
+        "ybdR", 
+        "ybhK", 
+        "ybhF", 
+        "tnaA", 
+        "dps", 
+        "ybiW", 
+        "cydC", 
+        "cydD", 
+        "ftsK", 
+        "ycaK", 
+        "ycgF", 
+        "alr", 
+        "treA", 
+        "yciT", 
+        "yciW", 
+        "ogt", 
+        "-", 
+        "ynfB", 
+        "nth", 
+        "ydhX", 
+        "ydjI", 
+        "yeaO", 
+        "znuC", 
+        "fliI", 
+        "dcm", 
+        "wcaE", 
+        "folC", 
+        "ypfH", 
+        "yfgC", 
+        "recO", 
+        "hypF", 
+        "hycI", 
+        "hypA", 
+        "yraN", 
+        "nlpI", 
+        "yhcO", 
+        "yhdA", 
+        "yheT", 
+        "dam", 
+        "aldB", 
+        "yidH", 
+        "gidB", 
+        "tatB", 
+        "tatC", 
+        "trmA", 
+        "zraS", 
+        "dnaB", 
+        "dnaC", 
+        "yjhT"
+    ], 
+    "6": [
+        "tuf", 
+        "metK", 
+        "lexA", 
+        "yadF", 
+        "tsf", 
+        "yaeQ", 
+        "metN", 
+        "clpX", 
+        "clpB", 
+        "yodC", 
+        "yfbQ", 
+        "hscB", 
+        "era", 
+        "ygeV", 
+        "yheS", 
+        "hslO", 
+        "yidA", 
+        "ubiE", 
+        "cutA", 
+        "mutL"
+    ], 
+    "99": [
+        "yjbH", 
+        "yjgF", 
+        "tdcF"
+    ], 
+    "98": [
+        "hslU", 
+        "metE", 
+        "hslV"
+    ], 
+    "91": [
+        "hypB", 
+        "prpD", 
+        "yfeA"
+    ], 
+    "90": [
+        "ygaD", 
+        "gltA", 
+        "dcrB"
+    ], 
+    "93": [
+        "recD", 
+        "recC", 
+        "recB"
+    ], 
+    "92": [
+        "hypE", 
+        "hybG", 
+        "ybjD"
+    ], 
+    "95": [
+        "uxaA", 
+        "yidR", 
+        "sbm"
+    ], 
+    "94": [
+        "exbB", 
+        "adhE", 
+        "pykF"
+    ], 
+    "97": [
+        "yiiT", 
+        "uspA", 
+        "adiY"
+    ], 
+    "96": [
+        "nanE", 
+        "hipB", 
+        "birA"
+    ], 
+    "11": [
+        "yabB", 
+        "lpdA", 
+        "yadB", 
+        "ybeB", 
+        "plsX", 
+        "uvrY", 
+        "intS", 
+        "fucU", 
+        "ygeR", 
+        "ilvB", 
+        "yjeF", 
+        "yjhP"
+    ], 
+    "10": [
+        "rpoC", 
+        "hepA", 
+        "nusA", 
+        "rpoA", 
+        "rpsO", 
+        "rpoZ", 
+        "rpoB", 
+        "cedA", 
+        "rpoD", 
+        "usg", 
+        "greA", 
+        "greB"
+    ], 
+    "13": [
+        "rfaD", 
+        "maa", 
+        "ybjQ", 
+        "ribC", 
+        "yoaB", 
+        "menB", 
+        "ispF", 
+        "ygfU", 
+        "ubiH", 
+        "yrbI", 
+        "coaD"
+    ], 
+    "12": [
+        "rpsT", 
+        "rpsE", 
+        "rpsN", 
+        "rpsH", 
+        "rpsR", 
+        "thiI", 
+        "rpsS", 
+        "yohI", 
+        "iclR", 
+        "yjeB", 
+        "yjfQ"
+    ], 
+    "15": [
+        "ssb", 
+        "rnhA", 
+        "topB", 
+        "ruvA", 
+        "sbcB", 
+        "recQ", 
+        "nudG", 
+        "ubiB", 
+        "recG", 
+        "priA"
+    ], 
+    "14": [
+        "dnaE", 
+        "dnaX", 
+        "holA", 
+        "dnaQ", 
+        "holB", 
+        "nusB", 
+        "holC", 
+        "yoaA", 
+        "holE", 
+        "holD", 
+        "trmD"
+    ], 
+    "17": [
+        "rplV", 
+        "moaC", 
+        "sufS", 
+        "ydiZ", 
+        "ynjB", 
+        "yhfA", 
+        "yhjD", 
+        "ytfE"
+    ], 
+    "16": [
+        "aceF", 
+        "malP", 
+        "yafV", 
+        "ybfF", 
+        "yccK", 
+        "ppk", 
+        "intA", 
+        "yjiE"
+    ], 
+    "19": [
+        "rplL", 
+        "mraW", 
+        "htpG", 
+        "lolA", 
+        "pth", 
+        "yjeQ", 
+        "yjiN"
+    ], 
+    "18": [
+        "ybgC", 
+        "fabB", 
+        "acpP", 
+        "ribF", 
+        "acpS", 
+        "aas", 
+        "glmU", 
+        "plsB"
+    ], 
+    "48": [
+        "yncB", 
+        "ytfG", 
+        "yjgK", 
+        "yjgR"
+    ], 
+    "49": [
+        "fdnG", 
+        "fdhE", 
+        "fdnH", 
+        "fdoG"
+    ], 
+    "46": [
+        "yccV", 
+        "yhhX", 
+        "yheN", 
+        "yhhW"
+    ], 
+    "47": [
+        "yciF", 
+        "ucpA", 
+        "yebO", 
+        "gldA"
+    ], 
+    "44": [
+        "ybaZ", 
+        "lysS", 
+        "tdcD", 
+        "idnD"
+    ], 
+    "45": [
+        "ybaS", 
+        "yccS", 
+        "-", 
+        "arcA"
+    ], 
+    "42": [
+        "guaC", 
+        "pepD", 
+        "pepP", 
+        "dhaK"
+    ], 
+    "43": [
+        "yaiB", 
+        "ydfG", 
+        "ycjX", 
+        "ydiJ"
+    ], 
+    "40": [
+        "dnaJ", 
+        "ptsP", 
+        "ybgI", 
+        "glyQ"
+    ], 
+    "41": [
+        "tuf", 
+        "dxs", 
+        "mutS", 
+        "yhhF"
+    ], 
+    "1": [
+        "rsuA", 
+        "rplQ", 
+        "hfq", 
+        "yadG", 
+        "ftn", 
+        "lpxD", 
+        "yciL", 
+        "pssA", 
+        "fabZ", 
+        "tgt", 
+        "ycbY", 
+        "yfiF", 
+        "deaD", 
+        "ybcJ", 
+        "pcnB", 
+        "rmf", 
+        "rne", 
+        "rluC", 
+        "srmB", 
+        "ygiF", 
+        "pnp", 
+        "yhiR", 
+        "rhlB", 
+        "rnr", 
+        "aidB", 
+        "ycaO", 
+        "ybeZ", 
+        "ybjX", 
+        "cspD", 
+        "cspC", 
+        "yhbY", 
+        "spoT", 
+        "himD", 
+        "yccW", 
+        "yjiC", 
+        "hrpA", 
+        "ymfC", 
+        "yncE", 
+        "yibL", 
+        "dacA", 
+        "rplY", 
+        "dapF", 
+        "ygiQ", 
+        "ydcP", 
+        "selB", 
+        "ydiI", 
+        "rhlE", 
+        "uvrC", 
+        "yedO", 
+        "yeeX", 
+        "rcsA", 
+        "rpmA", 
+        "yfbU", 
+        "yfdH", 
+        "yfgB", 
+        "ygdP", 
+        "ynbC", 
+        "yggE", 
+        "yggH", 
+        "ymcA", 
+        "rng", 
+        "rpsQ", 
+        "rnpA", 
+        "yiiU", 
+        "yjgA"
+    ], 
+    "5": [
+        "murE", 
+        "ftsE", 
+        "murC", 
+        "groEL", 
+        "ftsA", 
+        "murB", 
+        "yafD", 
+        "yafZ", 
+        "ybbN", 
+        "moaA", 
+        "flgK", 
+        "ycfV", 
+        "ychK", 
+        "sapF", 
+        "ydjQ", 
+        "rfbC", 
+        "fbaB", 
+        "ypfI", 
+        "yqaB", 
+        "mazG", 
+        "iciA", 
+        "yrbF", 
+        "yhbJ", 
+        "recF", 
+        "yjjU"
+    ], 
+    "9": [
+        "add", 
+        "gatY", 
+        "nuoC", 
+        "pstB", 
+        "malK", 
+        "ftsZ", 
+        "malT", 
+        "gatZ", 
+        "mreB", 
+        "gatB", 
+        "ibpB", 
+        "ibpA", 
+        "gatA"
+    ], 
+    "77": [
+        "ymdB", 
+        "rncS", 
+        "rnb"
+    ], 
+    "76": [
+        "ypeA", 
+        "yfcE", 
+        "yfeX"
+    ], 
+    "75": [
+        "wrbA", 
+        "chaB", 
+        "hybD"
+    ], 
+    "74": [
+        "hyaE", 
+        "hyaD", 
+        "yghF"
+    ], 
+    "73": [
+        "ycbX", 
+        "cysI", 
+        "cysJ"
+    ], 
+    "72": [
+        "mukE", 
+        "mukF", 
+        "mukB"
+    ], 
+    "71": [
+        "moaE", 
+        "moaD", 
+        "mobB"
+    ], 
+    "70": [
+        "sucA", 
+        "lipA", 
+        "sucB"
+    ], 
+    "79": [
+        "infC", 
+        "yaaW", 
+        "dnaA"
+    ], 
+    "78": [
+        "sufC", 
+        "sufD", 
+        "sufB"
+    ]
+}
