@@ -7,6 +7,8 @@ import json
 from sklearn.metrics import roc_curve
 import numpy as np
 import os
+import progressbar
+
 
 real_networks = {
     "arabidopsis_ppi": {
@@ -116,7 +118,8 @@ def get_rocs(mmatrix, nmap, comms, seed_sizes=(1, 3, 7, 15)):
     """
 
     res = []
-    for cid, comm in comms.items():
+
+    for cid, comm in progressbar.progressbar(comms.items()):
         cnodes = map_com(comm, nmap)
         for s in seed_sizes:
             if len(comm) > s:
