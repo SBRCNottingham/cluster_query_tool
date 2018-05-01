@@ -210,7 +210,7 @@ def generate_results(network, overwrite=False):
         with open(roc_df_path, "wb+") as roc_df:
             pickle.dump(roc_results, roc_df)
 
-    sign_df_path = os.path.join("results", graph.name) + "_sign_res.p"
+    sign_df_path = os.path.join("results", network) + "_sign_res.p"
 
     if overwrite or not os.path.exists(sign_df_path):
         graph, comms, mmatrix, nmap = load_network(dt["path"], network, dt["clusters"], dt["index"], dt["node_type"])
