@@ -52,7 +52,14 @@ def load_network(graph_path, graph_name, communities_path, index_path, node_type
 
     index = get_index(graph, cache_location=index_path)
     mmatrix, nmap = louvain_consensus.membership_matrix(list(graph.nodes()), index)
-    return graph, comms, mmatrix, nmap
+
+    rcomms = dict()
+    for c in comms:
+        nc = [x for c in comms[c] if x in nmap]
+        if len(nc) > 2:
+            rcomms[c] = nc
+
+    return graph, rcomms, mmatrix, nmap
 
 
 def comm_significance(cid, comm, membership_matrix):
