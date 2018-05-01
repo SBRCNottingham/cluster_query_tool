@@ -195,16 +195,16 @@ def plot_roc_curve(df, save_path):
         ax.legend()
 
     fig.tight_layout()
-    fig.save_fig(save_path)
+    fig.savefig(save_path)
 
 
 def generate_results(network, overwrite=False):
     dt = real_networks[network]
-    graph, comms, mmatrix, nmap = load_network(dt["path"], network, dt["clusters"], dt["index"], dt["node_type"])
 
-    roc_df_path = os.path.join("results", graph.name) + "_roc_res.p"
+    roc_df_path = os.path.join("results", network) + "_roc_res.p"
 
     if overwrite or not os.path.exists(roc_df_path):
+        graph, comms, mmatrix, nmap = load_network(dt["path"], network, dt["clusters"], dt["index"], dt["node_type"])
         print(network, "gen_roc_curves")
         roc_results = get_rocs(mmatrix, nmap, comms)
         with open(roc_df_path, "wb+") as roc_df:
@@ -213,10 +213,11 @@ def generate_results(network, overwrite=False):
     sign_df_path = os.path.join("results", graph.name) + "_sign_res.p"
 
     if overwrite or not os.path.exists(sign_df_path):
+        graph, comms, mmatrix, nmap = load_network(dt["path"], network, dt["clusters"], dt["index"], dt["node_type"])
         sigscores = get_community_significance_scores(mmatrix, nmap, comms)
         print(network, "gen_sig_scores")
         with open(sign_df_path, "wb+") as sig_df:
-            pickle.dump(sigscores, sig_df)
+           pickle.dump(sigscores, sig_df)
 
 
 def handle_results(network):
@@ -227,15 +228,17 @@ def handle_results(network):
     with open(roc_df_path, "rb") as rf:
         results = pickle.load(rf)
 
-    headings = ["cid", "s", "tpr", "fnr", "auc"]
+    headings = ["cid", "seed", "tpr", "fnr", "auc"]
 
-    df = pd.DataFrame(results, names=headings)
-
+    df = pd.DataFrame(results, columns=headings)
+    plot_roc_curve(df, "article/images/rocs/{}.png".format(network))
+    plot_roc_curve(df, "article/images/rocs/{}.svg".format(network))
+    plot_roc_curve(df, "article/images/rocs/{}.eps".format(network))
     return df
 
 
 if __name__ == "__main__":
     for n in real_networks:
         print(n)
-        #generate_results(n)
+        generate_results(n)
         handle_results(n)
