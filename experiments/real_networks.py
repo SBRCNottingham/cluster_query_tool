@@ -81,8 +81,8 @@ def get_community_significance_scores(mmatrix, nmap, comms):
     :param comms:
     :return:
     """
-    jobs = (delayed(comm_significance)(cid, map_com(comm, nmap), mmatrix) for cid, comm in comms.items())
-    sign = Parallel(n_jobs=cpu_count())(jobs)
+    sign = Parallel(n_jobs=cpu_count())(delayed(comm_significance)(cid, map_com(comm, nmap), mmatrix)
+                                        for cid, comm in comms.items())
     return dict(sign)
 
 
@@ -164,6 +164,18 @@ def generate_results(network, overwrite=False):
         print(network, "gen_sig_scores")
         with open(sign_df_path, "wb+") as sig_df:
             pickle.dump(sigscores, sig_df)
+
+
+def handle_results(network):
+
+    dt = real_networks[network]
+    graph, comms, mmatrix, nmap = load_network(dt["path"], network, dt["clusters"], dt["index"], dt["node_type"])
+
+    roc_df_path = os.path.join("results", graph.name) + "_roc_res.p"
+    with open(roc_df_path, "rb") as rf:
+        results = pickle.load(rf)
+
+    print(np.mean([r[4] for r in results]))
 
 
 if __name__ == "__main__":
