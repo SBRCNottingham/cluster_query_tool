@@ -9,6 +9,7 @@ from sklearn.metrics import roc_curve
 import numpy as np
 import os
 import progressbar
+import pandas as pd
 
 
 real_networks = {
@@ -169,13 +170,16 @@ def generate_results(network, overwrite=False):
 def handle_results(network):
 
     dt = real_networks[network]
-    graph, comms, mmatrix, nmap = load_network(dt["path"], network, dt["clusters"], dt["index"], dt["node_type"])
 
-    roc_df_path = os.path.join("results", graph.name) + "_roc_res.p"
+    roc_df_path = os.path.join("results", network) + "_roc_res.p"
     with open(roc_df_path, "rb") as rf:
         results = pickle.load(rf)
 
-    print(np.mean([r[4] for r in results]))
+    headings = ["cid", "s", "tpr", "fnr", "auc"]
+
+    df = pd.DataFrame(results, names=headings)
+
+    return df
 
 
 if __name__ == "__main__":
