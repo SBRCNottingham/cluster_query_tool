@@ -29,7 +29,7 @@ real_networks = {
         "clusters": "data/ecoli_ppi/ecoli_ppi.json",
         "index": "data/eu_email/index.json.xz",
         "node_type": "str",
-    }
+    },
 
     "arabidopsis_ppi_go_complexes": {
         "path": "data/arabidopsis_ppi/arabidopsis_ppi.edgelist",
