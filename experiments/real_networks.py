@@ -55,7 +55,7 @@ def load_network(graph_path, graph_name, communities_path, index_path, node_type
 
     rcomms = dict()
     for c in comms:
-        nc = [x for c in comms[c] if x in nmap]
+        nc = [x for x in comms[c] if x in nmap]
         if len(nc) > 2:
             rcomms[c] = nc
 
