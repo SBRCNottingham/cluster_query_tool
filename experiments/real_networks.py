@@ -141,6 +141,7 @@ def generate_results(network, overwrite=False):
     roc_df_path = os.path.join("results", graph.name) + "roc_res.json"
 
     if overwrite or not os.path.exists(roc_df_path):
+        print(network, "gen_roc_curves")
         roc_results = get_rocs(mmatrix, nmap, comms)
         with open(roc_df_path, "w+") as roc_df:
             json.dump(roc_results, roc_df)
@@ -149,11 +150,12 @@ def generate_results(network, overwrite=False):
 
     if overwrite or not os.path.exists(sign_df_path):
         sigscores = get_community_significance_scores(mmatrix, nmap, comms)
-
+        print(network, "gen_sig_scores")
         with open(sign_df_path, "w+") as sig_df:
             json.dump(sigscores, sig_df)
 
 
 if __name__ == "__main__":
     for n in real_networks:
+        print(n)
         generate_results(n)
