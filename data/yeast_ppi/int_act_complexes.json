@@ -1,0 +1,3800 @@
+{
+    "CPX-1355": [
+        "YHR154W",
+        "YLR135W",
+        "YBR228W"
+    ],
+    "CPX-1362": [
+        "YML095C",
+        "YLR135W",
+        "YPL022W"
+    ],
+    "CPX-1363": [
+        "YAL027W",
+        "YPL022W",
+        "YML095C"
+    ],
+    "CPX-1369": [
+        "YGR009C",
+        "YMR183C"
+    ],
+    "CPX-1278": [
+        "YNL015W",
+        "YLR043C"
+    ],
+    "CPX-1283": [
+        "YHR204W",
+        "YCL043C"
+    ],
+    "CPX-1288": [
+        "YPL121C",
+        "YHR079C-A"
+    ],
+    "CPX-1292": [
+        "YHR157W",
+        "YLR329W"
+    ],
+    "CPX-1294": [
+        "YML091C"
+    ],
+    "CPX-1260": [
+        "YKL193C",
+        "YER133W",
+        "YFR003C"
+    ],
+    "CPX-1293": [
+        "YFL018C",
+        "YDR148C",
+        "YIL125W",
+        "YFR049W"
+    ],
+    "CPX-1304": [
+        "YOR326W",
+        "YCL063W",
+        "YEL013W"
+    ],
+    "CPX-1274": [
+        "YGR216C",
+        "YPL076W",
+        "YPL175W",
+        "YNL038W",
+        "YDR437W",
+        "YPL096C-A"
+    ],
+    "CPX-1280": [
+        "YLR207W",
+        "YJL034W",
+        "YDR057W"
+    ],
+    "CPX-1268": [
+        "YDR019C",
+        "YMR189W",
+        "YAL044C",
+        "YFL018C"
+    ],
+    "CPX-1302": [
+        "YPR075C",
+        "YGR014W"
+    ],
+    "CPX-1185": [
+        "YOR173W",
+        "YLR270W"
+    ],
+    "CPX-301": [
+        "YDR255C",
+        "YBR105C",
+        "YIL017C",
+        "YCL039W",
+        "YMR135C",
+        "YIL097W",
+        "YGL227W"
+    ],
+    "CPX-1893": [
+        "YHR148W",
+        "YJR002W",
+        "YNL075W"
+    ],
+    "CPX-1894": [
+        "YIL071C",
+        "YJR084W",
+        "YDR179C",
+        "YMR025W",
+        "YOL117W",
+        "YDL216C"
+    ],
+    "CPX-1895": [
+        "YDR228C",
+        "YGL044C",
+        "YMR061W",
+        "YOR250C"
+    ],
+    "CPX-1896": [
+        "YDR228C",
+        "YOR250C",
+        "YGL044C",
+        "YOL123W",
+        "YMR061W"
+    ],
+    "CPX-1892": [
+        "YMR150C",
+        "YIL154C",
+        "YEL059C-A"
+    ],
+    "CPX-2944": [
+        "YLR274W",
+        "YBR202W",
+        "YEL032W",
+        "YPR019W",
+        "YGL201C",
+        "YBL023C"
+    ],
+    "CPX-1188": [
+        "YGL113W",
+        "YKL108W",
+        "YJL090C"
+    ],
+    "CPX-2091": [
+        "YBL035C",
+        "YIR008C",
+        "YNL102W",
+        "YKL045W"
+    ],
+    "CPX-2101": [
+        "YDL102W",
+        "YJR006W",
+        "YJR043C"
+    ],
+    "CPX-2110": [
+        "YNL262W",
+        "YBR278W",
+        "YPR175W",
+        "YDR121W"
+    ],
+    "CPX-325": [
+        "YNL191W",
+        "YNL191W",
+        "YBR281C",
+        "YBR281C"
+    ],
+    "CPX-1162": [
+        "YKL182W",
+        "YPL231W"
+    ],
+    "CPX-473": [
+        "YPR133W-A",
+        "YMR203W",
+        "YNL070W",
+        "YOR045W",
+        "YNL131W"
+    ],
+    "CPX-474": [
+        "YPR133W-A",
+        "YMR203W",
+        "YNL070W",
+        "YNL131W",
+        "YGR082W",
+        "YNL121C",
+        "YOR045W"
+    ],
+    "CPX-675": [
+        "YHR099W",
+        "YBR081C",
+        "YBR198C",
+        "YDR176W",
+        "YGR252W",
+        "YDR392W",
+        "YGL112C",
+        "YPL254W",
+        "YDR145W",
+        "YOL148C",
+        "YDR448W",
+        "YER164W",
+        "YGL066W",
+        "YDR167W",
+        "YMR236W",
+        "YGL252C",
+        "YMR223W"
+    ],
+    "CPX-734": [
+        "YGL133W",
+        "YOR304W"
+    ],
+    "CPX-962": [
+        "YGL116W",
+        "YJL030W"
+    ],
+    "CPX-582": [
+        "YMR261C",
+        "YDR074W",
+        "YBR126C"
+    ],
+    "CPX-583": [
+        "YBR126C",
+        "YDR074W",
+        "YML100W"
+    ],
+    "CPX-607": [
+        "YIL062C",
+        "YJR065C",
+        "YNR035C",
+        "YLR370C",
+        "YDL029W",
+        "YKL013C",
+        "YBR234C"
+    ],
+    "CPX-769": [
+        "YIL035C",
+        "YOR039W",
+        "YGL019W"
+    ],
+    "CPX-770": [
+        "YOR061W",
+        "YGL019W",
+        "YOR039W"
+    ],
+    "CPX-771": [
+        "YGL019W",
+        "YCL031C",
+        "YGR090W",
+        "YOR039W",
+        "YIL035C"
+    ],
+    "CPX-772": [
+        "YOR039W",
+        "YCL031C",
+        "YGR090W",
+        "YOR061W",
+        "YGL019W",
+        "YIL035C"
+    ],
+    "CPX-776": [
+        "YOR061W",
+        "YOR039W",
+        "YGL019W",
+        "YGR090W",
+        "YCL031C",
+        "YLR223C"
+    ],
+    "CPX-780": [
+        "YKL154W",
+        "YDR292C"
+    ],
+    "CPX-782": [
+        "YPR131C",
+        "YOL076W"
+    ],
+    "CPX-783": [
+        "YHR013C",
+        "YOR253W",
+        "YDL040C"
+    ],
+    "CPX-609": [
+        "YDL092W",
+        "YKL122C",
+        "YML105C",
+        "YPL210C",
+        "YPL243W",
+        "YPR088C"
+    ],
+    "CPX-781": [
+        "YEL053C",
+        "YCR020C-A",
+        "YPR051W"
+    ],
+    "CPX-824": [
+        "YDL207W",
+        "YKL068W",
+        "YOR098C",
+        "YKL057C",
+        "YDL088C",
+        "YER107C",
+        "YJL041W",
+        "YLR335W",
+        "YMR047C",
+        "YFR002W",
+        "YML031W",
+        "YOR257W",
+        "YBL079W",
+        "YGR119C",
+        "YGL100W",
+        "YKR082W",
+        "YDL116W",
+        "YJL039C",
+        "YJR042W",
+        "YML103C",
+        "YDR164C",
+        "YGL092W",
+        "YJL061W",
+        "YMR153W",
+        "YMR129W",
+        "YER105C",
+        "YGL172W",
+        "YAR002W",
+        "YLR018C",
+        "YIL115C",
+        "YDR192C"
+    ],
+    "CPX-828": [
+        "YBL103C",
+        "YOL067C"
+    ],
+    "CPX-956": [
+        "YGL020C",
+        "YDL100C",
+        "YER083C"
+    ],
+    "CPX-961": [
+        "YJL030W",
+        "YGL086W"
+    ],
+    "CPX-539": [
+        "YGR033C",
+        "YNR017W",
+        "YPL063W",
+        "YJL143W",
+        "YLR008C",
+        "YJR045C",
+        "YJL104W",
+        "YOR232W",
+        "YIL022W"
+    ],
+    "CPX-565": [
+        "YKL148C",
+        "YLL041C",
+        "YDR178W",
+        "YKL141W"
+    ],
+    "CPX-548": [
+        "YIL144W",
+        "YMR117C",
+        "YOL069W",
+        "YER018C"
+    ],
+    "CPX-863": [
+        "YER092W",
+        "YOR141C",
+        "YNL215W",
+        "YFL039C",
+        "YPL235W",
+        "YDL002C",
+        "YLR052W",
+        "YEL044W",
+        "YOR189W",
+        "YPL129W",
+        "YDR190C",
+        "YJL081C",
+        "YNL059C",
+        "YGL150C",
+        "YFL013C"
+    ],
+    "CPX-545": [
+        "YBR087W",
+        "YNL290W",
+        "YOR217W",
+        "YOL094C",
+        "YJR068W"
+    ],
+    "CPX-554": [
+        "YMR205C",
+        "YGR240C"
+    ],
+    "CPX-567": [
+        "YPR191W",
+        "YBL045C",
+        "YOR065W",
+        "Q0105",
+        "YFR033C",
+        "YEL024W",
+        "YHR001W-A",
+        "YGR183C",
+        "YJL166W",
+        "YDR529C"
+    ],
+    "CPX-588": [
+        "YLR433C",
+        "YKL190W"
+    ],
+    "CPX-590": [
+        "YML057W",
+        "YKL190W"
+    ],
+    "CPX-558": [
+        "YNL037C",
+        "YOR136W"
+    ],
+    "CPX-784": [
+        "YPL019C",
+        "YJL012C",
+        "YFL004W",
+        "YER072W"
+    ],
+    "CPX-581": [
+        "YIL035C",
+        "YOR039W",
+        "YGL019W",
+        "YOR061W"
+    ],
+    "CPX-656": [
+        "YDR392W",
+        "YER164W",
+        "YMR223W",
+        "YCL010C",
+        "YHR099W",
+        "YDR448W",
+        "YMR236W",
+        "YBR081C",
+        "YGR252W",
+        "YGL066W",
+        "YBR111W-A",
+        "YPL047W",
+        "YGL112C",
+        "YDR167W",
+        "YOL148C",
+        "YLR055C",
+        "YDR145W",
+        "YDR176W",
+        "YPL254W",
+        "YBR198C"
+    ],
+    "CPX-544": [
+        "YBR088C"
+    ],
+    "CPX-608": [
+        "YGR252W",
+        "YDR448W",
+        "YDR176W",
+        "YOR023C"
+    ],
+    "CPX-636": [
+        "YMR044W",
+        "YLR095C",
+        "YBR245C"
+    ],
+    "CPX-637": [
+        "YBR245C",
+        "YFR013W"
+    ],
+    "CPX-568": [
+        "YML102W",
+        "YBR195C",
+        "YPR018W"
+    ],
+    "CPX-963": [
+        "YJL030W",
+        "YJL013C",
+        "YGL116W",
+        "YOR026W"
+    ],
+    "CPX-964": [
+        "YMR055C",
+        "YJR053W"
+    ],
+    "CPX-580": [
+        "YGL130W",
+        "YPL228W"
+    ],
+    "CPX-728": [
+        "YGL133W",
+        "YDR121W",
+        "YJL065C",
+        "YOR304W"
+    ],
+    "CPX-579": [
+        "YOR303W",
+        "YJR109C"
+    ],
+    "CPX-756": [
+        "YOR249C",
+        "YKL022C",
+        "YIR025W",
+        "YNL172W",
+        "YDR118W",
+        "YLR127C",
+        "YGL240W",
+        "YDR260C",
+        "YHR166C",
+        "YDL008W",
+        "YFR036W",
+        "YBL084C",
+        "YLR102C"
+    ],
+    "CPX-760": [
+        "YBL084C",
+        "YDR118W",
+        "YLR102C",
+        "YIR025W",
+        "YHR166C",
+        "YGL116W",
+        "YDR260C",
+        "YOR249C",
+        "YNL172W",
+        "YGL240W",
+        "YFR036W",
+        "YKL022C",
+        "YLR127C",
+        "YDL008W"
+    ],
+    "CPX-761": [
+        "YOR249C",
+        "YDR118W",
+        "YFR036W",
+        "YIR025W",
+        "YLR102C",
+        "YKL022C",
+        "YDR260C",
+        "YLR127C",
+        "YGL003C",
+        "YDL008W",
+        "YBL084C",
+        "YNL172W",
+        "YGL240W",
+        "YHR166C"
+    ],
+    "CPX-762": [
+        "YNL172W",
+        "YLR127C",
+        "YFR036W",
+        "YIR025W",
+        "YDR260C",
+        "YLR102C",
+        "YGR225W",
+        "YDL008W",
+        "YHR166C",
+        "YOR249C",
+        "YKL022C",
+        "YGL240W",
+        "YDR118W",
+        "YBL084C"
+    ],
+    "CPX-773": [
+        "YGL019W",
+        "YOR061W",
+        "YCL031C",
+        "YGR090W",
+        "YOR039W"
+    ],
+    "CPX-774": [
+        "YOR061W",
+        "YCL031C",
+        "YGL019W",
+        "YGR090W",
+        "YLR223C",
+        "YOR039W",
+        "YIL035C"
+    ],
+    "CPX-775": [
+        "YCL031C",
+        "YOR039W",
+        "YGR090W",
+        "YLR223C",
+        "YIL035C",
+        "YGL019W"
+    ],
+    "CPX-779": [
+        "YHR187W",
+        "YMR312W",
+        "YPL086C",
+        "YPL101W",
+        "YGR200C",
+        "YLR384C"
+    ],
+    "CPX-777": [
+        "YMR127C",
+        "YOR213C",
+        "YDR181C"
+    ],
+    "CPX-778": [
+        "YNR046W",
+        "YOL124C"
+    ],
+    "CPX-940": [
+        "YLR119W",
+        "YPL065W",
+        "YGR206W",
+        "YCL008C"
+    ],
+    "CPX-946": [
+        "YER111C",
+        "YLR182W"
+    ],
+    "CPX-950": [
+        "YDL056W",
+        "YLR182W"
+    ],
+    "CPX-1041": [
+        "YBR233W-A",
+        "YGL061C",
+        "YKL052C",
+        "YGR113W",
+        "YDR016C",
+        "YKR037C",
+        "YDR320C-A",
+        "YDR201W",
+        "YKL138C-A",
+        "YKR083C"
+    ],
+    "CPX-1038": [
+        "YAL051W",
+        "YOR363C"
+    ],
+    "CPX-1040": [
+        "YPR189W",
+        "YGL213C",
+        "YLR398C"
+    ],
+    "CPX-1037": [
+        "YDR097C",
+        "YOL090W"
+    ],
+    "CPX-1101": [
+        "YMR270C",
+        "YNL030W",
+        "YLR141W",
+        "YNL031C",
+        "YBL025W",
+        "YOR295W"
+    ],
+    "CPX-1102": [
+        "YGR180C",
+        "YJL026W",
+        "YER070W"
+    ],
+    "CPX-1103": [
+        "YGR180C",
+        "YER070W",
+        "YJL026W",
+        "YIL066C"
+    ],
+    "CPX-1036": [
+        "YOL090W",
+        "YCR092C"
+    ],
+    "CPX-1039": [
+        "YKL018W",
+        "YBR175W",
+        "YLR015W",
+        "YAR003W",
+        "YDR469W",
+        "YBR258C",
+        "YHR119W",
+        "YPL138C"
+    ],
+    "CPX-1187": [
+        "YDR318W",
+        "YGR179C",
+        "YBR211C",
+        "YPL018W"
+    ],
+    "CPX-1186": [
+        "YIR010W",
+        "YPL233W",
+        "YAL034W-A",
+        "YJR112W"
+    ],
+    "CPX-1881": [
+        "YPL120W",
+        "YLR240W",
+        "YBR128C",
+        "YBR097W",
+        "YLR211C"
+    ],
+    "CPX-1898": [
+        "YMR094W",
+        "YMR168C",
+        "YGR140W",
+        "YDR328C"
+    ],
+    "CPX-1940": [
+        "YML077W",
+        "YOR115C",
+        "YDR246W",
+        "YBR254C",
+        "YKR068C",
+        "YDR472W"
+    ],
+    "CPX-1947": [
+        "YGL245W",
+        "YGL105W",
+        "YGR264C"
+    ],
+    "CPX-1679": [
+        "YDL175C",
+        "YJL050W",
+        "YOL115W",
+        "YJR036C"
+    ],
+    "CPX-1707": [
+        "YPL111W",
+        "YJL088W"
+    ],
+    "CPX-1647": [
+        "YML049C",
+        "YOR319W",
+        "YPR094W",
+        "YNL138W-A",
+        "YMR288W",
+        "YMR240C"
+    ],
+    "CPX-1648": [
+        "YJL203W",
+        "YDL030W",
+        "YDL043C"
+    ],
+    "CPX-1652": [
+        "YDR238C",
+        "YNL287W",
+        "YDL145C",
+        "YIL076W",
+        "YGL137W",
+        "YFR051C",
+        "YPL010W"
+    ],
+    "CPX-1645": [
+        "YJR086W",
+        "YOR212W"
+    ],
+    "CPX-1653": [
+        "YOR132W",
+        "YHR012W",
+        "YJL053W",
+        "YOR069W",
+        "YJL154C"
+    ],
+    "CPX-1655": [
+        "YCL044C",
+        "YPR024W",
+        "YMR115W"
+    ],
+    "CPX-1680": [
+        "YJL050W",
+        "YIL079C",
+        "YNL299W"
+    ],
+    "CPX-1681": [
+        "YER106W",
+        "YDR439W",
+        "YCR086W",
+        "YPL204W"
+    ],
+    "CPX-1682": [
+        "YPL001W",
+        "YLL022C",
+        "YEL056W"
+    ],
+    "CPX-1683": [
+        "YIL106W",
+        "YGR092W"
+    ],
+    "CPX-1684": [
+        "YFL034C-B",
+        "YNL161W"
+    ],
+    "CPX-1685": [
+        "YPR161C",
+        "YLR226W"
+    ],
+    "CPX-1686": [
+        "YOL072W",
+        "YOR257W",
+        "YDR159W",
+        "YBR111W-A"
+    ],
+    "CPX-1687": [
+        "YDR159W",
+        "YOL072W"
+    ],
+    "CPX-1688": [
+        "YOL001W",
+        "YPL031C"
+    ],
+    "CPX-1689": [
+        "YER059W",
+        "YPL031C"
+    ],
+    "CPX-1656": [
+        "YOR110W",
+        "YPL007C",
+        "YGR047C",
+        "YBR123C",
+        "YDR362C",
+        "YAL001C"
+    ],
+    "CPX-1644": [
+        "YGL033W",
+        "YGL183C"
+    ],
+    "CPX-1649": [
+        "YGL174W",
+        "YIR005W",
+        "YLR016C"
+    ],
+    "CPX-1626": [
+        "YMR231W",
+        "YDR495C",
+        "YAL002W",
+        "YLR148W",
+        "YLR396C",
+        "YPL045W"
+    ],
+    "CPX-1628": [
+        "YOL149W",
+        "YNL118C"
+    ],
+    "CPX-1629": [
+        "YBR091C",
+        "YJL054W",
+        "YDL217C",
+        "YOR297C",
+        "YEL020W-A",
+        "YHR005C-A"
+    ],
+    "CPX-1651": [
+        "YLL036C",
+        "YKL095W",
+        "YKL173W",
+        "YDL030W",
+        "YLR275W",
+        "YDR482C",
+        "YER029C",
+        "YJL203W",
+        "YDR163W",
+        "YLR147C",
+        "YJR050W",
+        "YAL032C",
+        "YGR129W",
+        "YDL209C",
+        "YMR288W",
+        "YER172C",
+        "YDR088C",
+        "YNL245C",
+        "YIR005W",
+        "YOR148C",
+        "YLR117C",
+        "YCR063W",
+        "YMR240C",
+        "YMR213W",
+        "YDR364C",
+        "YLR323C",
+        "YGL128C",
+        "YBR188C",
+        "YIR009W",
+        "YML049C",
+        "YPL064C",
+        "YPR101W",
+        "YPR182W",
+        "YDL043C",
+        "YGR074W",
+        "YER013W",
+        "YDR416W",
+        "YGR278W",
+        "YPL151C",
+        "YHR165C",
+        "YPL213W",
+        "YGL174W",
+        "YBR065C"
+    ],
+    "CPX-1631": [
+        "YJL125C",
+        "YNL062C"
+    ],
+    "CPX-1636": [
+        "YPR176C",
+        "YJL031C",
+        "YOR370C"
+    ],
+    "CPX-1639": [
+        "YDL232W",
+        "YOR103C",
+        "YMR149W",
+        "YJL002C",
+        "YEL002C",
+        "YGL022W",
+        "YGL226C-A",
+        "YOR085W"
+    ],
+    "CPX-1641": [
+        "YJL072C",
+        "YOL146W",
+        "YDR013W",
+        "YDR489W"
+    ],
+    "CPX-1667": [
+        "YLR035C",
+        "YMR167W"
+    ],
+    "CPX-1657": [
+        "YMR125W",
+        "YPL178W"
+    ],
+    "CPX-1658": [
+        "YKR062W",
+        "YKL028W"
+    ],
+    "CPX-1660": [
+        "YDR460W",
+        "YPR025C",
+        "YDL108W"
+    ],
+    "CPX-1654": [
+        "YMR089C",
+        "YER017C"
+    ],
+    "CPX-1666": [
+        "YNL082W",
+        "YMR167W"
+    ],
+    "CPX-1669": [
+        "YFR028C",
+        "YJL076W",
+        "YDL042C"
+    ],
+    "CPX-1671": [
+        "YML094W",
+        "YLR200W",
+        "YEL003W",
+        "YGR078C",
+        "YNL153C",
+        "YJL179W"
+    ],
+    "CPX-1622": [
+        "YHL002W",
+        "YNR006W"
+    ],
+    "CPX-1661": [
+        "YML010W",
+        "YGR063C"
+    ],
+    "CPX-1662": [
+        "YER159C",
+        "YDR397C"
+    ],
+    "CPX-1663": [
+        "YCR084C",
+        "YBR112C"
+    ],
+    "CPX-1664": [
+        "YOR210W",
+        "YOR340C",
+        "YJR063W",
+        "YNL248C",
+        "YPR187W",
+        "YBR154C",
+        "YOR224C",
+        "YPR010C",
+        "YDR156W",
+        "YHR143W-A",
+        "YNL113W",
+        "YOR341W",
+        "YJL148W",
+        "YPR110C"
+    ],
+    "CPX-1673": [
+        "YMR048W",
+        "YNL273W"
+    ],
+    "CPX-1674": [
+        "YGL124C",
+        "YBR131W"
+    ],
+    "CPX-1675": [
+        "YDL225W",
+        "YCR002C",
+        "YJR076C",
+        "YHR107C",
+        "YLR314C"
+    ],
+    "CPX-1630": [
+        "YLR163C",
+        "YHR024C"
+    ],
+    "CPX-1677": [
+        "YLR240W",
+        "YBR097W",
+        "YPL120W",
+        "YLR360W"
+    ],
+    "CPX-1678": [
+        "YJR036C",
+        "YJL050W",
+        "YIL079C",
+        "YOL115W"
+    ],
+    "CPX-1676": [
+        "YPR185W",
+        "YGL180W",
+        "YPL166W",
+        "YLR423C",
+        "YDR022C",
+        "YPL166W",
+        "YLR423C",
+        "YDR022C",
+        "YGL180W",
+        "YPR185W"
+    ],
+    "CPX-1690": [
+        "YPL031C",
+        "YIL050W"
+    ],
+    "CPX-1691": [
+        "YPL031C",
+        "YPL219W"
+    ],
+    "CPX-1692": [
+        "YGL134W",
+        "YPL031C"
+    ],
+    "CPX-1693": [
+        "YGL215W",
+        "YPL031C"
+    ],
+    "CPX-1694": [
+        "YPL031C",
+        "YDL127W"
+    ],
+    "CPX-1695": [
+        "YPL031C",
+        "YNL289W"
+    ],
+    "CPX-1696": [
+        "YPL031C",
+        "YHR071W"
+    ],
+    "CPX-1697": [
+        "YDL179W",
+        "YPL031C"
+    ],
+    "CPX-1698": [
+        "YGL200C",
+        "YAR002C-A",
+        "YAL007C",
+        "YML012W"
+    ],
+    "CPX-1633": [
+        "YKL058W",
+        "YOR194C"
+    ],
+    "CPX-1623": [
+        "YLR417W",
+        "YJR102C",
+        "YPL002C"
+    ],
+    "CPX-1624": [
+        "YKL041W",
+        "YKL002W",
+        "YLR025W",
+        "YMR077C"
+    ],
+    "CPX-1668": [
+        "YPL164C",
+        "YMR167W"
+    ],
+    "CPX-1670": [
+        "YDR386W",
+        "YBR098W"
+    ],
+    "CPX-1625": [
+        "YMR231W",
+        "YLR396C",
+        "YDL077C",
+        "YDR080W",
+        "YLR148W",
+        "YPL045W"
+    ],
+    "CPX-1627": [
+        "YJR033C",
+        "YDR202C",
+        "YDR328C"
+    ],
+    "CPX-1632": [
+        "YDR165W",
+        "YDL201W"
+    ],
+    "CPX-1634": [
+        "YKL019W",
+        "YDL090C"
+    ],
+    "CPX-1659": [
+        "YPR025C",
+        "YDL108W",
+        "YDR460W",
+        "YDR311W",
+        "YER171W",
+        "YLR005W",
+        "YPR056W",
+        "YDR079C-A",
+        "YPL122C",
+        "YIL143C",
+        "YOR352W"
+    ],
+    "CPX-1665": [
+        "YOR005C",
+        "YGL090W"
+    ],
+    "CPX-1672": [
+        "YPL050C",
+        "YML115C"
+    ],
+    "CPX-1699": [
+        "YBR160W",
+        "YMR199W",
+        "YBR135W"
+    ],
+    "CPX-1700": [
+        "YBR160W",
+        "YAL040C",
+        "YBR135W"
+    ],
+    "CPX-1701": [
+        "YBR160W",
+        "YPR119W"
+    ],
+    "CPX-1702": [
+        "YPR120C",
+        "YBR160W"
+    ],
+    "CPX-1703": [
+        "YGR132C",
+        "YGR231C"
+    ],
+    "CPX-1704": [
+        "YDL154W",
+        "YFL003C"
+    ],
+    "CPX-1705": [
+        "YER133W",
+        "YAR014C"
+    ],
+    "CPX-1706": [
+        "YHL003C",
+        "YMR298W",
+        "YKL008C"
+    ],
+    "CPX-1635": [
+        "YGL155W",
+        "YKL019W"
+    ],
+    "CPX-1646": [
+        "YHR005C",
+        "YOR212W",
+        "YJR086W"
+    ],
+    "CPX-1637": [
+        "YKL007W",
+        "YIL034C"
+    ],
+    "CPX-1638": [
+        "YMR149W",
+        "YJL002C",
+        "YGL226C-A",
+        "YDL232W",
+        "YEL002C",
+        "YOR103C",
+        "YGL022W",
+        "YML019W"
+    ],
+    "CPX-1640": [
+        "YER162C",
+        "YEL037C"
+    ],
+    "CPX-1642": [
+        "YMR005W",
+        "YML015C",
+        "YBR198C",
+        "YPL129W",
+        "YGL112C",
+        "YDR145W",
+        "YDR167W",
+        "YMR236W",
+        "YML114C",
+        "YML098W",
+        "YCR042C",
+        "YGR274C",
+        "YER148W",
+        "YPL011C",
+        "YMR227C"
+    ],
+    "CPX-1643": [
+        "YBR070C",
+        "YGL047W"
+    ],
+    "CPX-1744": [
+        "YNL026W",
+        "YHR083W",
+        "YMR060C"
+    ],
+    "CPX-1738": [
+        "YFL022C",
+        "YLR060W"
+    ],
+    "CPX-1708": [
+        "YMR201C",
+        "YPL022W",
+        "YML095C"
+    ],
+    "CPX-1709": [
+        "YBR114W",
+        "YJR052W",
+        "YKL112W"
+    ],
+    "CPX-1721": [
+        "Q0045",
+        "YLR038C",
+        "Q0275",
+        "YMR256C"
+    ],
+    "CPX-1786": [
+        "YGL145W",
+        "YLR440C",
+        "YNL258C"
+    ],
+    "CPX-1787": [
+        "YHR004C",
+        "YAL009W"
+    ],
+    "CPX-1716": [
+        "YKL203C",
+        "YHR186C",
+        "YPL180W",
+        "YNL006W"
+    ],
+    "CPX-1717": [
+        "YKL203C",
+        "YJL058C",
+        "YMR068W",
+        "YNL006W",
+        "YOL078W",
+        "YER093C"
+    ],
+    "CPX-1718": [
+        "YJL029C",
+        "YDR484W",
+        "YDR027C",
+        "YKR020W"
+    ],
+    "CPX-1719": [
+        "YMR237W",
+        "YLR330W",
+        "YKR027W",
+        "YOR299W",
+        "YJL099W"
+    ],
+    "CPX-1722": [
+        "YLR038C",
+        "Q0275",
+        "YMR256C",
+        "Q0045"
+    ],
+    "CPX-1734": [
+        "YLR002C",
+        "YOR206W"
+    ],
+    "CPX-1733": [
+        "YOR206W",
+        "YDR060W"
+    ],
+    "CPX-1836": [
+        "YBL014C",
+        "YJL025W",
+        "YML043C"
+    ],
+    "CPX-1715": [
+        "YHR186C",
+        "YNL006W",
+        "YJR066W",
+        "YPL180W"
+    ],
+    "CPX-1830": [
+        "YKL109W",
+        "YGL237C",
+        "YOR358W",
+        "YBL021C"
+    ],
+    "CPX-1735": [
+        "YPR144C",
+        "YDL148C"
+    ],
+    "CPX-1720": [
+        "YLR154C",
+        "YDR279W",
+        "YNL072W"
+    ],
+    "CPX-1739": [
+        "YBR036C",
+        "YPL057C"
+    ],
+    "CPX-1740": [
+        "YBR161W",
+        "YBR036C"
+    ],
+    "CPX-1741": [
+        "YJR045C"
+    ],
+    "CPX-1726": [
+        "YBR279W",
+        "YLR418C",
+        "YGL244W",
+        "YOL145C",
+        "YOR123C"
+    ],
+    "CPX-1711": [
+        "YHR085W",
+        "YHR197W",
+        "YNL182C"
+    ],
+    "CPX-1742": [
+        "YJL035C",
+        "YLR316C"
+    ],
+    "CPX-1743": [
+        "YGR285C",
+        "YHR064C"
+    ],
+    "CPX-1712": [
+        "YJR076C",
+        "YKR048C",
+        "YHR107C",
+        "YLR314C",
+        "YDR507C",
+        "YCR002C",
+        "YNL166C",
+        "YDL225W"
+    ],
+    "CPX-1730": [
+        "YPL147W",
+        "YKL188C"
+    ],
+    "CPX-1732": [
+        "YMR284W",
+        "YMR106C"
+    ],
+    "CPX-1792": [
+        "YDR138W",
+        "YML062C",
+        "YNL139C",
+        "YHR167W",
+        "YNL253W"
+    ],
+    "CPX-1731": [
+        "YBR087W",
+        "YNL290W",
+        "YCL016C",
+        "YMR078C",
+        "YJR068W",
+        "YOL094C",
+        "YHR191C"
+    ],
+    "CPX-1710": [
+        "YJL006C",
+        "YKL139W",
+        "YML112W"
+    ],
+    "CPX-1793": [
+        "YML062C",
+        "YDL084W",
+        "YDR381W",
+        "YNL253W",
+        "YDR138W",
+        "YNL139C",
+        "YHR167W"
+    ],
+    "CPX-1869": [
+        "YBL097W",
+        "YDR325W",
+        "YLR086W",
+        "YFR031C",
+        "YLR272C"
+    ],
+    "CPX-1867": [
+        "YFL008W",
+        "YDL003W",
+        "YIL026C",
+        "YJL074C"
+    ],
+    "CPX-1861": [
+        "YLL026W",
+        "YBR137W",
+        "YOR007C",
+        "YOL111C",
+        "YOR164C"
+    ],
+    "CPX-1848": [
+        "YPL149W",
+        "YBR217W"
+    ],
+    "CPX-1832": [
+        "YPL083C",
+        "YLR105C",
+        "YAR008W",
+        "YMR059W"
+    ],
+    "CPX-1849": [
+        "YBR217W",
+        "YMR159C",
+        "YPL149W"
+    ],
+    "CPX-1882": [
+        "YAL005C",
+        "YLR256W",
+        "YCL037C",
+        "YNL064C"
+    ],
+    "CPX-1883": [
+        "YLL024C",
+        "YNL064C",
+        "YCL037C"
+    ],
+    "CPX-1840": [
+        "YNL041C",
+        "YGL223C",
+        "YNL051W",
+        "YML071C",
+        "YGL005C",
+        "YPR105C",
+        "YGR120C",
+        "YER157W"
+    ],
+    "CPX-1837": [
+        "YNL230C",
+        "YPL046C",
+        "YOL133W",
+        "YGR003W"
+    ],
+    "CPX-1859": [
+        "YGL190C",
+        "YAL016W",
+        "YDL188C"
+    ],
+    "CPX-1839": [
+        "YDR245W",
+        "YEL036C",
+        "YJL183W",
+        "YJR075W"
+    ],
+    "CPX-1846": [
+        "YNL201C",
+        "YBL046W",
+        "YDR075W"
+    ],
+    "CPX-1833": [
+        "YER087C-B",
+        "YLR378C",
+        "YDR086C"
+    ],
+    "CPX-1834": [
+        "YBR283C",
+        "YDR086C",
+        "YER019C-A"
+    ],
+    "CPX-1835": [
+        "YLR066W",
+        "YJR010C-A",
+        "YIR022W",
+        "YML055W"
+    ],
+    "CPX-1862": [
+        "YOR272W",
+        "YMR049C",
+        "YGR103W"
+    ],
+    "CPX-1800": [
+        "YGR134W",
+        "YAL021C",
+        "YER068W",
+        "YPR072W",
+        "YNR052C",
+        "YNL288W",
+        "YCR093W",
+        "YIL038C",
+        "YDL165W"
+    ],
+    "CPX-1810": [
+        "YBL052C",
+        "YOR064C",
+        "YJR082C",
+        "YPL129W",
+        "YPR031W"
+    ],
+    "CPX-1811": [
+        "YDR227W",
+        "YDL042C",
+        "YLR442C"
+    ],
+    "CPX-1812": [
+        "YPR165W",
+        "YLR342W"
+    ],
+    "CPX-1813": [
+        "YGR032W",
+        "YPR165W"
+    ],
+    "CPX-1852": [
+        "YAL013W",
+        "YDL076C",
+        "YNL330C",
+        "YIL084C",
+        "YBR095C",
+        "YPL139C",
+        "YOL004W",
+        "YPL181W",
+        "YNL097C",
+        "YMR263W"
+    ],
+    "CPX-1853": [
+        "YNL025C",
+        "YCR081W",
+        "YDR443C",
+        "YPL042C"
+    ],
+    "CPX-1805": [
+        "YHR129C",
+        "YMR294W",
+        "YLL049W",
+        "YDR106W",
+        "YPL174C"
+    ],
+    "CPX-1806": [
+        "YPL194W",
+        "YLR288C",
+        "YOR368W"
+    ],
+    "CPX-1807": [
+        "YBR087W",
+        "YJR068W",
+        "YNL290W",
+        "YOL094C",
+        "YER173W"
+    ],
+    "CPX-1863": [
+        "YIL153W",
+        "YDL047W",
+        "YMR028W"
+    ],
+    "CPX-1864": [
+        "YFR040W",
+        "YDL047W"
+    ],
+    "CPX-1865": [
+        "YJL098W",
+        "YDL047W"
+    ],
+    "CPX-1866": [
+        "YKR028W",
+        "YDL047W"
+    ],
+    "CPX-1808": [
+        "YGL195W",
+        "YFR009W"
+    ],
+    "CPX-1850": [
+        "YKL211C",
+        "YER090W"
+    ],
+    "CPX-1851": [
+        "YMR075W",
+        "YPL139C",
+        "YOL004W",
+        "YNL330C",
+        "YPR023C"
+    ],
+    "CPX-1809": [
+        "YJR021C",
+        "YER044C-A",
+        "YMR133W"
+    ],
+    "CPX-1838": [
+        "YGL032C",
+        "YNR044W"
+    ],
+    "CPX-1856": [
+        "YDL134C",
+        "YGL190C",
+        "YAL016W"
+    ],
+    "CPX-1857": [
+        "YAL016W",
+        "YDL134C",
+        "YOR014W"
+    ],
+    "CPX-1858": [
+        "YAL016W",
+        "YDL188C",
+        "YOR014W"
+    ],
+    "CPX-1868": [
+        "YER147C",
+        "YDR180W"
+    ],
+    "CPX-1814": [
+        "YHR034C",
+        "YPL235W",
+        "YDR190C",
+        "YCR060W"
+    ],
+    "CPX-1831": [
+        "YMR146C",
+        "YBR079C",
+        "YDR429C",
+        "YOR361C",
+        "YMR309C"
+    ],
+    "CPX-1854": [
+        "YLR078C",
+        "YLR026C",
+        "YLR268W"
+    ],
+    "CPX-1855": [
+        "YKL196C",
+        "YLR026C",
+        "YHL031C"
+    ],
+    "CPX-1885": [
+        "YGR129W",
+        "YLR117C",
+        "YPR101W",
+        "YLL036C",
+        "YMR213W",
+        "YBR188C",
+        "YJR050W",
+        "YDR416W"
+    ],
+    "CPX-1886": [
+        "YGL120C",
+        "YLR424W",
+        "YKR022C"
+    ],
+    "CPX-1872": [
+        "YNL250W",
+        "YDR369C",
+        "YMR224C"
+    ],
+    "CPX-1887": [
+        "YGL212W",
+        "YMR197C",
+        "YOR106W"
+    ],
+    "CPX-1888": [
+        "YGR275W",
+        "YCR020W-B",
+        "YKR008W",
+        "YCR052W",
+        "YFR037C",
+        "YML127W",
+        "YIL126W",
+        "YLR357W",
+        "YMR091C",
+        "YHR056C",
+        "YPR034W",
+        "YMR033W",
+        "YLR033W",
+        "YDR303C",
+        "YLR321C",
+        "YBL006C"
+    ],
+    "CPX-1873": [
+        "YIR015W",
+        "YBL018C",
+        "YBR167C",
+        "YGR030C",
+        "YNL221C",
+        "YAL033W",
+        "YBR257W",
+        "YHR062C",
+        "YNL282W"
+    ],
+    "CPX-1884": [
+        "YDR295C",
+        "YNL021W",
+        "YPR179C"
+    ],
+    "CPX-1890": [
+        "YBR102C",
+        "YJL085W",
+        "YLR166C",
+        "YPR055W",
+        "YER008C",
+        "YDR166C",
+        "YIL068C",
+        "YGL233W"
+    ],
+    "CPX-1889": [
+        "YGR275W",
+        "YCR052W",
+        "YKR008W",
+        "YCR020W-B",
+        "YGR056W",
+        "YML127W",
+        "YBL006C",
+        "YLR321C",
+        "YMR033W",
+        "YFR037C",
+        "YDR303C",
+        "YPR034W",
+        "YHR056C",
+        "YLR033W",
+        "YIL126W",
+        "YMR091C"
+    ],
+    "CPX-1899": [
+        "YDR532C",
+        "YGL093W"
+    ],
+    "CPX-1900": [
+        "YPL209C",
+        "YJR089W",
+        "YBR156C",
+        "YHR199C-A"
+    ],
+    "CPX-1891": [
+        "YDR404C",
+        "YJL140W"
+    ],
+    "CPX-1905": [
+        "YDR142C",
+        "YHR160C"
+    ],
+    "CPX-1903": [
+        "YDR265W",
+        "YMR026C",
+        "YJL210W"
+    ],
+    "CPX-1901": [
+        "YNL329C",
+        "YOL044W",
+        "YKL197C"
+    ],
+    "CPX-1906": [
+        "YDR142C",
+        "YGR239C"
+    ],
+    "CPX-1902": [
+        "YKL197C",
+        "YNL329C"
+    ],
+    "CPX-1904": [
+        "YNL214W",
+        "YGL153W",
+        "YLR191W"
+    ],
+    "CPX-1939": [
+        "YGR166W",
+        "YML077W",
+        "YOR115C",
+        "YDR472W",
+        "YEL048C",
+        "YMR218C",
+        "YDR407C",
+        "YDR246W",
+        "YKR068C",
+        "YBR254C"
+    ],
+    "CPX-2122": [
+        "YLR385C",
+        "YBR231C",
+        "YJL081C",
+        "YAL011W",
+        "YLR085C",
+        "YDR334W",
+        "YPL235W",
+        "YFL039C",
+        "YDR190C",
+        "YLR399C",
+        "YGR002C",
+        "YNL107W",
+        "YML041C",
+        "YDR485C"
+    ],
+    "CPX-1426": [
+        "YHR023W",
+        "YGL106W",
+        "YPR188C"
+    ],
+    "CPX-3146": [
+        "YFL036W",
+        "YMR228W"
+    ],
+    "CPX-3139": [
+        "YDR004W",
+        "YDR076W"
+    ],
+    "CPX-2946": [
+        "YDL126C",
+        "YGR048W",
+        "YBR170C"
+    ],
+    "CPX-2148": [
+        "YNL231C"
+    ],
+    "CPX-2112": [
+        "YLR453C",
+        "YBR275C",
+        "YNL216W"
+    ],
+    "CPX-2937": [
+        "YGL058W",
+        "YLR024C",
+        "YMR100W"
+    ],
+    "CPX-2935": [
+        "YGL058W",
+        "YLR024C"
+    ],
+    "CPX-2948": [
+        "YMR022W",
+        "YMR264W"
+    ],
+    "CPX-3055": [
+        "YLR378C",
+        "YER087C-B",
+        "YPL094C",
+        "YOR254C",
+        "YBR171W",
+        "YLR292C",
+        "YDR086C"
+    ],
+    "CPX-3069": [
+        "YDL126C",
+        "YBR170C",
+        "YDR049W"
+    ],
+    "CPX-3070": [
+        "YBR201W",
+        "YDR057W",
+        "YOL013C",
+        "YML013W",
+        "YML029W",
+        "YLR207W"
+    ],
+    "CPX-3034": [
+        "YCL009C",
+        "YMR108W"
+    ],
+    "CPX-3037": [
+        "YDL095W",
+        "YOR321W"
+    ],
+    "CPX-3038": [
+        "YDL093W",
+        "YAL023C"
+    ],
+    "CPX-2923": [
+        "YER125W",
+        "YML111W"
+    ],
+    "CPX-2896": [
+        "YJR104C"
+    ],
+    "CPX-2156": [
+        "YDL143W",
+        "YJL008C",
+        "YJL014W",
+        "YJR064W",
+        "YJL111W",
+        "YDR188W",
+        "YDR212W",
+        "YIL142W"
+    ],
+    "CPX-3078": [
+        "YDR137W",
+        "YLR039C"
+    ],
+    "CPX-2523": [
+        "YDL195W",
+        "YLR208W",
+        "YDL195W",
+        "YPL218W",
+        "YPR181C",
+        "YIL109C"
+    ],
+    "CPX-2541": [
+        "YGL087C",
+        "YDR092W"
+    ],
+    "CPX-3172": [
+        "YML121W",
+        "YGR163W",
+        "YBR077C",
+        "YKR007W",
+        "YCR075W-A"
+    ],
+    "CPX-3196": [
+        "YOL009C",
+        "YGL219C",
+        "YAL010C",
+        "YAL048C",
+        "YLL006W"
+    ],
+    "CPX-3211": [
+        "YBR057C",
+        "YGL192W",
+        "YNL196C"
+    ],
+    "CPX-3207": [
+        "YGR193C",
+        "YER178W",
+        "YNL071W",
+        "YBR221C",
+        "YFL018C"
+    ],
+    "CPX-3226": [
+        "YHR041C",
+        "YGL151W",
+        "YOR174W",
+        "YBR193C",
+        "YBR253W",
+        "YGL127C",
+        "YNR010W",
+        "YDR308C",
+        "YPR168W",
+        "YHR058C",
+        "YLR071C",
+        "YDL005C",
+        "YOL135C",
+        "YGL025C",
+        "YGR104C",
+        "YPR070W",
+        "YBL093C",
+        "YER022W",
+        "YMR112C",
+        "YNL236W",
+        "YOL051W"
+    ],
+    "CPX-2566": [
+        "YNL031C",
+        "YBL002W",
+        "YDR225W",
+        "YNL030W"
+    ],
+    "CPX-3212": [
+        "YGR188C",
+        "YGL086W",
+        "YOR026W",
+        "YJL030W"
+    ],
+    "CPX-3215": [
+        "YGL207W",
+        "YML069W"
+    ],
+    "CPX-3231": [
+        "YHL023C",
+        "YOL138C",
+        "YJR138W",
+        "YBL104C",
+        "YDR128W",
+        "YEL062W",
+        "YLR208W",
+        "YGL100W"
+    ],
+    "CPX-3159": [
+        "YLR135W",
+        "YBR228W"
+    ],
+    "CPX-3158": [
+        "YMR296C",
+        "YDR062W",
+        "YBR058C-A",
+        "YLR350W",
+        "YKL212W",
+        "YGR038W"
+    ],
+    "CPX-2146": [
+        "YCR030C"
+    ],
+    "CPX-3184": [
+        "YNL136W",
+        "YPR023C",
+        "YEL018W"
+    ],
+    "CPX-3188": [
+        "YLL021W",
+        "YLR319C",
+        "YNL271C",
+        "YNL293W",
+        "YOL112W",
+        "YER149C"
+    ],
+    "CPX-2902": [
+        "YGL058W",
+        "YCR066W"
+    ],
+    "CPX-2660": [
+        "YKL144C",
+        "YJL011C",
+        "YOR116C",
+        "YNR003C",
+        "YOR207C",
+        "YNL151C",
+        "YDL150W",
+        "YPR190C",
+        "YDR045C",
+        "YKR025W",
+        "YHR143W-A",
+        "YOR210W",
+        "YPR187W",
+        "YOR224C",
+        "YPR110C",
+        "YBR154C",
+        "YNL113W"
+    ],
+    "CPX-2662": [
+        "YGL070C",
+        "YHR143W-A",
+        "YBR154C",
+        "YIL021W",
+        "YOR224C",
+        "YOR210W",
+        "YOL005C",
+        "YDL140C",
+        "YOR151C",
+        "YPR187W"
+    ],
+    "CPX-2147": [
+        "YHR079C",
+        "YHR079C"
+    ],
+    "CPX-3234": [
+        "YOL133W",
+        "YDR054C",
+        "YDL132W",
+        "YFL009W",
+        "YDR328C"
+    ],
+    "CPX-3238": [
+        "YDR390C",
+        "YPR180W"
+    ],
+    "CPX-2918": [
+        "YGL058W",
+        "YGR184C"
+    ],
+    "CPX-2225": [
+        "YGL106W",
+        "YOR326W",
+        "YBR109C"
+    ],
+    "CPX-2895": [
+        "YMR038C"
+    ],
+    "CPX-3241": [
+        "YDL132W",
+        "YDR054C",
+        "YDR328C",
+        "YJR090C",
+        "YOL133W"
+    ],
+    "CPX-3242": [
+        "YDR328C",
+        "YDR054C",
+        "YOL133W",
+        "YLR368W",
+        "YDL132W"
+    ],
+    "CPX-3243": [
+        "YDR054C",
+        "YDR328C",
+        "YOL133W",
+        "YML088W",
+        "YDL132W"
+    ],
+    "CPX-3244": [
+        "YJL149W",
+        "YDL132W",
+        "YDR328C",
+        "YOL133W",
+        "YDR054C"
+    ],
+    "CPX-3039": [
+        "YJR143C"
+    ],
+    "CPX-2262": [
+        "YOR362C",
+        "YGL011C",
+        "YOR157C",
+        "YER094C",
+        "YGR135W",
+        "YGR253C",
+        "YFR050C",
+        "YJL001W",
+        "YBL041W",
+        "YER012W",
+        "YOL038W",
+        "YPR103W",
+        "YML092C",
+        "YMR314W",
+        "YFR004W",
+        "YDL097C",
+        "YDL147W",
+        "YOR261C",
+        "YLR421C",
+        "YDR427W",
+        "YER021W",
+        "YFR052W",
+        "YPR108W",
+        "YHR027C",
+        "YIL075C",
+        "YHR200W",
+        "YKL145W",
+        "YDL007W",
+        "YDR394W",
+        "YOR259C",
+        "YOR117W",
+        "YGL048C",
+        "YDR363W-A"
+    ],
+    "CPX-2267": [
+        "YJR104C",
+        "YMR038C"
+    ],
+    "CPX-2268": [
+        "YEL020W-A",
+        "YHR005C-A"
+    ],
+    "CPX-3249": [
+        "YIL046W",
+        "YDL132W",
+        "YDR328C",
+        "YOL133W",
+        "YDR054C"
+    ],
+    "CPX-3250": [
+        "YOR080W",
+        "YOL133W",
+        "YDR054C",
+        "YDR328C",
+        "YDL132W"
+    ],
+    "CPX-3253": [
+        "YLR352W",
+        "YDR054C",
+        "YDR328C",
+        "YOL133W",
+        "YDL132W"
+    ],
+    "CPX-3254": [
+        "YOL133W",
+        "YDR054C",
+        "YDR328C",
+        "YDL132W",
+        "YBR280C"
+    ],
+    "CPX-3255": [
+        "YDR054C",
+        "YDR328C",
+        "YDL132W",
+        "YOL133W",
+        "YLR097C"
+    ],
+    "CPX-3265": [
+        "YGR048W",
+        "YDR333C",
+        "YBR170C",
+        "YMR247C",
+        "YDL126C",
+        "YPL009C"
+    ],
+    "CPX-2800": [
+        "YDR477W",
+        "YGL115W",
+        "YGL208W"
+    ],
+    "CPX-3185": [
+        "YFL024C",
+        "YOR244W",
+        "YHR090C"
+    ],
+    "CPX-2911": [
+        "YDL074C",
+        "YDL074C"
+    ],
+    "CPX-2143": [
+        "YPR193C"
+    ],
+    "CPX-2371": [
+        "YJR135W-A",
+        "YGR181W"
+    ],
+    "CPX-2854": [
+        "YAL003W",
+        "YBR118W",
+        "YPL048W",
+        "YPL048W"
+    ],
+    "CPX-3074": [
+        "YML013W",
+        "YIL030C"
+    ],
+    "CPX-2894": [
+        "YKL004W",
+        "YDR367W"
+    ],
+    "CPX-2910": [
+        "YGL058W",
+        "YDL074C"
+    ],
+    "CPX-3056": [
+        "YBR171W",
+        "YPL094C",
+        "YOR254C",
+        "YLR292C"
+    ],
+    "CPX-3088": [
+        "YFR021W",
+        "YNL054W",
+        "YNL325C",
+        "YLR386W",
+        "YFR019W"
+    ],
+    "CPX-2950": [
+        "YBR091C",
+        "YHR005C-A",
+        "YEL020W-A"
+    ],
+    "CPX-2921": [
+        "YER125W",
+        "YMR275C"
+    ],
+    "CPX-3087": [
+        "YHL006C",
+        "YDR078C",
+        "YIL132C",
+        "YLR376C"
+    ],
+    "CPX-3155": [
+        "YFL024C",
+        "YJR082C",
+        "YFL039C",
+        "YPR023C",
+        "YNL136W",
+        "YEL018W",
+        "YOR244W",
+        "YGR002C",
+        "YHR090C",
+        "YHR099W",
+        "YJL081C",
+        "YNL107W",
+        "YDR359C"
+    ],
+    "CPX-3163": [
+        "YFR030W",
+        "YJR137C"
+    ],
+    "CPX-3028": [
+        "YPR165W",
+        "YMR306W"
+    ],
+    "CPX-3036": [
+        "YDL095W",
+        "YAL023C"
+    ],
+    "CPX-3040": [
+        "YOR321W",
+        "YDL093W"
+    ],
+    "CPX-3233": [
+        "YML121W",
+        "YKR007W",
+        "YBR077C",
+        "YGR163W",
+        "YKL143W"
+    ],
+    "CPX-3179": [
+        "YDL013W",
+        "YER116C"
+    ],
+    "CPX-3180": [
+        "YPL029W",
+        "YMR287C"
+    ],
+    "CPX-3248": [
+        "YNL008C",
+        "YMR119W",
+        "YNL159C"
+    ],
+    "CPX-36": [
+        "YAR014C",
+        "YHR158C",
+        "YGR238C"
+    ],
+    "CPX-45": [
+        "YBL026W",
+        "YDR378C",
+        "YJL124C",
+        "YER112W",
+        "YER146W",
+        "YNL147W",
+        "YLR438C-A"
+    ],
+    "CPX-3297": [
+        "YAL019W"
+    ],
+    "CPX-30": [
+        "YBL074C",
+        "YKL173W",
+        "YHR165C",
+        "YER029C",
+        "YFL017W-A",
+        "YLR275W",
+        "YGR074W",
+        "YPR182W",
+        "YOR159C",
+        "YLR147C"
+    ],
+    "CPX-3294": [
+        "YGL094C",
+        "YKL025C"
+    ],
+    "CPX-31": [
+        "YER029C",
+        "YFL017W-A",
+        "YDR473C",
+        "YLR275W",
+        "YGR074W",
+        "YPR182W",
+        "YEL026W",
+        "YOR159C",
+        "YPR178W",
+        "YLR147C"
+    ],
+    "CPX-32": [
+        "YER029C",
+        "YER112W",
+        "YER146W",
+        "YFL017W-A",
+        "YDR473C",
+        "YBL026W",
+        "YNL147W",
+        "YLR275W",
+        "YDR378C",
+        "YGR074W",
+        "YPR182W",
+        "YEL026W",
+        "YLR438C-A",
+        "YOR159C",
+        "YPR178W",
+        "YLR147C",
+        "YGR091W",
+        "YJR022W"
+    ],
+    "CPX-3281": [
+        "YBR039W",
+        "YBL099W",
+        "YKL016C",
+        "YDL004W",
+        "YDR298C",
+        "YDR377W",
+        "YJR121W",
+        "YLR295C",
+        "YPL078C",
+        "YPL271W",
+        "YML081C-A",
+        "Q0080",
+        "Q0085",
+        "YOL077W-A",
+        "Q0130",
+        "YPR020W",
+        "YDR322C-A"
+    ],
+    "CPX-3284": [
+        "YAL033W",
+        "YBR257W",
+        "YHR062C",
+        "YLR145W",
+        "YBL018C",
+        "YGR030C",
+        "YNL282W",
+        "YBR167C",
+        "YDR478W",
+        "YNL221C"
+    ],
+    "CPX-3298": [
+        "YIL009C-A",
+        "YLR318W",
+        "YLR233C"
+    ],
+    "CPX-43": [
+        "YFL017W-A",
+        "YGR074W",
+        "YER029C",
+        "YLR275W",
+        "YPR182W",
+        "YOR159C",
+        "YLR147C"
+    ],
+    "CPX-44": [
+        "YJR022W",
+        "YBL026W",
+        "YDR378C",
+        "YER112W",
+        "YER146W",
+        "YNL147W",
+        "YLR438C-A"
+    ],
+    "CPX-46": [
+        "YBL026W",
+        "YDR378C",
+        "YER112W",
+        "YER146W",
+        "YNL147W",
+        "YLR438C-A"
+    ],
+    "CPX-15": [
+        "YDL220C",
+        "YDR082W",
+        "YLR010C"
+    ],
+    "CPX-21": [
+        "YAR007C",
+        "YJL173C",
+        "YNL312W"
+    ],
+    "CPX-24": [
+        "YER112W",
+        "YER146W",
+        "YBL026W",
+        "YNL147W",
+        "YDR378C",
+        "YLR438C-A",
+        "YMR268C",
+        "YJR022W"
+    ],
+    "CPX-25": [
+        "YER172C",
+        "YKL173W",
+        "YHR165C",
+        "YER029C",
+        "YER112W",
+        "YER146W",
+        "YFL017W-A",
+        "YDR473C",
+        "YBR152W",
+        "YBL026W",
+        "YGR075C",
+        "YNL147W",
+        "YPR082C",
+        "YLR275W",
+        "YDR378C",
+        "YGR074W",
+        "YPR182W",
+        "YEL026W",
+        "YLR438C-A",
+        "YDR243C",
+        "YOR159C",
+        "YBR055C",
+        "YPR178W",
+        "YDL098C",
+        "YOR308C",
+        "YLR147C",
+        "YGR091W",
+        "YJR022W",
+        "YFR005C"
+    ],
+    "CPX-26": [
+        "YGL174W",
+        "YNL286W",
+        "YIR005W",
+        "YLR016C",
+        "YJL203W",
+        "YNL138W-A",
+        "YER029C",
+        "YML049C",
+        "YFL017W-A",
+        "YMR240C",
+        "YPR094W",
+        "YDL043C",
+        "YLR275W",
+        "YGR074W",
+        "YPR182W",
+        "YOR159C",
+        "YOR319W",
+        "YPL213W",
+        "YDL030W",
+        "YLR147C",
+        "YMR288W",
+        "YIR009W"
+    ],
+    "CPX-3279": [
+        "YIR024C",
+        "YPL099C"
+    ],
+    "CPX-23": [
+        "YDL087C",
+        "YBR119W",
+        "YHR086W",
+        "YML046W",
+        "YKL012W",
+        "YDR235W",
+        "YER029C",
+        "YGR074W",
+        "YLR275W",
+        "YLR147C",
+        "YOR159C",
+        "YFL017W-A",
+        "YPR182W",
+        "YIL061C",
+        "YDR240C",
+        "YGR013W",
+        "YLR298C"
+    ],
+    "CPX-29": [
+        "YER172C",
+        "YKL173W",
+        "YHR165C",
+        "YER029C",
+        "YFL017W-A",
+        "YPR082C",
+        "YLR275W",
+        "YGR074W",
+        "YPR182W",
+        "YHR156C",
+        "YDR243C",
+        "YOR159C",
+        "YBR055C",
+        "YLR147C"
+    ],
+    "CPX-112": [
+        "YJL124C",
+        "YBL026W",
+        "YLR438C-A",
+        "YER112W",
+        "YER146W",
+        "YDR378C",
+        "YNL147W",
+        "YCR077C"
+    ],
+    "CPX-124": [
+        "YOR038C",
+        "YJR140C",
+        "YBL008W",
+        "YBR215W"
+    ],
+    "CPX-393": [
+        "YKR072C",
+        "YOR054C",
+        "YKL088W"
+    ],
+    "CPX-384": [
+        "YBR120C",
+        "YPL215W"
+    ],
+    "CPX-386": [
+        "YKR071C",
+        "YPR048W"
+    ],
+    "CPX-336": [
+        "YBR160W",
+        "YDL155W"
+    ],
+    "CPX-396": [
+        "YIL083C",
+        "YKL088W",
+        "YGR277C",
+        "YDR196C"
+    ],
+    "CPX-242": [
+        "YDR021W",
+        "YLR336C"
+    ],
+    "CPX-140": [
+        "YBR262C",
+        "YKR016W",
+        "YFR011C",
+        "YGR235C",
+        "YNL100W",
+        "YCL057C-A"
+    ],
+    "CPX-231": [
+        "YDR477W",
+        "YGL115W",
+        "YER027C"
+    ],
+    "CPX-161": [
+        "YBR179C",
+        "YOR211C",
+        "YDR470C"
+    ],
+    "CPX-154": [
+        "YGR188C",
+        "YOR026W"
+    ],
+    "CPX-307": [
+        "YCL045C",
+        "YJR088C",
+        "YKL207W",
+        "YGL231C",
+        "YIL027C",
+        "YLL014W"
+    ],
+    "CPX-166": [
+        "YDL193W",
+        "YMR101C"
+    ],
+    "CPX-335": [
+        "YBR160W",
+        "YGR108W"
+    ],
+    "CPX-397": [
+        "YPL166W",
+        "YLR423C",
+        "YLR423C",
+        "YDR022C",
+        "YPL166W",
+        "YDR022C"
+    ],
+    "CPX-334": [
+        "YPR173C",
+        "YPR173C"
+    ],
+    "CPX-339": [
+        "YGR109C",
+        "YBR160W"
+    ],
+    "CPX-297": [
+        "YLR103C"
+    ],
+    "CPX-162": [
+        "YDL193W",
+        "YBR002C"
+    ],
+    "CPX-431": [
+        "YGL049C",
+        "YJL138C",
+        "YOL139C"
+    ],
+    "CPX-337": [
+        "YBR160W",
+        "YLR210W"
+    ],
+    "CPX-302": [
+        "YGL080W",
+        "YHR162W"
+    ],
+    "CPX-303": [
+        "YGL080W",
+        "YGR243W"
+    ],
+    "CPX-232": [
+        "YDR477W",
+        "YGL115W",
+        "YDR422C"
+    ],
+    "CPX-342": [
+        "YBR135W",
+        "YPL256C",
+        "YBR160W"
+    ],
+    "CPX-416": [
+        "YBL080C",
+        "YMR293C",
+        "YGR102C"
+    ],
+    "CPX-417": [
+        "YDR221W",
+        "YBR229C"
+    ],
+    "CPX-418": [
+        "YDR140W",
+        "YNR046W"
+    ],
+    "CPX-361": [
+        "YNL242W",
+        "YFR021W"
+    ],
+    "CPX-385": [
+        "YIL003W",
+        "YGL091C",
+        "YIL003W",
+        "YGL091C"
+    ],
+    "CPX-422": [
+        "YOL094C",
+        "YBR087W",
+        "YNL290W",
+        "YOR144C",
+        "YJR068W"
+    ],
+    "CPX-392": [
+        "YCL017C",
+        "YER048W-A"
+    ],
+    "CPX-1026": [
+        "YMR162C",
+        "YNR048W"
+    ],
+    "CPX-427": [
+        "YER025W",
+        "YJR007W",
+        "YPL237W"
+    ],
+    "CPX-535": [
+        "YPL195W",
+        "YGR261C",
+        "YBR288C",
+        "YJL024C"
+    ],
+    "CPX-537": [
+        "YIL033C",
+        "YPL203W"
+    ],
+    "CPX-1021": [
+        "YER166W",
+        "YNL323W"
+    ],
+    "CPX-1022": [
+        "YDR093W",
+        "YNL323W"
+    ],
+    "CPX-426": [
+        "YBL007C",
+        "YNL084C",
+        "YIR006C"
+    ],
+    "CPX-435": [
+        "YBR143C",
+        "YDR172W"
+    ],
+    "CPX-429": [
+        "YKR026C",
+        "YDR211W",
+        "YGR083C",
+        "YLR291C",
+        "YOR260W"
+    ],
+    "CPX-1015": [
+        "YNL103W",
+        "YIR017C",
+        "YDR253C"
+    ],
+    "CPX-1016": [
+        "YNL103W",
+        "YIR017C",
+        "YJR060W"
+    ],
+    "CPX-536": [
+        "YIL033C",
+        "YJL164C"
+    ],
+    "CPX-532": [
+        "YPR029C",
+        "YKL135C",
+        "YPL259C",
+        "YLR170C"
+    ],
+    "CPX-425": [
+        "YAL003W",
+        "YBR118W",
+        "YKL081W",
+        "YKL081W"
+    ],
+    "CPX-1045": [
+        "YAL042W",
+        "YML067C"
+    ],
+    "CPX-534": [
+        "YBL037W",
+        "YJR005W",
+        "YOL062C",
+        "YJR058C"
+    ],
+    "CPX-430": [
+        "YGR162W",
+        "YJL138C",
+        "YOL139C"
+    ],
+    "CPX-465": [
+        "YKR084C",
+        "YNL001W"
+    ],
+    "CPX-729": [
+        "YLR197W",
+        "YOR310C",
+        "YDL014W",
+        "YEL026W"
+    ],
+    "CPX-1151": [
+        "YJL071W"
+    ],
+    "CPX-1150": [
+        "YPL016W",
+        "YOR290C",
+        "YPR034W",
+        "YFL049W",
+        "YMR033W",
+        "YBR289W",
+        "YNR023W",
+        "YHL025W",
+        "YPL129W",
+        "YDR073W",
+        "YJL176C",
+        "YGR275W"
+    ],
+    "CPX-533": [
+        "YPR029C",
+        "YKL135C",
+        "YHL019C",
+        "YLR170C"
+    ],
+    "CPX-1018": [
+        "YAL026C",
+        "YCR094W"
+    ],
+    "CPX-692": [
+        "YMR043W",
+        "YCR039C",
+        "YCR039C",
+        "YMR043W"
+    ],
+    "CPX-693": [
+        "YCR040W",
+        "YMR043W",
+        "YCR040W",
+        "YMR043W"
+    ],
+    "CPX-977": [
+        "YJR086W",
+        "YJL157C",
+        "YAL041W",
+        "YOR212W"
+    ],
+    "CPX-571": [
+        "YIL033C",
+        "YKL166C"
+    ],
+    "CPX-574": [
+        "YPL203W",
+        "YIL033C",
+        "YKL166C"
+    ],
+    "CPX-599": [
+        "YNL232W",
+        "YHR069C",
+        "YOL142W",
+        "YGR195W",
+        "YGR095C",
+        "YGR158C",
+        "YDL111C",
+        "YCR035C",
+        "YDR280W",
+        "YOL021C",
+        "YOR001W"
+    ],
+    "CPX-813": [
+        "YOL110W",
+        "YLR246W"
+    ],
+    "CPX-684": [
+        "YCR039C"
+    ],
+    "CPX-695": [
+        "YJL005W",
+        "YNL138W"
+    ],
+    "CPX-768": [
+        "YML065W",
+        "YBR060C",
+        "YLL004W",
+        "YPR162C",
+        "YNL261W",
+        "YHR118C"
+    ],
+    "CPX-1028": [
+        "YDR141C",
+        "YNL297C",
+        "YIL048W",
+        "YBR164C"
+    ],
+    "CPX-1047": [
+        "YCR047C",
+        "YNR046W"
+    ],
+    "CPX-1053": [
+        "YNL222W",
+        "YAL043C",
+        "YLR115W",
+        "YGR156W",
+        "YKL018W",
+        "YDR195W",
+        "YDR301W",
+        "YJR093C",
+        "YER133W",
+        "YKR002W",
+        "YNL317W",
+        "YKL059C",
+        "YLR277C",
+        "YPR107C",
+        "YOR179C"
+    ],
+    "CPX-576": [
+        "YHR084W",
+        "YPL049C",
+        "YBR083W"
+    ],
+    "CPX-603": [
+        "YNL232W",
+        "YHR069C",
+        "YOL142W",
+        "YGR195W",
+        "YGR095C",
+        "YGR158C",
+        "YDL111C",
+        "YCR035C",
+        "YDR280W",
+        "YOL021C"
+    ],
+    "CPX-575": [
+        "YHR084W",
+        "YPL049C",
+        "YDR480W"
+    ],
+    "CPX-737": [
+        "YHR072W-A",
+        "YLR175W",
+        "YHR089C",
+        "YDL208W"
+    ],
+    "CPX-1068": [
+        "YNL189W",
+        "YLR347C"
+    ],
+    "CPX-1143": [
+        "YGR246C",
+        "YNL039W",
+        "YER148W"
+    ],
+    "CPX-1157": [
+        "YJL047C",
+        "YPR164W",
+        "YLR320W",
+        "YHR154W",
+        "YOL133W"
+    ],
+    "CPX-867": [
+        "YDL017W",
+        "YDR052C"
+    ],
+    "CPX-868": [
+        "YMR058W",
+        "YER145C"
+    ],
+    "CPX-869": [
+        "YBR207W",
+        "YFL041W"
+    ],
+    "CPX-1071": [
+        "YLR234W",
+        "YMR190C",
+        "YPL024W"
+    ],
+    "CPX-1091": [
+        "YPL167C",
+        "YIL139C"
+    ],
+    "CPX-1189": [
+        "YJR035W",
+        "YKL054C"
+    ],
+    "CPX-1142": [
+        "YKL186C",
+        "YPL169C"
+    ],
+    "CPX-1155": [
+        "YOL096C",
+        "YDR204W",
+        "YML110C",
+        "YGR255C",
+        "YLR201C",
+        "YOR125C"
+    ],
+    "CPX-1156": [
+        "YLR381W",
+        "YLR315W",
+        "YAL034W-A",
+        "YPR046W",
+        "YBR107C",
+        "YDR254W",
+        "YDR383C",
+        "YJR135C"
+    ],
+    "CPX-572": [
+        "YIL033C",
+        "YPL203W",
+        "YJL164C"
+    ],
+    "CPX-573": [
+        "YJL164C",
+        "YIL033C",
+        "YKL166C"
+    ],
+    "CPX-999": [
+        "YPL038W",
+        "YNL103W",
+        "YIR017C"
+    ],
+    "CPX-1042": [
+        "YML051W",
+        "YDR009W"
+    ],
+    "CPX-1052": [
+        "YML014W",
+        "YNR046W"
+    ],
+    "CPX-1043": [
+        "YML051W",
+        "YBR020W"
+    ],
+    "CPX-1044": [
+        "YML051W",
+        "YPL248C"
+    ],
+    "CPX-1125": [
+        "YDL099W",
+        "YDR517W"
+    ],
+    "CPX-995": [
+        "YKR038C",
+        "YGR262C",
+        "YKR095W-A",
+        "YML036W",
+        "YJL184W"
+    ],
+    "CPX-1140": [
+        "YER118C",
+        "YMR032W",
+        "YDL117W",
+        "YNL152W"
+    ],
+    "CPX-1141": [
+        "YPL082C",
+        "YER148W"
+    ],
+    "CPX-1149": [
+        "YGR186W",
+        "YGR005C",
+        "YPL129W"
+    ],
+    "CPX-1152": [
+        "YML099C",
+        "YMR042W",
+        "YMR043W",
+        "YDR173C"
+    ],
+    "CPX-1153": [
+        "YKL061W",
+        "YEL005C",
+        "YNL086W",
+        "YGL079W",
+        "YLR408C",
+        "YDR357C"
+    ],
+    "CPX-1407": [
+        "YLR445W",
+        "YDR446W"
+    ],
+    "CPX-1408": [
+        "YFL008W",
+        "YIL026C",
+        "YJL074C",
+        "YPR007C"
+    ],
+    "CPX-1409": [
+        "YMR093W",
+        "YDR324C",
+        "YDR398W",
+        "YGR128C",
+        "YHR196W",
+        "YPL126W",
+        "YJL109C"
+    ],
+    "CPX-1410": [
+        "YCR057C",
+        "YLR129W",
+        "YLR409C",
+        "YLR222C",
+        "YJL069C",
+        "YDR449C"
+    ],
+    "CPX-1412": [
+        "YNR051C",
+        "YER151C"
+    ],
+    "CPX-1229": [
+        "YPL075W",
+        "YNL216W",
+        "YNL199C"
+    ],
+    "CPX-1249": [
+        "YKL193C",
+        "YER133W"
+    ],
+    "CPX-1315": [
+        "YHR077C",
+        "YMR080C",
+        "YGR072W"
+    ],
+    "CPX-1344": [
+        "YOR181W",
+        "YBL007C"
+    ],
+    "CPX-1276": [
+        "YLR256W",
+        "YPL240C",
+        "YNL064C",
+        "YCL037C",
+        "YLL024C",
+        "YMR186W",
+        "YAL005C"
+    ],
+    "CPX-1277": [
+        "YDR123C",
+        "YOL108C"
+    ],
+    "CPX-1279": [
+        "YNL015W",
+        "YGR209C"
+    ],
+    "CPX-1303": [
+        "YGL051W",
+        "YAR033W"
+    ],
+    "CPX-1314": [
+        "Q0120",
+        "YLR382C"
+    ],
+    "CPX-1316": [
+        "YLR430W",
+        "YNL251C",
+        "YPL190C"
+    ],
+    "CPX-1317": [
+        "YLL010C",
+        "YOR043W"
+    ],
+    "CPX-1318": [
+        "YLR019W",
+        "YOR043W"
+    ],
+    "CPX-1322": [
+        "YPL153C",
+        "YJL115W"
+    ],
+    "CPX-1332": [
+        "YGL246C",
+        "YOR048C"
+    ],
+    "CPX-1333": [
+        "YNL246W",
+        "YLL002W",
+        "YNL246W",
+        "YLL002W"
+    ],
+    "CPX-1335": [
+        "YDR388W",
+        "YCR009C"
+    ],
+    "CPX-1341": [
+        "YHR098C",
+        "YPR181C"
+    ],
+    "CPX-1378": [
+        "YJL036W",
+        "YDR425W"
+    ],
+    "CPX-1371": [
+        "YNL334C",
+        "YMR096W"
+    ],
+    "CPX-1372": [
+        "YMR176W",
+        "YNL330C",
+        "YGL131C"
+    ],
+    "CPX-1413": [
+        "YJR044C",
+        "YOL129W"
+    ],
+    "CPX-1613": [
+        "YDR224C",
+        "YOL012C",
+        "YNL031C",
+        "YNL030W"
+    ],
+    "CPX-1614": [
+        "YBL002W",
+        "YOL012C",
+        "YNL031C",
+        "YNL030W"
+    ],
+    "CPX-1377": [
+        "YJL036W",
+        "YDL113C"
+    ],
+    "CPX-1379": [
+        "YGR244C",
+        "YOR142W"
+    ],
+    "CPX-1384": [
+        "YDR310C",
+        "YOR279C",
+        "YOL068C"
+    ],
+    "CPX-1386": [
+        "YLR394W",
+        "YGL249W",
+        "YIL073C",
+        "YHR153C"
+    ],
+    "CPX-1387": [
+        "YLR445W",
+        "YDR285W",
+        "YLR263W",
+        "YIL072W",
+        "YDR446W"
+    ],
+    "CPX-1414": [
+        "YPR066W",
+        "YPL003W"
+    ],
+    "CPX-1415": [
+        "YJR094C",
+        "YDR207C"
+    ],
+    "CPX-1417": [
+        "YLR116W",
+        "YKL074C"
+    ],
+    "CPX-1419": [
+        "YPL124W",
+        "YKL042W",
+        "YDR356W",
+        "YBR109C"
+    ],
+    "CPX-1606": [
+        "YOL010W",
+        "YPL217C"
+    ],
+    "CPX-1165": [
+        "YJL047C",
+        "YPR164W",
+        "YLR320W",
+        "YPR135W",
+        "YOL133W"
+    ],
+    "CPX-1166": [
+        "YJL047C",
+        "YPR164W",
+        "YOL133W",
+        "YDR363W"
+    ],
+    "CPX-1167": [
+        "YJL047C",
+        "YPR164W",
+        "YOL133W",
+        "YNL261W"
+    ],
+    "CPX-1364": [
+        "YOL034W",
+        "YEL019C",
+        "YLR383W",
+        "YML023C",
+        "YER038C",
+        "YDL105W",
+        "YDR288W",
+        "YLR007W"
+    ],
+    "CPX-1599": [
+        "YLR167W",
+        "YGL123W",
+        "YNL178W",
+        "YJR123W",
+        "YOR369C",
+        "YDR064W",
+        "YOL040C",
+        "YMR116C",
+        "YHL015W"
+    ],
+    "CPX-1200": [
+        "YPL075W",
+        "YNL216W"
+    ],
+    "CPX-1616": [
+        "YGL206C",
+        "YGR167W"
+    ],
+    "CPX-1179": [
+        "YLR270W"
+    ],
+    "CPX-1197": [
+        "YDR200C",
+        "YMR052W",
+        "YFR008W",
+        "YMR029C",
+        "YLR238W",
+        "YNL127W"
+    ],
+    "CPX-1601": [
+        "YGL103W",
+        "YFR032C-A",
+        "YGL030W",
+        "YBL092W",
+        "YLR325C",
+        "YJL189W",
+        "YLR340W",
+        "YOR063W",
+        "YPL131W",
+        "YLR075W"
+    ],
+    "CPX-1603": [
+        "YPL118W",
+        "YDL045W-A",
+        "YNL137C",
+        "YNL306W",
+        "YDR036C",
+        "YGL129C",
+        "YBL090W",
+        "YDR337W",
+        "YMR188C",
+        "YGR084C",
+        "YJR113C",
+        "YBR251W",
+        "YDR041W",
+        "YLR204W",
+        "YHL004W",
+        "YDR494W",
+        "YDR347W",
+        "YBR146W",
+        "YER050C",
+        "YNR036C",
+        "YDR175C",
+        "YNL081C",
+        "YJR101W",
+        "YHR059W",
+        "Q0140",
+        "YNR037C",
+        "YKL003C",
+        "YGR165W",
+        "YIL093C",
+        "YGR215W",
+        "YOR158W",
+        "YMR158W",
+        "YPR166C",
+        "YPL013C"
+    ],
+    "CPX-1178": [
+        "YKR054C",
+        "YDR424C",
+        "YDR488C",
+        "YKR054C",
+        "YMR299C"
+    ],
+    "CPX-1231": [
+        "YOR178C",
+        "YER133W"
+    ],
+    "CPX-1266": [
+        "YER133W",
+        "YDR028C"
+    ],
+    "CPX-1267": [
+        "YBR050C",
+        "YER133W"
+    ],
+    "CPX-1307": [
+        "YHR193C",
+        "YDR252W"
+    ],
+    "CPX-1331": [
+        "Q0115",
+        "YIR021W"
+    ],
+    "CPX-1342": [
+        "YIL112W",
+        "YOL068C",
+        "YDR155C",
+        "YCR033W",
+        "YKR029C",
+        "YGL194C",
+        "YBR103W"
+    ],
+    "CPX-1382": [
+        "YMR028W",
+        "YPL152W",
+        "YDL188C"
+    ],
+    "CPX-1604": [
+        "YCL059C",
+        "YDL014W",
+        "YMR229C",
+        "YLR186W",
+        "YOR310C",
+        "YDL153C",
+        "YEL026W",
+        "YHR065C",
+        "YOR004W",
+        "YER127W",
+        "YHR169W",
+        "YKL078W",
+        "YDR021W",
+        "YMR290C",
+        "YGL120C",
+        "YGL171W",
+        "YLR430W",
+        "YLR197W",
+        "YBL004W",
+        "YMR128W",
+        "YIL091C",
+        "YKL099C",
+        "YML093W",
+        "YER082C",
+        "YNR054C",
+        "YJL033W",
+        "YOR078W",
+        "YLL011W",
+        "YBR247C",
+        "YDR365C",
+        "YLR068W",
+        "YGR280C",
+        "YNL132W",
+        "YKL143W",
+        "YPR112C",
+        "YKL009W",
+        "YDL213C",
+        "YJL010C",
+        "YGR159C",
+        "YEL055C",
+        "YPR137W",
+        "YOR287C",
+        "YLR336C",
+        "YGR081C",
+        "YKR060W",
+        "YDR339C",
+        "YGR251W"
+    ],
+    "CPX-1607": [
+        "YLR197W",
+        "YBL004W",
+        "YMR128W",
+        "YIL091C",
+        "YKL099C",
+        "YML093W",
+        "YER082C",
+        "YNR054C",
+        "YJL033W",
+        "YOR078W",
+        "YLL011W",
+        "YBR247C",
+        "YDR365C",
+        "YLR068W",
+        "YGR280C",
+        "YNL132W",
+        "YKL143W",
+        "YPR112C",
+        "YKL009W",
+        "YDL213C",
+        "YJL010C",
+        "YGR159C",
+        "YEL055C",
+        "YPR137W",
+        "YOR287C",
+        "YLR336C",
+        "YGR081C",
+        "YKR060W",
+        "YDR339C",
+        "YGR251W",
+        "YCL059C",
+        "YDL014W",
+        "YMR229C",
+        "YLR186W",
+        "YOR310C",
+        "YDL153C",
+        "YEL026W",
+        "YHR065C",
+        "YOR004W",
+        "YER127W",
+        "YHR169W",
+        "YKL078W",
+        "YDR021W",
+        "YMR290C",
+        "YGL120C",
+        "YGL171W",
+        "YLR430W"
+    ],
+    "CPX-1608": [
+        "YLR197W",
+        "YBL004W",
+        "YMR128W",
+        "YIL091C",
+        "YKL099C",
+        "YML093W",
+        "YER082C",
+        "YNR054C",
+        "YJL033W",
+        "YOR078W",
+        "YLL011W",
+        "YBR247C",
+        "YDR365C",
+        "YLR068W",
+        "YGR280C",
+        "YNL132W",
+        "YKL143W",
+        "YPR112C",
+        "YKL009W",
+        "YDL213C",
+        "YJL010C",
+        "YGR159C",
+        "YEL055C",
+        "YPR137W",
+        "YOR287C",
+        "YLR336C",
+        "YGR081C",
+        "YKR060W",
+        "YDR339C",
+        "YGR251W",
+        "YCL059C",
+        "YDL014W",
+        "YMR229C",
+        "YLR186W",
+        "YOR310C",
+        "YDL153C",
+        "YEL026W",
+        "YHR065C",
+        "YOR004W",
+        "YER127W",
+        "YHR169W",
+        "YKL078W",
+        "YDR021W",
+        "YMR290C",
+        "YGL120C",
+        "YGL171W",
+        "YLR430W"
+    ],
+    "CPX-1610": [
+        "YNL031C",
+        "YBL002W",
+        "YBL003C",
+        "YNL030W"
+    ],
+    "CPX-1611": [
+        "YDR224C",
+        "YBL003C",
+        "YNL031C",
+        "YNL030W"
+    ],
+    "CPX-1612": [
+        "YDR224C",
+        "YDR225W",
+        "YNL031C",
+        "YNL030W"
+    ],
+    "CPX-1190": [
+        "YOR223W",
+        "YOL073C",
+        "YDL091C",
+        "YKL034W"
+    ],
+    "CPX-1365": [
+        "YGR009C",
+        "YPL232W"
+    ],
+    "CPX-1198": [
+        "YHR172W",
+        "YLR212C",
+        "YNL126W",
+        "YLR212C"
+    ],
+    "CPX-1370": [
+        "YMR095C",
+        "YMR096W"
+    ],
+    "CPX-1230": [
+        "YER133W",
+        "YNL233W"
+    ],
+    "CPX-1269": [
+        "YNL158W",
+        "YBR004C"
+    ],
+    "CPX-1275": [
+        "YDR331W",
+        "YLR088W",
+        "YDR434W",
+        "YHR188C",
+        "YLR459W",
+        "YLR088W",
+        "YHR188C",
+        "YDR331W",
+        "YDR434W",
+        "YLR459W"
+    ],
+    "CPX-1287": [
+        "YGL075C",
+        "YPL255W"
+    ],
+    "CPX-1380": [
+        "YMR028W",
+        "YPL152W",
+        "YDL134C"
+    ],
+    "CPX-1381": [
+        "YEL013W",
+        "YHR195W"
+    ],
+    "CPX-1383": [
+        "YDR108W",
+        "YBR254C",
+        "YDR246W",
+        "YDR472W",
+        "YOR115C",
+        "YKR068C",
+        "YML077W"
+    ],
+    "CPX-1418": [
+        "YBR237W"
+    ],
+    "CPX-1470": [
+        "YBR109C",
+        "YMR109W"
+    ],
+    "CPX-1319": [
+        "YGR170W",
+        "YNL264C"
+    ],
+    "CPX-1320": [
+        "YEL037C",
+        "YPL096W"
+    ],
+    "CPX-1323": [
+        "YDL126C",
+        "YEL037C",
+        "YDL190C"
+    ],
+    "CPX-1295": [
+        "YNL085W",
+        "YGR178C"
+    ],
+    "CPX-1306": [
+        "YHR193C",
+        "YPL037C"
+    ],
+    "CPX-1602": [
+        "YDR296W",
+        "YBR122C",
+        "YDR405W",
+        "YMR024W",
+        "YOR150W",
+        "YDR237W",
+        "YBR268W",
+        "YNL005C",
+        "YNL185C",
+        "YCR003W",
+        "YHR147C",
+        "YLR312W-A",
+        "YML025C",
+        "YCR046C",
+        "YLR439W",
+        "YEL050C",
+        "YKR085C",
+        "YKR006C",
+        "YPL173W",
+        "YNL284C",
+        "YJL063C",
+        "YMR193W",
+        "YBR282W",
+        "YGR076C",
+        "YNL252C",
+        "YPL183W-A",
+        "YGR220C",
+        "YMR286W",
+        "YKL138C",
+        "YML009C",
+        "YDR462W",
+        "YBL038W",
+        "YDL202W",
+        "YJL096W",
+        "YKL170W",
+        "YNL122C",
+        "YDR322W",
+        "YCR071C",
+        "YDR116C",
+        "YNL177C",
+        "YMR225C",
+        "YPR100W",
+        "YKL167C",
+        "YNR022C",
+        "YDR115W",
+        "YGL068W"
+    ],
+    "CPX-1340": [
+        "YDR113C",
+        "YGR098C"
+    ],
+    "CPX-1191": [
+        "YGR003W",
+        "YJR052W",
+        "YPL046C",
+        "YBR114W"
+    ],
+    "CPX-1420": [
+        "YKL042W",
+        "YNL225C"
+    ],
+    "CPX-1421": [
+        "YKL014C",
+        "YJR041C",
+        "YLR221C",
+        "YNR038W",
+        "YOL144W"
+    ],
+    "CPX-1422": [
+        "YKL033W",
+        "YGR099W",
+        "YJR136C"
+    ],
+    "CPX-1423": [
+        "YLR203C",
+        "YJL062W-A",
+        "YML129C",
+        "YJR045C"
+    ],
+    "CPX-1424": [
+        "YFL037W",
+        "YML085C"
+    ],
+    "CPX-1425": [
+        "YFL037W",
+        "YML124C"
+    ],
+    "CPX-3384": [
+        "YKR063C",
+        "YLL035W",
+        "YLL035W",
+        "YKR063C"
+    ],
+    "CPX-1270": [
+        "YCL052C",
+        "YJR013W"
+    ],
+    "CPX-1500": [
+        "YBR109C",
+        "YKL129C"
+    ],
+    "CPX-1192": [
+        "YMR054W",
+        "YEL027W",
+        "YPL234C",
+        "YHR026W",
+        "YLR447C",
+        "YCL005W-A",
+        "YDL185W",
+        "YBR127C",
+        "YOR332W",
+        "YKL080W",
+        "YGR020C",
+        "YEL051W",
+        "YHR039C-A",
+        "YPR036W"
+    ],
+    "CPX-1501": [
+        "YGL106W",
+        "YAL029C",
+        "YBR109C"
+    ],
+    "CPX-1556": [],
+    "CPX-3342": [
+        "YLR404W",
+        "YCL005W"
+    ],
+    "CPX-1193": [
+        "YOR270C",
+        "YEL027W",
+        "YPL234C",
+        "YHR026W",
+        "YLR447C",
+        "YCL005W-A",
+        "YDL185W",
+        "YBR127C",
+        "YOR332W",
+        "YKL080W",
+        "YGR020C",
+        "YEL051W",
+        "YHR039C-A",
+        "YPR036W"
+    ]
+}

@@ -1,14 +1,11 @@
 
 \documentclass[sigconf]{acmart}
 
-\usepackage{booktabs} % For formal tables
-
-
 % Copyright
-%\setcopyright{none}
+\setcopyright{none}
 %\setcopyright{acmcopyright}
 %\setcopyright{acmlicensed}
-\setcopyright{rightsretained}
+%\setcopyright{rightsretained}
 %\setcopyright{usgov}
 %\setcopyright{usgovmixed}
 %\setcopyright{cagov}
@@ -16,10 +13,10 @@
 
 
 % DOI
-\acmDOI{10.475/123_4}
+\acmDOI{}
 
 % ISBN
-\acmISBN{123-4567-24-567/08/06}
+\acmISBN{}
 
 %Conference
 \acmConference[]{}{}{}
@@ -208,6 +205,7 @@ However, for the case where $i$ is in $S$ we, instead, consider the value $\mu_i
 In many cases, a query set will not be fully represented by the partitions found within the network, this is further elaborated in the following section.
 
 \subsection{Statistically significant query sets}
+\label{sec:query_sign}
 Naturally, not every label set will be of high quality or represented within the community structure of a network.
 This is established further in section \ref{sec:go_labels} which tests gene ontology terms (GO) on protein interaction networks.
 In this case, all the labels relate to the real function of the vertices, however, GO is a hierarchical system and many terms are extremely general.
@@ -289,9 +287,6 @@ This indicates that the method is capable of uncovering latent overlapping membe
      \label{fig:auc_overlap}
 \end{figure*}
 
-\subsubsection{Cluster significance}
-In this section we evaluate the method for testing labels to discover significant communities by comparing the scores to randomly selected communities.
-In order to do this, we 
 
 \subsection{Real networks}
 
@@ -367,7 +362,7 @@ The real networks used are listed as follows:
 %     \label{fig:real_network_nodwise_classifiers}
 % \end{figure*}
 
-
+\subsubsection{High quality labels}
 We tested the method on each real network described in section \ref{sec:real_network_descs}.
 Figure \ref{fig:real_network_results} shows the mean ROC scores for each community in the relevant networks, organised by size of community at increasing numbers levels of query seed nodes.
 On the EU emails and Yeast PPI dataasets, for all communities tested with 3 or more nodes, mean AUC scores calculated with the cross validation method described in section \ref{sec:cross_validation} were above 0.6.
@@ -378,8 +373,15 @@ Here, binary classification is performed on each node for which community data i
 The $mu_i({i})$ score is used as a binary classifier.
 For the EU email and Yeast PPI the average ROC AUC score to classify node membership inside communities is 0.9 and 0.93, respectively.
 
-\subsection{Gene ontology data}
+\subsubsection{Gene ontology data}
 \label{sec:go_labels}
+In this section we analyse the performance of our method on gene ontology data for the protein interaction networks in this study.
+Unlike the the curated protein complexes and known departmental memberships in Section \ref{sec:real_network_labels}, gene ontology cannot be considered fully relevant in all cases.
+Specific terms may have no relevance in the context of protein-protein interactions, and many terms are extremely general.
+Consequently, we cannot expect the labels to perform well in this context.
+Therefore, we use the query set significance testing outlined in Section \ref{sec:query_sign}.
+The data used in this study contains all non-redundant gene ontology terms available for proteins contained within a network from AmiGO \cite{carbon2008amigo}.
+The purpose of this test is not to find biologically relevant information but, rather, to show how the method presented here can be tuned to evaluate poor quality label sets.
 
 \section{Discussion}
 The semi-supervised method for vertex classification presented in this work has shown to have good results on both synthetic benchmarks and real-world datasets.
