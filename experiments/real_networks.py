@@ -10,6 +10,8 @@ import numpy as np
 import os
 import progressbar
 import pandas as pd
+import matplotlib as mpl
+mpl.use('Agg')
 import matplotlib.pyplot as plt
 from scipy import interp
 
