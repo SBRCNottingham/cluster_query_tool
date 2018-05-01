@@ -38,7 +38,7 @@
 
 \author{James P Gilbert}
 \affiliation{%
-  \institution{Synthetic biology research centre}
+  \institution{Synthetic Biology Research Centre}
   \streetaddress{University of Nottingham}
   \city{Nottingham}
   \country{United Kingdom}
@@ -346,11 +346,11 @@ The real networks used are listed as follows:
     \end{subfigure}
     \begin{subfigure}[b]{0.48\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{images/rocs/arabidopsis_ppi_go_complexes.png}
+        \includegraphics[width=\textwidth]{images/rocs/ecoli_ppi.png}
         \caption{E coli PPI protein complexes}
     \end{subfigure}
     \caption{ROC scores for the high quality labels for real networks described in Section \ref{sec:real_network_descs}. 
-    Results represent the averages over all label sets.
+    Results represent the averages over all reciever operating characteristic scores from all samples of label sets with the cross validation procedure described in \ref{sec:cross_validation}.
     Shaded areas indicate standard deviations.}
     \label{fig:quality_label_rocs}
 \end{figure*}
@@ -431,13 +431,14 @@ However, this approach requires the community landscape to contain many local ma
 Similarly, the method presented here requires both some labelled data and the labels to be represented well within the topology of the underlying network.
 The approach presented here differs from other ensemble approaches in that the objective is to provide a probabilistic framework for label classification.
 This approach performs extremely well on both synthetically generated networks and real-world ground truth communities with relatively small sets of labels.
+However, in a practical application this would still require selecting some form of arbitrary cut off for defining \textit{crisp} communities.
 
-This work presents a number of interesting potential future avenues for research, such as observing how query sets change in time dynamic or multi-scale networks.
-Similarly, further analysis could be conducted to test how large the set of high value partitions needs to be, and how applicable this approach can be to very large graphs.
+This also work presents a number of interesting potential future avenues for research, such as observing how query sets change in time dynamic or multi-scale networks.
 
 \section*{Acknowledgements}
 We are grateful for access to the University of Nottingham High Performance Computing Facility for supporting this work.
 This work was supported by the Biotechnology and Biological Sciences Research Council grant BB/L013940/1.
+We would like to thank Nicole Pearcy for assistance with this manuscript.
 
 \bibliographystyle{acm} 
 \bibliography{references}
