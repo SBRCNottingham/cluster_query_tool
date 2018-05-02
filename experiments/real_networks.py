@@ -158,7 +158,7 @@ def get_rocs(mmatrix, nmap, comms, seed_sizes=(1, 3, 7, 15)):
 
 def psize_scoring(mmatrix, nmap, comms, seed_sizes=(1, 3, 7, 15)):
     funcs = []
-    for mat_size in np.linspace(10, 2000, 10):
+    for mat_size in np.linspace(1, 2000, 100, dtype=int):
         sub_mat = mmatrix.transpose()[:int(mat_size)].transpose()
         for cid, comm in comms.items():
             cnodes = map_com(comm, nmap)
@@ -255,7 +255,7 @@ def generate_results(network, overwrite=False):
         with open(sign_df_path, "wb+") as sig_df:
            pickle.dump(sigscores, sig_df)
 
-    roc_res_partitions = os.path.join("results", network) + "auc_res_partitions.p"
+    roc_res_partitions = os.path.join("results", network) + "auc_res_partitions2.p"
     if overwrite or not os.path.exists(roc_res_partitions):
         graph, comms, mmatrix, nmap = load_network(dt["path"], network, dt["clusters"], dt["index"], dt["node_type"])
         psize_scores = psize_scoring(mmatrix, nmap, comms)
@@ -277,17 +277,23 @@ def plot_ensemble_size_impact(df):
 
     xvals = sorted(df["mat_size"].unique())
 
+    ax.set_xlabel("Number of partition samples")
+    ax.set_ylabel("Mean AUC score")
+
+    ax.set_xlim([1, max(xvals) + 10])
+
     for seed_size in df["seed"].unique():
         scores = []
         stds = []
+        sdf = df.loc[df["seed"] == seed_size]
         for msize in xvals:
-            sdf = df.loc[df["mat_size"] == msize and df["seed"] == seed_size]
+            sdf2 = sdf.loc[sdf["mat_size"] == msize]
+            scores.append(sdf2.mean()["auc"])
+            stds.append(sdf2.std()["auc"])
 
-            scores.append(sdf.mean()["auc"])
-            stds.append(sdf.std()["auc"])
-
-        ax.scatter(xvals, scores)
-        ax.yerror(xvals, scores, yerror=stds)
+        ax.plot(xvals, scores, label="{} seed node(s)".format(seed_size), color=colours[seed_size])
+        #ax.errorbar(xvals, scores, yerr=stds)
+    ax.legend()
     fig.tight_layout()
     return fig
 
@@ -306,7 +312,7 @@ def handle_results(network):
     fig.savefig("article/images/rocs/{}.svg".format(network))
     fig.savefig("article/images/rocs/{}.eps".format(network))
 
-    roc_res_partitions = os.path.join("results", network) + "auc_res_partitions.p"
+    roc_res_partitions = os.path.join("results", network) + "auc_res_partitions2.p"
     with open(roc_res_partitions, "rb") as rf:
         results = pickle.load(rf)
 
@@ -314,15 +320,15 @@ def handle_results(network):
 
     fig = plot_ensemble_size_impact(df)
 
-    fig.savefig("article/images/{}_psize_auc.png")
-    fig.savefig("article/images/{}_psize_auc.eps")
-    fig.savefig("article/images/{}_psize_auc.svg")
+    fig.savefig("article/images/{}_psize_auc.png".format(network))
+    fig.savefig("article/images/{}_psize_auc.eps".format(network))
+    fig.savefig("article/images/{}_psize_auc.svg".format(network))
 
     return df
 
 
 if __name__ == "__main__":
-    for n in ["eu_email"]:
+    for n in real_networks:
         print(n)
         generate_results(n)
         handle_results(n)
