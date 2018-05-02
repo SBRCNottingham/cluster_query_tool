@@ -14,7 +14,7 @@ import itertools
 from numba import jit
 
 logger = logging.getLogger("cigram.generators")
-logger.setLevel(logging.WARNING)
+logger.setLevel(logging.ERROR)
 
 
 def param_modifier(params, param, values):
