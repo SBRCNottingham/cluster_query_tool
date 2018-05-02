@@ -61,6 +61,7 @@ def auc_compute(seed, n, mu, results_folder):
 
 def get_net_significance(n, mu, seed):
     pset = _base_params.copy()
+    mu = float("{:.2f}".format(mu))
     pset['n'] = int(n)
     pset['mu'] = mu
     pset['seed'] = int(seed)
