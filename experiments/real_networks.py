@@ -162,7 +162,7 @@ def gen_auc(mmatrix, comm, s, cid):
     funcs = []
     for mat_size in np.linspace(10, 2000, 10):
         # Get a sub matrix of specified size
-        sub_mat = mmatrix.transpose()[:mat_size].transpose()
+        sub_mat = mmatrix.transpose()[:int(mat_size)].transpose()
 
         for samp in samples:
             funcs.append(delayed(samp_auc)(samp, sub_mat, comm, cid, s, mat_size))
