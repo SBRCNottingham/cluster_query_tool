@@ -12,6 +12,10 @@ import json
 import os
 from joblib import Parallel, delayed
 from itertools import product, chain
+from matplotlib import pyplot as plt
+import glob
+import pandas as pd
+
 
 _base_params = dict(
     average_degree=20,
@@ -88,14 +92,51 @@ def csign(n, results_folder, mu_steps):
     :return:
     """
 
-    jobs = (delayed(get_net_significance)(n, mu, seed) for mu, seed in product(
-        np.linspace(0, 1, mu_steps), range(1, 11)))
+    js = product(np.linspace(0, 1, mu_steps), range(1, 11))
+    jobs = (delayed(get_net_significance)(n, mu, seed) for mu, seed in js)
 
-    results = Parallel(n_jobs=16)(jobs)
+    results = Parallel(n_jobs=16, verbose=5)(jobs)
     results_path = os.path.join(os.path.abspath(results_folder), "significance.json")
     with open(results_path, "w+") as rp:
         results = list(chain(*results))
         json.dump(results, rp)
+
+
+@click.command()
+@click.argument("results_folder")
+def plot_csign(results_folder):
+    results_path = os.path.join(os.path.abspath(results_folder), "significance.json")
+    with(open(results_path)) as rp:
+        results = json.load(rp)
+
+    df = pd.DataFrame(results, columns=["N", "SEED", "MU", "CID", "qscore", "c_size" ] )
+    thresh = 0.001
+
+    xvals= sorted(df["MU"].unique())
+
+    fig, ax = plt.subplots()
+    fig.set_dpi(90)
+    ax.set_ylabel("Fraction signficant comms")
+    ax.set_xlabel("Mixing coefficient $\mu$")
+    ax.set_ylim(0.0, 1.01)
+    ax.set_xlim(0.0, 1.01)
+
+    sign = []
+    std = []
+    for m in xvals:
+        frac_signficant = []
+        sdf = df.loc(df["MU"] == m)
+        for s in sdf.loc["SEED"].unique():
+            sdf2 = sdf.loc(sdf["SEED"] == s)
+            fr = (sdf2["qscore"] > thresh).sum()
+
+            frac_signficant.append(((len(sdf) - fr)/len(sdf)))
+
+        sign.append(np.mean(frac_signficant))
+        std.append(np.mean(frac_signficant))
+
+    plt.scatter(xvals, sign)
+    plt.errorbar(xvals, sign, yerr=std)
 
 
 @click.command()
@@ -174,10 +215,6 @@ python {_file} auc_compute {n} {mu:.2f} $JOB {results_folder}
 @click.command()
 @click.argument("n")
 def gen_figure(n):
-    import json
-    from matplotlib import pyplot as plt
-    import glob
-    import pandas as pd
     rows = []
 
     for f in glob.glob("hpc_results/lfr_no_overlap_{}/*.json".format(n)):
