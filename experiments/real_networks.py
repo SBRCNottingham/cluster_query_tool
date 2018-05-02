@@ -31,12 +31,6 @@ real_networks = {
         "node_type": "str",
     },
 
-    "arabidopsis_ppi_go_complexes": {
-        "path": "data/arabidopsis_ppi/arabidopsis_ppi.edgelist",
-        "clusters": "data/arabidopsis_ppi/go_complexes.json",
-        "index": "data/arabidopsis_ppi/index.json.xz",
-        "node_type": "str",
-    },
     "yeast_ppi": {
         "path": "data/yeast_ppi/yeast.edgelist",
         "clusters": "data/yeast_ppi/yeast_ppi.json",
@@ -121,6 +115,21 @@ def samp_roc_and_auc(samp, mmatrix, comm, cid, s):
     return cid, s, tpr, fnr, auc
 
 
+def samp_auc(samp, mmatrix, comm, cid, s, mat_size):
+    ncom = np.array([x for x in range(mmatrix.shape[0]) if x not in samp])
+    vec = louvain_consensus.query_vector(np.array(samp), mmatrix)
+
+    def inc(x):
+        if x in comm:
+            return 1
+        return 0
+
+    y_true = np.array([inc(x) for x in ncom])
+    y_prob = vec[ncom]
+    auc = fast_auc(y_true, y_prob)
+    return cid, s, mat_size, auc
+
+
 def gen_roc_curves(mmatrix, comm, s, cid):
     funcs = (delayed(samp_roc_and_auc)(samp, mmatrix, comm, cid, s) for samp in unique_sampler(comm, s))
     results = Parallel(n_jobs=cpu_count(), backend='threading')(funcs)
@@ -144,6 +153,33 @@ def get_rocs(mmatrix, nmap, comms, seed_sizes=(1, 3, 7, 15)):
         for s in seed_sizes:
             if len(comm) > s:
                 res += gen_roc_curves(mmatrix, cnodes, s, cid)
+    return res
+
+
+def gen_auc(mmatrix, comm, s, cid):
+
+    samples = unique_sampler(comm, s)
+    funcs = []
+    for mat_size in np.linspace(10, 2000, 10):
+        # Get a sub matrix of specified size
+        sub_mat = mmatrix.transpose()[:mat_size].transpose()
+
+        for samp in samples:
+            funcs.append(delayed(samp_auc)(samp, sub_mat, comm, cid, s, mat_size))
+
+    results = Parallel(n_jobs=cpu_count(), backend='threading')(funcs)
+    return list(results)
+
+
+def psize_scoring(mmatrix, nmap, comms, seed_sizes=(1, 3, 7, 15)):
+    res = []
+
+    for cid, comm in progressbar.progressbar(comms.items()):
+        cnodes = map_com(comm, nmap)
+
+        for s in seed_sizes:
+            if len(comm) > s:
+                res += gen_auc(mmatrix, cnodes, s, cid)
     return res
 
 
@@ -228,6 +264,14 @@ def generate_results(network, overwrite=False):
         print(network, "gen_sig_scores")
         with open(sign_df_path, "wb+") as sig_df:
            pickle.dump(sigscores, sig_df)
+
+    roc_res_partitions = os.path.join("results", network) + "auc_res_partitions.p"
+    if overwrite or not os.path.exists(roc_res_partitions):
+        graph, comms, mmatrix, nmap = load_network(dt["path"], network, dt["clusters"], dt["index"], dt["node_type"])
+        psize_scores = psize_scoring(mmatrix, nmap, comms)
+
+        with open(roc_res_partitions, "wb+") as auc_res_df:
+           pickle.dump(psize_scores, auc_res_df)
 
 
 def handle_results(network):
