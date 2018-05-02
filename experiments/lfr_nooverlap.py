@@ -269,4 +269,5 @@ if __name__ == "__main__":
     cli.add_command(auc_compute)
     cli.add_command(gen_figure)
     cli.add_command(csign)
+    cli.add_command(plot_csign)
     cli()
