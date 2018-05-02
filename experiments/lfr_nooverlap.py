@@ -105,8 +105,9 @@ def csign(n, results_folder, mu_steps):
 
 
 @click.command()
+@click.argument("n")
 @click.argument("results_folder")
-def plot_csign(results_folder):
+def plot_csign(n, results_folder):
     results_path = os.path.join(os.path.abspath(results_folder), "significance.json")
     with(open(results_path)) as rp:
         results = json.load(rp)
@@ -137,8 +138,11 @@ def plot_csign(results_folder):
         sign.append(np.mean(frac_signficant))
         std.append(np.mean(frac_signficant))
 
-    plt.scatter(xvals, sign)
-    plt.errorbar(xvals, sign, yerr=std)
+    ax.scatter(xvals, sign)
+    ax.errorbar(xvals, sign, yerr=std)
+    fig.savefig("article/images/lfr_sig_{}.eps".format(n))
+    fig.savefig("article/images/lfr_sig_{}.svg".format(n))
+    fig.savefig("article/images/lfr_sig_{}.png".format(n))
 
 
 @click.command()
