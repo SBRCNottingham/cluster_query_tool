@@ -67,6 +67,7 @@ def get_net_significance(n, mu, seed):
     graph, communities, index = get_benchmark(pset)
     membership_ma, nmap = membership_matrix(graph.nodes(), index)
 
+    print(pset)
     rows = []
     for c in communities:
         query = np.array([nmap[x] for x in communities[c]])
