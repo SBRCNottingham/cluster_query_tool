@@ -92,7 +92,7 @@ def csign(n, results_folder, mu_steps):
     :return:
     """
 
-    js = product(np.linspace(0, 1, mu_steps), range(1, 11))
+    js = list(product(np.linspace(0, 1, mu_steps), range(1, 11)))
     jobs = (delayed(get_net_significance)(n, mu, seed) for mu, seed in js)
 
     results = Parallel(n_jobs=16, verbose=5)(jobs)
