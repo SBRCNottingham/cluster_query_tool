@@ -73,9 +73,9 @@ def get_net_significance(n, mu, seed):
         qscore = quality_score(query, membership_ma)
 
         # N, SEED, MU, CID, qscore, len_query
-        row = [
+        row = (
             n, seed, mu, c, qscore, len(query),
-        ]
+        )
         rows.append(row)
     return rows
 
