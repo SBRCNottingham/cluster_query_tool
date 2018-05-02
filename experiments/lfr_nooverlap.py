@@ -12,6 +12,8 @@ import json
 import os
 from joblib import Parallel, delayed
 from itertools import product, chain
+import matplotlib as mpl
+mpl.use('Agg')
 from matplotlib import pyplot as plt
 import glob
 import pandas as pd
