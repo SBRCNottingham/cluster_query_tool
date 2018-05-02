@@ -80,7 +80,7 @@ def get_net_significance(n, mu, seed):
 @click.argument("n")
 @click.argument("results_folder")
 @click.option("--mu_steps", default=10)
-def comm_significance(n, results_folder, mu_steps):
+def csign(n, results_folder, mu_steps):
     """
     Calculate the fraction of statistically significant query sets at each given time point
     :param n:
@@ -225,4 +225,5 @@ if __name__ == "__main__":
     cli.add_command(run_jobs)
     cli.add_command(auc_compute)
     cli.add_command(gen_figure)
+    cli.add(csign)
     cli()
