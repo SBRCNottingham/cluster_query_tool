@@ -4,12 +4,14 @@ HPC script for running evaluation of performance on benchmark graphs
 This script is supposed to be run by the jobscript
 """
 from experiments import get_benchmark, get_auc_scores_community
-from cluster_query_tool.louvain_consensus import membership_matrix
+from cluster_query_tool.louvain_consensus import membership_matrix, quality_score
 import numpy as np
 import click
 from subprocess import call
 import json
 import os
+from joblib import Parallel, delayed
+from itertools import product, chain
 
 _base_params = dict(
     average_degree=20,
@@ -51,6 +53,49 @@ def auc_compute(seed, n, mu, results_folder):
 
     with open(results_file, "w+") as rf:
         json.dump(results, rf)
+
+
+def get_net_significance(n, mu, seed):
+    pset = _base_params.copy()
+    pset['n'] = int(n)
+    pset['mu'] = mu
+    pset['seed'] = int(seed)
+    graph, communities, index = get_benchmark(pset)
+    membership_ma, nmap = membership_matrix(graph.nodes(), index)
+
+    rows = []
+    for c in communities:
+        query = np.array([nmap[x] for x in communities[c]])
+        qscore = quality_score(query, membership_ma)
+
+        # N, SEED, MU, CID, qscore, len_query
+        row = [
+            n, seed, mu, c, qscore, len(query),
+        ]
+        rows.append(row)
+    return rows
+
+
+@click.command()
+@click.argument("n")
+@click.argument("results_folder")
+@click.option("--mu_steps", default=10)
+def comm_significance(n, results_folder, mu_steps):
+    """
+    Calculate the fraction of statistically significant query sets at each given time point
+    :param n:
+    :param results_folder:
+    :return:
+    """
+
+    jobs = (delayed(get_net_significance)(n, mu, seed) for mu, seed in product(
+        np.linspace(0, 1, mu_steps), range(1, 11)))
+
+    results = Parallel(n_jobs=16)(jobs)
+    results_path = os.path.join(os.path.abspath(results_folder), "significance.json")
+    with open(results_path, "w+") as rp:
+        results = list(chain(*results))
+        json.dump(results, rp)
 
 
 @click.command()
