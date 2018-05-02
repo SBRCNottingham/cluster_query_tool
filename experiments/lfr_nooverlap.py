@@ -117,7 +117,7 @@ def plot_csign(n, results_folder):
     df = pd.DataFrame(results, columns=["N", "SEED", "MU", "CID", "qscore", "c_size" ] )
     thresh = 0.001
 
-    xvals= sorted(df["MU"].unique())
+    xvals = sorted(df["MU"].unique())
 
     fig, ax = plt.subplots()
     fig.set_dpi(90)
@@ -130,9 +130,9 @@ def plot_csign(n, results_folder):
     std = []
     for m in xvals:
         frac_signficant = []
-        sdf = df.loc(df["MU"] == m)
-        for s in sdf.loc["SEED"].unique():
-            sdf2 = sdf.loc(sdf["SEED"] == s)
+        sdf = df.loc[df["MU"] == m]
+        for s in sdf["SEED"].unique():
+            sdf2 = sdf.loc[sdf["SEED"] == s]
             fr = (sdf2["qscore"] > thresh).sum()
 
             frac_signficant.append(((len(sdf) - fr)/len(sdf)))
