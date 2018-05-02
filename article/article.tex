@@ -242,14 +242,13 @@ Figure \ref{fig:auc_no_overlap} represents tests on 100 networks with 1000 and 5
 As one would expect, the prediction of the method drops off steeply where communities are less defined above a mixing coefficient of 0.6.
 Using larger seed sets also improves accuracy with some prediction of true communities being possible at extremely high levels of mixing.
 
-\begin{figure}[t]
+\begin{figure*}[t]
     \centering
     \begin{subfigure}[b]{0.48\textwidth}
         \centering
         \includegraphics[width=\textwidth]{images/lfr_binary_mo_overlap_auc_1000.eps}
         \caption{1000 nodes}
     \end{subfigure}
-    
     \begin{subfigure}[b]{0.48\textwidth}
         \centering
         \includegraphics[width=\textwidth]{images/lfr_binary_mo_overlap_auc_5000.eps}
@@ -259,7 +258,7 @@ Using larger seed sets also improves accuracy with some prediction of true commu
      Data points represent mean auc scores for all communities on 100 sampled networks at varying mixing coefficients.
      Error bars represent standard deviations.}
      \label{fig:auc_no_overlap}
-\end{figure}
+\end{figure*}
 
 \subsubsection{Overlapping modules.} 
 In figure \ref{fig:auc_overlap} we show the results of network performance when tested against an increasing level of overlapping communities.
@@ -269,14 +268,13 @@ In order to test performance we varied the fraction of nodes that are in more th
 Interestingly, the method still has an AUC score above 0.5 when all nodes are placed in multiple communities.
 This indicates that the method is capable of uncovering latent overlapping memberships even when given a relatively small number of seed nodes.
 
-\begin{figure}[t]
+\begin{figure*}[t]
     \centering
     \begin{subfigure}[b]{0.48\textwidth}
         \centering
         \includegraphics[width=\textwidth]{images/lfr_binary_overlap_auc_1000.eps}
         \caption{1000 nodes}
     \end{subfigure}
-    
     \begin{subfigure}[b]{0.48\textwidth}
         \centering
         \includegraphics[width=\textwidth]{images/lfr_binary_overlap_auc_5000.eps}
@@ -286,12 +284,10 @@ This indicates that the method is capable of uncovering latent overlapping membe
      Data points represent mean auc scores for all communities on 100 sampled networks at varying overlapping fraction of nodes.
      Error bars represent standard deviations.}
      \label{fig:auc_overlap}
-\end{figure}
-
+\end{figure*}
 
 \subsection{Real networks}
 \label{sec:real_networks}
-
 \begin{figure*}[t]
 \includegraphics[width=\textwidth]{images/ppi_example_combined.eps}
 \caption{An example of the GO term \textit{``SNAP receptor activity''} (16 nodes) on the \textit{Arabidopsis thaliana} protein-protein interaction network.
@@ -318,13 +314,15 @@ The real networks used are listed as follows:
  The network contains 6222 nodes in the largest connected component, with 22,3868 edges.
  There are 409 experimentally validated protein complexes, 236 of which contain 3 or more nodes.
  The protein complexes are typically very small in terms of number of proteins with  90\% of the complexes containing less than 10 proteins and only 2 complexes containing 50 or more proteins.
+
+  \item \textbf{\textit{Escherichia coli} protein-protein interaction network (E.coli PPI) \cite{}}
+  For the \textit{E coli} dataset we used manually curated interacting proteins from \cite{}.
  
  \item \textbf{\textit{Arabidopsis thaliana} protein-protein interaction network (Arabidopsis PPI)} \cite{ArabidopsisConsortium2011}
   For the Arabidopsis dataset, the complex sources were more limited.
   Consequently, the IntAct database was used with all protein complexes listed containing less than 10 proteins in total \cite{}.
 
-  \item \textbf{\textit{Escherichia coli} protein-protein interaction network (E.coli PPI) \cite{}}
-  For the \textit{E coli} dataset we used manually curated interacting proteins from \cite{}.
+
 \end{itemize}
 
 The results with varying number of seed nodes, for the cross validation procedure described in Section \ref{sec:cross_validation} are shown in Figure \ref{fig:quality_label_rocs}.
@@ -361,7 +359,9 @@ However, in the other networks studied using 3 or more seed nodes appears to imp
     Shaded areas indicate standard deviations.}
     \label{fig:quality_label_rocs}
 \end{figure*}
-.
+
+The method also serves as a useful network reduction tool for more limited labels.
+This is demonstrated for the \textit{Arabidopsis PPI} dataset shown in \ref{fig:query_example} with a hand selected gene ontology term from AmiGO \cite{carbon2008amigo}.
 
 \section{Discussion}
 The semi-supervised method for vertex classification presented in this work has shown to have good results on both synthetic benchmarks and real-world datasets.

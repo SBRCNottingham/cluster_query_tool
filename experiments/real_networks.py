@@ -156,31 +156,21 @@ def get_rocs(mmatrix, nmap, comms, seed_sizes=(1, 3, 7, 15)):
     return res
 
 
-def gen_auc(mmatrix, comm, s, cid):
-
-    samples = unique_sampler(comm, s)
+def psize_scoring(mmatrix, nmap, comms, seed_sizes=(1, 3, 7, 15)):
     funcs = []
     for mat_size in np.linspace(10, 2000, 10):
-        # Get a sub matrix of specified size
         sub_mat = mmatrix.transpose()[:int(mat_size)].transpose()
+        for cid, comm in comms.items():
+            cnodes = map_com(comm, nmap)
+            for s in seed_sizes:
+                samples = unique_sampler(cnodes, s)
+                if len(comm) > s:
+                    for samp in samples:
+                        funcs.append(delayed(samp_auc)(samp, sub_mat, cnodes, cid, s, mat_size))
 
-        for samp in samples:
-            funcs.append(delayed(samp_auc)(samp, sub_mat, comm, cid, s, mat_size))
+    results = Parallel(n_jobs=cpu_count(), verbose=5)(funcs)
 
-    results = Parallel(n_jobs=cpu_count(), backend='threading')(funcs)
-    return list(results)
-
-
-def psize_scoring(mmatrix, nmap, comms, seed_sizes=(1, 3, 7, 15)):
-    res = []
-
-    for cid, comm in progressbar.progressbar(comms.items()):
-        cnodes = map_com(comm, nmap)
-
-        for s in seed_sizes:
-            if len(comm) > s:
-                res += gen_auc(mmatrix, cnodes, s, cid)
-    return res
+    return results
 
 
 def plot_roc_curve(df, save_path):
