@@ -24,6 +24,14 @@ real_networks = {
         "node_type": "str",
     },
 
+    "arabidopsis_ppi_go_comp": {
+        "path": "data/arabidopsis_ppi/arabidopsis_ppi.edgelist",
+        "clusters": "data/arabidopsis_ppi/go_complexes.json",
+        "index": "data/arabidopsis_ppi/index.json.xz",
+        "node_type": "str",
+    },
+
+
     "ecoli_ppi": {
         "path": "data/ecoli_ppi/ecoli_ppi.edgelist",
         "clusters": "data/ecoli_ppi/ecoli_ppi.json",
@@ -255,14 +263,6 @@ def generate_results(network, overwrite=False):
         with open(sign_df_path, "wb+") as sig_df:
            pickle.dump(sigscores, sig_df)
 
-    roc_res_partitions = os.path.join("results", network) + "auc_res_partitions2.p"
-    if overwrite or not os.path.exists(roc_res_partitions):
-        graph, comms, mmatrix, nmap = load_network(dt["path"], network, dt["clusters"], dt["index"], dt["node_type"])
-        psize_scores = psize_scoring(mmatrix, nmap, comms)
-
-        with open(roc_res_partitions, "wb+") as auc_res_df:
-           pickle.dump(psize_scores, auc_res_df)
-
 
 def plot_ensemble_size_impact(df):
     fig, ax = plt.subplots()
@@ -311,18 +311,6 @@ def handle_results(network):
     fig.savefig("article/images/rocs/{}.png".format(network))
     fig.savefig("article/images/rocs/{}.svg".format(network))
     fig.savefig("article/images/rocs/{}.eps".format(network))
-
-    roc_res_partitions = os.path.join("results", network) + "auc_res_partitions2.p"
-    with open(roc_res_partitions, "rb") as rf:
-        results = pickle.load(rf)
-
-    df = pd.DataFrame(results, columns=["cid", "seed", "mat_size", "auc"])
-
-    fig = plot_ensemble_size_impact(df)
-
-    fig.savefig("article/images/{}_psize_auc.png".format(network))
-    fig.savefig("article/images/{}_psize_auc.eps".format(network))
-    fig.savefig("article/images/{}_psize_auc.svg".format(network))
 
     return df
 

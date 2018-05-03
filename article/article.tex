@@ -317,10 +317,15 @@ The real networks used are listed as follows:
 
   \item \textbf{\textit{Escherichia coli} protein-protein interaction network (E.coli PPI) \cite{su2007bacteriome}}
   For the \textit{E coli} dataset we used manually curated interacting proteins from \cite{su2007bacteriome}.
+  The network contains 1913 nodes and 7252 edges, the protein complexes range in size between 3 and 65 nodes.
+  85\% of the complexes contain 10 or less nodes.
  
- \item \textbf{\textit{Arabidopsis thaliana} protein-protein interaction network (Arabidopsis PPI)} \cite{ArabidopsisConsortium2011}
+ \item \textbf{\textit{Arabidopsis thaliana} protein-protein interaction network (Arabidopsis PPI)} \cite{ArabidopsisConsortium2011}.
+  The network itself contains 4519 nodes and 11096 edges.
   For the Arabidopsis dataset, the complex sources were more limited.
-  Consequently, the IntAct database was used with all protein complexes listed containing less than 10 proteins in total \cite{orchard2013mintact}.
+  Consequently, we obtained all gene ontology annotations under the GO term \textit{``Protein-containing complex''} from AmiGO \cite{carbon2009amigo} with the label ``physical interaction evidence used in manual assertion''.
+  At the time of writing, this resulted in <INSERT> complexes within the network.
+  
 \end{itemize}
 
 %The networks and resulting area under the curve (AUC) of ROC statistics are shown in Table \ref{table:dataset_table}.

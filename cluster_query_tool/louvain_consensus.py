@@ -247,3 +247,25 @@ def mui_vec_largest_intersec(query_indexes, membership_mat):
     mu_vec *= 1 / membership_mat.shape[1]
     return mu_vec
 
+
+@jit(nopython=True)
+def _unique(arr):
+    it = np.array([1])
+    for x in arr:
+        if x not in it:
+            it.append([x])
+    return it
+
+
+@jit(nopython=True, nogil=True)
+def uniform_membership_probability(mmatrix, q_size):
+    n = mmatrix.shape[0]
+    prob = 0.0
+
+    for i in mmatrix.transpose():
+        for c in _unique(i):
+            ps = ((i == c).sum() / n)
+            for x in range(2, q_size + 1):
+                prob += ps ** x
+
+    return prob * 1/mmatrix.shape[1]
