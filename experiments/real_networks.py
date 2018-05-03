@@ -24,7 +24,7 @@ real_networks = {
         "node_type": "str",
     },
 
-    "arabidopsis_ppi_go_comp": {
+    "arabidopsis_ppi_go_comp2": {
         "path": "data/arabidopsis_ppi/arabidopsis_ppi.edgelist",
         "clusters": "data/arabidopsis_ppi/go_complexes.json",
         "index": "data/arabidopsis_ppi/index.json.xz",
@@ -77,11 +77,14 @@ def load_network(graph_path, graph_name, communities_path, index_path, node_type
     index = get_index(graph, cache_location=index_path)
     mmatrix, nmap = louvain_consensus.membership_matrix(list(graph.nodes()), index)
 
+    # make sure clusters are unique, have more than 2 nodes and all nodes are contained in the graph
     rcomms = dict()
+    rcomm_l = []
     for c in comms:
-        nc = [x for x in comms[c] if x in nmap]
-        if len(nc) > 2:
+        nc = tuple(sorted(set([x for x in comms[c] if x in nmap])))
+        if len(nc) > 2 and nc not in rcomm_l:
             rcomms[c] = nc
+            rcomm_l.append(nc)
 
     return graph, rcomms, mmatrix, nmap
 
