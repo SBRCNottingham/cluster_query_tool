@@ -72,7 +72,7 @@ Uncovering latent community structure in complex networks is a field that has re
 Unfortunately, whilst potentially very powerful unsupervised methods for uncovering labels based on topology alone has been shown to have several difficulties.
 For example, the search space for module extraction approaches appears to be extremely glassy, with many high valued solutions that lack any real similarity to one another.
 However, in this paper we argue that this is not a flaw with the modularity maximisation algorithm but, rather, information that can be used to aid the context specific classification of functional relationships between vertices.
-Formally, we present an approach to generating a high value modularity consensus space for a network, based on the space of locally optimal modular partitions.
+Formally, we present an approach to generating a high value modularity consensus space for a network, based on the ensemble space of locally optimal modular partitions.
 This is then used as an approach to uncover latent relationships between sets initial query sets.
 The methods developed in this paper are applied to biological and social datasets with ground-truth label data, with a small number of examples used as seed sets to uncover relationships.
 When tested on both real and synthetic datasets our method achieves extremely high levels of classification accuracy in a context specific manner.
@@ -91,7 +91,7 @@ This approach can be based on labels that are not first neighbours in order to f
 
 The number and size of communities is, generally, not known \textit{a priori}, and the problem has been shown to be NP-hard \cite{npHardModularity}.
 The work of Good \textit{et al.} \cite{good2010performance} recently highlighted that the popular modularity maximisation algorithm has a highly ``glassy'' search space.
-In this situation there are many locally optimal partitions that bear little to no resemblance to each other by measure of mutual information.
+In essence, for real, heterogeneous networks there are many locally optimal partitions that bear little to no resemblance to each other by measure of mutual information.
 This allows greedy optimisation algorithms \cite{blondel2008fast} to trivially find solutions that score extremely high values of modularity.
 In order to solve this issue, certain approaches use a consensus based approach to clustering, combining many high value partitions into a given median partition \cite{lancichinetti2012consensus}.
 
@@ -104,10 +104,10 @@ These densely connected clusters are widely believed to be associated with speci
 This, and work in related fields, has led to the desire for computational techniques that elucidate related, modular structure in the form of community detection algorithms \cite{fortunato2010community}.
 As a form of unsupervised machine learning module extraction methods largely focus on optimising some objective function with the desire of finding meaningful clusterings.
 Perhaps the most popular of these methods is that of modularity maximisation \cite{newman2004}, which seeks to find the most unexpected partition of a graph with respect to a given null model.
-One limitation of partition based methods is that each vertex can only belong to a community.
-Overlapping methods have recently been applied to this problem in both \textit{crisp} \cite{ahn2010link, lancichinetti2011finding} and \textit{fuzzy} \cite{gregory2011fuzzy} based algorithms.
+One limitation of partition based methods is that each vertex can only belong to a single community.
+Overlapping methods have recently been applied to this problem in both \textit{crisp} \cite{ahn2010link, lancichinetti2011finding} and \textit{fuzzy} \cite{gregory2011fuzzy} based algorithms which have been widely used to uncover latent relationships without labelling schemes.
 
-In this paper, we do not seek to find a single ``best'' partition, either overlapping or not.
+However, in this paper, we do not seek to find a single ``best'' partition, either overlapping or not and our objective is not to uncover labels but to use limited and small sets of labels to give the notion of a membership score to some grouping.
 Instead, we use the large number of highly modular solutions to form the index for a search query system.
 In essence, this is a method of semi-supervised learning that attempts to find items related given labelled sets of vertices using topology alone.
 Each high value partition, if statistically more modular than random, can be treated as information about the relationships between vertices.
@@ -116,7 +116,7 @@ As the objective of community detection approaches is to relate information, it 
 We propose an algorithm that pre-computes an index of clusterings for a given complex network, based on the fast greedy Louvain algorithm \cite{blondel2008fast}, used in a distributed manner.
 The detected clusters then form the basis of a searching algorithm that allows one to compute the relatedness of subsets of nodes.
 The querying method is a polynomial time algorithm that could be trivially adapted to form the basis of many user facing applications.
-This approach is applied to social and protein-protein interaction networks with good quality ground truth labels.
+This approach is then applied to synthetic benchmark networks with known, ground-truth labels as well as social and protein-protein interaction networks with high quality ground truth label sets.
 
 \section{The multi-vertex classification problem}
 The intuitive notion that the structure of a vertex's connections gives insight into its function is a fundamental basis for research in network science.
@@ -304,7 +304,7 @@ In order to test the performance of the semi-supervised classification on real-w
 All datasets taken use the largest single connected component sub-graph.
 The real networks used are listed as follows:
 \begin{itemize}
- \item \textbf{EU emails dataset (EU emails)} This anonymised dataset is taken from the SNAP database \cite{snap} and contains $986$ nodes and $16,687$ edges representing emails between individuals.
+ \item \textbf{EU emails core dataset (EU emails) \cite{leskovec2007graph}} This anonymised dataset is taken from the SNAP database \cite{snapnets} and contains $986$ nodes and $16,687$ edges representing emails between individuals.
  The metadata community labels represent different departments within the organisation.
  In total there are 42 communities, 39 of which contain at least 3 nodes.
  
@@ -315,21 +315,33 @@ The real networks used are listed as follows:
  There are 409 experimentally validated protein complexes, 236 of which contain 3 or more nodes.
  The protein complexes are typically very small in terms of number of proteins with  90\% of the complexes containing less than 10 proteins and only 2 complexes containing 50 or more proteins.
 
-  \item \textbf{\textit{Escherichia coli} protein-protein interaction network (E.coli PPI) \cite{}}
-  For the \textit{E coli} dataset we used manually curated interacting proteins from \cite{}.
+  \item \textbf{\textit{Escherichia coli} protein-protein interaction network (E.coli PPI) \cite{su2007bacteriome}}
+  For the \textit{E coli} dataset we used manually curated interacting proteins from \cite{su2007bacteriome}.
  
  \item \textbf{\textit{Arabidopsis thaliana} protein-protein interaction network (Arabidopsis PPI)} \cite{ArabidopsisConsortium2011}
   For the Arabidopsis dataset, the complex sources were more limited.
-  Consequently, the IntAct database was used with all protein complexes listed containing less than 10 proteins in total \cite{}.
-
-
+  Consequently, the IntAct database was used with all protein complexes listed containing less than 10 proteins in total \cite{orchard2013mintact}.
 \end{itemize}
 
-The results with varying number of seed nodes, for the cross validation procedure described in Section \ref{sec:cross_validation} are shown in Figure \ref{fig:quality_label_rocs}.
+%The networks and resulting area under the curve (AUC) of ROC statistics are shown in Table \ref{table:dataset_table}.
+ROC curves generated with the cross validation procedure described in Section \ref{sec:cross_validation} are shown in Figure \ref{fig:quality_label_rocs}.
 These results represent ROC curves and mean AUC statistics.
 For all the datasets in this study binary community classification is high, with an average AUC score above 0.88, even when using only a single seed node.
 In the case of the \textit{Arabidopsis thaliana} network the protein complexes tested are significantly smaller than for other networks and so a comparison of seed sizes is not possible.
 However, in the other networks studied using 3 or more seed nodes appears to improve results, though for 15 seed nodes the results are not significantly better than with 7 seeds.
+
+% \begin{table*}[t]
+% \begin{center}
+% \begin{tabular}{ c c c }
+%  cell1 & cell2 & cell3 \\ 
+%  cell4 & cell5 & cell6 \\  
+%  cell7 & cell8 & cell9    
+% \end{tabular}
+% \end{center}
+%  \label{table:dataset_table}
+%  \caption{Description of datasets used in this study and results of cross validation.}
+% \end{table*}
+
 
 \begin{figure*}
      \centering
@@ -354,7 +366,7 @@ However, in the other networks studied using 3 or more seed nodes appears to imp
         \includegraphics[width=\textwidth]{images/rocs/ecoli_ppi.png}
         \caption{E coli PPI protein complexes}
     \end{subfigure}
-    \caption{ROC scores for the high quality labels for real networks described in Section \ref{sec:real_networks}. 
+    \caption{Receiver operator characteristic (ROC) curves for the high quality labels for real networks described in Section \ref{sec:real_networks}. 
     Results represent the averages over all reciever operating characteristic scores from all samples of label sets with the cross validation procedure described in \ref{sec:cross_validation}.
     Shaded areas indicate standard deviations.}
     \label{fig:quality_label_rocs}

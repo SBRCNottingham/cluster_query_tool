@@ -291,8 +291,8 @@ def plot_ensemble_size_impact(df):
             scores.append(sdf2.mean()["auc"])
             stds.append(sdf2.std()["auc"])
 
-        ax.plot(xvals, scores, label="{} seed node(s)".format(seed_size), color=colours[seed_size])
-        #ax.errorbar(xvals, scores, yerr=stds)
+        ax.scatter(xvals, scores, label="{} seed node(s)".format(seed_size), color=colours[seed_size])
+        ax.errorbar(xvals, scores, yerr=stds, color=colours[seed_size])
     ax.legend()
     fig.tight_layout()
     return fig

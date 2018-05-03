@@ -187,7 +187,8 @@ def query_vector(query_indexes, M):
     for v in np.ndindex(M.shape[0]):
         for q in query_indexes:
             # Number of times node is in the same cluster as a query node
-            qm[v] += (M[v] == M[q]).sum()
+            if q != v:
+                qm[v] += (M[v] == M[q]).sum()
 
     return qm * norm_const
 
