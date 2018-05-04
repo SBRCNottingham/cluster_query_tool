@@ -17,21 +17,20 @@ from scipy import interp
 
 
 real_networks = {
-    "arabidopsis_ppi": {
+
+    "arabidopsis_ppi_amigo": {
         "path": "data/arabidopsis_ppi/arabidopsis_ppi.edgelist",
-        "clusters": "data/arabidopsis_ppi/int_act_complexes.json",
+        "clusters": "data/arabidopsis_ppi/amigo_terms.json",
         "index": "data/arabidopsis_ppi/index.json.xz",
         "node_type": "str",
     },
 
-    "arabidopsis_ppi_go_comp2": {
+    "arabidopsis_ppi_combined": {
         "path": "data/arabidopsis_ppi/arabidopsis_ppi.edgelist",
-        "clusters": "data/arabidopsis_ppi/go_complexes.json",
+        "clusters": "data/arabidopsis_ppi/combine_complexes.json",
         "index": "data/arabidopsis_ppi/index.json.xz",
         "node_type": "str",
     },
-
-
     "ecoli_ppi": {
         "path": "data/ecoli_ppi/ecoli_ppi.edgelist",
         "clusters": "data/ecoli_ppi/ecoli_ppi.json",
@@ -39,9 +38,23 @@ real_networks = {
         "node_type": "str",
     },
 
+    "ecoli_ppi_amigo": {
+        "path": "data/ecoli_ppi/ecoli_ppi.edgelist",
+        "clusters": "data/ecoli_ppi/amigo_terms.json",
+        "index": "data/ecoli_ppi/index.json.xz",
+        "node_type": "str",
+    },
+
     "yeast_ppi": {
         "path": "data/yeast_ppi/yeast.edgelist",
         "clusters": "data/yeast_ppi/yeast_ppi.json",
+        "index": "data/yeast_ppi/index.json.xz",
+        "node_type": "str",
+    },
+
+    "yeast_ppi_amigo": {
+        "path": "data/yeast_ppi/yeast.edgelist",
+        "clusters": "data/yeast_ppi/amigo_terms.json",
         "index": "data/yeast_ppi/index.json.xz",
         "node_type": "str",
     },
