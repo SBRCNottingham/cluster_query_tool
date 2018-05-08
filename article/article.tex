@@ -19,9 +19,10 @@
 \acmISBN{}
 
 %Conference
-\acmConference[]{}{}{}
+\acmConference[MLG 2018]{14th International Workshop on Mining and Learning with Graphs}{Aug 20, 2018}{United Kingdom}
 \acmYear{2018}
 \copyrightyear{2018}
+\acmPrice{}
 
 \usepackage[utf8]{inputenc}
 \usepackage{color}
@@ -34,7 +35,7 @@
 
 \begin{document}
 
-\title{From clusters to queries: exploiting uncertainty in the modularity landscape of complex networks}
+\title[From clusters to queries]{From clusters to queries: exploiting uncertainty in the modularity landscape of complex networks}
 
 \author{James P Gilbert}
 \affiliation{%
@@ -56,26 +57,15 @@
 }
 \email{jamie.twycross@nottingham.ac.uk}
 
-% \author{John King}
-% \affiliation{%
-%   \institution{School of Mathematical Sciences}
-%   \streetaddress{University of Nottingham}
-%   \city{Nottingham}
-%   \country{United Kingdom}
-%   \postcode{NG7 2RD}
-% }
-% \email{john.king@nottingham.ac.uk}
-
-
 \begin{abstract}
 Uncovering latent community structure in complex networks is a field that has received an enormous amount of attention.
-Unfortunately, whilst potentially very powerful, unsupervised methods for uncovering labels based on topology alone has been shown to have several difficulties.
+Unfortunately, whilst potentially very powerful, unsupervised methods for uncovering labels based on topology alone has been shown to suffer from several difficulties.
 For example, the search space for many module extraction approaches, such as the modularity maximisation algorithm, appears to be extremely glassy, with many high valued solutions that lack any real similarity to one another.
 However, in this paper we argue that this is not a flaw with the modularity maximisation algorithm but, rather, information that can be used to aid the context specific classification of functional relationships between vertices.
 Formally, we present an approach to generating a high value modularity consensus space for a network, based on the ensemble space of locally optimal modular partitions.
 We then use this approach to uncover latent relationships between sets initial query sets.
 The methods developed in this paper are applied to biological and social datasets with ground-truth label data, using a small number of examples used as seed sets to uncover relationships.
-When tested on both real and synthetic datasets our method achieves high levels of classification accuracy in a context specific manner.
+When tested on both real and synthetic datasets our method is shown to achieve high levels of classification accuracy in a context specific manner.
 \end{abstract}
 
 \maketitle
@@ -83,28 +73,27 @@ When tested on both real and synthetic datasets our method achieves high levels 
 \section{Introduction}
 
 A fundamental issue at the heart of machine learning methods applied to large scale datasets is the ability to correctly identify classes of related objects in an unsupervised manner.
-In network science, this methodology is often referred to as \textit{community} detection \cite{fortunato2010community}.
+In network science, this methodology is often referred to as \textit{community} detection \cite{fortunato2016community}.
 Many algorithms exist to solve this problem \cite{fortunato2016community}, yet initial starting conditions or different optimisation strategies may result in conflicting results even when the same objective function is being maximised \cite{good2010performance}.
 In this paper, we develop an intuitive method to use the uncertainty amongst a high number of near optimal solutions to measure context sensitive relationships between small sets of labelled vertices.
 This approach can be based on labels that are not first order neighbours in order to find other potentially related vertices.
+
+The use of community detection is widespread.
+For example, a core goal in systems biology is to characterise the function and functional relationships between genes, proteins or metabolites within a larger network \cite{girvan2002community}.
+In many situations, only the role of a small number of genes is known, with much of the annotation for a given organism being computed through naive homology information that ignores the role of a gene within a wider context.
+The advent of high throughput experimental datasets has allowed the construction of proteome scale networks, leading to the observation of non-trivial topological properties such as densely connected clusters \cite{ArabidopsisConsortium2011}.
+These densely connected clusters are widely believed to be associated with specific function, such as multi-protein complexes or biochemical pathways.
+
+As a form of unsupervised machine learning module extraction methods largely focus on optimising some objective function with the goal of finding meaningful clusterings.
+Perhaps the most popular of these methods is that of modularity maximisation \cite{newman2004}, which seeks to find the most unexpected partition of a graph with respect to a given null model.
+Overlapping methods have recently been applied to this problem in both \textit{crisp} \cite{ahn2010link, lancichinetti2011finding} and \textit{fuzzy} \cite{gregory2011fuzzy} based algorithms which have been widely used to uncover latent relationships without labelling schemes.
+In previous work, we found that most of these methods have significant disagreement when evaluated in a practical context \cite{gilbert2015probabilistic}.
 
 The number and size of communities is, generally, not known \textit{a priori}, and the problem has been shown to be NP-hard \cite{npHardModularity}.
 The work of Good \textit{et al.} \cite{good2010performance} recently highlighted that the popular modularity maximisation algorithm has a highly ``glassy'' search space.
 In essence, for real, heterogeneous networks there are many locally optimal partitions that bear little resemblance to each other by measure of mutual information.
 This allows greedy optimisation algorithms \cite{blondel2008fast} to trivially find solutions that score extremely high values of modularity.
 In order to solve this issue, certain approaches use a consensus based approach to clustering, combining many high value partitions into a given median partition \cite{lancichinetti2012consensus}.
-
-The use of community detection is widespread.
-For example, a core goal in systems biology is to characterise the function and functional relationships between genes, proteins or metabolites within a larger network \cite{girvan2002community}.
-In many situations, only the role of a small number of genes is known, with much of the annotation for a given organism being computed through naive homology information that ignores the role of a gene within a wider context.
-The advent of high throughput experimental datasets has allowed the construction of genome scale networks, leading to the observation of non-trivial topological properties such as densely connected clusters \cite{ArabidopsisConsortium2011}.
-These densely connected clusters are widely believed to be associated with specific function, such as multi-protein complexes or biochemical pathways.
-
-This, and work in related fields, has led to the desire for computational techniques that elucidate related, modular structure in the form of community detection algorithms \cite{fortunato2010community}.
-As a form of unsupervised machine learning module extraction methods largely focus on optimising some objective function with the desire of finding meaningful clusterings.
-Perhaps the most popular of these methods is that of modularity maximisation \cite{newman2004}, which seeks to find the most unexpected partition of a graph with respect to a given null model.
-One limitation of partition based methods is that each vertex can only belong to a single community.
-Overlapping methods have recently been applied to this problem in both \textit{crisp} \cite{ahn2010link, lancichinetti2011finding} and \textit{fuzzy} \cite{gregory2011fuzzy} based algorithms which have been widely used to uncover latent relationships without labelling schemes.
 
 However, in this paper, we do not seek to find a single ``best'' partition, either overlapping or not and our objective is not to uncover labels but to use limited and small sets of labels to give the notion of a membership score to some grouping.
 Instead, we use the large number of highly modular solutions to form the index for a search query system.
@@ -123,17 +112,16 @@ This approach is then applied to synthetic benchmark networks with known, ground
 
 
 \begin{figure}[t]
-    \includegraphics[width=0.45\textwidth]{images/search_space_3.png}
+    \includegraphics[width=0.43\textwidth]{images/search_space_3.png}
     \caption{Modularity search space of an \textit{E. coli} metabolic network.
  Distance between partitions is calculated using variation of information \cite{meilua2003comparing} and dimensionality reduction is performed using curvilinear component analysis \cite{demartines1997curvilinear}.
   The inset (top) demonstrates the landscape of the high modularity region. 
-  Figure generated with the software of Good \textit{et al.}\cite{good2010performance}.}
+  Figure generated with the software of Good \textit{et al.} \cite{good2010performance}.}
     \label{fig:modular_search_space}
 \end{figure}
 
 \section{Exploiting the modularity query space}
-To characterise latent community structure, one of the most popular approaches is to use modularity maximisation \cite{newman2004}.
-The modularity quality function of a partition on a graph is given by the equation
+To characterise latent community structure, one of the most popular approaches is to use modularity maximisation given by the equation \cite{newman2004}
 \begin{equation}\label{eq:modularity}
   Q = \frac{1}{2m}\sum_{i,j} \left[A_{ij} - \frac{k_i k_j}{2m}\right]\delta(c_i, c_j),
 \end{equation}
@@ -167,8 +155,8 @@ In essence, the objective is to use multiple modular representation of a given d
 In order to cover the space of high modularity partitions, randomly generated starting partitions are computed with a random cut set.
 To achieve this each edge is either placed inside the cut set or not as the result of an independent Bernoulli trial. 
 Each random partition is used as the starting partition for the greedy Louvain process.
-In principle, any search exploration procedure, such as simulated annealing \cite{GuimeraNature2005} could be used.
-The Louvain algorithm is selected as it is fast, running in $O(n \log n)$ time complexity \cite{blondel2008fast}, and because it is a greedy algorithm and is guaranteed to stop after finding a locally maximal solution.
+In principle, any search exploration procedure, such as simulated annealing \cite{good2010performance} could be used.
+The Louvain algorithm was selected as it is fast, running in $O(n \log n)$ time complexity \cite{blondel2008fast}, and because it is a greedy algorithm and is guaranteed to stop after finding a locally maximal solution.
 
 The Louvain algorithm is conceptually very simple; starting from a random partition, clusters are agglomerated if the merge results in a positive change in modularity $\Delta Q$.
 When no possible moves result in an increase in modularity the algorithm has found a local optima.
@@ -176,8 +164,8 @@ When no possible moves result in an increase in modularity the algorithm has fou
 The index \textit{coverage} is directly proportional to the number of starting random partitions.
 A full coverage index could be considered as every locally optimal partition.
 Given that there is no free lunch and it is impossible to know every solution, one can only ensure a full coverage index through an exhaustive search over the $2^m$ possible starting cut sets.
-Consequently, the approach taken here is to use a large but not exhaustive subset of the possible solutions using a suitably large space 2000 solutions for the networks studied in this paper.
-\footnote{Initial results indicated that a smaller space of partitions is possible but further work is required to asses the best number of partitions in a practical context}.
+Consequently, the approach taken here is to use a large but not exhaustive subset of the possible solutions using a suitably large space 2000 solutions for the networks studied in this paper
+\footnote{Initial results indicate that a significantly smaller space of partitions may still yield high quality results but we note that further work is required to asses the best number of partitions in a practical context.}.
 
 \subsection{Measuring the quality of relationships} \label{sec:expansion}
 Given a query of vertices, the relatedness to other vertexes in a network is quantifiable by the fraction of times they are clustered with the query set, given the set of high quality partitions.
@@ -187,7 +175,7 @@ Formally, this can be expressed in terms of the \textit{expansion score} of a gi
 \end{equation}
 where $S$ denotes a query set, $P$ is a given partition in the space of all high quality partitions $\mathcal{P}$, $c^{p}_{i}$ indicates the partition vertex $i$ is contained in within partition $P$ and
 $\delta(u, v)$ is the Dirac delta function that equals 1 if $c^{p}_i$ and  $c^{p}_j$ are the same cluster and $0$ otherwise.
-As a simple example, for a pair of vertices $i$ and $S$ such that $S = {j}$ we would consider $\mu_i$ to be the number of times $i$ and $j$ appear in the same cluster, given an ensemble of network clusterings.
+As a simple example, for a pair of vertices $i$ and $S$ such that $S = \{j\}$ we would consider $\mu_i$ to be the number of times $i$ and $j$ appear in the same cluster, given an ensemble of network clusterings.
 We define $\mu_i(S)$ for all vertices in the network, including those in $S$.
 However, for the case where $i$ is in $S$ we, instead, consider the value $\mu_i(S - i)$ to remove bias.
 In many cases, a query set will not be fully represented by the partitions found within the network, this is further elaborated in the following section.
@@ -197,15 +185,31 @@ In many cases, a query set will not be fully represented by the partitions found
 \label{sec:cross_validation}
 In this study we test a small number of labels that we intend to use in order to evaluate how well our method correctly generalises to discover unlabelled vertices.
 The cross validation procedure we devise is described as follows and depends on the size of the community and the number of initial seed labels being used.
-For this work we would like to capture binary classification  performance, \textit{true positives (tp), true negatives (tn), false positives (fp)} and \textit{false negatives (fn)}, on our datasets of community membership.
+For this work we would like to capture binary classification  performance, \textit{true positives (tp)}, \textit{true negatives (tn), false positives (fp)} and \textit{false negatives (fn)}, on our datasets of community memberships.
+In order to generate the different sets for the cross validation we take each label set and generate unique sample sets of vertices from the known true positive labels.
+
+We also note that though each node can have multiple labels, in the tests performed in this study we only consider performance on individual labels.
 As the seed label sets can be as small as 3 vertices, exhaustive cross validation is not possible for all labelling schemes.
 Consequently, cross validation is either conducted on an exhaustive set of all possible $\binom{|L|}{s}$ unique labellings or 120 seed queries sampled without replacement\footnote{This is equivalent to $\binom{10}{3}$ combinations, an exhaustive sample would not be possible for the larger communities in this study.}, where $L$ is the set of gold standard true labels and $s$ is the size of the randomly selected seed sets.
 It should therefore be noted that presented receiver operator characteristic (ROC) scores are, therefore, dependent on community sizes.
+We also note that we do not consider separate training and test sets in this study as the method does not use any examples when building the model from partitions of the graph.
 
+Formally, the steps for this procedure with a given label set $S$ are outlined as follows:
+\begin{itemize}
+ \item Generate up to 120 unique subsets of size $s$, sampled without replacement (set $T$).
+ \item For each test subset $\{\forall S_t \in T | S_t \subset S \wedge |S_t| = s \}$, generate the $\mu_i(S_t)$ score for all vertices in the network
+ \item Exclude vertices in $S_t$ from the test
+ \item Consider all nodes in nodes in $S$ but not in $S_t$ to be the \textit{tp} set.
+ \item Consider each of the nodes in $V$ not in $S$ to be the \textit{tn} set.
+ \item Generate an average ROC curve interpolated from all test subsets.
+ \end{itemize}
+
+Results presented are based on interpolated average ROC curves for all labels on each of the data sets. 
+ 
 \subsection{Synthetic networks}
 In this section we test the method on benchmark networks constructed with a ground-truth community structure.
 To evaluate how our method performs we use the undirected, unweighted LFR benchmark \cite{lancichinetti2008benchmark} in overlapping and non-overlapping forms.
-We test the area under the ROC curve (AUC) scores for networks synthetically generated with the LFR benchmark.
+We test the area under the ROC curve (AUC) scores for networks varying the mixing parameter (fraction of edges between communities) and the fraction of overlapping nodes.
 In these tests, the community distribution is defined with a power law coefficient of $-1.0$, the degree distribution is defined with a power law coefficient of $-2.0$.
 The number of nodes is stated in the text.
 
@@ -216,19 +220,19 @@ Using larger seed sets also improves accuracy with some prediction of true commu
 
 \begin{figure*}[t]
     \centering
-    \begin{subfigure}[b]{0.48\textwidth}
+    \begin{subfigure}[b]{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{images/lfr_binary_mo_overlap_auc_1000.eps}
         \caption{1000 nodes}
     \end{subfigure}
-    \begin{subfigure}[b]{0.48\textwidth}
+    \begin{subfigure}[b]{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{images/lfr_binary_mo_overlap_auc_5000.eps}
         \caption{5000 nodes}
     \end{subfigure}
     \caption{Non-overlapping community varying seed nodes on LFR networks with 1000 and 5000 nodes.
      Data points represent mean auc scores for all communities on 100 sampled networks at varying mixing coefficients.
-     Error bars represent one standard deviation..}
+     Error bars represent one standard deviation.}
      \label{fig:auc_no_overlap}
 \end{figure*}
 
@@ -242,19 +246,19 @@ This indicates that the method is capable of uncovering latent overlapping membe
 
 \begin{figure*}[t]
     \centering
-    \begin{subfigure}[b]{0.48\textwidth}
+    \begin{subfigure}[b]{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{images/lfr_binary_overlap_auc_1000.eps}
         \caption{1000 nodes}
     \end{subfigure}
-    \begin{subfigure}[b]{0.48\textwidth}
+    \begin{subfigure}[b]{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{images/lfr_binary_overlap_auc_5000.eps}
         \caption{5000 nodes}
     \end{subfigure}
     \caption{Overlapping community varying seed nodes on LFR networks with 1000 and 5000 nodes.
      Data points represent mean auc scores for all communities on 100 sampled networks at varying overlapping fraction of nodes.
-     Error bars represent one standard deviation..}
+     Error bars represent one standard deviation.}
      \label{fig:auc_overlap}
 \end{figure*}
 
@@ -265,23 +269,23 @@ This indicates that the method is capable of uncovering latent overlapping membe
      \centering
     \begin{subfigure}[b]{0.48\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{images/rocs/eu_email.png}
+        \includegraphics[width=\textwidth]{images/rocs/eu_email.eps}
         \caption{EU email departments}
     \end{subfigure}
     \begin{subfigure}[b]{0.48\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{images/rocs/yeast_ppi.png}
+        \includegraphics[width=\textwidth]{images/rocs/yeast_ppi.eps}
         \caption{Yeast PPI protein complexes}
     \end{subfigure}
     
     \begin{subfigure}[b]{0.48\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{images/rocs/arabidopsis_ppi_combined.png}
+        \includegraphics[width=\textwidth]{images/rocs/arabidopsis_ppi_combined.eps}
         \caption{Arabidopsis PPI protein complexes}
     \end{subfigure}
     \begin{subfigure}[b]{0.48\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{images/rocs/ecoli_ppi.png}
+        \includegraphics[width=\textwidth]{images/rocs/ecoli_ppi.eps}
         \caption{E coli PPI protein complexes}
     \end{subfigure}
     \caption{Receiver operator characteristic (ROC) curves for the high quality labels for real networks described in Section \ref{sec:real_networks}. 
@@ -314,7 +318,7 @@ The real networks used are:
  \item \textbf{\textit{Arabidopsis thaliana} protein-protein interaction network (Arabidopsis PPI)} \cite{ArabidopsisConsortium2011}.
   The network itself contains 4519 nodes and 11096 edges.
   For the Arabidopsis dataset, the complex sources were more limited.
-  Consequently, we obtained all gene ontology annotations under the GO term \textit{``Protein-containing complex''} from AmiGO \cite{carbon2009amigo} with the label ``physical interaction evidence used in manual assertion''.
+  Consequently, we obtained all gene ontology annotations under the GO term \textit{``Protein-containing complex''} from AmiGO \cite{carbon2009amigo} where experimentally collected physical interaction evidence was acquired.
   At the time of writing, this resulted in 7 complexes containing between 4 and 12 nodes.
   In addition, we included small protein complexes from the IntAct database \cite{orchard2013mintact}, resulting in a total of 165 unique complexes.
   As the labels for this dataset are small it was not possible to test algorithm performance with 15 seed nodes.
@@ -324,13 +328,11 @@ The real networks used are:
 %The networks and resulting area under the curve (AUC) of ROC statistics are shown in Table \ref{table:dataset_table}.
 ROC curves generated with the cross validation procedure described in Section \ref{sec:cross_validation} are shown in Figure \ref{fig:quality_label_rocs}.
 These results represent ROC curves and mean AUC statistics.
-For all the datasets in this study, binary community classification is high, with an average AUC scores above 0.83, even when using only a single seed node.
+For all the datasets in this study, binary community classification is high, with an average AUC scores above 0.87, even when using only a single seed node.
 In the case of the \textit{Arabidopsis thaliana} network the protein complexes tested are significantly smaller than for other networks and so a comparison of seed sizes is not possible.
 However, in the other networks studied, using 3 or more seed nodes appears to improve results, though for 15 seed nodes the results are not significantly better than with 7 seeds.
 
-The method also serves as a useful network reduction tool where the quality of labels is not as well defined.
-This visually is demonstrated for the \textit{Arabidopsis PPI} dataset shown in Figure \ref{fig:query_example} with a hand selected gene ontology term from AmiGO \cite{carbon2008amigo}.
-Figure \ref{fig:GO_TERM_ROCS}
+\subsubsection{Tests on gene ontology labels}
 
 \begin{figure*}[t]
 \includegraphics[width=\textwidth]{images/ppi_example_combined.eps}
@@ -343,42 +345,52 @@ Blue nodes indicate those in the randomly selected 3 query nodes, yellow the rem
 \label{fig:query_example}
 \end{figure*}
 
-
-\begin{figure*}
+\begin{figure*}[t]
      \centering
-    \begin{subfigure}[b]{0.3\textwidth}
+    \begin{subfigure}[b]{0.31\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{images/rocs/yeast_ppi.png}
+        \includegraphics[width=\textwidth]{images/rocs/yeast_ppi_amigo.eps}
         \caption{Yeast PPI GO terms}
     \end{subfigure}
-    \begin{subfigure}[b]{0.3\textwidth}
+    \begin{subfigure}[b]{0.31\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{images/rocs/arabidopsis_ppi_combined.png}
+        \includegraphics[width=\textwidth]{images/rocs/arabidopsis_ppi_amigo.eps}
         \caption{Arabidopsis PPI GO terms}
     \end{subfigure}
-    \begin{subfigure}[b]{0.3\textwidth}
+    \begin{subfigure}[b]{0.31\textwidth}
         \centering
-        \includegraphics[width=\textwidth]{images/rocs/ecoli_ppi.png}
+        \includegraphics[width=\textwidth]{images/rocs/ecoli_ppi_amigo.eps}
         \caption{E coli PPI GO terms}
     \end{subfigure}
-    \caption{Receiver operator characteristic (ROC) curves for the high quality labels for real networks described in Section \ref{sec:real_networks}. 
+    \caption{Receiver operator characteristic (ROC) curves for gene ontology labels for real networks described in Section \ref{sec:real_networks}. 
     Results represent the averages over all receiver operating characteristic scores from all samples of label sets with the cross validation procedure described in \ref{sec:cross_validation}.
     Shaded areas indicate one standard deviation.}
     \label{fig:GO_TERM_ROCS}
 \end{figure*}
 
+In a practical situation the high quality label sets described above are not likely to be available.
+Consequently, we wish to to highlight that the method also serves as a useful network reduction tool where the quality of labels is not well defined.
+In order to achieve this goal, for each of the biological data sets in this study, we acquired all Gene Ontology terms for each of the proteins from AmiGO \cite{carbon2008amigo}.
+Gene Ontology is a controlled vocabulary of terms associated with biological functions in three broad categories of Cellular Components (CC),  Metabolic Functions (MF) and Biological Processes (BP), forming a hierarchy of terms and associated sub terms.
+
+These labels are not all likely to be represented within the protein-protein interaction networks, though many biological processes are.
+For the Yeast, \textit{Arabidopsis} and \textit{E coli} PPIs we collected 85, 549 and 420 terms covering at least 3 nodes, respectively.
+As expected, average ROC and AUC scores shown in Figure \ref{fig:GO_TERM_ROCS} are considerably lower than for the Protein complexes. 
+However, this approach should be considered in contrast to conventional gene enrichment strategies on conventional network clusters \cite{chen2013enrichr}.
+
+The use of a $\mu_i(S)$ score on a network is visually demonstrated for the \textit{Arabidopsis PPI} dataset shown in Figure \ref{fig:query_example} with the hand selected GO term \textit{``SNAP receptor activity''}.
 
 \section{Discussion}
-The semi-supervised method for vertex classification presented in this work has shown to have good results on both synthetic benchmarks and real-world datasets.
+The semi-supervised method for vertex classification presented in this work has been shown to produce good results on both synthetic benchmarks and real-world datasets.
 Interestingly, this method is capable of correctly classifying communities with only a small number of seed query vertexes.
 These results show that this query method could be used as a powerful exploratory tool in network analysis.
 
 The fact that the method is able to uncover small protein complexes seems to contradict the principle that modularity maximisation algorithms have a resolution limit \cite{fortunato2007resolution}.
-Whilst this appears to be the case it is important to not that the resolution limit applies to a single partition of space.
+Whilst this appears to be the case it is important to note that the resolution limit applies to a single partition of space.
 Further work is needed to investigate why small communities are still detectable.
 However, we speculate that is likely due to the fact that the co-classification of vertices between different partitions remains fairly tolerant to changes.
 In other words, whilst the large communities they reside in changes significantly, the small cluster of nodes is always clustered in the same community, regardless of the partition.
-We do note that, where communities are very small, any approach will extremely sensitive to false positive and false negative results.
+We do note that, where communities are very small, any approach will be extremely sensitive to false positive and false negative results.
 As such, this should be considered when using any method of this form as an exploratory tool.
 
 The results also appear to be highly tolerant to a small number of seed nodes.
@@ -401,14 +413,13 @@ Further investigation needs to be conducted into how similar local community bas
 
 Many existing method are based on the idea of a locally dense subgraph containing \textit{all query nodes} \cite{benson2016higher}.
 In contrast, the query approach presented here does not require the queries to be a self contained sub-graph.
-Indeed, queries can contain spurious nodes that are topologically distinct from one another - the result is that the $\mu_i(S)$ score for the query set will likely be very low.
+Indeed, queries can contain spurious nodes that are topologically distant from one another - the result is that the $\mu_i(S)$ score for the query set will likely be very low.
 Further investigation into how to evaluate the quality of high average $\mu_i(S)$ for $i \in S$ is left to future work.
 
 In the field of community detection, a number of very recent articles have focused on using metadata to improve the results of community detection approaches.
 These algorithms, however, are distinct from the approach taken here as the metadata is not used in the module discovery process.
 Furthermore, the results in this work attempt to explicitly label unlabelled data and only require a relatively small number of labels to operate in such a fashion.
 In contrast,  the recent approach by Newman and Clauset \cite{newman2016structure}, for example, uses examples in which practically the entire network contains labels which is less useful from the perspective of label discovery.
-However, these methods generally consider if a labelling scheme (such as demography in a social network) accurately describes the structure of the network. 
 
 \section{Conclusions}
 This paper has presented a novel approach to semi-supervised community detection utilising a consensus of high scoring partitions computed with the popular modularity maximisation approach.
@@ -417,21 +428,22 @@ However, in this work we consider each locally optimal partition to be informati
 The approach presented here differs from other ensemble approaches in that the objective is to provide a probabilistic framework for label classification.
 Performance was shown to be strong on both synthetically generated networks and real-world ground truth communities with relatively small sets of labels.
 In the case of synthetic networks communities are correctly detected up to the detectability threshold.
-For real world networks with small label sets, average AUC scores were above 0.88 for all the datasets tested in this study.
+For real world networks with small label sets, average AUC scores were above 0.87 for the high quality datasets tested in this study.
 
 However, this approach requires the community landscape to contain many local maxima, a property likely shared by many real-world, heterogeneous networks.
 Similarly, the method presented here requires both some labelled data and the labels to be relevant in the context of the underlying network.
 
 This also work presents a number of interesting potential future avenues for research, such as observing how query sets change in time dynamic or multi-scale networks.
 Furthermore, as the algorithm is trivial to run in a distributed manner, this approach could be applied to larger graphs than those studied in this paper.
-Further research should also be conducted into how this approach could be applied to other partition quality functions.
+Further research should also be conducted into how this approach could be applied to other partition quality functions, such as the infomap algorithm \cite{Rosvall:2008fi}.
+The method was implemented in python and all software will be made open source at a later date.
 
 \section*{Acknowledgements}
-We are grateful for access to the University of Nottingham High Performance Computing Facility in support of this work.
-This work was supported by the Biotechnology and Biological Sciences Research Council grant BB/L013940/1.
-We would like to thank Nicole Pearcy and Jenna Reps for assistance with this manuscript.
+We would like to thank Nicole Pearcy and Jenna Reps for assistance preparing this manuscript.
+We are grateful for access to the University of Nottingham High Performance Computing Facility.
+This work was supported by the UK Biotechnology and Biological Sciences Research Council (BBSRC) grant BB/L013940/1.
 
-\bibliographystyle{acm} 
+\bibliographystyle{ACM-Reference-Format} 
 \bibliography{references}
 
 % \nocite{*}

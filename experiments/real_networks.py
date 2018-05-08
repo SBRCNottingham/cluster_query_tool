@@ -99,6 +99,9 @@ def load_network(graph_path, graph_name, communities_path, index_path, node_type
             rcomms[c] = nc
             rcomm_l.append(nc)
 
+
+    lengths = [len(x) for x in rcomm_l]
+    print(len(rcomms), min(lengths), max(lengths))
     return graph, rcomms, mmatrix, nmap
 
 
@@ -158,6 +161,21 @@ def gen_roc_curves(mmatrix, comm, s, cid):
     funcs = (delayed(samp_roc_and_auc)(samp, mmatrix, comm, cid, s) for samp in unique_sampler(comm, s))
     results = Parallel(n_jobs=cpu_count(), backend='threading')(funcs)
     return list(results)
+
+
+def avg_mui_score(com_id, comm, nmap, mmatrix):
+    # map to matrix
+    qnodes = np.array([nmap[x] for x in comm])
+    # get query_vec
+    vec = louvain_consensus.query_vector(qnodes, mmatrix)
+    # mean for internal vector
+    return com_id, np.mean(vec)
+
+
+def gen_avg_mui_scores(mmatrix, nmap, comms):
+    funcs = (delayed(avg_mui_score)(com_id, comm, nmap, mmatrix) for com_id, comm in comms.items())
+    results = dict(Parallel(n_jobs=cpu_count(), backend='threading')(funcs))
+    return results
 
 
 def get_rocs(mmatrix, nmap, comms, seed_sizes=(1, 3, 7, 15)):
@@ -262,9 +280,9 @@ def generate_results(network, overwrite=False):
     dt = real_networks[network]
 
     roc_df_path = os.path.join("results", network) + "_roc_res.p"
-
+    graph, comms, mmatrix, nmap = load_network(dt["path"], network, dt["clusters"], dt["index"], dt["node_type"])
     if overwrite or not os.path.exists(roc_df_path):
-        graph, comms, mmatrix, nmap = load_network(dt["path"], network, dt["clusters"], dt["index"], dt["node_type"])
+
         print(network, "gen_roc_curves")
         roc_results = get_rocs(mmatrix, nmap, comms)
         with open(roc_df_path, "wb+") as roc_df:
@@ -278,6 +296,14 @@ def generate_results(network, overwrite=False):
         print(network, "gen_sig_scores")
         with open(sign_df_path, "wb+") as sig_df:
            pickle.dump(sigscores, sig_df)
+
+    avg_mui_path = os.path.join("results", network) + "_avg_mui_scores.p"
+
+    if overwrite or not os.path.exists(avg_mui_path):
+        graph, comms, mmatrix, nmap = load_network(dt["path"], network, dt["clusters"], dt["index"], dt["node_type"])
+        rscores = gen_avg_mui_scores(mmatrix, nmap, comms)
+        with open(avg_mui_path, "wb+") as muiscores_f:
+            pickle.dump(rscores, muiscores_f)
 
 
 def plot_ensemble_size_impact(df):
@@ -314,6 +340,43 @@ def plot_ensemble_size_impact(df):
     return fig
 
 
+def plot_mui_comm_thresh(df, avg_mui, thresholds=10):
+    x_vals = np.linspace(0, 1.0, thresholds)
+
+    fig, ax = plt.subplots()
+    fig.set_dpi(90)
+
+    colours = {
+        1: "b",
+        3: "g",
+        7: "y",
+        15: "m"
+    }
+
+    ax.set_xlabel("Mean internal $\mu_i(S)$ score")
+    ax.set_ylabel("Mean AUC score")
+
+    # different seed sizes
+    for seed_size in df["seed"].unique():
+        sdf = df.loc[df["seed"] == seed_size]
+        yvals = []
+        yerr = []
+        # different mu scores
+        for thr in x_vals:
+            vcs = list(filter(lambda x: avg_mui[x] >= thr, avg_mui))
+            sdf2 = sdf.loc[sdf["cid"].isin(vcs)]
+            # average/std auc_score
+            yvals.append(sdf2.mean()["auc"])
+            yerr.append(sdf2.std()["auc"])
+
+        ax.scatter(x_vals, yvals, label="{} seed node(s)".format(seed_size), color=colours[seed_size])
+        ax.errorbar(x_vals, yvals, yerr=yerr, color=colours[seed_size])
+
+    ax.legend()
+    fig.tight_layout()
+    return fig
+
+
 def handle_results(network):
 
     roc_df_path = os.path.join("results", network) + "_roc_res.p"
@@ -326,7 +389,15 @@ def handle_results(network):
     fig = plot_roc_curve(df)
     fig.savefig("article/images/rocs/{}.png".format(network))
     fig.savefig("article/images/rocs/{}.svg".format(network))
-    fig.savefig("article/images/rocs/{}.eps".format(network))
+    #fig.savefig("article/images/rocs/{}.eps".format(network))
+
+    avg_mui_path = os.path.join("results", network) + "_avg_mui_scores.p"
+
+    with open(avg_mui_path, "rb") as rf:
+        avg_mui = pickle.load(rf)
+
+    fig2 = plot_mui_comm_thresh(df, avg_mui)
+    fig2.savefig("article/images/rocs/thresh_auc_{}.png".format(network))
 
     return df
 
