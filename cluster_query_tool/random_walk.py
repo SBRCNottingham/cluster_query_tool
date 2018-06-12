@@ -32,6 +32,7 @@ def rwr(graph, query_nodes, restart_prob, _dthreshold=10e-7):
     # Initialise until p_t
     p_t = np.copy(p_o)
     # restart is a fixed vector (i.e. the probability of jumping back to one of the seed nodes)
+    restart = p_o * restart_prob
     while delta > _dthreshold:
         p_tp1 = ((1 - restart_prob) * np.dot(w, p_t)) + restart
         delta = np.linalg.norm(p_t - p_tp1, 1)
