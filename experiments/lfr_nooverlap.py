@@ -253,7 +253,7 @@ def gen_figure(n):
     df = pd.DataFrame(rows, columns=['n', 'mixing', 'seed', 'c', 'seed_size', 'comm', 'auc', 'auc_std'])
 
     rows = []
-    for f in glob.glob("hpc_results/lfr_overlap_{}_rwr/*.json".format(n)):
+    for f in glob.glob("hpc_results/lfr_no_overlap_{}_rwr/*.json".format(n)):
         with open(f) as jf:
             rts = json.load(jf)
             for row in rts:
