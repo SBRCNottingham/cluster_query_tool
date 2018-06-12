@@ -92,91 +92,6 @@ def auc_compute_rwr(seed, n, mu, results_folder):
         json.dump(results, rf)
 
 
-def get_net_significance(n, mu, seed):
-    pset = _base_params.copy()
-    mu = float("{:.2f}".format(mu))
-    pset['n'] = int(n)
-    pset['mu'] = mu
-    pset['seed'] = int(seed)
-    graph, communities, index = get_benchmark(pset)
-    membership_ma, nmap = membership_matrix(graph.nodes(), index)
-
-    print(pset)
-    rows = []
-    for c in communities:
-        query = np.array([nmap[x] for x in communities[c]])
-        qscore = quality_score(query, membership_ma)
-
-        # N, SEED, MU, CID, qscore, len_query
-        row = (
-            n, seed, mu, c, qscore, len(query),
-        )
-        rows.append(row)
-    return rows
-
-
-@click.command()
-@click.argument("n")
-@click.argument("results_folder")
-@click.option("--mu_steps", default=10)
-def csign(n, results_folder, mu_steps):
-    """
-    Calculate the fraction of statistically significant query sets at each given time point
-    :param n:
-    :param results_folder:
-    :return:
-    """
-
-    js = list(product(np.linspace(0, 1, mu_steps), range(1, 11)))
-    jobs = (delayed(get_net_significance)(n, mu, seed) for mu, seed in js)
-
-    results = Parallel(n_jobs=16, verbose=5)(jobs)
-    results_path = os.path.join(os.path.abspath(results_folder), "significance.json")
-    with open(results_path, "w+") as rp:
-        results = list(chain(*results))
-        json.dump(results, rp)
-
-
-@click.command()
-@click.argument("n")
-@click.argument("results_folder")
-def plot_csign(n, results_folder):
-    results_path = os.path.join(os.path.abspath(results_folder), "significance.json")
-    with(open(results_path)) as rp:
-        results = json.load(rp)
-
-    df = pd.DataFrame(results, columns=["N", "SEED", "MU", "CID", "qscore", "c_size" ] )
-    thresh = 0.001
-
-    xvals = sorted(df["MU"].unique())
-
-    fig, ax = plt.subplots()
-    fig.set_dpi(90)
-    ax.set_ylabel("Fraction signficant comms")
-    ax.set_xlabel("Mixing coefficient $\mu$")
-    ax.set_ylim(0.0, 1.01)
-    ax.set_xlim(0.0, 1.01)
-
-    sign = []
-    std = []
-    for m in xvals:
-        frac_signficant = []
-        sdf = df.loc[df["MU"] == m]
-        for s in sdf["SEED"].unique():
-            sdf2 = sdf.loc[sdf["SEED"] == s]
-            fr = (sdf2["qscore"] > thresh).sum()
-
-            frac_signficant.append(((len(sdf) - fr)/len(sdf)))
-
-        sign.append(np.mean(frac_signficant))
-        std.append(np.mean(frac_signficant))
-
-    ax.scatter(xvals, sign)
-    ax.errorbar(xvals, sign, yerr=std)
-    fig.savefig("article/images/lfr_sig_{}.eps".format(n))
-    fig.savefig("article/images/lfr_sig_{}.svg".format(n))
-    fig.savefig("article/images/lfr_sig_{}.png".format(n))
-
 
 @click.command()
 @click.argument("n")
@@ -376,6 +291,4 @@ if __name__ == "__main__":
     cli.add_command(run_jobs_rwr)
     cli.add_command(auc_compute_rwr)
     cli.add_command(gen_figure)
-    cli.add_command(csign)
-    cli.add_command(plot_csign)
     cli()
