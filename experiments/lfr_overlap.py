@@ -254,6 +254,15 @@ def gen_figure(n):
 
     df = pd.DataFrame(rows, columns=['n', 'ol', 'seed', 'c', 'seed_size', 'comm', 'auc', 'auc_std'])
 
+    rows = []
+    for f in glob.glob("hpc_results/lfr_overlap_{}_rwr/*.json".format(n)):
+        with open(f) as jf:
+            rts = json.load(jf)
+            for row in rts:
+                rows.append(row)
+
+    df_rwr = pd.DataFrame(rows, columns=['n', 'ol', 'seed', 'c', 'seed_size', 'comm', 'auc', 'auc_std'])
+
     fig, ax = plt.subplots()
     fig.set_dpi(90)
     ax.set_ylabel("Mean AUC")
@@ -262,6 +271,13 @@ def gen_figure(n):
     ax.set_xlim(0.0, 1.01)
     x_vals = df['ol'].unique()
     x_vals.sort()
+
+    color = {
+        1:"b",
+        3:"y",
+        7:"g",
+        15:"r"
+    }
 
     for s in _seed_sizes:
         y_vals = []
@@ -272,10 +288,21 @@ def gen_figure(n):
             y_vals.append(m)
             std = sdf.loc[sdf['ol'] == x]["auc_std"].std()
             y_err.append(std)
-        ax.scatter(x_vals / int(n), y_vals, label="{} seed nodes".format(s))
-        ax.errorbar(x_vals/ int(n), y_vals, yerr=y_err)
+        ax.errorbar(x_vals/ int(n), y_vals, yerr=y_err, linestyle="-", color=color[s], marker="o",
+                    label="{} seed nodes $\mu$".format(s))
 
-    ax.legend(loc=3)
+        y_vals = []
+        y_err = []
+        sdf = df_rwr.loc[df_rwr['seed_size'] == s]
+        for x in x_vals:
+            m = sdf.loc[sdf['ol'] == x]["auc"].mean()
+            y_vals.append(m)
+            std = sdf.loc[sdf['ol'] == x]["auc_std"].std()
+            y_err.append(std)
+        ax.errorbar(x_vals / int(n), y_vals, yerr=y_err, linestyle="--", color=color[s], marker="D",
+                    label="{} seed nodes $rwr$".format(s))
+
+    ax.legend(loc=3, handlelength=3)
     fig.tight_layout()
     fig.savefig("article/images/lfr_binary_overlap_auc_{}.eps".format(n))
     fig.savefig("article/images/lfr_binary_overlap_auc_{}.svg".format(n))
