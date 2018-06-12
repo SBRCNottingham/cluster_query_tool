@@ -14,7 +14,7 @@ def diffusion_kernel(graph, query_nodes, beta=0.1):
     return score
 
 
-def rwr(graph, query_nodes, restart_prob, _dthreshold=10e-7):
+def rwr(graph, query_nodes, restart_prob=0.5, _dthreshold=10e-7):
     # Get adjacency matrix
     a = nx.to_numpy_array(graph)
 

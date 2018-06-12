@@ -7,6 +7,7 @@ import random
 import numpy as np
 from cluster_query_tool.indexer import get_index
 import logging
+from cluster_query_tool.random_walk import rwr
 
 from scipy.special import binom
 import itertools
@@ -106,6 +107,20 @@ def roc_score_seed(seed_set, nodes, membership_ma, comm):
     return fast_auc(y_true, y_score)
 
 
+def roc_score_seed_rwr(seed_set, graph, comm):
+
+    vec = rwr(graph, seed_set)
+
+    def inc(x):
+        if x in comm:
+            return 1
+        return 0
+
+    y_true = np.array([inc(x) for x in range(graph.number_of_nodes()) if x not in seed_set])
+    y_score = np.array([vec[x] for x in range(graph.number_of_nodes()) if x not in seed_set])
+    return fast_auc(y_true, y_score)
+
+
 def get_auc_scores_community(seed_size, community, nodes, membership_ma, sample_seed=1337):
     np.random.seed(sample_seed)
     samples = unique_sampler(community, seed_size)
@@ -113,3 +128,13 @@ def get_auc_scores_community(seed_size, community, nodes, membership_ma, sample_
     funcs = (delayed(roc_score_seed)(np.array(sample), nodes, membership_ma, community) for sample in samples)
     auc_scores = Parallel(n_jobs=cpu_count(), backend='threading')(funcs)
     return auc_scores
+
+
+def get_auc_scores_community_rwr(seed_size, community, graph, sample_seed=1337):
+    np.random.seed(sample_seed)
+    samples = unique_sampler(community, seed_size)
+
+    funcs = (delayed(roc_score_seed_rwr)(np.array(sample), graph, community) for sample in samples)
+    auc_scores = Parallel(n_jobs=cpu_count(), backend='threading')(funcs)
+    return auc_scores
+
