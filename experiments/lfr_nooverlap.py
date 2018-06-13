@@ -4,7 +4,8 @@ HPC script for running evaluation of performance on benchmark graphs
 This script is supposed to be run by the jobscript
 """
 from experiments import get_benchmark, get_auc_scores_community, get_auc_scores_community_rwr
-from cluster_query_tool.louvain_consensus import membership_matrix, quality_score
+from cigram import lfr_benchmark_graph
+from cluster_query_tool.louvain_consensus import membership_matrix
 import numpy as np
 import click
 from subprocess import call
@@ -75,7 +76,7 @@ def auc_compute_rwr(seed, n, mu, results_folder):
     rp = "{}_{}_{}_rwr.json".format(n, mu, seed)
     results_file = os.path.abspath(os.path.join(results_folder, rp))
 
-    graph, communities, index = get_benchmark(pset)
+    graph, communities = lfr_benchmark_graph(**pset)
 
     nmap = dict([(j, i) for i, j in enumerate(sorted(graph.nodes()))])
 
@@ -84,7 +85,7 @@ def auc_compute_rwr(seed, n, mu, results_folder):
         for seed_size in _seed_sizes:
             if len(comm) > seed_size:
                 # Seed of AUC scores for node this size
-                scom = np.array([nmap[i] for i in comm])
+                scom = [nmap[i] for i in comm]
                 auc_s = get_auc_scores_community_rwr(seed_size, scom, graph)
                 results.append([int(n), float(mu), int(seed), c, seed_size, len(comm), np.mean(auc_s), np.std(auc_s)])
 
