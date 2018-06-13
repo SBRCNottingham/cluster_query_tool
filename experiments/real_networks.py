@@ -9,7 +9,6 @@ import pickle
 from sklearn.metrics import roc_curve
 import numpy as np
 import os
-import progressbar
 import pandas as pd
 import matplotlib as mpl
 mpl.use('Agg')
@@ -213,7 +212,7 @@ def get_rocs(mmatrix, nmap, comms, seed_sizes=(1, 3, 7, 15)):
 
     res = []
 
-    for cid, comm in progressbar.progressbar(comms.items()):
+    for cid, comm in comms.items():
         cnodes = map_com(comm, nmap)
         for s in seed_sizes:
             if len(comm) > s:
@@ -233,7 +232,7 @@ def get_rocs_rwr(graph, nmap, comms, seed_sizes=(1, 3, 7, 15)):
 
     res = []
 
-    for cid, comm in progressbar.progressbar(comms.items()):
+    for cid, comm in comms.items():
         cnodes = map_com(comm, nmap)
         for s in seed_sizes:
             if len(comm) > s:
