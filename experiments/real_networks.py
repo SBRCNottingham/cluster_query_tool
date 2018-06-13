@@ -322,8 +322,7 @@ def generate_results(network, overwrite=False):
 
     roc_df_path = os.path.join("results", network) + "_roc_res_rwr.p"
 
-    #if overwrite or not os.path.exists(roc_df_path):
-    if True:
+    if overwrite or not os.path.exists(roc_df_path):
         nmap = dict([(j, i) for i,j in enumerate(graph.nodes())])
         print(network, "gen_roc_curves_rwr")
         roc_results = get_rocs_rwr(graph, nmap, comms)
@@ -354,7 +353,7 @@ def handle_results(network):
 
 
 if __name__ == "__main__":
-    for n in ["ecoli_ppi"]:
+    for n in [real_networks:
         print(n)
         generate_results(n)
         handle_results(n)
