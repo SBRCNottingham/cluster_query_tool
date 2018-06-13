@@ -2,6 +2,7 @@ import networkx as nx
 from cluster_query_tool import louvain_consensus
 from cluster_query_tool.indexer import get_index
 from experiments import fast_auc, unique_sampler
+from cluster_query_tool.random_walk import rwr
 from joblib import Parallel, delayed, cpu_count
 import json
 import pickle
@@ -142,6 +143,22 @@ def samp_roc_and_auc(samp, mmatrix, comm, cid, s):
     return cid, s, tpr, fnr, auc
 
 
+def samp_roc_and_auc_rwr(samp, graph, comm, cid, s):
+    ncom = np.array([x for x in range(graph.number_of_nodes()) if x not in samp])
+    vec = rwr(graph, samp)
+
+    def inc(x):
+        if x in comm:
+            return 1
+        return 0
+
+    y_true = np.array([inc(x) for x in ncom])
+    y_prob = vec[ncom]
+    tpr, fnr, _ = roc_curve(y_true, y_prob)
+    auc = fast_auc(y_true, y_prob)
+    return cid, s, tpr, fnr, auc
+
+
 def samp_auc(samp, mmatrix, comm, cid, s, mat_size):
     ncom = np.array([x for x in range(mmatrix.shape[0]) if x not in samp])
     vec = louvain_consensus.query_vector(np.array(samp), mmatrix)
@@ -159,6 +176,12 @@ def samp_auc(samp, mmatrix, comm, cid, s, mat_size):
 
 def gen_roc_curves(mmatrix, comm, s, cid):
     funcs = (delayed(samp_roc_and_auc)(samp, mmatrix, comm, cid, s) for samp in unique_sampler(comm, s))
+    results = Parallel(n_jobs=cpu_count(), backend='threading')(funcs)
+    return list(results)
+
+
+def gen_roc_curves_rwr(graph, comm, s, cid):
+    funcs = (delayed(samp_roc_and_auc_rwr)(samp, graph, comm, cid, s) for samp in unique_sampler(comm, s))
     results = Parallel(n_jobs=cpu_count(), backend='threading')(funcs)
     return list(results)
 
@@ -196,6 +219,27 @@ def get_rocs(mmatrix, nmap, comms, seed_sizes=(1, 3, 7, 15)):
             if len(comm) > s:
                 res += gen_roc_curves(mmatrix, cnodes, s, cid)
     return res
+
+
+def get_rocs_rwr(graph, nmap, comms, seed_sizes=(1, 3, 7, 15)):
+    """
+
+    :param mmatrix:
+    :param nmap:
+    :param comms:
+    :param seed_sizes:
+    :return:
+    """
+
+    res = []
+
+    for cid, comm in progressbar.progressbar(comms.items()):
+        cnodes = map_com(comm, nmap)
+        for s in seed_sizes:
+            if len(comm) > s:
+                res += gen_roc_curves_rwr(graph, cnodes, s, cid)
+    return res
+
 
 
 def psize_scoring(mmatrix, nmap, comms, seed_sizes=(1, 3, 7, 15)):
@@ -288,23 +332,14 @@ def generate_results(network, overwrite=False):
         with open(roc_df_path, "wb+") as roc_df:
             pickle.dump(roc_results, roc_df)
 
-    sign_df_path = os.path.join("results", network) + "_sign_res.p"
+    roc_df_path = os.path.join("results", network) + "_roc_res_rwr.p"
 
-    if overwrite or not os.path.exists(sign_df_path):
-        graph, comms, mmatrix, nmap = load_network(dt["path"], network, dt["clusters"], dt["index"], dt["node_type"])
-        sigscores = get_community_significance_scores(mmatrix, nmap, comms)
-        print(network, "gen_sig_scores")
-        with open(sign_df_path, "wb+") as sig_df:
-           pickle.dump(sigscores, sig_df)
+    if overwrite or not os.path.exists(roc_df_path):
 
-    avg_mui_path = os.path.join("results", network) + "_avg_mui_scores.p"
-
-    if overwrite or not os.path.exists(avg_mui_path):
-        graph, comms, mmatrix, nmap = load_network(dt["path"], network, dt["clusters"], dt["index"], dt["node_type"])
-        rscores = gen_avg_mui_scores(mmatrix, nmap, comms)
-        with open(avg_mui_path, "wb+") as muiscores_f:
-            pickle.dump(rscores, muiscores_f)
-
+        print(network, "gen_roc_curves")
+        roc_results = get_rocs_rwr(graph, nmap, comms)
+        with open(roc_df_path, "wb+") as roc_df:
+            pickle.dump(roc_results, roc_df)
 
 def plot_ensemble_size_impact(df):
     fig, ax = plt.subplots()
