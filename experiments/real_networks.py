@@ -335,7 +335,7 @@ def generate_results(network, overwrite=False):
 
     if overwrite or not os.path.exists(roc_df_path):
 
-        print(network, "gen_roc_curves")
+        print(network, "gen_roc_curves_rwr")
         roc_results = get_rocs_rwr(graph, nmap, comms)
         with open(roc_df_path, "wb+") as roc_df:
             pickle.dump(roc_results, roc_df)
