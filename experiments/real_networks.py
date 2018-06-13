@@ -185,21 +185,6 @@ def gen_roc_curves_rwr(graph, comm, s, cid):
     return list(results)
 
 
-def avg_mui_score(com_id, comm, nmap, mmatrix):
-    # map to matrix
-    qnodes = np.array([nmap[x] for x in comm])
-    # get query_vec
-    vec = louvain_consensus.query_vector(qnodes, mmatrix)
-    # mean for internal vector
-    return com_id, np.mean(vec)
-
-
-def gen_avg_mui_scores(mmatrix, nmap, comms):
-    funcs = (delayed(avg_mui_score)(com_id, comm, nmap, mmatrix) for com_id, comm in comms.items())
-    results = dict(Parallel(n_jobs=cpu_count(), backend='threading')(funcs))
-    return results
-
-
 def get_rocs(mmatrix, nmap, comms, seed_sizes=(1, 3, 7, 15)):
     """
 
@@ -339,39 +324,6 @@ def generate_results(network, overwrite=False):
         roc_results = get_rocs_rwr(graph, nmap, comms)
         with open(roc_df_path, "wb+") as roc_df:
             pickle.dump(roc_results, roc_df)
-
-def plot_ensemble_size_impact(df):
-    fig, ax = plt.subplots()
-    fig.set_dpi(90)
-
-    colours = {
-        1: "b",
-        3: "g",
-        7: "y",
-        15: "m"
-    }
-
-    xvals = sorted(df["mat_size"].unique())
-
-    ax.set_xlabel("Number of partition samples")
-    ax.set_ylabel("Mean AUC score")
-
-    ax.set_xlim([1, max(xvals) + 10])
-
-    for seed_size in df["seed"].unique():
-        scores = []
-        stds = []
-        sdf = df.loc[df["seed"] == seed_size]
-        for msize in xvals:
-            sdf2 = sdf.loc[sdf["mat_size"] == msize]
-            scores.append(sdf2.mean()["auc"])
-            stds.append(sdf2.std()["auc"])
-
-        ax.scatter(xvals, scores, label="{} seed node(s)".format(seed_size), color=colours[seed_size])
-        ax.errorbar(xvals, scores, yerr=stds, color=colours[seed_size])
-    ax.legend()
-    fig.tight_layout()
-    return fig
 
 
 def plot_mui_comm_thresh(df, avg_mui, thresholds=10):
