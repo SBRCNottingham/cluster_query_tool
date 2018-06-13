@@ -243,7 +243,7 @@ def psize_scoring(mmatrix, nmap, comms, seed_sizes=(1, 3, 7, 15)):
     return results
 
 
-def plot_roc_curve(df):
+def plot_roc_curve(df, df_rwr):
     """
     Takes a dataframe of roc curves at different seeds and plots the mean roc curves
 
@@ -293,12 +293,34 @@ def plot_roc_curve(df):
         tprs_upper = np.minimum(mean_tprs + std, 1)
         tprs_lower = mean_tprs - std
 
-        label = "{} seed node(s) mean AUC: {:.2f} (std: {:.2f})".format(s, sdf.mean()["auc"], sdf.std()["auc"])
+        label = "$\mu$ {} seed node(s) mean AUC: {:.2f} (std: {:.2f})".format(s, sdf.mean()["auc"], sdf.std()["auc"])
 
-        ax.plot(base_fpr, mean_tprs, color=colours[s], label=label)
-        ax.fill_between(base_fpr, tprs_lower, tprs_upper, color=colours[s], alpha=0.1)
+        ax.plot(base_fpr, mean_tprs, color=colours[s], label=label, linestyle="-")
+        #ax.fill_between(base_fpr, tprs_lower, tprs_upper, color=colours[s], alpha=0.1)
 
-        ax.legend()
+        sdf = df_rwr.loc[df_rwr["seed"] == s]
+
+        tprs = []
+        base_fpr = np.linspace(0, 1, 101)
+
+        for rid, row in sdf.iterrows():
+            tpr = interp(base_fpr, row["tpr"], row["fnr"])
+            tpr[0] = 0.0
+            tprs.append(tpr)
+
+        tprs = np.array(tprs)
+        mean_tprs = tprs.mean(axis=0)
+        std = tprs.std(axis=0)
+
+        tprs_upper = np.minimum(mean_tprs + std, 1)
+        tprs_lower = mean_tprs - std
+
+        label = "rwr {} seed node(s) mean AUC: {:.2f} (std: {:.2f})".format(s, sdf.mean()["auc"], sdf.std()["auc"])
+
+        ax.plot(base_fpr, mean_tprs, color=colours[s], label=label, linestyle="--")
+        # ax.fill_between(base_fpr, tprs_lower, tprs_upper, color=colours[s], alpha=0.1)
+
+    ax.legend()
 
     fig.tight_layout()
     return fig
@@ -326,64 +348,24 @@ def generate_results(network, overwrite=False):
             pickle.dump(roc_results, roc_df)
 
 
-def plot_mui_comm_thresh(df, avg_mui, thresholds=10):
-    x_vals = np.linspace(0, 1.0, thresholds)
-
-    fig, ax = plt.subplots()
-    fig.set_dpi(90)
-
-    colours = {
-        1: "b",
-        3: "g",
-        7: "y",
-        15: "m"
-    }
-
-    ax.set_xlabel("Mean internal $\mu_i(S)$ score")
-    ax.set_ylabel("Mean AUC score")
-
-    # different seed sizes
-    for seed_size in df["seed"].unique():
-        sdf = df.loc[df["seed"] == seed_size]
-        yvals = []
-        yerr = []
-        # different mu scores
-        for thr in x_vals:
-            vcs = list(filter(lambda x: avg_mui[x] >= thr, avg_mui))
-            sdf2 = sdf.loc[sdf["cid"].isin(vcs)]
-            # average/std auc_score
-            yvals.append(sdf2.mean()["auc"])
-            yerr.append(sdf2.std()["auc"])
-
-        ax.scatter(x_vals, yvals, label="{} seed node(s)".format(seed_size), color=colours[seed_size])
-        ax.errorbar(x_vals, yvals, yerr=yerr, color=colours[seed_size])
-
-    ax.legend()
-    fig.tight_layout()
-    return fig
-
-
 def handle_results(network):
-
+    headings = ["cid", "seed", "tpr", "fnr", "auc"]
     roc_df_path = os.path.join("results", network) + "_roc_res.p"
     with open(roc_df_path, "rb") as rf:
         results = pickle.load(rf)
 
-    headings = ["cid", "seed", "tpr", "fnr", "auc"]
-
     df = pd.DataFrame(results, columns=headings)
-    fig = plot_roc_curve(df)
+
+    roc_df_path = os.path.join("results", network) + "_roc_res_rwr.p"
+    with open(roc_df_path, "rb") as rf:
+        results = pickle.load(rf)
+
+    df_rwr = pd.DataFrame(results, columns=headings)
+
+    fig = plot_roc_curve(df, df_rwr)
     fig.savefig("article/images/rocs/{}.png".format(network))
     fig.savefig("article/images/rocs/{}.svg".format(network))
     #fig.savefig("article/images/rocs/{}.eps".format(network))
-
-    avg_mui_path = os.path.join("results", network) + "_avg_mui_scores.p"
-
-    with open(avg_mui_path, "rb") as rf:
-        avg_mui = pickle.load(rf)
-
-    fig2 = plot_mui_comm_thresh(df, avg_mui)
-    fig2.savefig("article/images/rocs/thresh_auc_{}.png".format(network))
 
     return df
 
