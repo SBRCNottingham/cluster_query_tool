@@ -225,24 +225,6 @@ def get_rocs_rwr(graph, nmap, comms, seed_sizes=(1, 3, 7, 15)):
     return res
 
 
-
-def psize_scoring(mmatrix, nmap, comms, seed_sizes=(1, 3, 7, 15)):
-    funcs = []
-    for mat_size in np.linspace(1, 2000, 100, dtype=int):
-        sub_mat = mmatrix.transpose()[:int(mat_size)].transpose()
-        for cid, comm in comms.items():
-            cnodes = map_com(comm, nmap)
-            for s in seed_sizes:
-                samples = unique_sampler(cnodes, s)
-                if len(comm) > s:
-                    for samp in samples:
-                        funcs.append(delayed(samp_auc)(samp, sub_mat, cnodes, cid, s, mat_size))
-
-    results = Parallel(n_jobs=cpu_count(), verbose=5)(funcs)
-
-    return results
-
-
 def plot_roc_curve(df, df_rwr):
     """
     Takes a dataframe of roc curves at different seeds and plots the mean roc curves
@@ -340,8 +322,9 @@ def generate_results(network, overwrite=False):
 
     roc_df_path = os.path.join("results", network) + "_roc_res_rwr.p"
 
-    if overwrite or not os.path.exists(roc_df_path):
-
+    #if overwrite or not os.path.exists(roc_df_path):
+    if True:
+        nmap = dict([(j, i) for i,j in enumerate(graph.nodes())])
         print(network, "gen_roc_curves_rwr")
         roc_results = get_rocs_rwr(graph, nmap, comms)
         with open(roc_df_path, "wb+") as roc_df:
@@ -371,7 +354,7 @@ def handle_results(network):
 
 
 if __name__ == "__main__":
-    for n in real_networks:
+    for n in ["ecoli_ppi"]:
         print(n)
         generate_results(n)
         handle_results(n)
