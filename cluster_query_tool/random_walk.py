@@ -16,8 +16,13 @@ def diffusion_kernel(graph, query_nodes, beta=0.1):
 
 def rwr(graph, query_nodes, restart_prob=0.5, _dthreshold=10e-7):
     # Get adjacency matrix
-    a = nx.to_numpy_array(graph)
+    a = np.zeros((graph.number_of_nodes(), graph.number_of_nodes()))
 
+    nmap = dict([(j,i) for i,j in enumerate(sorted(graph.nodes()))])
+    for i,j in graph.edges():
+        a[nmap[i]][nmap[j]] = 1
+        a[nmap[j]][nmap[i]] = 1
+    
     # Normalise the column vectors
     nr = a.sum(axis=1)
     w = a / nr

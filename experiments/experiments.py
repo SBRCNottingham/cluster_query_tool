@@ -96,7 +96,7 @@ def fast_auc(y_true, y_prob):
 
 def roc_score_seed(seed_set, nodes, membership_ma, comm):
     vec = query_vector(seed_set, membership_ma)
-
+    
     def inc(x):
         if x in comm:
             return 1
@@ -107,17 +107,17 @@ def roc_score_seed(seed_set, nodes, membership_ma, comm):
     return fast_auc(y_true, y_score)
 
 
-def roc_score_seed_rwr(seed_set, graph, comm):
+def roc_score_seed_rwr(seed_set, graph, comm, nmap):
+    
+    ncom = np.array([nmap[x] for x in graph.nodes() if nmap[x] not in seed_set])
+    probs = rwr(graph, seed_set)
 
-    vec = rwr(graph, seed_set)
-
-    def inc(x):
-        if x in comm:
+    def inc(n):
+        if n in comm:
             return 1
         return 0
-
-    y_true = np.array([inc(x) for x in range(graph.number_of_nodes()) if x not in seed_set])
-    y_score = np.array([vec[x] for x in range(graph.number_of_nodes()) if x not in seed_set])
+    y_true = np.array([inc(x) for x in ncom])
+    y_score = probs[ncom]
     return fast_auc(y_true, y_score)
 
 
@@ -130,11 +130,11 @@ def get_auc_scores_community(seed_size, community, nodes, membership_ma, sample_
     return auc_scores
 
 
-def get_auc_scores_community_rwr(seed_size, community, graph, sample_seed=1337):
+def get_auc_scores_community_rwr(seed_size, community, graph, nmap, sample_seed=1337):
     np.random.seed(sample_seed)
     samples = unique_sampler(community, seed_size)
 
-    funcs = (delayed(roc_score_seed_rwr)(np.array(sample), graph, community) for sample in samples)
+    funcs = (delayed(roc_score_seed_rwr)(np.array(sample), graph, community, nmap) for sample in samples)
     auc_scores = Parallel(n_jobs=cpu_count(), backend='threading')(funcs)
     return auc_scores
 

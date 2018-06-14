@@ -18,6 +18,7 @@ mpl.use('Agg')
 from matplotlib import pyplot as plt
 import glob
 import pandas as pd
+import networkx as nx
 
 
 _base_params = dict(
@@ -86,9 +87,11 @@ def auc_compute_rwr(seed, n, mu, results_folder):
             if len(comm) > seed_size:
                 # Seed of AUC scores for node this size
                 scom = [nmap[i] for i in comm]
-                auc_s = get_auc_scores_community_rwr(seed_size, scom, graph)
+                auc_s = get_auc_scores_community_rwr(seed_size, scom, graph, nmap)
                 results.append([int(n), float(mu), int(seed), c, seed_size, len(comm), np.mean(auc_s), np.std(auc_s)])
-
+                
+    df = pd.DataFrame(results, columns=['n', 'mixing', 'seed', 'c', 'seed_size', 'comm', 'auc', 'auc_std'])
+    print(df["auc"].mean())
     with open(results_file, "w+") as rf:
         json.dump(results, rf)
 
