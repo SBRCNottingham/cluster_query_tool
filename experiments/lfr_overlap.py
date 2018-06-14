@@ -80,7 +80,7 @@ def auc_compute_rwr(seed, n, ol, results_folder):
             if len(comm) > seed_size:
                 # Seed of AUC scores for node this size
                 scom = [nmap[i] for i in comm]
-                auc_s = get_auc_scores_community_rwr(seed_size, scom, graph)
+                auc_s = get_auc_scores_community_rwr(seed_size, scom, graph, nmap)
                 results.append([int(n), int(ol), int(seed), c, seed_size, len(comm), np.mean(auc_s), np.std(auc_s)])
 
     with open(results_file, "w+") as rf:
