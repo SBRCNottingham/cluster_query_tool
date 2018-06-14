@@ -324,8 +324,14 @@ def generate_results(network, overwrite=False):
 
     if overwrite or not os.path.exists(roc_df_path):
         nmap = dict([(j, i) for i,j in enumerate(graph.nodes())])
+
+        ngraph = nx.Graph()
+
+        for edge in graph.edges():
+            ngraph.add_edge(nmap[edge[0]], nmap[edge[1]])
+
         print(network, "gen_roc_curves_rwr")
-        roc_results = get_rocs_rwr(graph, nmap, comms)
+        roc_results = get_rocs_rwr(ngraph, nmap, comms)
         with open(roc_df_path, "wb+") as roc_df:
             pickle.dump(roc_results, roc_df)
 
