@@ -173,12 +173,13 @@ python {_file} auc_compute {n} {mu:.2f} $JOB {results_folder}
 @click.command()
 @click.argument("n")
 @click.option("--mu_steps", default=10)
+@click.option("--start_job", default=1)
 @click.option("--network_samples", default=10)
 @click.option("--walltime", default="01:30:00")
 @click.option("--request", default="select=1:ncpus=16:mem=31gb")
 @click.option("--execute/--no_exec", default=False)
 @click.option("--queue", default="HPCA-01839-EFR")
-def run_jobs_rwr(n, mu_steps, network_samples, walltime, request, execute, queue):
+def run_jobs_rwr(n, mu_steps, network_samples, start_job, walltime, request, execute, queue):
     script_template = """#!/bin/bash
 #PBS -l {request}
 #PBS -l {walltime}
@@ -215,12 +216,13 @@ python {_file} auc_compute_rwr {n} {mu:.2f} $JOB {results_folder}
 
     cmd_opt = dict(
         options="",
+        jstart=start_job,
         jcount=network_samples,
         n=n,
         e=err_path,
         o=opt_path,
     )
-    cmd_template = "qsub {options} -J 1-{jcount} {command_file} -e {e} -o {o}"
+    cmd_template = "qsub {options} -J {jstart}-{jcount} {command_file} -e {e} -o {o}"
 
     commands_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'job_scripts'))
     if not os.path.exists(commands_path):

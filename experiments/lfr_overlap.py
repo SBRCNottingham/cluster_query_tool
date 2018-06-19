@@ -165,11 +165,12 @@ python {file} auc_compute {n} {ol} $JOB {results_folder}
 @click.command()
 @click.argument("n")
 @click.option("--network_samples", default=10)
+@click.option("--start_job", default=1)
 @click.option("--walltime", default="01:30:00")
 @click.option("--request", default="select=1:ncpus=16:mem=31gb")
 @click.option("--execute/--no_exec", default=False)
 @click.option("--queue", default="HPCA-01839-EFR")
-def run_jobs_rwr(n, network_samples, walltime, request, execute, queue):
+def run_jobs_rwr(n, network_samples, start_job, walltime, request, execute, queue):
     script_template = """#!/bin/bash
 #PBS -k oe
 #PBS -l {request}
