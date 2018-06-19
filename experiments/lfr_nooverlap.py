@@ -268,7 +268,7 @@ def gen_figure(n):
     fig, ax = plt.subplots()
     fig.set_dpi(90)
     ax.set_ylabel("Mean AUC")
-    ax.set_xlabel("Mixing coefficient $\mu$")
+    ax.set_xlabel("Mixing coefficient")
     ax.set_ylim(0.4, 1.01)
     ax.set_xlim(0.0, 1.01)
     x_vals = df['mixing'].unique()

@@ -13,15 +13,15 @@
 
 
 % DOI
-\acmDOI{}
+\acmDOI{-}
 
 % ISBN
 \acmISBN{}
 
 %Conference
-\acmConference[MLG 2018]{14th International Workshop on Mining and Learning with Graphs}{Aug 20, 2018}{United Kingdom}
+\acmConference[KDD MLG 2018]{14th International Workshop on Mining and Learning with Graphs}{Aug 20, 2018}{London, United Kingdom}
 \acmYear{2018}
-\copyrightyear{2018}
+\copyrightyear{2018 Copyright held by the owner/author(s).}
 \acmPrice{}
 
 \usepackage[utf8]{inputenc}
@@ -110,7 +110,7 @@ The querying method is a polynomial time algorithm that could be trivially adapt
 This approach is then applied to synthetic benchmark networks with known, ground-truth labels as well as social and protein-protein interaction networks with high quality ground truth label sets.
 
 \begin{figure}[t]
-    \includegraphics[width=0.43\textwidth]{images/search_space_3.png}
+    \includegraphics[width=0.48\textwidth]{images/search_space_3.png}
     \caption{Modularity search space of an \textit{E. coli} metabolic network.
  Distance between partitions is calculated using variation of information \cite{meilua2003comparing} and dimensionality reduction is performed using curvilinear component analysis \cite{demartines1997curvilinear}.
   The inset (top) demonstrates the landscape of the high modularity region.
@@ -182,6 +182,7 @@ In many cases, a query set will not be fully represented by the partitions found
 \subsection{Cross-validation method}
 \label{sec:cross_validation}
 In this study we test a small number of labels that we intend to use in order to evaluate how well our method correctly generalises to discover unlabelled vertices.
+We would like to test a significantly smaller number of seed nodes than two class classification methods used in previous studies, which use leave-one-out cross validation \cite{kohler2008walking}.
 The cross validation procedure we devise is described as follows and depends on the size of the community and the number of initial seed labels being used.
 For this work we would like to capture binary classification  performance, \textit{true positives (tp)}, \textit{true negatives (tn), false positives (fp)} and \textit{false negatives (fn)}, on our datasets of community memberships.
 In order to generate the different sets for the cross validation we take each label set and generate unique sample sets of vertices from the known true positive labels.
@@ -201,7 +202,18 @@ Formally, the steps for this procedure with a given label set $S$ are outlined a
  \item Consider each of the nodes in $V$ not in $S$ to be the true negative set.
  \item Generate an average ROC curve interpolated from all test subsets.
  \end{itemize}
- 
+
+\subsection{Random walk with restart}
+As a comparison, we compare our method with the commonly used random walk with restart method as described in \cite{kohler2008walking}.
+This simulates an infinite random walk with a probability, $\alpha$ that a walker would teleport back to the initial seed nodes. 
+Formally, the random walk with restart algorithm uses the form
+\begin{equation} \label{eq:rwr}
+ \vec{p}_{t+1} = (1 - \alpha) W \vec{p}_t + \alpha \vec{p}_0,
+\end{equation}
+where $W$ is the row normalised adjacency matrix of a graph, $\vec{p}_0$ is the initial walk vector such that $\vec{p}_0 = \frac{1}{|S|}$ for vertices in the seed set.
+The random walk algorithm repeats equation \ref{eq:rwr} from $\vec{p}_0$ until the L1 norm between  $\vec{p}_t$ and  $\vec{p}_{t+1}$ converges to 0.
+For the tests performed in this work we use a restart probability $\alpha = 0.5$.
+
 \subsection{Synthetic networks}
 In this section we test the method on benchmark networks constructed with a ground-truth community structure.
 To evaluate how our method performs we use the undirected, unweighted LFR benchmark \cite{lancichinetti2008benchmark} in overlapping and non-overlapping forms.
@@ -213,6 +225,7 @@ The number of nodes is stated in the text.
 Figure \ref{fig:auc_no_overlap} represents tests on 100 networks with 1000 and 5000 nodes varying the mixing coefficient (number of edges between communities).
 As one would expect, the prediction of the method drops off steeply where communities are less defined above a mixing coefficient of 0.6.
 Using larger seed sets also improves accuracy with some prediction of true communities being possible at extremely high levels of mixing.
+Overall, results are comparable to the random walk with restart method, with slightly improved performance with a smaller number of seed nodes.
 
 \begin{figure*}[t]
     \centering
@@ -237,8 +250,9 @@ In Figure \ref{fig:auc_overlap} we show the results of network performance when 
 For these tests we fix the mixing coefficient at $0.3$.
 Here, each vertex can belong to up to 4 communities.
 In order to test performance we varied the fraction of nodes that are in more than one community.
-Interestingly, the method still has an AUC score above 0.5 when all nodes are placed in multiple communities.
+The method still has an AUC score above 0.5 when all nodes are placed in multiple communities.
 This indicates that the method is capable of uncovering latent overlapping memberships even when given a relatively small number of seed nodes.
+As with the non-overlapping results, the scores are comparable with the rwr method with performance slightly better in the case of 1000 node models.
 
 \begin{figure*}[t]
     \centering
@@ -263,30 +277,29 @@ This indicates that the method is capable of uncovering latent overlapping membe
 
 \begin{figure*}
      \centering
-    \begin{subfigure}[b]{0.48\textwidth}
+    \begin{subfigure}[b]{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{images/rocs/eu_email.eps}
         \caption{EU email departments}
     \end{subfigure}
-    \begin{subfigure}[b]{0.48\textwidth}
+    \begin{subfigure}[b]{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{images/rocs/yeast_ppi.eps}
         \caption{Yeast PPI protein complexes}
     \end{subfigure}
     
-    \begin{subfigure}[b]{0.48\textwidth}
+    \begin{subfigure}[b]{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{images/rocs/arabidopsis_ppi_combined.eps}
         \caption{Arabidopsis PPI protein complexes}
     \end{subfigure}
-    \begin{subfigure}[b]{0.48\textwidth}
+    \begin{subfigure}[b]{0.45\textwidth}
         \centering
         \includegraphics[width=\textwidth]{images/rocs/ecoli_ppi.eps}
         \caption{E. coli PPI protein complexes}
     \end{subfigure}
     \caption{Receiver operator characteristic (ROC) curves for the high quality labels for real networks described in Section \ref{sec:real_networks}. 
-    Results represent the averages over all receiver operating characteristic scores from all samples of label sets with the cross validation procedure described in \ref{sec:cross_validation}.
-    Shaded areas indicate one standard deviation.}
+    Results represent the averages over all receiver operating characteristic scores from all samples of label sets with the cross validation procedure described in \ref{sec:cross_validation}.}
     \label{fig:quality_label_rocs}
 \end{figure*}
 
@@ -329,19 +342,7 @@ In the case of the \textit{Arabidopsis thaliana} network the protein complexes t
 However, in the other networks studied, using 3 or more seed nodes appears to improve results, though for 15 seed nodes the results are not significantly better than with 7 seeds.
 
 \subsubsection{Tests on gene ontology labels}
-
-\begin{figure*}[t]
-\includegraphics[width=\textwidth]{images/ppi_example_combined.eps}
-\caption{An example of the GO term \textit{``SNAP receptor activity''} (16 nodes) on the \textit{Arabidopsis thaliana} protein-protein interaction network.
-(A) Shows the full network with 3 randomly chosen query nodes from the full query set.
-(B) Shows a reduced view of the network where a threshold of $\mu_i(S) > 0.8$ is selected, reducing the network to 404 nodes.
-Blue nodes indicates the 3 randomly selected query nodes, yellow the remaining nodes in the term and the shade of red relates to the strength of the relationship each node has to the query set.
-(C) Shows an example ROC curve from the cross validation described in the main text.
-}
-\label{fig:query_example}
-\end{figure*}
-
-\begin{figure*}[t]
+\begin{figure*}[]
      \centering
     \begin{subfigure}[b]{0.31\textwidth}
         \centering
@@ -359,9 +360,19 @@ Blue nodes indicates the 3 randomly selected query nodes, yellow the remaining n
         \caption{E. coli PPI GO terms}
     \end{subfigure}
     \caption{Receiver operator characteristic (ROC) curves for gene ontology labels for real networks described in Section \ref{sec:real_networks}. 
-    Results represent the averages over all receiver operating characteristic scores from all samples of label sets with the cross validation procedure described in \ref{sec:cross_validation}.
-    Shaded areas indicate one standard deviation.}
+    Results represent the averages over all receiver operating characteristic scores from all samples of label sets with the cross validation procedure described in \ref{sec:cross_validation}.}
     \label{fig:GO_TERM_ROCS}
+\end{figure*}
+
+\begin{figure*}[t]
+\includegraphics[width=0.8\textwidth]{images/ppi_example_combined.eps}
+\caption{An example of the GO term \textit{``SNAP receptor activity''} (16 nodes) on the \textit{Arabidopsis thaliana} protein-protein interaction network.
+(A) Shows the full network with 3 randomly chosen query nodes from the full query set.
+(B) Shows a reduced view of the network where a threshold of $\mu_i(S) > 0.8$ is selected, reducing the network to 404 nodes.
+Blue nodes indicates the 3 randomly selected query nodes, yellow the remaining nodes in the term and the shade of red relates to the strength of the relationship each node has to the query set.
+(C) Shows an example ROC curve from the cross validation described in the main text.
+}
+\label{fig:query_example}
 \end{figure*}
 
 In a practical situation the high quality label sets described above are not likely to be available.
@@ -400,12 +411,11 @@ Here, a given seed set is created and random walks are analysed to find clearly 
 One of the most common approaches to finding related vertices in a network is the random walk with restart (RWR) \cite{can2005analysis, kohler2008walking}.
 This approach has been applied in fields as diverse as recommender systems and the detection of potential drug targets \cite{chen2012drug}.
 In RWR the relatedness of any pair of vertices can be seen as the probability of a particle traversing the graph starting at a given vertex and ending at another.
-The restart aspect of the random walk can be thought of as the probability of the walker teleporting back to the start vertex with some none zero probability. 
+The restart aspect of the random walk can be thought of as the probability of the walker teleporting back to the start vertex set, as a fixed parameter. 
 The higher the probability of the walker ending up at a given vertex, the more likely it is that the two vertices are related.
 
 Conceptually, RWR is very similar to the method presented in this paper given that the user has a given query.
 The RWR probability as analogous to the value of $\mu_i(S)$ presented above.
-Further investigation needs to be conducted into how similar local community based approaches, such as random walks, compare with this method.
 
 Many existing method are based on the idea of a locally dense subgraph containing \textit{all query nodes} \cite{benson2016higher}.
 In contrast, the query approach presented here does not require the queries to be a self contained sub-graph.
@@ -424,7 +434,7 @@ However, in this work we consider each locally optimal partition to be informati
 The approach presented here differs from other ensemble approaches in that the objective is to provide a probabilistic framework for label classification.
 Performance was shown to be strong on both synthetically generated networks and real-world ground truth communities with relatively small sets of labels.
 In the case of synthetic networks communities are correctly detected up to the detectability threshold.
-For real world networks with small label sets, average AUC scores were above 0.87 for the high quality datasets tested in this study.
+For real world networks with small label sets, average AUC scores were above 0.87 and comparable to the random walk with restart method for the high quality datasets tested in this study.
 
 However, this approach requires the community landscape to contain many local maxima, a property likely shared by many real-world, heterogeneous networks.
 Similarly, the method presented here requires both some labelled data and the labels to be relevant in the context of the underlying network.
@@ -442,5 +452,4 @@ This work was supported by the UK Biotechnology and Biological Sciences Research
 \bibliographystyle{ACM-Reference-Format} 
 \bibliography{references}
 
-% \nocite{*}
 \end{document}

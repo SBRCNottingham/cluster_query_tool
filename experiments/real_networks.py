@@ -353,7 +353,7 @@ def handle_results(network):
     fig = plot_roc_curve(df, df_rwr)
     fig.savefig("article/images/rocs/{}.png".format(network))
     fig.savefig("article/images/rocs/{}.svg".format(network))
-    #fig.savefig("article/images/rocs/{}.eps".format(network))
+    fig.savefig("article/images/rocs/{}.eps".format(network))
 
     return df
 
