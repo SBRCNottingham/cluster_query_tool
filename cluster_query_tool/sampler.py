@@ -37,7 +37,7 @@ def gen_sample(network_path, nsamples=10, seed=1, opt="partitions_mod.txt"):
     :param seed:
     :return:
     """
-    graph = nx.read_edgelist(network_path)
+    graph = nx.read_edgelist(network_path, nodetype=int)
 
     # Sample start and end partitions and modularity for them
     # store only unique partitions
