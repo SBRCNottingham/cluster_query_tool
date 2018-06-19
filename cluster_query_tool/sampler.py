@@ -2,7 +2,7 @@ import networkx as nx
 from joblib import Parallel, cpu_count, delayed
 import random
 from . import louvain
-from .louvain_consensus import create_partition_from_edge_set
+from .louvain_consensus import create_partition_from_edge_set, partition_to_cut_set
 from itertools import chain
 
 
@@ -44,7 +44,12 @@ def gen_sample(network_path, nsamples=10, seed=1, opt="partitions_mod.txt"):
 
     partition_results = Parallel(n_jobs=cpu_count())(delayed(getpartitions)(graph, s)
                                                      for s in range(seed, seed +nsamples))
+
+    cutsets = []
     with open(opt, "w+") as of:
         # Output
         for q, ptl in chain(*partition_results):
-            of.write("{},{}\n".format(q, ptl))
+            cs = partition_to_cut_set(graph, ptl)
+            if cs not in cutsets:
+                cutsets.append(cs)
+                of.write("{},{}\n".format(q, ptl))
