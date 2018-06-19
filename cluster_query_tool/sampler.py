@@ -22,9 +22,9 @@ def getpartitions(graph, seed):
 
     partitions = []
     for i in range(len(dend)):
-        partition = louvain.partition_at_level(dend, i)
-        q_s = modularity(graph, partition)
-        partitions.append((q_s, [int(partition[node]) for node in graph.nodes()]))
+        pl = louvain.partition_at_level(dend, i)
+        q_s = modularity(graph, pl)
+        partitions.append((q_s, [int(pl[node]) for node in graph.nodes()]))
 
     return partitions
 
