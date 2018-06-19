@@ -207,12 +207,13 @@ python {file} auc_compute_rwr {n} {ol} $JOB {results_folder}
 
     cmd_opt = dict(
         options="",
+        jstart=start_job,
         jcount=network_samples,
         n=n,
         e=err_path,
         o=opt_path,
     )
-    cmd_template = "qsub {options} -J 1-{jcount} -e {e} -o {o} {command_file}"
+    cmd_template = "qsub {options} -J {jstart}-{jcount} -e {e} -o {o} {command_file}"
 
     commands_path = os.path.abspath(os.path.join(os.path.dirname(__file__), 'job_scripts'))
     if not os.path.exists(commands_path):
