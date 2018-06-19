@@ -1,5 +1,5 @@
 import networkx as nx
-import joblib
+from joblib import Parallel, cpu_count, delayed
 import random
 from . import louvain
 from .louvain_consensus import create_partition_from_edge_set
@@ -42,7 +42,8 @@ def gen_sample(network_path, nsamples=10, seed=1, opt="partitions_mod.txt"):
     # Sample start and end partitions and modularity for them
     # store only unique partitions
 
-    partition_results = [getpartitions(graph, 1)]
+    partition_results = Parallel(n_jobs=cpu_count())(delayed(getpartitions)(graph, s)
+                                                     for s in range(seed, seed +nsamples))
     with open(opt, "w+") as of:
         # Output
         for q, ptl in chain(*partition_results):
