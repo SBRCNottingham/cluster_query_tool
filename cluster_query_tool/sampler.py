@@ -18,7 +18,7 @@ def partitions(graph, seed):
     cut_set = random.sample(graph.edges(), random.randint(1, graph.number_of_edges()))
     # convert to partition
     start_partition = create_partition_from_edge_set(graph, cut_set)
-    dend = louvain.generate_dendogram(graph, partition=start_partition)
+    dend = louvain.generate_dendogram(graph, start_partition)
 
     partitions = []
     for i in range(len(dend)):
