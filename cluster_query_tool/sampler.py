@@ -3,6 +3,7 @@ import joblib
 import random
 from . import louvain
 from .louvain_consensus import create_partition_from_edge_set, modularity
+from itertools import chain
 
 
 def partitions(graph, seed):
@@ -17,15 +18,18 @@ def partitions(graph, seed):
     cut_set = random.sample(graph.edges(), random.randint(1, graph.number_of_edges()))
     # convert to partition
     start_partition = create_partition_from_edge_set(graph, cut_set)
-    local_optima = louvain.best_partition(graph, partition=start_partition)
+    dend = louvain.generate_dendogram(graph, partition=start_partition)
 
-    q_s = modularity(graph, start_partition)
-    q_o = modularity(graph, local_optima)
+    partitions = []
+    for i in range(len(dend)):
+        partition = louvain.partition_at_level(dend, i)
+        q_s = modularity(graph, partition)
+        partitions.append((q_s, [int(partition[node]) for node in graph.nodes()]))
 
-    return (q_s, start_partition), (q_o, local_optima)
+    return partitions
 
 
-def gen_sample(network_path, nsamples=10, seed=1):
+def gen_sample(network_path, nsamples=10, seed=1, opt="partitions_mod.txt"):
     """
     Sampler for visualisation of network parition space
     :param network_path:
@@ -40,10 +44,7 @@ def gen_sample(network_path, nsamples=10, seed=1):
 
     partition_results = joblib.Parallel(n_jobs=joblib.cpu_count())(joblib.delayed(partitions)(graph, s)
                                                                    for s in range(seed, seed+nsamples))
-
-    with open("partitions_mod.txt") as of:
+    with open(opt) as of:
         # Output
-        for start, lo in partition_results:
-            for q, part in [start, lo]:
-                ptl = str([int(part[node]) for node in graph.nodes()])
-                of.write("{},{}\n".format(q, ptl))
+        for q, ptl in chain(*partition_results):
+            of.write("{},{}\n".format(q, ptl))
