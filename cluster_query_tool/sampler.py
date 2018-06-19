@@ -43,7 +43,7 @@ def gen_sample(network_path, nsamples=10, seed=1, opt="partitions_mod.txt"):
     # store only unique partitions
 
     partition_results = getpartitions(graph, 1)
-    with open(opt) as of:
+    with open(opt, "w+") as of:
         # Output
         for q, ptl in chain(*partition_results):
             of.write("{},{}\n".format(q, ptl))
