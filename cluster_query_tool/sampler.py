@@ -6,7 +6,7 @@ from .louvain_consensus import create_partition_from_edge_set, modularity
 from itertools import chain
 
 
-def partitions(graph, seed):
+def getpartitions(graph, seed):
     """
     Generate a partition with louvain. If cut_set is None the starting partition will be randomly chosen.
     :param graph: nx.Graph
@@ -42,8 +42,9 @@ def gen_sample(network_path, nsamples=10, seed=1, opt="partitions_mod.txt"):
     # Sample start and end partitions and modularity for them
     # store only unique partitions
 
-    partition_results = joblib.Parallel(n_jobs=joblib.cpu_count())(joblib.delayed(partitions)(graph, s)
+    partition_results = joblib.Parallel(n_jobs=joblib.cpu_count())(joblib.delayed(getpartitions)(graph, s)
                                                                    for s in range(seed, seed+nsamples))
+
     with open(opt) as of:
         # Output
         for q, ptl in chain(*partition_results):
