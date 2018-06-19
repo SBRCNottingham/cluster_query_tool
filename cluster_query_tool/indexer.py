@@ -95,7 +95,7 @@ def partition_from_cut(graph, edge_set):
     return partition
 
 
-def _sample_local_optima(graph, seed):
+def sample_local_optima(graph, seed):
     """
     :param graph:
     :param seed:
@@ -114,7 +114,7 @@ def gen_sample_sets(graph, num_procs=cpu_count(), num_samples=2000, seed=1):
     """
     Compute louvain accross multiple cores
     """
-    cut_sets = Parallel(n_jobs=num_procs)(delayed(_sample_local_optima)(graph, s)
+    cut_sets = Parallel(n_jobs=num_procs)(delayed(sample_local_optima)(graph, s)
                                             for s in range(seed, seed+num_samples))
 
     cut_sets = list(set(cut_sets))

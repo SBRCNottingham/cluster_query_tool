@@ -3,7 +3,6 @@ from . import louvain
 import networkx as nx
 import random
 import numpy as np
-from scipy.stats import mannwhitneyu
 from numba import jit
 
 
@@ -65,97 +64,6 @@ def gen_local_optima_community(graph, cut_set=None):
     return start_partition, local_optima
 
 
-def mu_iscore(nodes, partitions, query_nodes):
-    """
-
-    """
-    query_set = set(query_nodes)
-    qs = 0
-    muscore = dict([(n, 0) for n in nodes])
-
-    for partition in partitions:
-        best = max([(len(query_set.intersection(set(cluster))), cluster) for cluster in partition], key=lambda x: x[0])
-
-        qs += 1.0/(len(query_set) - 1) * (best[0] - 1)
-
-        for n in best[1]:
-            if n in muscore and best[0] > 0:
-                muscore[n] += 1.0/len(partitions)
-
-    qs *= 1.0/len(partitions)
-
-    return muscore
-
-
-def mu_ivector(graph_or_nodes, partitions, query_nodes):
-    """
-    For all nodes in V, return a vector $\mu$ such that $\mu$ is the fraction of times that a node is in
-    the largest cluster that intersects with the query set over all clusters.
-
-    returns muscore (numpy array of floats) and  mappings for keys to vector index.
-    """
-    nodes = {}
-    if isinstance(graph_or_nodes, nx.Graph):
-        nodes = set(graph_or_nodes.nodes())
-    else:
-        nodes = set(graph_or_nodes)
-
-    query_set = set(query_nodes)
-    muscore = np.zeros(len(nodes))
-
-    key = dict([(k, i) for i, k in enumerate(sorted(nodes))])
-
-    for partition in partitions:
-        best = max([(len(query_set.intersection(set(cluster))), cluster) for cluster in partition])
-
-        for i in best[1]:
-            muscore[key[i]] += 1
-
-    # Normalise result
-    return muscore * 1/len(partitions), key
-
-
-def mu_ivector_n(graph, partitions, query_nodes):
-    """
-    For all nodes in V, return a vector $\mu$ such that $\mu$ is the fraction of times that a node is in
-    the largest cluster that intersects with the query set over all clusters.
-
-    returns muscore (numpy array of floats) and  mappings for keys to vector index.
-    """
-    query_set = set(query_nodes)
-    muscore = np.zeros(graph.number_of_nodes())
-
-    key = dict([(k, i) for i, k in enumerate(sorted(graph.nodes()))])
-
-    for partition in partitions:
-        for cluster in partition:
-            s = len(query_set.intersection(cluster))
-            if s > 0:
-                for i in cluster:
-                    muscore[key[i]] += 1/s
-
-    # Normalise result
-    return muscore * 1 / len(partitions), key
-
-
-def q_significance(graph, index, testset):
-    """
-    For a given query set, return the p value from a mann-whitney u test that the null hypothesis that the query nodes
-    could have been selected randomly from within the network.
-    :param graph:
-    :param index:
-    :param testset:
-    :return:
-    """
-    testset = set(testset)
-    vec, keys = mu_ivector(graph, index, testset)
-
-    network_dist = [vec[keys[x]] for x in keys if x not in testset]
-    seed_dist = [vec[keys[x]] for x in keys if x in testset]
-    u_score, pvalue = mannwhitneyu(network_dist, seed_dist)
-    return pvalue
-
-
 def membership_matrix(nodes, partitions):
     nmap = dict(((n, m) for m, n in enumerate(sorted(nodes))))
     M = np.zeros((len(nodes), len(partitions)), dtype=np.int16)
@@ -165,19 +73,6 @@ def membership_matrix(nodes, partitions):
             for v in cluster:
                 M[nmap[v]][pi] = ci
     return M, nmap
-
-
-def quality_score(query_indexes, M):
-    """
-
-    :param query_indexes:
-    :param M:
-    :return:
-    """
-    vec = query_vector(query_indexes, M)
-    nset = np.array([x for x in range(vec.shape[0]) if x not in query_indexes])
-    u_score, pvalue = mannwhitneyu(vec[nset], vec[query_indexes])
-    return pvalue
 
 
 @jit(nopython=True, nogil=True)
@@ -190,81 +85,3 @@ def query_vector(query_indexes, M):
             qm[v] += (M[v] == M[q]).sum()
 
     return qm * norm_const
-
-
-@jit(nopython=True, nogil=True)
-def mui_vec_membership(query_indexes, membership_mat):
-    # Get the sub matrix slice based on query node indexes
-    # qmat = membership_mat[np.array(query_indexes, dtype=np.int16)]
-    '''
-    qmat = np.zeros((query_indexes.shape[0], membership_mat.shape[1]))
-    for i in range(query_indexes.shape[0]):
-        qmat[i] = membership_mat[query_indexes[i]]
-    '''
-    qmat = membership_mat[query_indexes]
-
-    qtrans = qmat.transpose()
-    mu_vec = np.zeros(membership_mat.shape[0])
-
-    mtrans = membership_mat.transpose()
-
-    for col_id in range(qtrans.shape[0]):
-        for it in range(1, np.max(qtrans[col_id]) + 1):
-            # size of intersection for each community
-            isize = (qtrans[col_id] == it).sum()
-            mu_vec[np.where((mtrans[col_id] == it))] += isize
-    mu_vec *= 1 / (qmat.shape[0] * membership_mat.shape[1])
-    return mu_vec
-
-
-@jit(nopython=True, nogil=True)
-def mui_vec_largest_intersec(query_indexes, membership_mat):
-    # Get the sub matrix slice based on query node indexes
-    qmat = membership_mat[query_indexes]
-
-    qtrans = qmat.transpose()
-    mu_vec = np.zeros(membership_mat.shape[0])
-
-    mtrans = membership_mat.transpose()
-
-    for col_id in np.ndindex(qtrans.shape[0]):
-
-        maxi = 0
-        max_it = [0]
-        for it in range(1, np.max(qtrans[col_id]) + 1):
-            # size of intersection for each community
-            isize = (qtrans[col_id] == it).sum()
-            if isize > maxi:
-                maxi = isize
-                max_it = [int(it)]
-            # In case of a tie for largest intersection
-            elif isize == maxi:
-                max_it += [int(it)]
-
-        for it in max_it:
-            mu_vec[np.where((mtrans[col_id] == it))] += 1
-    mu_vec *= 1 / membership_mat.shape[1]
-    return mu_vec
-
-
-@jit(nopython=True)
-def _unique(arr):
-    it = np.array([1])
-    for x in arr:
-        if x not in it:
-            it.append([x])
-    return it
-
-
-@jit(nopython=True, nogil=True)
-def uniform_membership_probability(mmatrix, q_size):
-    n = mmatrix.shape[0]
-    prob = 0.0
-
-    for i in mmatrix.transpose():
-        for c in _unique(i):
-            ps = ((i == c).sum() / n)
-            for x in range(2, q_size + 1):
-                prob += ps ** x
-
-    return prob * 1/mmatrix.shape[1]

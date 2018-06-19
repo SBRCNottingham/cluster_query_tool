@@ -212,7 +212,7 @@ Formally, the random walk with restart algorithm uses the form
 \end{equation}
 where $W$ is the row normalised adjacency matrix of a graph, $\vec{p}_0$ is the initial walk vector such that $\vec{p}_0 = \frac{1}{|S|}$ for vertices in the seed set.
 The random walk algorithm repeats equation \ref{eq:rwr} from $\vec{p}_0$ until the L1 norm between  $\vec{p}_t$ and  $\vec{p}_{t+1}$ converges to 0.
-For the tests performed in this work we use a restart probability $\alpha = 0.5$.
+For the tests performed in this work we use a restart probability $\alpha = 0.25$.
 
 \subsection{Synthetic networks}
 In this section we test the method on benchmark networks constructed with a ground-truth community structure.
@@ -252,7 +252,7 @@ Here, each vertex can belong to up to 4 communities.
 In order to test performance we varied the fraction of nodes that are in more than one community.
 The method still has an AUC score above 0.5 when all nodes are placed in multiple communities.
 This indicates that the method is capable of uncovering latent overlapping memberships even when given a relatively small number of seed nodes.
-As with the non-overlapping results, the scores are comparable with the rwr method with performance slightly better in the case of 1000 node models.
+As with the non-overlapping results, the scores are comparable with the rwr method with performance slightly improved in the case of 1000 node models, but comparable for 5000 node models.
 
 \begin{figure*}[t]
     \centering
@@ -340,6 +340,7 @@ These results represent ROC curves and mean AUC statistics.
 For all the datasets in this study, binary community classification is high, with an average AUC scores above 0.87, even when using only a single seed node.
 In the case of the \textit{Arabidopsis thaliana} network the protein complexes tested are significantly smaller than for other networks and so a comparison of seed sizes is not possible.
 However, in the other networks studied, using 3 or more seed nodes appears to improve results, though for 15 seed nodes the results are not significantly better than with 7 seeds.
+The results of our method are comparable to the random walk with restart approach, which performs better on the datasets tested with the exception of the EU email dataset for which our model performs significantly better.
 
 \subsubsection{Tests on gene ontology labels}
 \begin{figure*}[]
@@ -379,13 +380,14 @@ In a practical situation the high quality label sets described above are not lik
 Consequently, we wish to highlight that the method also serves as a useful network reduction tool where the quality of labels is not well defined.
 In order to achieve this goal, for each of the biological data sets in this study, we acquired all Gene Ontology terms for each of the proteins from AmiGO \cite{carbon2008amigo}.
 Gene Ontology is a controlled vocabulary of terms associated with biological functions in three broad categories of Cellular Components (CC),  Metabolic Functions (MF) and Biological Processes (BP), forming a hierarchy of terms and associated sub terms.
+The use of a $\mu_i(S)$ score on a network is visually demonstrated for the \textit{Arabidopsis PPI} dataset shown in Figure \ref{fig:query_example} with the hand selected GO term \textit{``SNAP receptor activity''}.
 
 These labels are not all likely to be represented within the protein-protein interaction networks, though many biological processes are.
 For the Yeast, \textit{Arabidopsis} and \textit{E. coli} PPIs we collected 85, 549 and 420 terms covering at least 3 nodes, respectively.
-As expected, average ROC and AUC scores shown in Figure \ref{fig:GO_TERM_ROCS} are considerably lower than for the Protein complexes. 
+As expected, average ROC and AUC scores shown in Figure \ref{fig:GO_TERM_ROCS} are considerably lower than for the Protein complexes for both our method and the rwr approach. 
+Interestingly, however, the performance of the rwr approach is significantly worse than one would expect to find at random for the Yeast GO terms.
+The reason for this performance remains unknown.
 However, this approach should be considered in contrast to conventional gene enrichment strategies on conventional network clusters \cite{chen2013enrichr}.
-
-The use of a $\mu_i(S)$ score on a network is visually demonstrated for the \textit{Arabidopsis PPI} dataset shown in Figure \ref{fig:query_example} with the hand selected GO term \textit{``SNAP receptor activity''}.
 
 \section{Discussion}
 The semi-supervised method for vertex classification presented in this work has been shown to produce good results on both synthetic benchmarks and real-world datasets.

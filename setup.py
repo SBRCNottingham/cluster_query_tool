@@ -19,9 +19,7 @@ setup(
     author_email="jamie.gilbert@azimov.co.uk",
     license="GPL",
     entry_points={
-        'console_scripts': [
-            "modindexer=cluster_query_tool.distributed_indexer:cli"
-        ]
+        'console_scripts': []
     },
     url="https://github.com/azimov/cluster_query_tool",
     include_package_data=True,
