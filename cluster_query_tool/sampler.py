@@ -2,7 +2,7 @@ import networkx as nx
 import joblib
 import random
 from . import louvain
-from .louvain_consensus import create_partition_from_edge_set, modularity
+from .louvain_consensus import create_partition_from_edge_set
 from itertools import chain
 
 
@@ -23,7 +23,7 @@ def getpartitions(graph, seed):
     partitions = []
     for i in range(len(dend)):
         pl = louvain.partition_at_level(dend, i)
-        q_s = modularity(graph, pl)
+        q_s = louvain.modularity(pl, graph)
         partitions.append((q_s, [int(pl[node]) for node in graph.nodes()]))
 
     return partitions
