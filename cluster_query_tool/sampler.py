@@ -29,7 +29,7 @@ def getpartitions(graph, seed):
     return partitions
 
 
-def gen_sample(network_path, nsamples=10, seed=1, opt="partitions_mod.txt"):
+def gen_sample(network_path, nsamples=10000, seed=1, opt="partitions_mod.txt"):
     """
     Sampler for visualisation of network parition space
     :param network_path:
@@ -49,7 +49,7 @@ def gen_sample(network_path, nsamples=10, seed=1, opt="partitions_mod.txt"):
     with open(opt, "w+") as of:
         # Output
         for q, ptl in chain(*partition_results):
-            cs = partition_to_cut_set(graph, ptl)
+            cs = tuple(ptl)
             if cs not in cutsets:
                 cutsets.append(cs)
                 of.write("{},{}\n".format(q, ptl))
