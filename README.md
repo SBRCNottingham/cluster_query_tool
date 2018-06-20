@@ -12,7 +12,7 @@ MLG at KDD 2018.
 Written for Python version 3.5+
 
 ## Installation
-To install, create a `virtualenv` and run
+To install, create a `virtualenv` environment and run
 
     $ python setup.py install
 
