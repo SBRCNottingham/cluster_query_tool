@@ -1,7 +1,7 @@
 import networkx as nx
 from cluster_query_tool import louvain_consensus
 from cluster_query_tool.indexer import get_index
-from experiments import fast_auc, unique_sampler
+from cluster_query_tool.experiments.utils import fast_auc, unique_sampler
 from cluster_query_tool.random_walk import rwr
 from joblib import Parallel, delayed, cpu_count
 import json

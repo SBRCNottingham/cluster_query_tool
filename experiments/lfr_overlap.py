@@ -3,7 +3,8 @@ HPC script for running evaluation of performance on benchmark graphs
 
 This script is supposed to be run by the jobscript
 """
-from experiments import get_benchmark, get_auc_scores_community, get_auc_scores_community_rwr, lfr_benchmark_graph
+from cluster_query_tool.experiments.utils import get_benchmark, get_auc_scores_community, \
+    get_auc_scores_community_rwr, lfr_benchmark_graph
 import numpy as np
 import click
 from subprocess import call

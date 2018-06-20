@@ -3,7 +3,7 @@ HPC script for running evaluation of performance on benchmark graphs
 
 This script is supposed to be run by the jobscript
 """
-from experiments import get_benchmark, get_auc_scores_community, get_auc_scores_community_rwr
+from cluster_query_tool.experiments.utils import get_benchmark, get_auc_scores_community, get_auc_scores_community_rwr
 from cigram import lfr_benchmark_graph
 from cluster_query_tool.louvain_consensus import membership_matrix
 import numpy as np
@@ -11,14 +11,12 @@ import click
 from subprocess import call
 import json
 import os
-from joblib import Parallel, delayed
-from itertools import product, chain
+
 import matplotlib as mpl
 mpl.use('Agg')
 from matplotlib import pyplot as plt
 import glob
 import pandas as pd
-import networkx as nx
 
 
 _base_params = dict(
