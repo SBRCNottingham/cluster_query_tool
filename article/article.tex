@@ -109,14 +109,14 @@ The detected clusters then form the basis of a search algorithm that allows one 
 The querying method is a polynomial time algorithm that could be trivially adapted to form the basis of many user facing applications.
 This approach is then applied to synthetic benchmark networks with known, ground-truth labels as well as social and protein-protein interaction networks with high quality ground truth label sets.
 
-\begin{figure}[t]
-    \includegraphics[width=0.48\textwidth]{images/search_space_3.png}
-    \caption{Modularity search space of an \textit{E. coli} metabolic network.
- Distance between partitions is calculated using variation of information \cite{meilua2003comparing} and dimensionality reduction is performed using curvilinear component analysis \cite{demartines1997curvilinear}.
-  The inset (top) demonstrates the landscape of the high modularity region.
-  Figure generated with the software of Good \textit{et al.} \cite{good2010performance}.}
-    \label{fig:modular_search_space}
-\end{figure}
+% \begin{figure}[t]
+%     \includegraphics[width=0.48\textwidth]{images/search_space_3.png}
+%     \caption{Modularity search space of an \textit{E. coli} metabolic network.
+%  Distance between partitions is calculated using variation of information \cite{meilua2003comparing} and dimensionality reduction is performed using curvilinear component analysis \cite{demartines1997curvilinear}.
+%   The inset (top) demonstrates the landscape of the high modularity region.
+%   Figure generated with the software of Good \textit{et al.} \cite{good2010performance}.}
+%     \label{fig:modular_search_space}
+% \end{figure}
 
 \section{Exploiting the modularity query space}
 To characterise latent community structure, one of the most popular approaches is to use modularity maximisation given by the equation \cite{newman2004}
@@ -129,8 +129,8 @@ As a combinatorial optimisation problem, there are many different algorithmic ap
 The work by \cite{good2010performance} forms the basis of the motivation of the approach taken here.
 In this study, the authors discovered that the modularity search space for many real-world networks contains a huge number of high value solutions.
 Each of these solution partitions are extremely close to the global maxima, making it both difficult to find the optimal value of $Q$ and difficult to argue that the highest scoring partition is the ``true'' community structure.
-This fact is visually demonstrated with the software from \cite{good2010performance} in Figure \ref{fig:modular_search_space}, which shows the modularity search space of an \textit{E. coli} metabolic network reconstruction \cite{GuimeraNature2005}.
-The similarity between the partitions is compared with the variation of information measure \cite{meilua2003comparing} and dimensionality of the space is reduced with curvilinear component analysis \cite{demartines1997curvilinear} \footnote{The reader should note that axis on these plots are a result of the dimensionality reduction performed by curvilinear component analysis \cite{demartines1997curvilinear} and, therefore, have no natural interpretation.}.
+% This fact is visually demonstrated with the software from \cite{good2010performance} in Figure \ref{fig:modular_search_space}, which shows the modularity search space of an \textit{E. coli} metabolic network reconstruction \cite{GuimeraNature2005}.
+% The similarity between the partitions is compared with the variation of information measure \cite{meilua2003comparing} and dimensionality of the space is reduced with curvilinear component analysis \cite{demartines1997curvilinear} \footnote{The reader should note that axis on these plots are a result of the dimensionality reduction performed by curvilinear component analysis \cite{demartines1997curvilinear} and, therefore, have no natural interpretation.}.
 
 \begin{figure}[t]
     \centering

@@ -1,8 +1,8 @@
 import networkx as nx
 from joblib import Parallel, cpu_count, delayed
 import random
-from . import louvain
-from .louvain_consensus import create_partition_from_edge_set, partition_to_cut_set
+from cluster_query_tool import louvain
+from cluster_query_tool.louvain_consensus import create_partition_from_edge_set, partition_to_cut_set
 from itertools import chain
 
 
@@ -29,7 +29,7 @@ def getpartitions(graph, seed):
     return partitions
 
 
-def gen_sample(network_path, nsamples=10000, seed=1, opt="partitions_mod.txt"):
+def gen_sample(graph, nsamples=10000, seed=1, opt="partitions_mod.txt"):
     """
     Sampler for visualisation of network parition space
     :param network_path:
@@ -37,7 +37,6 @@ def gen_sample(network_path, nsamples=10000, seed=1, opt="partitions_mod.txt"):
     :param seed:
     :return:
     """
-    graph = nx.read_edgelist(network_path, nodetype=int)
 
     # Sample start and end partitions and modularity for them
     # store only unique partitions
@@ -53,3 +52,8 @@ def gen_sample(network_path, nsamples=10000, seed=1, opt="partitions_mod.txt"):
             if cs not in cutsets:
                 cutsets.append(cs)
                 of.write("{},{}\n".format(q, ptl))
+
+
+def sample_file(network_path):
+    graph = nx.read_edgelist(network_path, nodetype=int)
+    gen_sample(graph)
