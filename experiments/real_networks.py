@@ -243,7 +243,7 @@ def plot_roc_curve(df, df_rwr):
         1: "b",
         3: "g",
         7: "y",
-        15: "m"
+        15: "r"
     }
 
     fig, ax = plt.subplots()
