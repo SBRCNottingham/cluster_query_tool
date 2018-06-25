@@ -11,7 +11,6 @@ from subprocess import call
 import os
 import json
 from cluster_query_tool.louvain_consensus import membership_matrix
-import networkx as nx
 
 
 _base_params = dict(
