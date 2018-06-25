@@ -101,7 +101,7 @@ def load_network(graph_path, graph_name, communities_path, index_path, node_type
 
 
     lengths = [len(x) for x in rcomm_l]
-    print(len(rcomms), min(lengths), max(lengths))
+    print("network contains", len(rcomms), "communities of min size", min(lengths), "and max size", max(lengths))
     return graph, rcomms, mmatrix, nmap
 
 
@@ -124,6 +124,67 @@ def get_community_significance_scores(mmatrix, nmap, comms):
     sign = Parallel(n_jobs=cpu_count())(delayed(comm_significance)(cid, map_com(comm, nmap), mmatrix)
                                         for cid, comm in comms.items())
     return dict(sign)
+                       
+def construct_true_memberships_matrix(nmap, com_dict):
+    
+    tmm = np.zeros((len(nmap), len(com_dict)), dtype=np.int8)
+    
+    c_keys = dict(enumerate(sorted(com_dict.keys())))
+    
+    for i, cid in c_keys.items():
+        for n in com_dict[cid]:
+            tmm[nmap[n]][i] = 1
+    
+    return tmm, c_keys
+    
+def get_y_true(seed_ind, tmm):
+    """
+    returns true membership vector for a set of seed nodes
+    This corrects for the situation where a group of seed nodes have the same overlapping community membership
+    """
+    if len(seed_ind) == 1:
+        seed_ind = np.array([seed_ind[0], seed_ind[0]])
+    
+    subm = tmm[np.array(seed_ind)]
+    
+    # Recursive bitwise and
+    tv = np.bitwise_and(subm[0], subm[0])
+    for sb in subm[1:]:
+        tv = np.bitwise_and(tv, sb)
+    
+    comm_indexes = np.where(tv)
+    
+    tr = np.unique(np.where(tmm.transpose()[comm_indexes]))
+    
+    y_true = np.array(
+        [i in tr for i in range(tmm.shape[0]) if i not in seed_ind],
+        dtype=np.int8
+    )
+    return y_true
+
+
+def samp_roc_and_auc_new(samp, mmatrix, comm, cid, s, true_membership_matrix):
+    ncom = np.array([x for x in range(mmatrix.shape[0]) if x not in samp])
+    vec = louvain_consensus.query_vector(np.array(samp), mmatrix)
+
+    y_true = get_y_true(samp, true_membership_matrix)
+    y_prob = vec[ncom]
+    
+    tpr, fnr, _ = roc_curve(y_true, y_prob)
+    auc = fast_auc(y_true, y_prob)
+    return cid, s, tpr, fnr, auc
+
+
+def samp_roc_and_auc_new_rwr(samp, graph, comm, cid, s, tmm):
+    ncom = np.array([x for x in range(tmm.shape[0]) if x not in samp])
+    vec = rwr(graph, samp)
+    
+    y_true = get_y_true(samp, tmm)
+    y_prob = vec[ncom]
+    
+    tpr, fnr, _ = roc_curve(y_true, y_prob)
+    auc = fast_auc(y_true, y_prob)
+    return cid, s, tpr, fnr, auc
 
 
 def samp_roc_and_auc(samp, mmatrix, comm, cid, s):
@@ -173,19 +234,19 @@ def samp_auc(samp, mmatrix, comm, cid, s, mat_size):
     return cid, s, mat_size, auc
 
 
-def gen_roc_curves(mmatrix, comm, s, cid):
-    funcs = (delayed(samp_roc_and_auc)(samp, mmatrix, comm, cid, s) for samp in unique_sampler(comm, s))
+def gen_roc_curves(mmatrix, comm, s, cid, tmm):
+    funcs = (delayed(samp_roc_and_auc_new)(samp, mmatrix, comm, cid, s, tmm) for samp in unique_sampler(comm, s))
     results = Parallel(n_jobs=cpu_count(), backend='threading')(funcs)
     return list(results)
 
 
-def gen_roc_curves_rwr(graph, comm, s, cid):
-    funcs = (delayed(samp_roc_and_auc_rwr)(samp, graph, comm, cid, s) for samp in unique_sampler(comm, s))
+def gen_roc_curves_rwr(graph, comm, s, cid,tmm):
+    funcs = (delayed(samp_roc_and_auc_new_rwr)(samp, graph, comm, cid, s, tmm) for samp in unique_sampler(comm, s))
     results = Parallel(n_jobs=cpu_count(), backend='threading')(funcs)
     return list(results)
 
 
-def get_rocs(mmatrix, nmap, comms, seed_sizes=(1, 3, 7, 15)):
+def get_rocs(mmatrix, nmap, comms, tmm, seed_sizes=(1, 3, 7, 15)):
     """
 
     :param mmatrix:
@@ -201,11 +262,11 @@ def get_rocs(mmatrix, nmap, comms, seed_sizes=(1, 3, 7, 15)):
         cnodes = map_com(comm, nmap)
         for s in seed_sizes:
             if len(comm) > s:
-                res += gen_roc_curves(mmatrix, cnodes, s, cid)
+                res += gen_roc_curves(mmatrix, cnodes, s, cid, tmm)
     return res
 
 
-def get_rocs_rwr(graph, nmap, comms, seed_sizes=(1, 3, 7, 15)):
+def get_rocs_rwr(graph, nmap, comms, tmm, seed_sizes=(1, 3, 7, 15)):
     """
 
     :param mmatrix:
@@ -221,7 +282,7 @@ def get_rocs_rwr(graph, nmap, comms, seed_sizes=(1, 3, 7, 15)):
         cnodes = map_com(comm, nmap)
         for s in seed_sizes:
             if len(comm) > s:
-                res += gen_roc_curves_rwr(graph, cnodes, s, cid)
+                res += gen_roc_curves_rwr(graph, cnodes, s, cid, tmm)
     return res
 
 
@@ -313,10 +374,12 @@ def generate_results(network, overwrite=False):
 
     roc_df_path = os.path.join("results", network) + "_roc_res.p"
     graph, comms, mmatrix, nmap = load_network(dt["path"], network, dt["clusters"], dt["index"], dt["node_type"])
+    
+   
     if overwrite or not os.path.exists(roc_df_path):
-
+        tmm, cmap = construct_true_memberships_matrix(nmap, comms)
         print(network, "gen_roc_curves")
-        roc_results = get_rocs(mmatrix, nmap, comms)
+        roc_results = get_rocs(mmatrix, nmap, comms, tmm)
         with open(roc_df_path, "wb+") as roc_df:
             pickle.dump(roc_results, roc_df)
 
@@ -329,9 +392,10 @@ def generate_results(network, overwrite=False):
 
         for edge in graph.edges():
             ngraph.add_edge(nmap[edge[0]], nmap[edge[1]])
-
+        
+        tmm, cmap = construct_true_memberships_matrix(nmap, comms)
         print(network, "gen_roc_curves_rwr")
-        roc_results = get_rocs_rwr(ngraph, nmap, comms)
+        roc_results = get_rocs_rwr(ngraph, nmap, comms, tmm)
         with open(roc_df_path, "wb+") as roc_df:
             pickle.dump(roc_results, roc_df)
 
