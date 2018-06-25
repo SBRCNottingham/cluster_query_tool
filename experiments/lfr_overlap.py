@@ -73,7 +73,7 @@ def auc_compute_rwr(seed, n, ol, results_folder):
     rp = "{}_{}_{}_rwr.json".format(n, ol, seed)
     results_file = os.path.abspath(os.path.join(results_folder, rp))
 
-    graph, communities, index = get_benchmark(pset)
+    graph, communities = lfr_benchmark_graph(**pset)
 
     nmap = dict([(j, i) for i, j in enumerate(sorted(graph.nodes()))])
 

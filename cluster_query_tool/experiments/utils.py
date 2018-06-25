@@ -103,7 +103,7 @@ def roc_score_seed(seed_set, nodes, membership_ma, comm, tmm):
 
 
 def roc_score_seed_rwr(seed_set, graph, comm, nmap, tmm):
-    ncom = np.array([nmap[x] for x in graph.nodes() if nmap[x] not in seed_set])
+    ncom = np.array([x for x in range(tmm.shape[0]) if x not in seed_set])
     probs = rwr(graph, seed_set)
 
     y_true = get_y_true(seed_set, tmm)
