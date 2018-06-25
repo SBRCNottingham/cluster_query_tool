@@ -109,14 +109,14 @@ The detected clusters then form the basis of a search algorithm that allows one 
 The querying method is a polynomial time algorithm that could be trivially adapted to form the basis of many user facing applications.
 This approach is then applied to synthetic benchmark networks with known, ground-truth labels as well as social and protein-protein interaction networks with high quality ground truth label sets.
 
-% \begin{figure}[t]
-%     \includegraphics[width=0.48\textwidth]{images/search_space_3.png}
-%     \caption{Modularity search space of an \textit{E. coli} metabolic network.
-%  Distance between partitions is calculated using variation of information \cite{meilua2003comparing} and dimensionality reduction is performed using curvilinear component analysis \cite{demartines1997curvilinear}.
-%   The inset (top) demonstrates the landscape of the high modularity region.
-%   Figure generated with the software of Good \textit{et al.} \cite{good2010performance}.}
-%     \label{fig:modular_search_space}
-% \end{figure}
+\begin{figure}[t]
+    \includegraphics[width=0.48\textwidth]{images/search_space_3.png}
+    \caption{Modularity search space of an \textit{E. coli} metabolic network.
+ Distance between partitions is calculated using variation of information \cite{meilua2003comparing} and dimensionality reduction is performed using curvilinear component analysis \cite{demartines1997curvilinear}.
+  The inset (top) demonstrates the landscape of the high modularity region.
+  Figure generated with the software of Good \textit{et al.} \cite{good2010performance}.}
+    \label{fig:modular_search_space}
+\end{figure}
 
 \section{Exploiting the modularity query space}
 To characterise latent community structure, one of the most popular approaches is to use modularity maximisation given by the equation \cite{newman2004}
@@ -129,8 +129,8 @@ As a combinatorial optimisation problem, there are many different algorithmic ap
 The work by \cite{good2010performance} forms the basis of the motivation of the approach taken here.
 In this study, the authors discovered that the modularity search space for many real-world networks contains a huge number of high value solutions.
 Each of these solution partitions are extremely close to the global maxima, making it both difficult to find the optimal value of $Q$ and difficult to argue that the highest scoring partition is the ``true'' community structure.
-% This fact is visually demonstrated with the software from \cite{good2010performance} in Figure \ref{fig:modular_search_space}, which shows the modularity search space of an \textit{E. coli} metabolic network reconstruction \cite{GuimeraNature2005}.
-% The similarity between the partitions is compared with the variation of information measure \cite{meilua2003comparing} and dimensionality of the space is reduced with curvilinear component analysis \cite{demartines1997curvilinear} \footnote{The reader should note that axis on these plots are a result of the dimensionality reduction performed by curvilinear component analysis \cite{demartines1997curvilinear} and, therefore, have no natural interpretation.}.
+This fact is visually demonstrated with the software from \cite{good2010performance} in Figure \ref{fig:modular_search_space}, which shows the modularity search space of an \textit{E. coli} metabolic network reconstruction \cite{GuimeraNature2005}.
+The similarity between the partitions is compared with the variation of information measure \cite{meilua2003comparing} and dimensionality of the space is reduced with curvilinear component analysis \cite{demartines1997curvilinear} \footnote{The reader should note that axis on these plots are a result of the dimensionality reduction performed by curvilinear component analysis \cite{demartines1997curvilinear} and, therefore, have no natural interpretation.}.
 
 \begin{figure}[t]
     \centering
@@ -185,8 +185,7 @@ In this study we test a small number of labels that we intend to use in order to
 We would like to test a significantly smaller number of seed nodes than two class classification methods used in previous studies, which use leave-one-out cross validation \cite{kohler2008walking}.
 The cross validation procedure we devise is described as follows and depends on the size of the community and the number of initial seed labels being used.
 For this work we would like to capture binary classification  performance, \textit{true positives (tp)}, \textit{true negatives (tn), false positives (fp)} and \textit{false negatives (fn)}, on our datasets of community memberships.
-In order to generate the different sets for the cross validation we take each label set and generate unique sample sets of vertices from the known true positive labels.
-We also note that although each node can have multiple labels, in the tests performed in this study we only consider performance on individual labels.
+In order to generate the different sets for the cross validation we take each label set and generate unique sample sets of vertices from the known true positive labels\footnote{Note that although each node can have multiple labels, in the tests performed in this study we only consider performance on individual labels as this is likely the situation one would encounter with limited label sets in practice.}.
 
 As the seed label sets can be as small as 3 vertices, exhaustive cross validation was not possible for all labelling schemes.
 Consequently, cross validation is either conducted on an exhaustive set of all possible $\binom{|S|}{s}$ unique labellings or 120 seed queries sampled randomly without replacement from the possible subsets \footnote{This is equivalent to $\binom{10}{3}$ combinations, an exhaustive sample would not be possible for the larger communities in this study.}, where $S$ is the set of gold standard true labels and $s$ is the size of the randomly selected seed sets.
@@ -203,15 +202,19 @@ Formally, the steps for this procedure with a given label set $S$ are outlined a
  \item Generate an average ROC curve interpolated from all test subsets.
  \end{itemize}
 
+In the case for the synthetic networks tested below, true labels are drawn from the known communities, with each tested in isolation.
+For the real world networks tested the labels are considered in the same manner though many nodes have no assigned labels.
+Every community is considered with different seed set sizes.
+ 
 \subsection{Random walk with restart}
-As a comparison, we compare our method with the commonly used random walk with restart method as described in \cite{kohler2008walking}.
-This simulates an infinite random walk with a probability, $\alpha$ that a walker would teleport back to the initial seed nodes. 
+In the following sections compare our method with the commonly used random walk with restart method as described in \cite{kohler2008walking}.
+This simulates an infinite random walk with a fixed probability, $\alpha$ that a walker would teleport back to the initial seed nodes. 
 Formally, the random walk with restart algorithm uses the form
 \begin{equation} \label{eq:rwr}
  \vec{p}_{t+1} = (1 - \alpha) W \vec{p}_t + \alpha \vec{p}_0,
 \end{equation}
 where $W$ is the row normalised adjacency matrix of a graph, $\vec{p}_0$ is the initial walk vector such that $\vec{p}_0 = \frac{1}{|S|}$ for vertices in the seed set.
-The random walk algorithm repeats equation \ref{eq:rwr} from $\vec{p}_0$ until the L1 norm between  $\vec{p}_t$ and  $\vec{p}_{t+1}$ converges to 0.
+The random walk algorithm repeats equation \ref{eq:rwr} from $\vec{p}_0$ until the L1 norm between  $\vec{p}_t$ and  $\vec{p}_{t+1}$ converges to 0, simulating the steady state vector $\vec{p}_{\infty}$.
 For the tests performed in this work we use a restart probability $\alpha = 0.25$.
 
 \subsection{Synthetic networks}
@@ -343,7 +346,7 @@ However, in the other networks studied, using 3 or more seed nodes appears to im
 The results of our method are comparable to the random walk with restart approach, which performs better on the datasets tested with the exception of the EU email dataset for which our model performs significantly better.
 
 \subsubsection{Tests on gene ontology labels}
-\begin{figure*}[]
+\begin{figure*}[t]
      \centering
     \begin{subfigure}[b]{0.31\textwidth}
         \centering
@@ -365,8 +368,8 @@ The results of our method are comparable to the random walk with restart approac
     \label{fig:GO_TERM_ROCS}
 \end{figure*}
 
-\begin{figure*}[t]
-\includegraphics[width=0.8\textwidth]{images/ppi_example_combined.eps}
+\begin{figure}[t]
+\includegraphics[width=0.48\textwidth]{images/ppi_example_combined.eps}
 \caption{An example of the GO term \textit{``SNAP receptor activity''} (16 nodes) on the \textit{Arabidopsis thaliana} protein-protein interaction network.
 (A) Shows the full network with 3 randomly chosen query nodes from the full query set.
 (B) Shows a reduced view of the network where a threshold of $\mu_i(S) > 0.8$ is selected, reducing the network to 404 nodes.
@@ -374,7 +377,7 @@ Blue nodes indicates the 3 randomly selected query nodes, yellow the remaining n
 (C) Shows an example ROC curve from the cross validation described in the main text.
 }
 \label{fig:query_example}
-\end{figure*}
+\end{figure}
 
 In a practical situation the high quality label sets described above are not likely to be available.
 Consequently, we wish to highlight that the method also serves as a useful network reduction tool where the quality of labels is not well defined.
@@ -418,6 +421,12 @@ The higher the probability of the walker ending up at a given vertex, the more l
 
 Conceptually, RWR is very similar to the method presented in this paper given that the user has a given query.
 The RWR probability as analogous to the value of $\mu_i(S)$ presented above.
+
+The reader may also consider the similarity of this approach to that of label propagation \cite{raghavan2007near, gregory2010finding}, which seeks to find communities based on a vote, where at different time steps a node updates it's label to to be the most common amongst its neighbours.
+A common problem with label propagation schemes is that they often fail to converge, resulting in many competing clusterings of a network.
+We liken this to the problem encountered by Good Good \textit{et al.} \cite{good2010performance} in modularity maximisation.
+The core contribution of this paper is that, in such situations, there is no single, context independent labelling scheme that can be seen as the ``true'' community structure, overlapping or not.
+Indeed, the approach applied here is extremely general and could be adapted to the label propagation approach (or any other community detection algorithm) should sufficient semi-supervised group memberships be known \textit{a priori}.
 
 Many existing method are based on the idea of a locally dense subgraph containing \textit{all query nodes} \cite{benson2016higher}.
 In contrast, the query approach presented here does not require the queries to be a self contained sub-graph.

@@ -3,7 +3,8 @@ HPC script for running evaluation of performance on benchmark graphs
 
 This script is supposed to be run by the jobscript
 """
-from cluster_query_tool.experiments.utils import get_benchmark, get_auc_scores_community, get_auc_scores_community_rwr
+from cluster_query_tool.experiments.utils import get_benchmark, get_auc_scores_community, get_auc_scores_community_rwr, \
+    construct_true_memberships_matrix
 from cigram import lfr_benchmark_graph
 from cluster_query_tool.louvain_consensus import membership_matrix
 import numpy as np
@@ -46,6 +47,7 @@ def auc_compute(seed, n, mu, results_folder):
     graph, communities, index = get_benchmark(pset)
 
     membership_ma, nmap = membership_matrix(graph.nodes(), index)
+    tmm, cmap = construct_true_memberships_matrix(nmap, communities)
 
     nodes = np.array(list(nmap.values()))
     results = []
@@ -54,7 +56,7 @@ def auc_compute(seed, n, mu, results_folder):
             if len(comm) > seed_size:
                 # Seed of AUC scores for node this size
                 scom = np.array([nmap[i] for i in comm])
-                auc_s = get_auc_scores_community(seed_size, scom, nodes, membership_ma)
+                auc_s = get_auc_scores_community(seed_size, scom, nodes, membership_ma, tmm)
                 results.append([int(n), float(mu), int(seed), c, seed_size, len(comm), np.mean(auc_s), np.std(auc_s)])
 
     with open(results_file, "w+") as rf:
@@ -78,6 +80,7 @@ def auc_compute_rwr(seed, n, mu, results_folder):
     graph, communities = lfr_benchmark_graph(**pset)
 
     nmap = dict([(j, i) for i, j in enumerate(sorted(graph.nodes()))])
+    tmm, cmap = construct_true_memberships_matrix(nmap, communities)
 
     results = []
     for c, comm in communities.items():
@@ -85,7 +88,7 @@ def auc_compute_rwr(seed, n, mu, results_folder):
             if len(comm) > seed_size:
                 # Seed of AUC scores for node this size
                 scom = [nmap[i] for i in comm]
-                auc_s = get_auc_scores_community_rwr(seed_size, scom, graph, nmap)
+                auc_s = get_auc_scores_community_rwr(seed_size, scom, graph, nmap, tmm)
                 results.append([int(n), float(mu), int(seed), c, seed_size, len(comm), np.mean(auc_s), np.std(auc_s)])
                 
     df = pd.DataFrame(results, columns=['n', 'mixing', 'seed', 'c', 'seed_size', 'comm', 'auc', 'auc_std'])

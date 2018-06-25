@@ -1,7 +1,7 @@
 import networkx as nx
 from cluster_query_tool import louvain_consensus
 from cluster_query_tool.indexer import get_index
-from cluster_query_tool.experiments.utils import fast_auc, unique_sampler
+from cluster_query_tool.experiments.utils import fast_auc, unique_sampler, construct_true_memberships_matrix, get_y_true
 from cluster_query_tool.random_walk import rwr
 from joblib import Parallel, delayed, cpu_count
 import json
@@ -124,43 +124,6 @@ def get_community_significance_scores(mmatrix, nmap, comms):
     sign = Parallel(n_jobs=cpu_count())(delayed(comm_significance)(cid, map_com(comm, nmap), mmatrix)
                                         for cid, comm in comms.items())
     return dict(sign)
-                       
-def construct_true_memberships_matrix(nmap, com_dict):
-    
-    tmm = np.zeros((len(nmap), len(com_dict)), dtype=np.int8)
-    
-    c_keys = dict(enumerate(sorted(com_dict.keys())))
-    
-    for i, cid in c_keys.items():
-        for n in com_dict[cid]:
-            tmm[nmap[n]][i] = 1
-    
-    return tmm, c_keys
-    
-def get_y_true(seed_ind, tmm):
-    """
-    returns true membership vector for a set of seed nodes
-    This corrects for the situation where a group of seed nodes have the same overlapping community membership
-    """
-    if len(seed_ind) == 1:
-        seed_ind = np.array([seed_ind[0], seed_ind[0]])
-    
-    subm = tmm[np.array(seed_ind)]
-    
-    # Recursive bitwise and
-    tv = np.bitwise_and(subm[0], subm[0])
-    for sb in subm[1:]:
-        tv = np.bitwise_and(tv, sb)
-    
-    comm_indexes = np.where(tv)
-    
-    tr = np.unique(np.where(tmm.transpose()[comm_indexes]))
-    
-    y_true = np.array(
-        [i in tr for i in range(tmm.shape[0]) if i not in seed_ind],
-        dtype=np.int8
-    )
-    return y_true
 
 
 def samp_roc_and_auc_new(samp, mmatrix, comm, cid, s, true_membership_matrix):

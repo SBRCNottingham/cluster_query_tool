@@ -94,47 +94,81 @@ def fast_auc(y_true, y_prob):
     return auc
 
 
-def roc_score_seed(seed_set, nodes, membership_ma, comm):
+def roc_score_seed(seed_set, nodes, membership_ma, comm, tmm):
     vec = query_vector(seed_set, membership_ma)
 
-    def inc(x):
-        if x in comm:
-            return 1
-        return 0
-
-    y_true = np.array([inc(x) for x in nodes if x not in seed_set])
+    y_true = get_y_true(seed_set, tmm)
     y_score = np.array([vec[x] for x in nodes if x not in seed_set])
     return fast_auc(y_true, y_score)
 
 
-def roc_score_seed_rwr(seed_set, graph, comm, nmap):
+def roc_score_seed_rwr(seed_set, graph, comm, nmap, tmm):
     ncom = np.array([nmap[x] for x in graph.nodes() if nmap[x] not in seed_set])
     probs = rwr(graph, seed_set)
 
-    def inc(n):
-        if n in comm:
-            return 1
-        return 0
-
-    y_true = np.array([inc(x) for x in ncom])
+    y_true = get_y_true(seed_set, tmm)
     y_score = probs[ncom]
     return fast_auc(y_true, y_score)
 
 
-def get_auc_scores_community(seed_size, community, nodes, membership_ma, sample_seed=1337):
+def get_auc_scores_community(seed_size, community, nodes, membership_ma, tmm, sample_seed=1337):
     np.random.seed(sample_seed)
     samples = unique_sampler(community, seed_size)
 
-    funcs = (delayed(roc_score_seed)(np.array(sample), nodes, membership_ma, community) for sample in samples)
+    funcs = (delayed(roc_score_seed)(np.array(sample), nodes, membership_ma, community, tmm) for sample in samples)
     auc_scores = Parallel(n_jobs=cpu_count(), backend='threading')(funcs)
     return auc_scores
 
 
-def get_auc_scores_community_rwr(seed_size, community, graph, nmap, sample_seed=1337):
+def get_auc_scores_community_rwr(seed_size, community, graph, nmap, tmm, sample_seed=1337):
     np.random.seed(sample_seed)
     samples = unique_sampler(community, seed_size)
 
-    funcs = (delayed(roc_score_seed_rwr)(np.array(sample), graph, community, nmap) for sample in samples)
+    funcs = (delayed(roc_score_seed_rwr)(np.array(sample), graph, community, nmap, tmm) for sample in samples)
     auc_scores = Parallel(n_jobs=cpu_count(), backend='threading')(funcs)
     return auc_scores
 
+
+def construct_true_memberships_matrix(nmap, com_dict):
+    """
+    Given a dict of communities and node mapping, return a N x |C| binary matrix of memberships
+    Also returns a dict of keys for the community indexes
+    :param nmap:
+    :param com_dict:
+    :return:
+    """
+    tmm = np.zeros((len(nmap), len(com_dict)), dtype=np.int8)
+
+    c_keys = dict(enumerate(sorted(com_dict.keys())))
+
+    for i, cid in c_keys.items():
+        for n in com_dict[cid]:
+            tmm[nmap[n]][i] = 1
+
+    return tmm, c_keys
+
+
+def get_y_true(seed_ind, tmm):
+    """
+    returns true membership vector for a set of seed nodes
+    This corrects for the situation where a group of seed nodes have the same overlapping community membership
+    """
+    if len(seed_ind) == 1:
+        seed_ind = np.array([seed_ind[0], seed_ind[0]])
+
+    subm = tmm[np.array(seed_ind)]
+
+    # Recursive bitwise and
+    tv = np.bitwise_and(subm[0], subm[0])
+    for sb in subm[1:]:
+        tv = np.bitwise_and(tv, sb)
+
+    comm_indexes = np.where(tv)
+
+    tr = np.unique(np.where(tmm.transpose()[comm_indexes]))
+
+    y_true = np.array(
+        [i in tr for i in range(tmm.shape[0]) if i not in seed_ind],
+        dtype=np.int8
+    )
+    return y_true

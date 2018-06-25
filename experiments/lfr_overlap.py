@@ -4,7 +4,7 @@ HPC script for running evaluation of performance on benchmark graphs
 This script is supposed to be run by the jobscript
 """
 from cluster_query_tool.experiments.utils import get_benchmark, get_auc_scores_community, \
-    get_auc_scores_community_rwr, lfr_benchmark_graph
+    get_auc_scores_community_rwr, lfr_benchmark_graph, construct_true_memberships_matrix
 import numpy as np
 import click
 from subprocess import call
@@ -43,6 +43,8 @@ def auc_compute(seed, n, ol, results_folder):
 
     membership_ma, nmap = membership_matrix(graph.nodes(), index)
 
+    tmm, cmap = construct_true_memberships_matrix(nmap, communities)
+
     nodes = np.array(list(nmap.values()))
     results = []
     for c, comm in communities.items():
@@ -50,7 +52,7 @@ def auc_compute(seed, n, ol, results_folder):
             if len(comm) > seed_size:
                 # Seed of AUC scores for node this size
                 scom = np.array([nmap[i] for i in comm])
-                auc_s = get_auc_scores_community(seed_size, scom, nodes, membership_ma)
+                auc_s = get_auc_scores_community(seed_size, scom, nodes, membership_ma, tmm)
                 results.append([int(n), int(ol), int(seed), c, seed_size, len(comm), np.mean(auc_s), np.std(auc_s)])
 
     with open(results_file, "w+") as rf:
@@ -75,13 +77,14 @@ def auc_compute_rwr(seed, n, ol, results_folder):
 
     nmap = dict([(j, i) for i, j in enumerate(sorted(graph.nodes()))])
 
+    tmm, cmap = construct_true_memberships_matrix(nmap, communities)
     results = []
     for c, comm in communities.items():
         for seed_size in _seed_sizes:
             if len(comm) > seed_size:
                 # Seed of AUC scores for node this size
                 scom = [nmap[i] for i in comm]
-                auc_s = get_auc_scores_community_rwr(seed_size, scom, graph, nmap)
+                auc_s = get_auc_scores_community_rwr(seed_size, scom, graph, nmap, tmm)
                 results.append([int(n), int(ol), int(seed), c, seed_size, len(comm), np.mean(auc_s), np.std(auc_s)])
 
     with open(results_file, "w+") as rf:
