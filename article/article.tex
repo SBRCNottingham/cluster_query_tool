@@ -5,7 +5,7 @@
 \setcopyright{none}
 %\setcopyright{acmcopyright}
 %\setcopyright{acmlicensed}
-%\setcopyright{rightsretained}
+\setcopyright{rightsretained}
 %\setcopyright{usgov}
 %\setcopyright{usgovmixed}
 %\setcopyright{cagov}
@@ -13,7 +13,9 @@
 
 
 % DOI
-\acmDOI{-}
+\makeatletter
+\renewcommand\@formatdoi[1]{\ignorespaces}
+\makeatother
 
 % ISBN
 \acmISBN{}
@@ -21,8 +23,12 @@
 %Conference
 \acmConference[KDD MLG 2018]{14th International Workshop on Mining and Learning with Graphs}{Aug 20, 2018}{London, United Kingdom}
 \acmYear{2018}
-\copyrightyear{2018 Copyright held by the owner/author(s).}
+\copyrightyear{2018}
 \acmPrice{}
+
+\settopmatter{printacmref=false} % Removes citation information below abstract
+\renewcommand\footnotetextcopyrightpermission[1]{} % removes footnote with conference information in first column
+\pagestyle{plain} % removes running headers
 
 \usepackage[utf8]{inputenc}
 \usepackage{color}
@@ -102,7 +108,7 @@ That is to say, there is not a single, correct view of the underlying community 
 As the objective of community detection approaches is to relate information, it is assumed that some labelled meta-data can be used to find unlabelled, potentially related vertices.
 
 More formally, the problem tackled in this paper can be formulated as follows:
-Given a graph made up of vertices and edges $G = (V, E)$, and a query set $S \subset V$, we formally ask the question; \textit{How well is a given vertex, $i \notin S$ related to $S$?}
+Given a graph made up of vertices and edges $G = (V, E)$, and a query set $S \subset V$, we ask the question; \textit{How well is a given vertex, $i \notin S$ related to $S$?}
 
 We propose an algorithm that pre-computes an index of clusterings for a given complex network, based on the fast greedy Louvain algorithm \cite{blondel2008fast}, used in a distributed manner.
 The detected clusters then form the basis of a search algorithm that allows one to compute the relatedness of nodes to a given query set.
@@ -113,7 +119,7 @@ This approach is then applied to synthetic benchmark networks with known, ground
     \includegraphics[width=0.48\textwidth]{images/e_coli_search_space.eps}
     \caption{Modularity search space of an \textit{E. coli} metabolic network.
  Distance between partitions is calculated using variation of information \cite{meilua2003comparing} and dimensionality reduction is performed using curvilinear component analysis \cite{demartines1997curvilinear}.
-  The inset (top) demonstrates the landscape of the high modularity region.
+  The inset (top) demonstrates the landscape of the high modularity partitions.
   Figure generated with the software of Good \textit{et al.} \cite{good2010performance}.}
     \label{fig:modular_search_space}
 \end{figure}
@@ -212,6 +218,7 @@ For the real world networks tested the labels are considered in the same manner 
 Every community is considered with different seed set sizes.
  
 \subsection{Random walk with restart}
+\label{sec:rwr}
 In the following sections compare our method with the commonly used random walk with restart method as described in \cite{kohler2008walking}.
 This simulates an infinite random walk with a fixed probability, $\alpha$ that a walker would teleport back to the initial seed nodes. 
 Formally, the random walk with restart algorithm uses the form
@@ -230,7 +237,7 @@ In these tests, the community distribution is defined with a power law coefficie
 The number of nodes is stated in the text.
 
 \subsubsection{Non-overlapping modules.}
-Figure \ref{fig:auc_no_overlap} represents tests on 100 networks with 1000 and 5000 nodes varying the mixing coefficient (number of edges between communities).
+Figure \ref{fig:auc_no_overlap} represents tests on 10 networks with 1000 and 5000 nodes varying the mixing coefficient (number of edges between communities).
 As one would expect, the prediction of the method drops off steeply where communities are less defined above a mixing coefficient of 0.6.
 Using larger seed sets also improves accuracy with some prediction of true communities being possible at extremely high levels of mixing.
 Overall, results are comparable to the random walk with restart method, with slightly improved performance with a smaller number of seed nodes.
@@ -248,7 +255,7 @@ Overall, results are comparable to the random walk with restart method, with sli
         \caption{5000 nodes}
     \end{subfigure}
     \caption{Non-overlapping community varying seed nodes on LFR networks with 1000 and 5000 nodes.
-     Data points represent mean AUC scores for all communities on 100 sampled networks at varying mixing coefficients.
+     Data points represent mean AUC scores for all communities on 10 sampled networks at varying mixing coefficients.
      Error bars represent one standard deviation.}
      \label{fig:auc_no_overlap}
 \end{figure*}
@@ -275,7 +282,7 @@ As with the non-overlapping results, the scores are comparable with the rwr meth
         \caption{5000 nodes}
     \end{subfigure}
     \caption{Overlapping community varying seed nodes on LFR networks with 1000 and 5000 nodes.
-     Data points represent mean AUC scores for all communities on 100 sampled networks at varying overlapping fraction of nodes.
+     Data points represent mean AUC scores for all communities on 10 sampled networks at varying overlapping fraction of nodes.
      Error bars represent one standard deviation.}
      \label{fig:auc_overlap}
 \end{figure*}
@@ -419,19 +426,16 @@ From the perspective of exploratory studies, this implies that a small number of
 \label{sec:related_work}
 This work relates very strongly to the idea of local community detection, more specifically the idea of \textit{seed set expansion} \cite{gleich2012vertex}.
 Here, a given seed set is created and random walks are analysed to find clearly related communities of vertices.
-One of the most common approaches to finding related vertices in a network is the random walk with restart (RWR) \cite{can2005analysis, kohler2008walking}.
+One of the most common approaches to finding related vertices in a network is the random walk with restart (RWR) \cite{can2005analysis, kohler2008walking} explained in section \ref{sec:rwr}.
 This approach has been applied in fields as diverse as recommender systems and the detection of potential drug targets \cite{chen2012drug}.
 In RWR the relatedness of any pair of vertices can be seen as the probability of a particle traversing the graph starting at a given vertex and ending at another.
-The restart aspect of the random walk can be thought of as the probability of the walker teleporting back to the start vertex set, as a fixed parameter. 
-The higher the probability of the walker ending up at a given vertex, the more likely it is that the two vertices are related.
-
 Conceptually, RWR is very similar to the method presented in this paper given that the user has a given query.
-The RWR probability as analogous to the value of $\mu_i(S)$ presented above.
+The RWR probability as analogous though not equivalent to the value of $\mu_i(S)$.
 
 The reader may also consider the similarity of this approach to that of label propagation \cite{raghavan2007near, gregory2010finding}, which seeks to find communities based on a vote, where at different time steps a node updates it's label to to be the most common amongst its neighbours.
 A common problem with label propagation schemes is that they often fail to converge, resulting in many competing clusterings of a network.
-We liken this to the problem encountered by Good Good \textit{et al.} \cite{good2010performance} in modularity maximisation.
-The core contribution of this paper is that, in such situations, there is no single, context independent labelling scheme that can be seen as the ``true'' community structure, overlapping or not.
+We liken this to the problem encountered by Good \textit{et al.} \cite{good2010performance} in modularity maximisation.
+A core contribution of this paper is that, in such situations, there is no single, context independent labelling scheme that can be seen as the ``true'' community structure, overlapping or not.
 Indeed, the approach applied here is extremely general and could be adapted to the label propagation approach (or any other community detection algorithm) should sufficient semi-supervised group memberships be known \textit{a priori}.
 
 Many existing method are based on the idea of a locally dense subgraph containing \textit{all query nodes} \cite{benson2016higher}.
