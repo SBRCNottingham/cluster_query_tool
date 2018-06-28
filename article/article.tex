@@ -59,7 +59,7 @@
   \streetaddress{University of Nottingham}
   \city{Nottingham}
   \country{United Kingdom}
-  \postcode{NG7 2RD}
+  \postcode{NG8 1BB}
 }
 \email{jamie.twycross@nottingham.ac.uk}
 
@@ -167,7 +167,7 @@ When no possible moves result in an increase in modularity the algorithm has fou
 
 The index \textit{coverage} is directly proportional to the number of starting random partitions.
 A full coverage index could be considered as every locally optimal partition.
-Given that there is no free lunch and it is impossible to know every solution, one can only ensure a full coverage index through an exhaustive search over the $2^m$ possible starting cut sets.
+Given that there is no free lunch and it is impossible to know every solution, one can only ensure a full coverage index through an exhaustive search over the $2^m$ possible starting cut sets, where m is the number of edges in the graph.
 Consequently, the approach taken here is to use a large but not exhaustive subset of the possible solutions using a suitably large space of 2000 solutions for the networks studied in this paper
 \footnote{Initial results indicate that a significantly smaller space of partitions may still yield high quality results but we note that further work is required to asses the best number of partitions in a practical context.}.
 
@@ -182,7 +182,6 @@ $\delta(u, v)$ is the Dirac delta function that equals 1 if $c^{p}_i$ and  $c^{p
 As a simple example, for a pair of vertices $i$ and $S$ such that $S = \{j\}$ we would consider $\mu_i$ to be the number of times $i$ and $j$ appear in the same cluster, given an ensemble of network clusterings.
 We define $\mu_i(S)$ for all vertices in the network, including those in $S$.
 However, for the case where $i$ is in $S$ we, instead, consider the value $\mu_i(S - i)$ to remove bias.
-In many cases, a query set will not be fully represented by the partitions found within the network, this is further elaborated in the following section.
 
 \section{Results}
 \subsection{Cross-validation method}
@@ -195,7 +194,7 @@ For this work we would like to capture binary classification  performance, \text
 In order to generate the different sets for the cross validation we take each label set and generate unique sample sets of vertices from the known true positive labels.
 
 As the seed label sets can be as small as 3 vertices, exhaustive cross validation was not possible for all labelling schemes.
-Consequently, cross validation is either conducted on an exhaustive set of all possible $\binom{|S|}{s}$ unique labellings or 120 seed queries sampled randomly without replacement from the possible subsets \footnote{This is equivalent to $\binom{10}{3}$ combinations, an exhaustive sample would not be possible for the larger communities in this study.}, where $S$ is the set of gold standard true labels and $s$ is the size of the randomly selected seed sets.
+Consequently, cross validation is either conducted on an exhaustive set of all possible $\binom{|S|}{s}$ unique labellings or 120 seed queries sampled randomly without replacement from the possible subsets \footnote{This is equivalent to $\binom{10}{3}$ combinations, given time constraints, an exhaustive sample would not be possible for the larger communities in this study.}, where $S$ is the set of gold standard true labels and $s$ is the size of the randomly selected seed sets.
 
 As the selected seed sets can be contained within multiple communities, we consider the set of true positives not to be the community for which the seed set is randomly selected, but all communities for which that seed set is a subset of.
 This is because the purpose of the approach presented within this paper is to distinguish between different communities in a context specific manner, if the overlap between two communities is represented by the seed nodes this should be considered in the tests.
@@ -209,8 +208,8 @@ Formally, the steps for this procedure with a given label set $S$ are outlined a
  \item For each test subset $\{\forall S_t \in T | S_t \subset S \wedge |S_t| = s \}$, generate the $\mu_i(S_t)$ score for all vertices in the network
  \item Exclude vertices in $S_t$ from the test
  \item Consider the true community membership of $S_t$ to be the true positive set.
- \item Consider each of the nodes in $V$ not in $S$ to be the true negative set.
- \item Generate an average ROC curve interpolated from all test subsets.
+ \item Consider each of the nodes in $V$ not in the community membership of $S_t$ to be the true negative set.
+ \item Generate a network wide average ROC curve interpolated from all test subsets from all communities.
  \end{itemize}
 
 In the case for the synthetic networks tested below, true labels are drawn from the known communities, with each tested in isolation.
@@ -254,7 +253,7 @@ Overall, results are comparable to the random walk with restart method, with sli
         \includegraphics[width=\textwidth]{images/lfr_binary_mo_overlap_auc_5000.eps}
         \caption{5000 nodes}
     \end{subfigure}
-    \caption{Non-overlapping community varying seed nodes on LFR networks with 1000 and 5000 nodes.
+    \caption{Non-overlapping LFR community networks with varying seed nodes with 1000 and 5000 nodes.
      Data points represent mean AUC scores for all communities on 10 sampled networks at varying mixing coefficients.
      Error bars represent one standard deviation.}
      \label{fig:auc_no_overlap}
@@ -281,7 +280,7 @@ As with the non-overlapping results, the scores are comparable with the rwr meth
         \includegraphics[width=\textwidth]{images/lfr_binary_overlap_auc_5000.eps}
         \caption{5000 nodes}
     \end{subfigure}
-    \caption{Overlapping community varying seed nodes on LFR networks with 1000 and 5000 nodes.
+    \caption{Overlapping LFR community networks with varying seed nodes with 1000 and 5000 nodes.
      Data points represent mean AUC scores for all communities on 10 sampled networks at varying overlapping fraction of nodes.
      Error bars represent one standard deviation.}
      \label{fig:auc_overlap}
@@ -330,7 +329,7 @@ The real networks used are:
  \item \textbf{Yeast protein-protein interaction network (Yeast PPI)} \cite{yu2008high}
  This dataset is a collection of recorded binary interactions between proteins collected with high-throughput yeast-2-hybrid assays.
  The metadata used are known, experimentally validated protein complexes from \cite{pu2008up}.
- The network contains 6222 nodes in the largest connected component, with 22,3868 edges.
+ The network contains 6222 nodes in the largest connected component, with 22,386 edges.
  There are 409 experimentally validated protein complexes, 236 of which contain 3 or more nodes.
  The protein complexes are typically very small in terms of number of proteins, with  90\% of the complexes containing less than 10 proteins and only 2 complexes containing 50 or more proteins.
 
@@ -340,7 +339,7 @@ The real networks used are:
   85\% of the complexes contain 10 or less nodes.
  
  \item \textbf{\textit{Arabidopsis thaliana} protein-protein interaction network (Arabidopsis PPI)} \cite{ArabidopsisConsortium2011}.
-  The network itself contains 4519 nodes and 11096 edges.
+  The network itself contains 4519 nodes and 11,096 edges.
   For the Arabidopsis dataset, the complex sources were more limited.
   Consequently, we obtained all gene ontology annotations under the GO term \textit{``Protein-containing complex''} from AmiGO \cite{carbon2009amigo} where experimentally collected physical interaction evidence was acquired.
   At the time of writing, this resulted in 7 complexes containing between 4 and 12 nodes.
@@ -401,8 +400,8 @@ Gene Ontology is a controlled vocabulary of terms associated with biological fun
 These labels are not all likely to be represented within the protein-protein interaction networks, though many biological processes are.
 For the Yeast, \textit{Arabidopsis} and \textit{E. coli} PPIs we collected 85, 549 and 420 terms covering at least 3 nodes, respectively.
 As expected, average ROC and AUC scores shown in Figure \ref{fig:GO_TERM_ROCS} are considerably lower than for the Protein complexes for both our method and the rwr approach. 
-Interestingly, however, the performance of the rwr approach is significantly worse than one would expect to find at random for the Yeast GO terms.
-The reason for this performance remains unknown.
+Notably, however, the performance of the rwr approach is significantly worse than one would expect to find at random for the Yeast GO terms.
+The reason for this performance remains unknown, however, it is likely to to the fact that the gene ontology labels are poorly represented in the dataset.
 However, this approach should be considered in contrast to conventional gene enrichment strategies on conventional network clusters \cite{chen2013enrichr}.
 
 \section{Discussion}
